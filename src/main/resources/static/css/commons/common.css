@@ -1,0 +1,12 @@
+@charset "UTF-8";
+@import url("reset.css");
+
+
+.flex{display: flex;}
+.row{flex-direction: row;}
+.column{flex-direction: column;}
+.center{justify-content: center;}
+.between{justify-content: space-between;}
+.around{justify-content: space-around;}
+.aicenter{align-items: center}
+
