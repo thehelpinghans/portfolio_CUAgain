@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	  th:fragment="memberLayout(head, main)">
 
 <head>
     <meta charset="UTF-8">
@@ -10,10 +12,13 @@
     <!-- Box Icons  -->
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <!-- Styles  -->
-    <link rel="shortcut icon" href="assets/img/kxp_fav.png" type="image/x-icon">
-    <link rel="stylesheet" href="/css/main.css">
-	<!-- Link JS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
+	<link rel="shortcut icon" href="assets/img/kxp_fav.png" type="image/x-icon">
+	<link rel="stylesheet" href="/css/commons/common.css">
+	<link rel="stylesheet" href="/css/main.css">
+
+	<th:block th:replace="${head}"/>
 </head>
 
 <body>
@@ -53,7 +58,7 @@
                 <div class="submenu">
                     <a href="#" class="link submenu-title">Category</a>
                     <a href="#" class="link">공지사항</a>
-                    <a href="#" class="link">자유게시판</a>               
+                    <a href="#" class="link">자유게시판</a>
                 </div>
             </li>
 
@@ -101,7 +106,7 @@
                 <div class="submenu">
                     <a href="#" class="link submenu-title">조직도</a>
                     <a href="#" class="link">조직도</a>
-                    <a href="#" class="link">주소록</a>                  
+                    <a href="#" class="link">주소록</a>
                 </div>
             </li>
 
@@ -119,7 +124,7 @@
                     <!-- submenu links here  -->
                 </div>
             </li>
-            
+
            <li>
                 <div class="title">
                     <a href="#" class="link">
@@ -139,6 +144,7 @@
     <!-- ============= Home Section =============== -->
     <section class="home">
 
+		<th:block th:replace="${main}"/>
     </section>
 
 	<script src="/js/main.js"></script>
