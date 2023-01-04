@@ -14,7 +14,7 @@ listItems.forEach((item) => {
 });
 
 const toggleSidebar = document.querySelector(".toggle-sidebar");
-
+const logo = document.querySelector(".logo-box");
 const sidebar = document.querySelector(".sidebar");
 
 toggleSidebar.addEventListener("click", () => {
@@ -22,7 +22,6 @@ toggleSidebar.addEventListener("click", () => {
 });
 
 
-const logo = document.querySelector(".logo-box");
 logo.addEventListener("click", () => {
   sidebar.classList.toggle("close");
 });

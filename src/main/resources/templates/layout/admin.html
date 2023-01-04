@@ -1,10 +1,151 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	  th:fragment="adminLayout(head, main)">
+
 <head>
-	<meta charset="UTF-8">
-	<title>Title</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>편의점</title>
+
+    <!-- Box Icons  -->
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <!-- Styles  -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+	<link rel="shortcut icon" href="assets/img/kxp_fav.png" type="image/x-icon">
+    <link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="/css/commons/common.css">
+
+	<th:block th:replace="${head}"/>
 </head>
+
 <body>
-	어드민페이지
+    <div class="sidebar">
+        <!-- ========== Logo ============  -->
+        <a href="#" class="logo-box">
+            <i class='bx bxs-store-alt' ></i>
+            <div class="logo-name">CU</div>
+        </a>
+
+        <!-- ========== List ============  -->
+        <ul class="sidebar-list">
+            <!-- -------- Non Dropdown List Item ------- -->
+            <li class="dropdown">
+                <div class="title">
+                    <a href="#" class="link">
+                        <i class='bx bx-collection'></i>
+                        <span class="name">사원관리</span>
+                    </a>
+                    <i class='bx bxs-chevron-down'></i>
+                </div>
+                <div class="submenu">
+                    <a href="#" class="link submenu-title">사원관리</a>
+                    <a href="#" class="link">등록</a>
+                    <a href="#" class="link">조회/수정</a>               
+                </div>
+            </li>
+
+            <!-- -------- Dropdown List Item ------- -->
+            <li class="dropdown">
+                <div class="title">
+                    <a href="#" class="link">
+                        <i class='bx bx-collection'></i>
+                        <span class="name">급여관리</span>
+                    </a>
+                    <i class='bx bxs-chevron-down'></i>
+                </div>
+                <div class="submenu">
+                    <a href="#" class="link submenu-title">급여관리</a>
+                    <a href="#" class="link">등록</a>
+                    <a href="#" class="link">조회/수정</a>               
+                </div>
+            </li>
+            
+            <li>
+                <div class="title">
+                    <a href="#" class="link">
+                        <i class='bx bx-store' ></i>
+                        <span class="name">근태관리</span>
+                    </a>
+                    <!-- <i class='bx bxs-chevron-down'></i> -->
+                </div>
+                <div class="submenu">
+                    <a href="#" class="link submenu-title">근태관리</a>
+                    <!-- submenu links here  -->
+                </div>
+            </li>
+
+            <!-- -------- Dropdown List Item ------- -->
+            <li class="dropdown">
+                <div class="title">
+                    <a href="#" class="link">
+                        <i class='bx bxs-paper-plane' ></i>
+                        <span class="name">부서관리</span>
+                    </a>
+                    <i class='bx bxs-chevron-down'></i>
+                </div>
+                <div class="submenu">
+                    <a href="#" class="link submenu-title">부서관리</a>                  
+                    <a href="#" class="link">등록</a>
+                    <a href="#" class="link">조회/수정</a>
+                </div>
+            </li>
+
+            <li class="dropdown">
+                <div class="title">
+                    <a href="#" class="link">
+                        <i class='bx bx-collection'></i>
+                        <span class="name">게시판</span>
+                    </a>
+                    <i class='bx bxs-chevron-down'></i>
+                </div>
+                <div class="submenu">
+                    <a href="#" class="link submenu-title">게시판</a>
+                    <a href="#" class="link">공지사항</a>
+                    <a href="#" class="link">자유게시판</a>               
+                </div>
+            </li>
+
+           	<li class="dropdown">
+                <div class="title">
+                    <a href="#" class="link">
+                        <i class='bx bx-collection'></i>
+                        <span class="name">결재관리</span>
+                    </a>
+                    <i class='bx bxs-chevron-down'></i>
+                </div>
+                <div class="submenu">
+                    <a href="#" class="link submenu-title">결재관리</a>
+                    <a href="#" class="link">문서작성</a>
+                    <a href="#" class="link">문서관리</a>               
+                </div>
+            </li>
+            <li class="dropdown">
+                <div class="title">
+                    <a href="#" class="link">
+                        <i class='bx bxs-user-circle' ></i>
+                        <span class="name">영업점 관리</span>
+                    </a>
+                    <i class='bx bxs-chevron-down'></i>
+                </div>
+                <div class="submenu">
+                    <a href="#" class="link submenu-title">영업점 관리</a>
+                    <a href="#" class="link">등록</a>
+                    <a href="#" class="link">조회/수정</a>
+                    <a href="#" class="link">삭제</a>
+                </div>
+            </li>   
+                   
+      	</ul>
+    </div>
+
+    <!-- ============= Home Section =============== -->
+    <section class="home">
+		<th:block th:replace="${main}"/>
+	</section>
+	<!-- Link JS -->
+	<script src="/js/main.js"></script>
 </body>
+
 </html>
