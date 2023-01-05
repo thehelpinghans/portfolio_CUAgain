@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  th:replace="~{layout/admin :: adminLayout(~{this::head}, ~{::main})}">
+<head>
+	<!--필요한 head 추가-->
+	<link rel="stylesheet" href="/css/depart/department2.css">
+<script type="text/javascript">
+</script>
+</head>
+<main>	
+	<div class="container view_size_depa">
+		<div class="content_depart center">
+			<div class="content_head">
+				<div class="title_cover between flex">
+					<h3 class="con_head_title">
+						<span>부서등록</span>
+					</h3>
+					<!-- <button type="button" class="lw_btn_point">부서 추가</button> -->
+					
+				</div>			
+			</div>
+			<div class="member_view">
+				<button type="button" class="btn_fold_side">
+					<i class="tooltip">조직도 숨기기</i>
+				</button>
+				
+				<section class="organization">
+					<h1 class="corp_name" >CUAgain(그룹이름)</h1>
+					<ul class="org_tree flex">
+						<li class>
+							<span class="tree_item selected corp">
+								<button type="button" class="btn_toggle_tree">...</button>
+								<a href="#" class="group_name"></a>
+							</span>
+							<ul>
+								<span class="tree_item">
+									<span class="drag_handle">
+										<span class="cst_tooltip">드래그로 이동</span>
+									</span>
+									<button type="button" class="btn_toggle_tree">
+										<i class="blind">펼치기/닫기</i>
+									</button>
+									<a href="#" class="group_name"></a>
+										<span class="group_name_modify">
+											<input type="text" class="ipt_modify" value="부서명">
+										</span>
+									<button type="button" class="btn_context">
+										<i class="blind"></i>
+									</button>
+									<div class="ly_context" style="display: block; top: 100%; left: 16px;">
+										<ul>
+											<li><a href="#">조직명 수정</a></li>
+											<li><a href="#">하위 조직 추가</a></li>
+											<li><a href="#">조직 삭제</a></li>
+										</ul>
+									</div>
+								</span>
+							</ul>
+							<ul class="sub_group">
+								<li class="fold">
+									<span class="tree_item">
+										<span class="drag_handle">
+											<span class="cst_tooltip">드래그로 이동 예정</span>
+										</span>
+										<a href="#" class="group_name">...</a>
+										<span class="group_name_modify">
+											<input type="text" class="ipt_modify" value="팀명">
+										</span>
+										<button type="button" class="btn_context">
+											<i class="blind"></i>
+										</button>
+									</span>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+				
+			</div>
+		</div>
+	</div>
+</main>
+</html>
