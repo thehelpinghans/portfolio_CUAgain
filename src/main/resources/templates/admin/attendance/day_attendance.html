@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"
+	  th:replace="~{layout/admin :: adminLayout(~{this::head}, ~{::main})}">
+<head>
+	<!--필요한 head 추가-->
+	<link rel="stylesheet" href="/css/attendance/attendance.css">
+</head>
+<main><!--내용 채우기-->
+	<!-- <h1>일별 근태현황 페이지</h1> -->
+	<div id="content">
+		<table>
+			<tr>
+				<td>
+					<b>일별근태현황</b>
+				</td>
+			</tr>
+			<tr>
+				<td height="5"></td>
+			</tr>
+			<tr>
+				<td height="1" bgcolor="black"></td>
+			</tr>
+		</table>
+		<div class="img">
+			<img src="/image/attendance/round.gif">
+			일별 근태현황 관리입니다.
+		</div>
+		<form>
+			<table class="table">
+				<tbody>
+					<tr>
+						<th width="100px;">검색기간</th>
+						<td>
+							<div style="padding-bottom:5px;"></div>
+							<input type="date" class="inputType_left" id="search_sdate" name="search_sdate">
+						</td>
+					</tr>
+					<tr>
+						<th width="100px;">사업장</th>
+						<td>
+							<select id="companyPlace" name="companyPlace" style="width: 150px;">
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<th width="100px;">부서</th>
+						<td>
+							<select id="category_depth" name="category_depth" style="width: 150px;">
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<th width="100px;">사원명</th>
+						<td>
+							<input type="text">
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<button class="btn_search">검색</button>
+		</form>
+		<table class="table">
+			<tbody>
+				<tr>
+					<th width="8%">사원번호</th>
+					<th width="7%">부서</th>
+					<th width="7%">직책</th>
+					<th width="8%">사원명</th>
+					<th width="7%">상태</th>
+					<th width="12%">출근일자</th>
+					<th width="12%">출근시간</th>
+					<th width="12%">퇴근일자</th>
+					<th width="12%">퇴근시간</th>
+					<th width="18%">상세내역</th>
+				</tr>
+				<tr>
+					<td colspan="9">
+						<p>데이터가 없습니다.</p>
+					</td>
+					
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</main>
+</html>
