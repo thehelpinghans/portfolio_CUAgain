@@ -1,31 +1,95 @@
 @charset "UTF-8";
 /*전체적용*/
-main *{border: 1px solid #ddd;}
-i{display: none;}
+*{font-size: 16px; }
 main{height:100%; background-color: white;}
 
-/*개별적용*/
+.fa-duotone, .fa-solid{
+	font-family: "FontAwesome";
+	color: #a9a9a9;
+	padding-left: 0.5em;
+}
 .view_size_depa{
 	margin: 10em auto;
 	width: 1200px;
 	padding: 3em;
 }
-.container{
-    box-sizing: border-box;
-    border: 1px solid #222;
-}
+/*개별적용*/
+
 .content_depart{
-	overflow: hidden;
-    min-height: 400px;
-    border: 1px solid #222;
+	margin: 2em;
 }
-.content_head{
-    position: relative;
-    padding: 30px;
-    border-bottom: 1px solid #ddd;
-    z-index: 80;
+/*부서헤더*/
+.content_head>div>span{
+	margin: -1em 2em;
+	height: 100px;
+	padding: 0.5em;
+	font-size: 24px;
+	font-weight: 600px;
 }
-.title_cover{
+/*부서바디*/
+.contents_body{
+	padding: 1em;
+	border: 1px solid #ddd;
+	height: 800px;
+	padding: 2em;
+}
+/*회사명 btn_toggle_tree누르면 부서org_tree보이게 안보이게 */
+.btn_toggle_tree{
+	background-color: #e7f2fe;
 	padding: 0;
-    padding-bottom: 10px;
+	width: 200px;
+	height: 30px;
+	margin-left: 0;
 }
+/*회사명*/
+.btn_toggle_tree>.corp_name{
+	color: #157efb;
+	padding: 2em 1em;
+}
+/*회사명 btn_toggle_tree호버시 백그라운드컬러 달라지게*/
+.btn_toggle_tree:hover{
+	background-color: #e6e6e6;
+}
+/*토글 기본값 안보이게*/
+.org_tree{display: none;}
+.team_item{display: none; padding: 0.5em;}
+.team_name{display: none;}
+/*부서이름 안으로 넣어줌*/
+.org_tree>ul>li{
+	margin-left: 20px;	
+}
+.team_name{
+	margin-left: 40px;
+	padding: 0.5em;
+	weight: 320px;
+	height: 30px;
+}
+
+/**/
+
+.team_item{
+	position: absolute;
+	border: 1px solid #ddd;
+	background-color: #fff;
+	width: 100px;
+	height: 90px;
+}
+.depart_name{
+	
+	width: 240px;
+}
+/*부서명 호버시 백그라운드컬러 달라지게*/
+.depart_name>:hover{
+	background-color: #e6e6e6;
+}
+.btn_tt{
+	transform: rotate(90deg); /*각도 단위 : dbkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+    min-width: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid #e5e5e6;}
