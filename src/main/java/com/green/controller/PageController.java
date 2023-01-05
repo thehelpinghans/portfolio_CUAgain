@@ -17,4 +17,9 @@ public class PageController {
     public String admin(){
         return "admin/main";
     }
+  //부서관리 이동
+    @GetMapping("/admin/department")
+    public String department(){
+        return "admin/depart/department";
+    }
 }
