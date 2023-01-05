@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  th:replace="~{layout/admin :: adminLayout(~{this::head}, ~{::main})}">
+<head>
+	<!--필요한 head 추가-->
+	<script src="https://kit.fontawesome.com/8dd87b7874.js" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="/css/depart/department2.css">
+<script type="text/javascript">
+
+$(document).ready(function(){
+	  $(".btn_toggle_tree").click(function(){
+	    $(".org_tree").toggle(400);
+	    
+	    
+	  });
+	  $(".btn_tree_team").click(function(){
+		    $(".team_item").toggle(400);
+		    
+		  });
+	});
+	$(".depart_name").click(function(){
+	    $(".team_name").toggle(400);
+	});
+
+</script>
+</head>
+<main>	
+	<div class="container view_size_depa">
+		<div class="content_depart center">
+		
+			<div class="content_head">
+				<div class="title_cover flex">
+					<span>부서관리</span>
+				</div>			
+			</div>
+			
+			<div class="contents_body">
+				<div class="member_view">
+				
+					<section class="organization">
+						<button type="button" class="btn_toggle_tree">
+							<i class="fa-duotone fa-angle-down"></i>
+							<span class="corp_name">CUAgain(회사명)</span>
+						</button>
+						
+						<div class="org_tree" id="org_tree">
+							<ul class="depart_name">
+								<li class="tree_team">
+									<i class="fa-duotone fa-angle-down"></i>
+									<i class="fa-solid fa-user-group"></i>
+									<a class="depart_name_r">마케팅부(부서명)&nbsp;
+										<button type="button" class="btn_tree_team">
+											<span ciass="btn_tt">...</span>
+									</a>
+										<div class="team_item flex">
+											<p>부서명 수정</p>
+											<p>팀 추가</p>
+											<p>부서 삭제</p>
+										</div>
+										</button>
+										<div class="team_name">
+											<i class="fa-duotone fa-angle-down"></i>
+											<i class="fa-solid fa-user-group"></i>
+											<span>마케팅기획팀(팀명)&nbsp;</span>
+										</div>
+									</li>
+								</ul>
+							<div>
+							</div>
+						</div>
+					</section>
+					
+					<section class="fix_contents member_list">
+						<div class="fix_head memlist_head">
+							<div class="list_head">
+							</div>
+							<div class=""></div>
+						</div>
+					</section>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+</html>

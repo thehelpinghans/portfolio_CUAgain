@@ -20,6 +20,6 @@ public class PageController {
   //부서관리 이동
     @GetMapping("/admin/department")
     public String department(){
-        return "admin/depart/department";
+        return "admin/depart/department2";
     }
 }
