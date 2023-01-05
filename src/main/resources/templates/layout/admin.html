@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+<html xmlns:th="https://www.thymeleaf.org"
+	  xmlns:sec="https://www.thymeleaf.org/extras/spring-security"
 	  th:fragment="adminLayout(head, main)">
 
 <head>
@@ -62,16 +62,18 @@
                 </div>
             </li>
             
-            <li>
+            <li class="dropdown">
                 <div class="title">
                     <a href="#" class="link">
                         <i class='bx bx-store' ></i>
                         <span class="name">근태관리</span>
                     </a>
-                    <!-- <i class='bx bxs-chevron-down'></i> -->
+                    <i class='bx bxs-chevron-down'></i>
                 </div>
                 <div class="submenu">
                     <a href="#" class="link submenu-title">근태관리</a>
+                    <a href="/admin/day_attendance"  class="link">일 근태현황</a>
+                    <a href="/admin/month_attendance" class="link">월 근태현황</a>
                     <!-- submenu links here  -->
                 </div>
             </li>

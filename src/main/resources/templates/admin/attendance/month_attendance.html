@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"
+	  th:replace="~{layout/admin :: adminLayout(~{this::head}, ~{::main})}">
+<head>
+	<!--필요한 head 추가-->
+	<link rel="stylesheet" href="/css/attendance/attendance.css">
+	<!-- fullcalender -->
+	<script src='/resources/static/js/index.global.js'></script>
+	<script src='/resources/static/js/index.global.min.js'></script>
+	<script>
+	
+	      document.addEventListener('DOMContentLoaded', function() {
+	        var calendarEl = document.getElementById('calendar');
+	        var calendar = new FullCalendar.Calendar(calendarEl, {
+	          initialView: 'dayGridMonth'
+	        });
+	        calendar.render();
+	      });
+	
+	</script>
+</head>
+<main><!--내용 채우기-->
+	<!-- <h1>월 근태현황 페이지</h1> -->
+	<div id="content">
+		<form>
+			<table>
+				<tr>
+					<td>
+						<b>월별근태현황</b>
+					</td>
+				</tr>
+				<tr>
+					<td height="5"></td>
+				</tr>
+				<tr>
+					<td height="1" bgcolor="black"></td>
+				</tr>
+			</table>
+			<div class="img">
+				<img src="/image/attendance/round.gif">
+				월별 근태현황 관리입니다.
+			</div>
+			<table class="table">
+				<tr>
+					<th width="12%">사업장</th>
+					<td>
+						<select style="width: 150px;"></select>
+					</td>
+				</tr>
+				<tr>
+					<th width="12%">부서</th>
+					<td>
+						<select style="width: 150px;"></select>
+					</td>
+				</tr>
+			</table>
+			<button class="btn_search">검색</button>
+			<table>
+				<tbody>
+					<tr>
+						<td>
+							<a>
+								<img class="cursor" src="/image/attendance/paging_arr_prev.gif" alt="이전월">
+							</a>
+							<select name="search_year" onchange="searchDate()" style="width: 80px;">
+								<option value="2023">2023</option>
+								<option value="2022">2022</option>
+								<option value="2021">2021</option>
+								<option value="2020">2020</option>
+								<option value="2019">2019</option>
+							</select>
+							<select name="search_month" onchange="searchDate()">
+								<option value="1월">1월</option>
+								<option value="2월">2월</option>
+								<option value="3월">3월</option>
+								<option value="4월">4월</option>
+								<option value="5월">5월</option>
+								<option value="6월">6월</option>
+								<option value="7월">7월</option>
+								<option value="8월">8월</option>
+								<option value="9월">9월</option>
+								<option value="10월">10월</option>
+								<option value="11월">11월</option>
+								<option value="12월">12월</option>
+							</select>
+							<a>
+								<img class="cursor" src="/image/attendance/paging_arr_next.gif" alt="이전월">
+							</a>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<button class="btn_dayD">일별상세보기</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+		<div id="calendar">
+			
+		</div>
+		
+	</div>
+</main>
+</html>
