@@ -17,6 +17,18 @@ public class PageController {
     public String admin(){
         return "admin/main";
     }
+
+    //일 근태현황 페이지
+    @GetMapping("/admin/day_attendance")
+    public String dayAttendance() {
+    	return "admin/attendance/day_attendance";
+    }
+
+    //월 근태현황 페이지
+    @GetMapping("/admin/month_attendance")
+    public String monthAttendance() {
+    	return "admin/attendance/month_attendance";
+    }
   //부서관리 이동
     @GetMapping("/admin/department")
     public String department(){
