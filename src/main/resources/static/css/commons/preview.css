@@ -1,0 +1,73 @@
+@charset "UTF-8";
+
+h1{
+	padding: 20px 0px 0px 20px;
+	font-weight: bold;
+	font-size: 30px;
+}
+h2{
+	padding: 70px 0px 0px 20px;
+	
+}
+.previewContents{
+	width: 500px;
+	height: 130px;
+	margin: 40px 0px 0px 20px;
+}
+.previewContents div{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 5px;
+}
+
+.MemberSelectArea{
+	height: 30px;
+	
+}
+.MemberSelect{
+	width: 200px;
+	height: 30px;
+}
+.yearsSearchLine{
+	margin: 50px 0px 5px 20px;
+	display: flex;
+	justify-content: space-between;
+	width: 1255px;
+}
+.yearsSearchLine span:first-child{
+	color: red;
+}
+.yearsSearch{
+	width: 200px;
+}
+.yearsSearch button{
+	width: 40px;
+	height: 21px;
+	background-color: #DDD;
+	border-radius: 3px;
+	border: solid 1px black;
+}
+.center{
+	text-align: center;
+}
+.searchResultArea{
+	width: 1500px;
+	height: 500px;
+	margin: 0px 0px 0px 20px;
+}
+table{
+	border: solid 2px;
+	background-color: white;
+}
+table th,td{
+	border: solid 1px;
+	text-align: center;
+}
+td{
+	padding: 2px 15px 3px 15px;
+}
+th{
+	padding: 10px 15px 10px 15px;;
+	background-color: #ddd;
+}

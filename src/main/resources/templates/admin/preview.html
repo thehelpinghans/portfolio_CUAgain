@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  th:replace="~{layout/admin :: adminLayout(~{this::head}, ~{::main})}">
+<head>
+	<link rel="stylesheet" href="/css/commons/preview.css">
+</head>
+<main><!--내용 채우기-->
+
+	<h1>급여 조회 페이지</h1>
+	<h2>조회 대상 선택</h2>
+	<div class="previewContents">
+		<div class="MemberSelectArea">
+			<span>사업장</span>
+			<select class="MemberSelect">
+				<option value="none" hidden="">선택</option>
+				<option>사업장1</option>
+				<option>사업장2</option>
+				<option>사업장3</option>
+				<option>사업장4</option>
+				<option>사업장5</option>
+				<option>사업장6</option>
+			</select>
+		</div>
+		<div class="MemberSelectArea">
+			<span>부서</span>
+			<select class="MemberSelect">
+				<option value="none" hidden="">선택</option>
+				<option>부서1</option>
+				<option>부서2</option>
+				<option>부서3</option>
+				<option>부서4</option>
+				<option>부서5</option>
+				<option>부서6</option>
+			</select>
+		</div>
+		<div class="MemberSelectArea">
+			<span>사원명</span>
+			<select class="MemberSelect">
+				<option value="none" hidden="">선택</option>
+				<option>김다은</option>
+				<option>안원모</option>
+				<option>이현정</option>
+				<option>최광진</option>
+				<option>홍대표</option>
+				<option>홍원기</option>
+			</select>
+		</div>
+	</div>
+	<h2>조회 결과</h2>
+	<div class="yearsSearchLine">
+		<span>* 항목을 클릭하면 급여명세서를 볼 수 있습니다.</span>
+		<div class="yearsSearch">
+			<select class="yearsSelect">
+				<option value="none" hidden="">선택</option>
+				<option>2018</option>
+				<option>2019</option>
+				<option>2020</option>
+				<option>2021</option>
+				<option>2022</option>
+				<option>2023</option>
+			</select>
+			<span>년</span>
+			<button >검색</button>
+		</div>
+	</div>
+	<div class="searchResultArea">
+		<table class="table">
+			<tr class="center">
+				<th scope="col">신고귀속</th>
+				<th scope="col">구분</th>
+				<th scope="col">지급총액</th>
+				<th scope="col">식대</th>
+				<th scope="col">철야수당</th>
+				<th scope="col">소득세</th>
+				<th scope="col">주민세</th>
+				<th scope="col">국민연금</th>
+				<th scope="col">건강보험</th>
+				<th scope="col">고용보험</th>
+				<th scope="col">장기요양</th>
+				<th scope="col">공제총액</th>
+				<th scope="col">실지급액</th>
+			</tr>
+			<tr>
+				<td>2019년 8월</td>
+				<td>급여</td>
+				<td>3,890,000</td>
+				<td>100,000</td>
+				<td>24,000</td>
+				<td>152,000</td>
+				<td>15,200</td>
+				<td>135,000</td>
+				<td>115,950</td>
+				<td>23,330</td>
+				<td>9,860</td>
+				<td>451,340</td>
+				<td>3,438,660</td>
+			</tr>
+			<tr>
+				<td colspan="2">합계</td>
+				<td>3,890,000</td>
+				<td>100,000</td>
+				<td>24,000</td>
+				<td>152,000</td>
+				<td>15,200</td>
+				<td>135,000</td>
+				<td>115,950</td>
+				<td>23,330</td>
+				<td>9,860</td>
+				<td>451,340</td>
+				<td>3,438,660</td>
+			</tr>
+		</table>
+	</div>
+</main>
+</html>
