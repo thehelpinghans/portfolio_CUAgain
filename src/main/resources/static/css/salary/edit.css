@@ -41,10 +41,12 @@ h2{
 	margin: 50px 0px 5px 20px;
 	display: flex;
 	justify-content: space-between;
-	width: 1489px;
+	width: 1495px;
 }
 .yearsSearchLine span:first-child{
 	color: red;
+	padding-top: 17px;
+	font-size: 16px;
 }
 .yearsSearch{
 	width: 200px;
@@ -62,7 +64,7 @@ h2{
 	padding: 2px 30px;
 }
 .searchResultArea{
-	width: 1500px;
+	width: 1450px;
 	height: 500px;
 	margin: 0px 0px 0px 20px;
 }
@@ -70,6 +72,7 @@ table{
 	border: solid 2px;
 	background-color: white;
 	text-align: right;
+	width: inherit;
 }
 table th, td{
 	border: solid 1px;
@@ -91,5 +94,5 @@ th{
 	border-radius: 3px;
 	border: solid 1px black;
 	float: right;
-	margin: 5px 56px 0px 0px;
+	margin: 5px 0px 0px 0px;
 }
