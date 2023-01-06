@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<div class="view-size-content"><!--내용 채우기-->
+	<h1>사원 디테일 페이지입니다.</h1>
+	<form class="regForm flex column">
+		<div>
+			<label class="img"></label>
+			<input id="defimg" class="gimg" type="file" name="gimg"
+				   onchange="gimgChanged(this)">
+			<input type="hidden" class="newName" name="newName">
+			<input type="hidden" class="orgName" name="orgName">
+			<br>
+			<span>프로필 사진</span>
+			<label class="label-btn" for="defimg">수정</label>
+		</div>
+		<label><span>로그인 이메일</span><span>test@test.com</span><br></label>
+		<label><span>비밀번호 변경</span><input type="password"><br></label>
+		<label><span>비밀번호 확인</span><input type="password"><br></label>
+		<label><span>이름</span><input type="text"><br></label>
+		<label><span>연락처</span><input type="text"><br></label>
+		<label><span>입사일</span><input type="date" class="currentDate" readonly><br></label>
+		<label>
+			<span>부서</span>
+			<select name="department">
+				<option value="">부서지정</option>
+				<option value="학생">부서1</option>
+				<option value="회사원">부서2</option>
+				<option value="기타">부서3</option>
+			</select>
+			<br></label>
+		<label>
+			<span>직책</span>
+			<select name="position">
+				<option value="">직책</option>
+				<option value="학생">사장</option>
+				<option value="회사원">이사</option>
+				<option value="기타">사원</option>
+
+			</select>
+			<br></label>
+		<div>
+			<button>수정완료</button>
+			<button type="button" onclick="btnCancelClicked();">취소</button>
+		</div>
+	</form>
+</div>
