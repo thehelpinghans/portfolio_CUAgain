@@ -22,4 +22,9 @@ public class PageController {
     public String department(){
         return "admin/depart/department2";
     }
+  //부서관리 이동
+    @GetMapping("/admin/department3")
+    public String departTest(){
+        return "admin/depart/department3";
+    }
 }
