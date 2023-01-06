@@ -17,4 +17,10 @@ public class PageController {
     public String admin(){
         return "admin/main";
     }
+    
+    //임시, 결재페이지로 이동
+    @GetMapping("admin/payment")
+    public String payMent() {
+    	return "admin/payment";
+    }
 }
