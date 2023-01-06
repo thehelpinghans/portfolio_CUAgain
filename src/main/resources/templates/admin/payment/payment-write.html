@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  th:replace="~{layout/admin :: adminLayout(~{this::head}, ~{::main})}">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/css/commons/common.css">
+<link rel="stylesheet" href="/css/payment/payment-write.css">
+<title>결재등록</title>
+</head>
+<body>
+	<main>
+		<h1>결재등록</h1>
+		<form>
+			<table class="flex aicenter payment-table">
+				<tr>
+					<td>문서제목</td>
+					<td><input type="text" placeholder="문서명을 입력해주세요"></td>
+				</tr>
+				<tr>
+					<td>기안자</td>
+					<td><input type="text" placeholder="이름을 입력해 주세요"/></td>
+				</tr>
+				<tr>
+					<td>기안부서</td>
+					<td>
+						<select>
+							<option value="부서1">부서1</option>
+							<option value="부서2">부서2</option>
+							<option value="부서3">부서3</option>
+							<option value="부서4">부서4</option>
+							<option value="부서5">부서5</option>
+							<option value="부서6">부서6</option>
+							<option value="부서7">부서7</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" >상세정보</td>
+				</tr>
+				<tr>
+					<td colspan="2"><textarea ></textarea></td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<button class="suecs">결재등록</button>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</main>
+</body>
+</html>
