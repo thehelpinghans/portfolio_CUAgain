@@ -1,30 +1,32 @@
 @charset "UTF-8";
 /*전체적용*/
-*{font-size: 16px; }
+*{font-size: 14px; }
 main{height:100%; background-color: white;}
 
 /*아이콘 기본 설정*/
 .fa-duotone, .fa-solid, .fa-regular, .fa-solid{
 	font-family: "FontAwesome";
 	color: #a9a9a9;
-	padding: 0.5em 0 0.5em 1em;
+	margin: 0 0.2em;
 }
 
 .view_size_depa{
 	margin: 10em auto;
 	width: 900px;
-	height: 600px;
+	height: 700px;
 	padding: 3em;
 }
 /*개별적용*/
 .organization{
 	border: 1px solid #ddd;
 	width: 300px;
+	height: 700px;
+	padding: 0 auto;
 }
 .content_depart{
-	height: 100%;
+	height: 800px;
 }
-
+/*//////////////////부서조회 추가 수정 삭제 등///////////////////////////*/
 /*부서헤더*/
 .content_head>div>span{
 	margin: -1em 2em;
@@ -36,9 +38,8 @@ main{height:100%; background-color: white;}
 /*부서바디*/
 .contents_body{
 	padding: 1em;
-	border: 1px solid #ddd;
 	height: 800px;
-	padding: 2em;
+	
 }
 /*회사명 btn_toggle_tree누르면 부서org_tree보이게 안보이게 */
 .btn_toggle_tree{
@@ -53,10 +54,7 @@ main{height:100%; background-color: white;}
 	color: #157efb;
 	padding: 2em 0em;
 }
-/*부서명 안으로 넣어줌*/
-.org_tree>ul>li{
-	margin-left: 20px;	
-}
+
 /*회사명 btn_toggle_tree호버시 백그라운드컬러 달라지게*/
 .btn_toggle_tree:hover{
 	background-color: #e6e6e6;
@@ -74,22 +72,21 @@ main{height:100%; background-color: white;}
 .team_name{
 	margin: 0;
 	padding: 0;
-	weight: 260px;
-	height: 30px;
-	
+	weight: 200px;
+	height: 20px;
 	background-color: #fff;
 }
 /*부서 수정가능창 여는 버튼*/
 .btn_depart_menu{
 	position: absolute;
-	right: 0;
+	right: 10px;
 	z-index: 80px;
 	width: 20px;
 	height: 20px;
 }
 .depart_menu{
 	position: absolute;
-	margin-left:7.5em;
+	margin-left:7em;
 	background-color: rgba(255, 255, 255, 0.9);
 	width: 100px;
 	margin-right: 0;
@@ -97,14 +94,27 @@ main{height:100%; background-color: white;}
 	
 }
 .tree_team{
-	width: 240px;
+	width: 200px;
 	position: relative;
 	top:-30px;
-	left: 20px;
+	left: 15px;
 }
-.fix_contents{
+/*//////////////////내용///////////////////////////*/
+.selected{
+	margin: 0 0.5em;
+}
+.fix_contents {
 	border: 1px solid #ddd;
-	height: 600px;
-	width: 500px;
-	padding: 5em;
+}
+
+.fix_head {
+	border-bottom: 1px solid #ddd;
+	height: 60px;
+	width: 800px;
+    position: relative;
+    line-height: 20px;
+    padding: 16px 0 16px 20px;
+}
+.fix_body{
+	margin: 2em;
 }
