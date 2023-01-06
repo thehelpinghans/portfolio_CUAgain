@@ -4,18 +4,7 @@
 <head>
 	<!--필요한 head 추가-->
 	<link rel="stylesheet" href="/css/attendance/attendance.css">
-
-	<script>
 	
-	      document.addEventListener('DOMContentLoaded', function() {
-	        var calendarEl = document.getElementById('calendar');
-	        var calendar = new FullCalendar.Calendar(calendarEl, {
-	          initialView: 'dayGridMonth'
-	        });
-	        calendar.render();
-	      });
-	
-	</script>
 </head>
 <main><!--내용 채우기-->
 	<!-- <h1>월 근태현황 페이지</h1> -->
@@ -56,7 +45,7 @@
 			<table>
 				<tbody>
 					<tr>
-						<td>
+						<td class="alignLeft">
 							<a>
 								<img class="cursor" src="/image/attendance/paging_arr_prev.gif" alt="이전월">
 							</a>
@@ -95,7 +84,7 @@
 			</table>
 		</form>
 		<div id="calendar">
-			
+			캘린더 적용..(어려워서 헤메다 일단 푸쉬합니다..)
 		</div>
 		
 	</div>
