@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+<html xmlns:th="https://www.thymeleaf.org"
+	  xmlns:sec="https://www.thymeleaf.org/extras/spring-security"
 	  th:fragment="adminLayout(head, main)">
 
 <head>
@@ -41,8 +41,8 @@
                 </div>
                 <div class="submenu">
                     <a href="#" class="link submenu-title">사원관리</a>
-                    <a href="#" class="link">등록</a>
-                    <a href="#" class="link">조회/수정</a>               
+                    <a href="/admin/emp/reg" class="link">등록</a>
+                    <a href="/admin/emp/list" class="link">조회/수정</a>
                 </div>
             </li>
 
@@ -57,21 +57,23 @@
                 </div>
                 <div class="submenu">
                     <a href="#" class="link submenu-title">급여관리</a>
-                    <a href="#" class="link">등록</a>
+                    <a href="/admin/preview" class="link">등록</a>
                     <a href="#" class="link">조회/수정</a>               
                 </div>
             </li>
             
-            <li>
+            <li class="dropdown">
                 <div class="title">
                     <a href="#" class="link">
                         <i class='bx bx-store' ></i>
                         <span class="name">근태관리</span>
                     </a>
-                    <!-- <i class='bx bxs-chevron-down'></i> -->
+                    <i class='bx bxs-chevron-down'></i>
                 </div>
                 <div class="submenu">
                     <a href="#" class="link submenu-title">근태관리</a>
+                    <a href="/admin/day_attendance"  class="link">일 근태현황</a>
+                    <a href="/admin/month_attendance" class="link">월 근태현황</a>
                     <!-- submenu links here  -->
                 </div>
             </li>
@@ -101,9 +103,9 @@
                     <i class='bx bxs-chevron-down'></i>
                 </div>
                 <div class="submenu">
-                    <a href="#" class="link submenu-title">게시판</a>
-                    <a href="#" class="link">공지사항</a>
-                    <a href="#" class="link">자유게시판</a>               
+                    
+                    <a href="/board/notice" class="link">공지사항</a>
+                    <a href="/board/free" class="link">자유게시판</a>               
                 </div>
             </li>
 
@@ -118,7 +120,7 @@
                 <div class="submenu">
                     <a href="#" class="link submenu-title">결재관리</a>
                     <a href="#" class="link">문서작성</a>
-                    <a href="#" class="link">문서관리</a>               
+                    <a href="/admin/payment" class="link">문서관리</a>               
                 </div>
             </li>
             <li class="dropdown">

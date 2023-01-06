@@ -17,6 +17,18 @@ public class PageController {
     public String admin(){
         return "admin/main";
     }
+
+    //일 근태현황 페이지
+    @GetMapping("/admin/day_attendance")
+    public String dayAttendance() {
+    	return "admin/attendance/day_attendance";
+    }
+
+    //월 근태현황 페이지
+    @GetMapping("/admin/month_attendance")
+    public String monthAttendance() {
+    	return "admin/attendance/month_attendance";
+    }
   //부서관리 이동
     @GetMapping("/admin/department")
     public String department(){
@@ -26,5 +38,17 @@ public class PageController {
     @GetMapping("/admin/department3")
     public String departTest(){
         return "admin/depart/department3";
+    }
+
+    //임시, 결재페이지로 이동
+    @GetMapping("admin/payment")
+    public String payMent() {
+    	return "admin/payment";
+    }
+
+    //Won 임시, 급여관리의 등록 페이지로 이동
+    @GetMapping("/admin/preview")
+    public String preview(){
+        return "/admin/preview";
     }
 }

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  th:replace="~{layout/admin :: adminLayout(~{this::head}, ~{::main})}">
+<head>
+	<!--필요한 head 추가-->
+	<link rel="stylesheet" href="/css/employee/reg.css">
+	<script>
+		$(function () {
+			$(".currentDate").val(new Date().toISOString().substring(0, 10));
+		});
+		/*document.getElementById('currentDate').value = new Date().toISOString().substring(0, 10);;*/
+	</script>
+</head>
+<main class="view-size-content"><!--내용 채우기-->
+	<h1>사원 등록 페이지입니다.</h1>
+	<form class="regForm flex column">
+		<div>
+			<label class="img" for="defimg"></label>
+			<input id="defimg" class="gimg" type="file" name="gimg"
+				   onchange="gimgChanged(this)">
+			<input type="hidden" class="newName" name="newName">
+			<input type="hidden" class="orgName" name="orgName">
+			<br>
+			<span>프로필 사진</span>
+		</div>
+		<label><span>로그인 이메일</span><input type="email"><br></label>
+		<label><span>비밀번호</span><input type="password"><br></label>
+		<label><span>비밀번호 확인</span><input type="password"><br></label>
+		<label><span>이름</span><input type="text"><br></label>
+		<label><span>연락처</span><input type="text"><br></label>
+		<label><span>입사일</span><input type="date" class="currentDate"><br></label>
+		<label>
+			<span>부서</span>
+			<select name="department">
+				<option value="">부서지정</option>
+				<option value="학생">부서1</option>
+				<option value="회사원">부서2</option>
+				<option value="기타">부서3</option>
+
+			</select>
+			<br></label>
+		<label>
+			<span>직책</span>
+			<select name="position">
+				<option value="">직책</option>
+				<option value="학생">사장</option>
+				<option value="회사원">이사</option>
+				<option value="기타">사원</option>
+
+			</select>
+			<br></label>
+		<button>사원 등록</button>
+	</form>
+</main>
+</html>
