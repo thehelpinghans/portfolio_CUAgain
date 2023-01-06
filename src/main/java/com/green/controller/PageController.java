@@ -39,4 +39,10 @@ public class PageController {
     public String departTest(){
         return "admin/depart/department3";
     }
+
+    //임시, 결재페이지로 이동
+    @GetMapping("admin/payment")
+    public String payMent() {
+    	return "admin/payment";
+    }
 }
