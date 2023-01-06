@@ -43,12 +43,17 @@ public class PageController {
     //임시, 결재페이지로 이동
     @GetMapping("admin/payment")
     public String payMent() {
-    	return "admin/payment";
+    	return "admin/payment/payment";
     }
 
     //Won 임시, 급여관리의 등록 페이지로 이동
     @GetMapping("/admin/preview")
     public String preview(){
         return "/admin/preview";
+    }
+    
+    @GetMapping("admin/payment-write")
+    private String payMentWrite() {
+    	return "admin/payment/payment-write";
     }
 }
