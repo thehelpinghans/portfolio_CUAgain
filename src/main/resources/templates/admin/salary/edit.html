@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	  th:replace="~{layout/admin :: adminLayout(~{this::head}, ~{::main})}">
 <head>
-	<link rel="stylesheet" href="/css/commons/preview.css">
+	<link rel="stylesheet" href="/css/salary/edit.css">
 </head>
 <main><!--내용 채우기-->
 
@@ -45,6 +45,7 @@
 				<option>홍원기</option>
 			</select>
 		</div>
+		<button class="inquireBtn">조회</button>
 	</div>
 	<h2>조회 결과</h2>
 	<div class="yearsSearchLine">
@@ -60,7 +61,8 @@
 				<option>2023</option>
 			</select>
 			<span>년</span>
-			<button >검색</button>
+			<button class="SearchBtn">검색</button>
+			
 		</div>
 	</div>
 	<div class="searchResultArea">
@@ -81,8 +83,8 @@
 				<th scope="col">실지급액</th>
 			</tr>
 			<tr>
-				<td>2019년 8월</td>
-				<td>급여</td>
+				<td class="center">2019년 8월</td>
+				<td class="center">급여</td>
 				<td>3,890,000</td>
 				<td>100,000</td>
 				<td>24,000</td>
@@ -96,7 +98,7 @@
 				<td>3,438,660</td>
 			</tr>
 			<tr>
-				<td colspan="2">합계</td>
+				<td class="center" colspan="2">합계</td>
 				<td>3,890,000</td>
 				<td>100,000</td>
 				<td>24,000</td>
@@ -110,6 +112,7 @@
 				<td>3,438,660</td>
 			</tr>
 		</table>
+		<button class="editBtn">수정</button>
 	</div>
 </main>
 </html>
