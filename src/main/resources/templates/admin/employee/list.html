@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  th:replace="~{layout/admin :: adminLayout(~{this::head}, ~{::main})}">
+<head>
+	<!--필요한 head 추가-->
+	<link rel="stylesheet" href="/css/employee/list.css">
+	<link rel="stylesheet" href="/css/employee/detail.css">
+
+	<script>
+		$(function (){
+			$(".nameTd>button").click(btnDetailClicked);
+		});
+
+		function btnDetailClicked(){
+			var memberId=$(this).parent(".nameTd").prev().val();
+			$.ajax({
+				url:`/admin/member/detailTag`,/*/admin/member/detailTag/${memberId}*/
+				type:"get",
+				success:function (resultHTML){
+					$("#view-list").hide();
+					$("#view-detail").html(resultHTML).show();
+				}
+			});
+		}
+		function btnCancelClicked(){
+			$("#view-list").show();
+			$("#view-detail").hide();
+		}
+	</script>
+</head>
+<main id="main-tag"><!--내용 채우기-->
+	<div id="view-list">
+		<hr>
+		<h1>사원명부</h1>
+		<hr>
+
+		<div class="flex searchTag">
+
+			<label>검색어
+				<select name="searchType">
+					<option value="">성명</option>
+					<option value="학생">부서명</option>
+					<option value="회사원">사원번호</option>
+				</select>
+				<input type="text">
+			</label>
+			<button class="btn-search">검색</button>
+		</div>
+
+		<div class="emp-info">
+			<p>사원명부</p>
+			<table class="emp-list-table">
+				<thead>
+				<tr>
+					<th>사원번호</th>
+					<th>성명</th>
+					<th>직책</th>
+					<th>부서</th>
+					<th>입사일자</th>
+					<th>핸드폰</th>
+					<th>E-MAIL</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td>사원번호</td>
+					<td class="nameTd"><button onclick="">성명</button></td>
+					<td>직책</td>
+					<td>부서</td>
+					<td>입사일자</td>
+					<td>핸드폰</td>
+					<td>E-MAIL</td>
+				</tr>
+				</tbody>
+			</table>
+
+		</div>
+		<p>% 성명을 클릭하면 상세정보로 이동합니다.</p>
+	</div>
+	<div id="view-detail">
+
+	</div>
+</main>
+</html>
