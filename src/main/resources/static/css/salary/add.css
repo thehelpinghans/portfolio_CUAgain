@@ -1,0 +1,48 @@
+@charset "UTF-8";
+
+h1{
+	padding: 20px 0px 0px 20px;
+	font-weight: bold;
+	font-size: 30px;
+}
+h2{
+	padding: 70px 0px 0px 20px;
+	font-size: 25px;
+}
+.previewContents{
+	width: 500px;
+	height: 250px;
+	margin: 40px 0px 0px 20px;
+}
+.previewContents div{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 5px;
+}
+
+.MemberSelectArea{
+	height: 30px;
+	
+}
+.MemberSelect{
+	width: 200px;
+	height: 30px;
+}
+input {
+	width: 200px;
+	border-radius: 2px;
+	border: solid 1px;
+	padding-left: 5px;
+}
+select {
+	padding-left: 2px;
+}
+.inquireBtn{
+	margin-top: 10px;
+	width: 200px;
+	height: 33px;
+	background-color: #DDD;
+	border-radius: 3px;
+	border: solid 1px black;
+}

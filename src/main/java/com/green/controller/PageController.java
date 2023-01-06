@@ -46,9 +46,15 @@ public class PageController {
     	return "admin/payment";
     }
 
-    //Won 임시, 급여관리의 등록 페이지로 이동
-    @GetMapping("/admin/preview")
-    public String preview(){
-        return "/admin/preview";
+ // 급여관리의 등록 페이지로 이동
+    @GetMapping("/admin/add")
+    public String salaryAdd(){
+        return "/admin/salary/add";
+    }
+    
+    // 급여관리의 조회/수정 페이지로 이동
+    @GetMapping("/admin/edit")
+    public String salaryEdit(){
+        return "/admin/salary/edit";
     }
 }
