@@ -9,78 +9,80 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
-	  $(".btn_toggle_tree").click(function(){
-	    $(".org_tree").toggle(400);
-	    
-	    
-	  });
-	  $(".btn_tree_team").click(function(){
-		    $(".team_item").toggle(400);
-		    
-		  });
+	$(".btn_toggle_tree").click(function(){
+    	$(".org_tree").slideToggle(400);
 	});
-	$(".depart_name").click(function(){
-	    $(".team_name").toggle(400);
+	$(".btn_depart_menu").click(function(){
+		$(".depart_menu").slideToggle(400);
 	});
+	$(".btn_tree_team").click(function(){
+		$(".team_name").slideToggle(400);
+	});
+});
+
 
 </script>
 </head>
 <main>	
 	<div class="container view_size_depa">
+		<!-- 부서관리 타이틀 -->
+		<div class="content_head">
+			<div class="title_cover flex">
+				<span>부서관리</span>
+			</div>			
+		</div>
 		<div class="content_depart center">
-		
-			<div class="content_head">
-				<div class="title_cover flex">
-					<span>부서관리</span>
-				</div>			
-			</div>
+		<!-- 부서관리 내용 -->
+		<div class="contents_body">
+			<div class="member_view  flex">
 			
-			<div class="contents_body">
-				<div class="member_view">
-				
-					<section class="organization">
-						<button type="button" class="btn_toggle_tree">
-							<i class="fa-duotone fa-angle-down"></i>
-							<span class="corp_name">CUAgain(회사명)</span>
-						</button>
-						
-						<div class="org_tree" id="org_tree">
-							<ul class="depart_name">
-								<li class="tree_team">
-									<i class="fa-duotone fa-angle-down"></i>
-									<i class="fa-solid fa-user-group"></i>
-									<a class="depart_name_r">마케팅부(부서명)&nbsp;
-										<button type="button" class="btn_tree_team">
-											<span ciass="btn_tt">...</span>
-									</a>
-										<div class="team_item flex">
-											<p>부서명 수정</p>
-											<p>팀 추가</p>
-											<p>부서 삭제</p>
-										</div>
-										</button>
-										<div class="team_name">
-											<i class="fa-duotone fa-angle-down"></i>
-											<i class="fa-solid fa-user-group"></i>
-											<span>마케팅기획팀(팀명)&nbsp;</span>
-										</div>
-									</li>
-								</ul>
-							<div>
+				<section class="organization">
+					<button type="button" class="btn_toggle_tree">
+						<i class="fa-solid fa-sort-down"></i>
+						<i class="fa-regular fa-building"></i>
+						<span class="corp_name">&nbsp;CUAgain(회사명)</span>
+					</button>
+					<!-- 부서추가할 경우 부서명이 나오는 예시 -->
+					<div class="org_tree">
+						<ul class="tree_team">
+							<li class="depart_name">
+							<button type="button" class="btn_tree_team">
+								<i class="fa-solid fa-sort-down"></i>
+								<i class="fa-solid fa-user-group"></i>
+								<span class="depart_name">마케팅부(부서명)&nbsp;</span>
+							</button>
+							<!-- 부서 수정목록창여는 버튼 -->
+							<button type="button" class="btn_depart_menu">
+								<span class="btn_tt">
+									<i class="fa-regular fa-ellipsis-vertical"></i>
+								</span>
+							</button>
+							<!-- 부서 수정목록들 -->
+							<div class="depart_menu flex">
+								<p>부서명 수정</p>
+								<p>팀명 추가</p>
+								<p>부서 삭제</p>
 							</div>
-						</div>
-					</section>
+							<!-- 팀 추가할 경우 팀명이 나오는 예시 -->
+							<div class="team_name">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;<i class="fa-regular fa-user"></i>
+								<span>&nbsp;마케팅기획팀(팀명)&nbsp;</span>
+							</div>
+							</li>
+						</ul>
+					</div>
 					
-					<section class="fix_contents member_list">
-						<div class="fix_head memlist_head">
-							<div class="list_head">
-							</div>
-							<div class=""></div>
-						</div>
-					</section>
-				</div>
+				</section>
+				
+				<section class="fix_contents member_list">
+					<div class="fix_head memlist_head">
+						<div class="list_head"></div>
+						<div class="list_body">데이터 뿌려줄 곳 </div>
+					</div>
+				</section>
 			</div>
 		</div>
+	</div>
 	</div>
 </main>
 </html>

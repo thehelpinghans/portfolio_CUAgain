@@ -3,21 +3,28 @@
 *{font-size: 16px; }
 main{height:100%; background-color: white;}
 
-.fa-duotone, .fa-solid{
+/*아이콘 기본 설정*/
+.fa-duotone, .fa-solid, .fa-regular, .fa-solid{
 	font-family: "FontAwesome";
 	color: #a9a9a9;
-	padding-left: 0.5em;
+	padding: 0.5em 0 0.5em 1em;
 }
+
 .view_size_depa{
 	margin: 10em auto;
-	width: 1200px;
+	width: 900px;
+	height: 600px;
 	padding: 3em;
 }
 /*개별적용*/
-
-.content_depart{
-	margin: 2em;
+.organization{
+	border: 1px solid #ddd;
+	width: 300px;
 }
+.content_depart{
+	height: 100%;
+}
+
 /*부서헤더*/
 .content_head>div>span{
 	margin: -1em 2em;
@@ -39,57 +46,65 @@ main{height:100%; background-color: white;}
 	padding: 0;
 	width: 200px;
 	height: 30px;
-	margin-left: 0;
+	margin: 2em 1em ;
 }
 /*회사명*/
 .btn_toggle_tree>.corp_name{
 	color: #157efb;
-	padding: 2em 1em;
+	padding: 2em 0em;
+}
+/*부서명 안으로 넣어줌*/
+.org_tree>ul>li{
+	margin-left: 20px;	
 }
 /*회사명 btn_toggle_tree호버시 백그라운드컬러 달라지게*/
 .btn_toggle_tree:hover{
 	background-color: #e6e6e6;
 }
-/*토글 기본값 안보이게*/
-.org_tree{display: none;}
-.team_item{display: none; padding: 0.5em;}
-.team_name{display: none;}
-/*부서이름 안으로 넣어줌*/
-.org_tree>ul>li{
-	margin-left: 20px;	
-}
-.team_name{
-	margin-left: 40px;
-	padding: 0.5em;
-	weight: 320px;
-	height: 30px;
-}
-
-/**/
-
-.team_item{
-	position: absolute;
-	border: 1px solid #ddd;
-	background-color: #fff;
-	width: 100px;
-	height: 90px;
-}
-.depart_name{
-	
-	width: 240px;
-}
 /*부서명 호버시 백그라운드컬러 달라지게*/
-.depart_name>:hover{
+.tree_team>:hover{
 	background-color: #e6e6e6;
 }
-.btn_tt{
-	transform: rotate(90deg); /*각도 단위 : dbkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    position: relative;
-    width: 100%;
-    min-width: 0;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    border: 1px solid #e5e5e6;}
+/*토글 기본값 안보이게*/
+.org_tree{display: none;}
+.depart_menu{display: none; padding: 0.5em;}
+.team_name{display: none;}
+
+/*부서명 선택시 크기*/
+.team_name{
+	margin: 0;
+	padding: 0;
+	weight: 260px;
+	height: 30px;
+	
+	background-color: #fff;
+}
+/*부서 수정가능창 여는 버튼*/
+.btn_depart_menu{
+	position: absolute;
+	right: 0;
+	z-index: 80px;
+	width: 20px;
+	height: 20px;
+}
+.depart_menu{
+	position: absolute;
+	margin-left:7.5em;
+	background-color: rgba(255, 255, 255, 0.9);
+	width: 100px;
+	margin-right: 0;
+	border: 1px solid #ddd;
+	
+}
+.tree_team{
+	width: 240px;
+	position: relative;
+	top:-30px;
+	left: 20px;
+}
+.fix_contents{
+	border: 1px solid #ddd;
+	height: 600px;
+	width: 500px;
+	padding: 5em;
+}
