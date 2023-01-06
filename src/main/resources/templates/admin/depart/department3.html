@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  th:replace="~{layout/admin :: adminLayout(~{this::head}, ~{::main})}">
+<head>
+	<!--필요한 head 추가-->
+	<script src="https://kit.fontawesome.com/8dd87b7874.js" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="/css/depart/department3.css">
+<script type="text/javascript">
+var toggle = false;
+
+btn.addEventListener('click', function() {
+	//클릭할 때마다 현재상태 반전
+	toggle =!toggle;
+	//switch 방법
+	switch (toggle){
+		case true :
+			selector.className = 'on';
+			break;
+		default :
+			selector.className = '';
+	}
+}, false);
+</script>
+</head>
+<main>
+	<section class="flex">
+		<h2>Toggle Switch Test</h2>
+	
+	<input type="checkbox" id="switch1">
+	<label for="switch1">안녕하세요1</label>
+	
+	<input type="checkbox" id="switch2" cheked>
+	<label for="switch2">안녕하세요2</label>
+	
+	<br>
+	<br>
+	
+	<input type="checkbox" id="switch3">
+	<label for="switch3" class=round>안녕하세요3</label>
+	
+	<input type="checkbox" id="switch4" cheked>
+	<label for="switch4" class=round>안녕하세요4</label>
+	</section>	
+	
+	
+	
+</main>
+</html>
