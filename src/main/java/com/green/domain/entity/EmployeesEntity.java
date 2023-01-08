@@ -45,7 +45,7 @@ public class EmployeesEntity {
 
     @ManyToOne//속한 팀
 	@JoinColumn(name ="team_id", insertable= false, updatable=false)//관여방지
-	private TeamEntity team;
+	private TeamEntity team_;
     
     @ManyToOne//속한 부서
 	@JoinColumn(name ="department_id", insertable= false, updatable=false)//관여방지
