@@ -21,6 +21,19 @@ btn.addEventListener('click', function() {
 			selector.className = '';
 	}
 }, false);
+
+function TeamAdd(){
+	$.ajax({
+		url:"/admin/teamAdd",
+		type:"post",				//팀이름이랑 팀번호 등 하나가아니니까serialize() 추가?
+		data : $("#TeaminsertDTO").serialize(),
+ 		dataType: "json",
+		success:function(resultHTML){
+				$("#department").html(resultHTML);
+			}
+		
+	});
+}
 </script>
 </head>
 <main>
@@ -42,8 +55,34 @@ btn.addEventListener('click', function() {
 	<input type="checkbox" id="switch4" cheked>
 	<label for="switch4" class=round>안녕하세요4</label>
 	</section>	
+	<section>
+		<div class="depart_menu flex">
+			<p><a href="#">부서명 수정</a></p>
+			<p><a href="#">팀명 추가</a></p>
+			<p><a href="#">부서 삭제</a></p>
+			
+		</div>
+	</section>
+	<!-- 부서에 팀을 추가해봅시다  -->
+	<section>
+		<form action="/admin/teamAdd">
+		<button>
+			<input type="text" name="name" placeholder="팀명 추가">
+		</button>
+		
+		
+	</form>
+	</section>
 	
 	
 	
 </main>
 </html>
+
+
+
+
+
+
+
+

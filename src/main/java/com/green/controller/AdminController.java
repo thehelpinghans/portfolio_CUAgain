@@ -4,7 +4,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class adminController {
+public class AdminController {
+	
+//	@Autowired
+//	private TeamService teamService;
+	
 	
 	@GetMapping("/board/notice")
 	public String notice() {
@@ -63,4 +67,17 @@ public class adminController {
     public String empDetail(){
         return "admin/employee/detailTag";
     }
+//    //팀등록
+//    @PostMapping("/admin/teamAdd")
+//    public String teamadd(TeamAddDTO dto, Model model) {
+//    	teamService.save(dto, model);
+//    	return "admin/depart/department";
+//    } 
+    //이런식으로해야하나? 
+//    @PostMapping("/admin/teamAdd")
+//	public String teamadd(TeamAddDTO dto, Model model) {
+//    	teamService.updateMember(dto, model);
+//		return "redirect:/admin/depart/department";
+//	}
+    
 }
