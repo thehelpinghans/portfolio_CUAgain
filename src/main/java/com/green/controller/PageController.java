@@ -32,9 +32,9 @@ public class PageController {
   //부서관리 이동
     @GetMapping("/admin/department")
     public String department(){
-        return "admin/depart/department2";
+        return "admin/depart/department";
     }
-  //부서관리 이동
+  //부서테스트이동
     @GetMapping("/admin/department3")
     public String departTest(){
         return "admin/depart/department3";

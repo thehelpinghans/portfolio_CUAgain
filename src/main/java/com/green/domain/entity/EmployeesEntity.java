@@ -38,10 +38,20 @@ public class EmployeesEntity {
     private boolean end ;    // 퇴사여부
     private LocalDate endDate;  //퇴사일
     private String phone;    // 연락처
+    
     @JoinColumn //image_id
     @OneToOne
     private imagesEntity image;
 
+    @ManyToOne//속한 팀
+	@JoinColumn(name ="team_id", insertable= false, updatable=false)//관여방지
+	private TeamEntity team;
+    
+    @ManyToOne//속한 부서
+	@JoinColumn(name ="department_id", insertable= false, updatable=false)//관여방지
+	private DepartmentEntity department;
+    
+    
     @Enumerated(EnumType.STRING)
     private Position position;
     //ROLE정보 --enum 사용
@@ -59,4 +69,5 @@ public class EmployeesEntity {
         return this;
     }
 */
+   
 }
