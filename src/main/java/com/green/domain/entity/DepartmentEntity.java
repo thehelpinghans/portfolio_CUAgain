@@ -36,8 +36,9 @@ public class DepartmentEntity {
 	@OneToOne //담당자
 	@JoinColumn
 	private EmployeesEntity manager;
-				//
-	@OneToMany(mappedBy="department_id") //부서에 속한 팀들
+	/*
+				//테이블이 중복으로 생기지않기위해 (mappedBy=?)
+	@OneToMany(mappedBy="department") //부서에 속한 팀들
 	private List<TeamEntity> department = new ArrayList<>();
-	
+	*/
 }

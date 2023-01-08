@@ -37,12 +37,17 @@ public class TeamEntity {
 	@OneToOne //담당자
 	@JoinColumn
 	private EmployeesEntity manager;
-	
-	@OneToMany(mappedBy="team_id") //팀에 소속 사원들
+	/*
+	@Builder.Default//테이블이 중복으로 생기지않기위해 (mappedBy=?)
+	@OneToMany(mappedBy="team") //팀에 소속 사원들
 	private List<EmployeesEntity> employees = new ArrayList<>();
 	//사원정보는 리스트로 받겠다?
-	
+	public TeamEntity team_em(EmployeesEntity employees) {
+		this.employees.add(employees);
+		return this;
+	}
+	*/
 	@ManyToOne//상위 조직 부서
-	@JoinColumn(name ="team", insertable= false, updatable=false)//관여방지
+	@JoinColumn(name ="department", insertable= false, updatable=false)//관여방지
 	private DepartmentEntity department;
 }

@@ -7,38 +7,63 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="/css/depart/department3.css">
 <script type="text/javascript">
-var toggle = false;
-
-btn.addEventListener('click', function() {
-	//클릭할 때마다 현재상태 반전
-	toggle =!toggle;
-	//switch 방법
-	switch (toggle){
-		case true :
-			selector.className = 'on';
-			break;
-		default :
-			selector.className = '';
-	}
-}, false);
-
-function TeamAdd(){
-	$.ajax({
-		url:"/admin/teamAdd",
-		type:"post",				//팀이름이랑 팀번호 등 하나가아니니까serialize() 추가?
-		data : $("#TeaminsertDTO").serialize(),
- 		dataType: "json",
-		success:function(resultHTML){
-				$("#department").html(resultHTML);
-			}
-		
+$("#btn").on("click", function() {
+	  $("bbb").show();
 	});
-}
+	$("#btn").on("clicked", function() {
+	  $("bbb").hide();
+	});
+/*
+ * var toggle = false;
+
+ btn.addEventListener('click', function() {
+ 	//클릭할 때마다 현재상태 반전
+ 	toggle =!toggle;
+ 	//switch 방법
+ 	switch (toggle){
+ 		case true :
+ 			selector.className = 'on';
+ 			break;
+ 		default :
+ 			selector.className = '';
+ 	}
+ }, false);
+
+ function TeamAdd(){
+ 	$.ajax({
+ 		url:"/admin/teamAdd",
+ 		type:"post",				//팀이름이랑 팀번호 등 하나가아니니까serialize() 추가?
+ 		data : $("#TeamAddDTO").serialize(),
+  		dataType: "json",
+ 		success:function(resultHTML){
+ 				$("#department").html(resultHTML);
+ 			}
+ 	
+ 	  
+ 	
+ }
+ */
 </script>
 </head>
 <main>
+	<p><button id="btn">팀명추가</button></p>
+  	<div id="bbb">
+  		<input type="text" name="name"  placeholder="팀명 추가">
+  	</div>
+  
+	<!--  
 	<section class="flex">
-		<h2>Toggle Switch Test</h2>
+	
+	
+  
+	<input type="checkbox" id="switch">
+	<label for="switch" class="TeamAdd" id="TeamAdd">팀명추가</label>
+	
+	
+	<input type="checkbox" id="switch0" cheked>
+	<label for="switch0" class="TeamAdd" id="TeamAdd">
+	팀명 추가
+	</label>
 	
 	<input type="checkbox" id="switch1">
 	<label for="switch1">안녕하세요1</label>
@@ -63,14 +88,16 @@ function TeamAdd(){
 			
 		</div>
 	</section>
+	-->
 	<!-- 부서에 팀을 추가해봅시다  -->
 	<section>
 		<form action="/admin/teamAdd">
 		<button>
-			<input type="text" name="name" placeholder="팀명 추가">
+			<input type="checkbox" name="name" onchange="TeamAdd()" placeholder="팀명 추가">
 		</button>
-		
-		
+		<input type="submit" id="switch4" name="name" onchange="TeamAdd()" placeholder="팀명 추가">
+		<label for="switch" class="hide" >팀명추가</label>
+		<label for="switch" class="show" >팀명추가</label>
 	</form>
 	</section>
 	
