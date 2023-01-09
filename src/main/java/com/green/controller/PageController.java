@@ -44,7 +44,7 @@ public class PageController {
         return "admin/depart/department";
     }
 //    //팀명가져올거임 
-//    @GetMapping("/admin/teamList")
+//    @PostMapping("/admin/teamList")
 //    public String teamList(Model model){
 //    	teamService.getList(model);
 //        return "";

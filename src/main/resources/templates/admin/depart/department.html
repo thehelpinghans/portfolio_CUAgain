@@ -62,15 +62,6 @@ $(document).ready(function(){
 							    		</tr>
 									</table>
 								</button>
-								<!-- 부서 수정목록창여는 버튼
-								<button type="button" class="btn_depart_menu">
-									<span class="btn_tt">
-										&nbsp;&nbsp;<i class="fa-regular fa-ellipsis-vertical"></i>
-									</span>
-								</button> -->
-								<!-- 부서 수정목록들 -->
-								
-								
 								<div class="depart_menu flex">
 									<p><a href="#">부서명 수정</a></p>
 									<p><a href="/admin/team/reg">팀명추가</a></p>
@@ -80,11 +71,11 @@ $(document).ready(function(){
 								<!-- 팀 추가할 경우 팀명이 나오는 예시 -->
 								<!-- 부서아이디와 일치하는 팀명만 보이도록 해줄거임 -->
 								<table class="team-table">
-									<form action="">
+									<form action="/admin/teamList">
 										<tr class="team-tr2" th:each= "dto : ${list}">
 											<td></td>
 											<td></td>
-											<td th:text="${dto.name}"></td>
+											<!-- <td th:text="${dto.name}"></td> -->
 							    		</tr>
 							    	</form>
 								</table>
@@ -92,6 +83,40 @@ $(document).ready(function(){
 									<i class="fa-regular fa-user"></i>
 									<span>마케팅기획팀(팀명)&nbsp;</span>
 								</div>
+								<!-- 부서 수정목록창여는 버튼
+								<button type="button" class="btn_depart_menu">
+									<span class="btn_tt">
+										&nbsp;&nbsp;<i class="fa-regular fa-ellipsis-vertical"></i>
+									</span>
+								</button> -->
+								<!-- 부서 수정목록들 
+								
+								
+								<div class="depart_menu flex">
+									<p><a href="#">부서명 수정</a></p>
+									<p><a href="/admin/team/reg">팀명추가</a></p>
+									<p><a href="#">부서 삭제</a></p>
+									
+								</div>
+								-->
+								<!-- 팀 추가할 경우 팀명이 나오는 예시 -->
+								<!-- 부서아이디와 일치하는 팀명만 보이도록 해줄거임 -->
+								<!--  
+								<table class="team-table">
+									<form action="/admin/teamList">
+										<tr class="team-tr2" th:each= "dto : ${list}">
+											<td></td>
+											<td></td>
+										</tr>
+							    	</form>
+								</table>
+											-->
+											<!-- <td th:text="${dto.name}"></td> -->
+							    	<!-- <div class="team_name">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<i class="fa-regular fa-user"></i>
+									<span>마케팅기획팀(팀명)&nbsp;</span>
+								</div> -->	
+								
 								</li>
 							</ul>
 						</div>
