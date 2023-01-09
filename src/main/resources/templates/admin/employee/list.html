@@ -3,6 +3,8 @@
 	  th:replace="~{layout/admin :: adminLayout(~{this::head}, ~{::main})}">
 <head>
 	<!--필요한 head 추가-->
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="/js/employee/daumPostcode.js"></script>
 	<link rel="stylesheet" href="/css/employee/list.css">
 	<link rel="stylesheet" href="/css/employee/detail.css">
 
@@ -12,6 +14,7 @@
 		});
 
 		function btnDetailClicked(){
+
 			var memberId=$(this).parent(".nameTd").prev().val();
 			$.ajax({
 				url:`/admin/member/detailTag`,/*/admin/member/detailTag/${memberId}*/
@@ -19,6 +22,7 @@
 				success:function (resultHTML){
 					$("#view-list").hide();
 					$("#view-detail").html(resultHTML).show();
+					$(".currentDate").val(new Date().toISOString().substring(0, 10));
 				}
 			});
 		}
@@ -59,17 +63,20 @@
 					<th>입사일자</th>
 					<th>핸드폰</th>
 					<th>E-MAIL</th>
+					<th>주소</th>
 				</tr>
 				</thead>
 				<tbody>
 				<tr>
 					<td>사원번호</td>
-					<td class="nameTd"><button onclick="">성명</button></td>
+					<td class="nameTd"><button type="button">성명</button></td>
 					<td>직책</td>
 					<td>부서</td>
 					<td>입사일자</td>
 					<td>핸드폰</td>
 					<td>E-MAIL</td>
+					<td>주소</td>
+
 				</tr>
 				</tbody>
 			</table>

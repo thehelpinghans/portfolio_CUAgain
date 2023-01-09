@@ -39,6 +39,9 @@
 .emp-list-table>tbody{
     font-size: 14px;
 }
+.emp-list-table>tbody>tr>td>button{
+    font-size: 14px;
+}
 .emp-list-table>tbody>tr>td{
     border: 1px solid rgba(128, 128, 128, 0.5);
     background-color: white;
@@ -48,22 +51,25 @@
     width: 5%;
 }
 .emp-list-table>tbody>tr>td:nth-child(2){
-    width: 12%;
+    width: 10%;
 }
 .emp-list-table>tbody>tr>td:nth-child(3){
-    width: 12%;
+    width: 10%;
 }
 .emp-list-table>tbody>tr>td:nth-child(4){
-    width: 12%;
+    width: 10%;
 }
 .emp-list-table>tbody>tr>td:nth-child(5){
-    width: 12%;
+    width: 10%;
 }
 .emp-list-table>tbody>tr>td:nth-child(6){
-    width: 12%;
+    width: 10%;
 }
 .emp-list-table>tbody>tr>td:nth-child(7){
-    width: 35%;
+    width: 15%;
+}
+.emp-list-table>tbody>tr>td:nth-child(8){
+    width: 30%;
 }
 
 #view-list>p{

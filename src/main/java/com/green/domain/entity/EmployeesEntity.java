@@ -7,14 +7,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 @DynamicUpdate
 @Builder
@@ -40,13 +35,17 @@ public class EmployeesEntity {
     private String phone;    // 연락처
     @JoinColumn //image_id
     @OneToOne
-    private imagesEntity image;
+    private ImagesEntity image;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)    //직책
     private Position position;
     //ROLE정보 --enum 사용
     @Enumerated(EnumType.STRING)    //저장유형 문자열로(롤 확장시 유리) 기본 ordinal(숫자)
     private MyRole role ;          //시큐리티 role
+
+    @JoinColumn //address_id
+    @OneToOne
+    private AddressEntity address;  //주소
 
     /*
     //배송지정보
