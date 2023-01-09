@@ -23,7 +23,7 @@ public class ReplyEntity extends BaseDateEntity{
     private String content;
 
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private BoardStatus status;
 
     @JoinColumn
     @ManyToOne(fetch = FetchType.EAGER)
