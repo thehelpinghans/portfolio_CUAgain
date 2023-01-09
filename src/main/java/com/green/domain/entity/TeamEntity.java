@@ -48,6 +48,6 @@ public class TeamEntity {
 	}
 	*/
 	@ManyToOne//상위 조직 부서
-	@JoinColumn(name ="dep_id", insertable= false, updatable=false)//관여방지
+	@JoinColumn(name ="dep_id")//관여방지
 	private DepartmentEntity dep;
 }
