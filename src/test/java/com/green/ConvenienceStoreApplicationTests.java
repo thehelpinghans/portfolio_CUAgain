@@ -54,11 +54,11 @@ class ConvenienceStoreApplicationTests {
                 .build());
 
     }
-    @Test
+    //@Test
     void 팀데이터추가() {
     	teamRepo.save(TeamEntity.builder()
-    			.dep(depRepo.findById(1L).get())
-    			.name("인사기획팀")
+    			.dep(depRepo.findById(4L).get())//부서넘버
+    			.name("오프라인사업팀")
     			.build());
     }
 

@@ -40,11 +40,11 @@ public class EmployeesEntity {
 
     @Enumerated(EnumType.STRING)    //직책
     @ManyToOne//속한 팀
-	@JoinColumn(name ="team_id", insertable= false, updatable=false)//관여방지
+	@JoinColumn(name ="team_id")
 	private TeamEntity team;
 
     @ManyToOne//속한 부서
-	@JoinColumn(name ="department_id", insertable= false, updatable=false)//관여방지
+	@JoinColumn(name ="department_id")
 	private DepartmentEntity department;
 
 

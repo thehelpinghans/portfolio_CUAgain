@@ -50,7 +50,21 @@ $("#btn").on("click", function() {
   	<div id="bbb">
   		<input type="text" name="name"  placeholder="팀명 추가">
   	</div>
-  
+  <table class="dep-table">
+										<thead class="wrap">
+											<tr class="dep-tr1">
+												<th class="dep_name">부서명</th>
+											</tr>
+										</thead>
+										<tbody class="wrap">
+										<tr class="dep-tr2">
+											<td th:text="#{dto.name}"></td>
+											<!-- <tr class="dep-tr2" th:each="dto : ${list}"> 
+											<td>[[${dto.name}]]</td>-->
+							    				
+							    			</tr>
+										</tbody>
+									</table>
 	<!--  
 	<section class="flex">
 	
