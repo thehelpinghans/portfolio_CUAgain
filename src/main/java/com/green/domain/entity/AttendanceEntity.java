@@ -1,14 +1,8 @@
 package com.green.domain.entity;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.CollectionTable;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -51,7 +45,7 @@ public class AttendanceEntity extends BaseDateEntity{
 	
 	//상태
 	@Enumerated(EnumType.STRING)
-	private Status status;
+	private AttendStatus attendStatus;
 	
 
 }
