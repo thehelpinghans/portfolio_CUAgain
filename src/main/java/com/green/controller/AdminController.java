@@ -1,14 +1,24 @@
 package com.green.controller;
 
+import com.green.domain.dto.EmployeesInsertDTO;
+import com.green.service.EmployeesService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.Map;
 
 @Controller
 public class AdminController {
 	
 //	@Autowired
 //	private TeamService teamService;
-	
+
+	@Autowired
+	EmployeesService employeesService;
 	
 	@GetMapping("/board/notice")
 	public String notice() {
@@ -67,6 +77,23 @@ public class AdminController {
     public String empDetail(){
         return "admin/employee/detailTag";
     }
+
+	//사원 증명사진 이미지 temp 저장
+	@ResponseBody//응답데이터를 json타입으로 리턴합니다.
+	@PostMapping("/admin/temp-upload")
+	public Map<String, String> tempUpload(MultipartFile gimg) {
+		return employeesService.fileTempUpload(gimg);
+	}
+
+	//사원 등록시
+	@PostMapping("/admin/emp/reg")
+	public String adminGoodsUpload(EmployeesInsertDTO dto) {
+		//등록하면 dto에 업데이트! 하고 사원 리스트로 리턴
+		System.out.println(dto);
+		employeesService.save(dto);
+		return "redirect:/admin/emp/list";	//사원리스트 페이지로 이동
+	}
+
 //    //팀등록
 //    @PostMapping("/admin/teamAdd")
 //    public String teamadd(TeamAddDTO dto, Model model) {
