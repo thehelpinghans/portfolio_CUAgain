@@ -43,7 +43,7 @@ public class PageController {
     //임시, 결재페이지로 이동
     @GetMapping("admin/payment")
     public String payMent() {
-    	return "admin/payment";
+    	return "admin/payment/payment";
     }
 
  // 급여관리의 등록 페이지로 이동
@@ -56,5 +56,10 @@ public class PageController {
     @GetMapping("/admin/edit")
     public String salaryEdit(){
         return "/admin/salary/edit";
+    }
+    
+    @GetMapping("admin/payment-write")
+    private String payMentWrite() {
+    	return "admin/payment/payment-write";
     }
 }

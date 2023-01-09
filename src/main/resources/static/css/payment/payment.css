@@ -20,13 +20,15 @@ main{
 }
 .pay-list1{
 	width: 1000px;
-	margin: 0 60px;
+	margin: auto;
+	margin-left: 200px;
 	padding: 1em;
 	border-bottom: 1px solid black;
 }
 .pay-list2{
 	width: 1000px;
 	margin: auto;
+	margin-left: 200px;
 	padding: 1em;
 	border-bottom: 1px solid black;
 }
@@ -38,5 +40,5 @@ main{
 	border-radius: 5px;
 	background-color: #ff0080;
 	font-weight: 600;
-	margin-left: 1050px;
+	margin-left: 1300px;
 }
