@@ -4,7 +4,20 @@
 <head>
 	<!--필요한 head 추가-->
 	<link rel="stylesheet" href="/css/attendance/attendance.css">
-	
+	<!-- full calendar 적용 -->
+	<script src="/js/calendar/main.js"></script>
+	<link rel="stylesheet" href="/css/attendance/main.css">
+	<script>
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridMonth'
+        });
+        calendar.render();
+      });
+
+    </script>
 </head>
 <main><!--내용 채우기-->
 	<!-- <h1>월 근태현황 페이지</h1> -->
@@ -29,12 +42,6 @@
 			</div>
 			<table class="table">
 				<tr>
-					<th width="12%">사업장</th>
-					<td>
-						<select style="width: 150px;"></select>
-					</td>
-				</tr>
-				<tr>
 					<th width="12%">부서</th>
 					<td>
 						<select style="width: 150px;"></select>
@@ -45,35 +52,7 @@
 			<table>
 				<tbody>
 					<tr>
-						<td class="alignLeft">
-							<a>
-								<img class="cursor" src="/image/attendance/paging_arr_prev.gif" alt="이전월">
-							</a>
-							<select name="search_year" onchange="searchDate()" style="width: 80px;">
-								<option value="2023">2023</option>
-								<option value="2022">2022</option>
-								<option value="2021">2021</option>
-								<option value="2020">2020</option>
-								<option value="2019">2019</option>
-							</select>
-							<select name="search_month" onchange="searchDate()">
-								<option value="1월">1월</option>
-								<option value="2월">2월</option>
-								<option value="3월">3월</option>
-								<option value="4월">4월</option>
-								<option value="5월">5월</option>
-								<option value="6월">6월</option>
-								<option value="7월">7월</option>
-								<option value="8월">8월</option>
-								<option value="9월">9월</option>
-								<option value="10월">10월</option>
-								<option value="11월">11월</option>
-								<option value="12월">12월</option>
-							</select>
-							<a>
-								<img class="cursor" src="/image/attendance/paging_arr_next.gif" alt="이전월">
-							</a>
-						</td>
+						
 					</tr>
 					<tr>
 						<td>
@@ -84,7 +63,7 @@
 			</table>
 		</form>
 		<div id="calendar">
-			캘린더 적용..(어려워서 헤메다 일단 푸쉬합니다..)
+			
 		</div>
 		
 	</div>
