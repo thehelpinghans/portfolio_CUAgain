@@ -1,6 +1,7 @@
 package com.green.service.impl;
 
 import com.green.domain.dto.EmployeesInsertDTO;
+import com.green.domain.dto.EmployeesListDTO;
 import com.green.domain.entity.*;
 import com.green.security.MyRole;
 import com.green.service.EmployeesService;
@@ -43,7 +44,7 @@ public class EmployeesServiceProcess  implements EmployeesService {
     public void getEmpList(Model model) {
 
 
-        //empRepo.findAll().stream().map().collect(Collectors.toList());
+        empRepo.findAll().stream().map(EmployeesListDTO::new).collect(Collectors.toList());
     }
 
     @Override

@@ -5,9 +5,13 @@ import com.green.nowon.domain.entity.MemberEntity;
 import com.green.nowon.domain.entity.MemberEntityRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Log4j2
 public class MyUserDetailsService implements UserDetailsService {
@@ -25,8 +29,6 @@ public class MyUserDetailsService implements UserDetailsService {
 
         //email, pass, roles(Collection<? extends org.springframework.security.core.GrantedAuthority> authorities)
         // enum MyRole -> SimpleGrantedAuthority
-*/
-/*
 
         Set<SimpleGrantedAuthority> authorities =
                 entity.getRoles()
@@ -35,7 +37,7 @@ public class MyUserDetailsService implements UserDetailsService {
                 .collect(Collectors.toSet());
 
         return new MyUserDetails(username, entity.getPass(),authorities);
-*//*
+
 
         return new MyUserDetails(entity);
 
