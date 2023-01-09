@@ -39,6 +39,15 @@
 			</select>
 			<br></label>
 		<div>
+			<input type="text" id="postcode" name="postcode" placeholder="우편번호">
+			<input type="button" onclick="daumPostcode()" value="우편번호 찾기"><br>
+			<input type="text" id="roadAddress" name="roadAddress" placeholder="도로명주소">
+			<input type="text" id="jibunAddress" name="jibunAddress" placeholder="지번주소">
+			<span id="guide" style="color:#999;display:none"></span>
+			<input type="text" id="detailAddress"  name="detailAddress" placeholder="상세주소">
+			<input type="text" id="extraAddress" name="extraAddress" placeholder="참고항목">
+		</div>
+		<div>
 			<button>수정완료</button>
 			<button type="button" onclick="btnCancelClicked();">취소</button>
 		</div>
