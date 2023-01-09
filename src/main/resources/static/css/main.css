@@ -181,7 +181,7 @@
 /* =============== Home Section =============== */
 .home{
     position: relative;
-    background-color: #fff;
+    background-color: var(--color_Light2);
     left: 260px;
     width: calc(100% - 260px);
     height: 100vh;

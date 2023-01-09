@@ -48,7 +48,7 @@ table {
 *{margin: 0; padding:0; box-sizing: border-box;
 	font-family: 'Noto Sans KR', sans-serif;
 	font-weight: 400;
-	font-size: 20px;
+	font-size: 16px;
 	color: #222;
 }
 a{text-decoration: none; color: #222; text-underline-position: from-font;}
