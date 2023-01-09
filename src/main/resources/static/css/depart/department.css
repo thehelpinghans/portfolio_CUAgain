@@ -1,224 +1,120 @@
 @charset "UTF-8";
+/*전체적용*/
+*{font-size: 14px; }
+main{height:100%; background-color: white;}
 
-main{
-	height:100%;
-	background-color: white;
+/*아이콘 기본 설정*/
+.fa-duotone, .fa-solid, .fa-regular, .fa-solid{
+	font-family: "FontAwesome";
+	color: #a9a9a9;
+	margin: 0 0.2em;
 }
-i {
-    font-style: italic;
-}
-.blind {
-    position: absolute;
-    clip: rect(0,0,0,0);
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-}
-button, select {
-    text-transform: none;
-}
-button, input, optgroup, select, textarea {
-    font-family: inherit;
-    font-size: 100%;
-    line-height: 1.15;
-    margin: 0;
-}
-.org_tree .tree_item.selected .group_name {
-    color: #157efb;
-    font-weight: 700;
-}
-.org_tree .tree_item .group_name, .org_tree .tree_item .group_name .txt {
-    -webkit-box-flex: 0;
-    -webkit-flex: 0 1 auto;
-    -ms-flex: 0 1 auto;
-    flex: 0 1 auto;
-}
-.org_tree .tree_item, .org_tree .tree_item .group_name {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-}
+
 .view_size_depa{
 	margin: 10em auto;
-	width: 1200px;
+	width: 900px;
+	height: 700px;
 	padding: 3em;
 }
-.container{
-    box-sizing: border-box;
-    border: 1px solid #222;
+/*개별적용*/
+.organization{
+	border: 1px solid #ddd;
+	width: 300px;
+	height: 700px;
+	padding: 0 auto;
 }
 .content_depart{
-	overflow: hidden;
-    min-height: 400px;
-    border: 1px solid #222;
+	height: 800px;
 }
-.content_head{
-    position: relative;
-    padding: 30px;
-    border-bottom: 1px solid #ddd;
-    z-index: 80;
+/*//////////////////부서조회 추가 수정 삭제 등///////////////////////////*/
+/*부서헤더*/
+.content_head>div>span{
+	margin: -1em 2em;
+	height: 100px;
+	padding: 0.5em;
+	font-size: 24px;
+	font-weight: 600px;
 }
-.title_cover{
+/*부서바디*/
+.contents_body{
+	padding: 1em;
+	height: 800px;
+	
+}
+/*회사명 btn_toggle_tree누르면 부서org_tree보이게 안보이게 */
+.btn_toggle_tree{
+	background-color: #e7f2fe;
 	padding: 0;
-    padding-bottom: 10px;
+	width: 200px;
+	height: 30px;
+	margin: 2em 1em ;
 }
-.lw_btn_point {
-    font-size: 14px;
-    display: inline-block;
-    border: 0;
-    height: 36px;
-    border-radius: 4px;
-    line-height: 21px;
-    text-decoration: none;
-    vertical-align: middle;
-    white-space: nowrap;
-    padding: 7px 12px 8px;
-    cursor: pointer;
-    min-width: 64px;
-    background: #157efb;
-    color: #fff;
-    font-weight: 700;
-}
-.member_view {
-	border: 1px solid #222;
-    position: relative;
-    min-height: 0;
-    height: 100%;
-}
-.btn_fold_side {
-    position: absolute;
-    
-    left: 241px;
-    top: 7px;
-    padding: 0;
-    width: 27px;
-    height: 40px;
-    border: 1px solid #ddd;
-    box-shadow: 0 1px 2px hsl(0deg 0% 81% / 50%);
-    box-sizing: border-box;
-    border-radius: 0 2px 2px 0;
-    z-index: 60;
-}
-.btn_fold_side .tooltip {
-	
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-top: 4px;
-    background-color: rgba(0,0,0,.6);
-    color: #fff;
-    white-space: nowrap;
-    font-size: 12px;
-    padding: 3px 8px 3px;
-    line-height: 18px;
-    border-radius: 2px;
-    font-style: normal;
-    -webkit-transform: translate(-50%);
-    transform: translate(-50%);
-    z-index: 30;
-}
-.member_view .organization {
-	
-	border: 1px solid #e5e5e6;
-    padding: 13px;
-    flex: 0 0 auto;
-    width: 600px;
-    height:600px;
-    overflow: auto;
-    position: relative;
-    box-sizing: border-box;
-    border-right: 0;
-    min-height: 0;
-    min-width: 0;
+/*회사명*/
+.btn_toggle_tree>.corp_name{
+	color: #157efb;
+	padding: 2em 0em;
 }
 
-.organization .corp_name {
+/*회사명 btn_toggle_tree호버시 백그라운드컬러 달라지게*/
+.btn_toggle_tree:hover{
+	background-color: #e6e6e6;
+}
+/*부서명 호버시 백그라운드컬러 달라지게*/
+.tree_team>:hover{
+	background-color: #e6e6e6;
+}
+/*토글 기본값 안보이게*/
+.org_tree{display: none;}
+.depart_menu{display: none; padding: 0.5em;}
+.team_name{display: none;}
+
+/*부서명 선택시 크기*/
+.team_name{
+	margin: 0;
+	padding: 0;
+	weight: 200px;
+	height: 20px;
+	background-color: #fff;
+}
+/*부서 수정가능창 여는 버튼*/
+.btn_depart_menu{
+	position: absolute;
+	right: 10px;
+	z-index: 80px;
+	width: 20px;
+	height: 20px;
+}
+.depart_menu{
+	position: absolute;
+	margin-left:7em;
+	background-color: rgba(255, 255, 255, 0.9);
+	width: 100px;
+	margin-right: 0;
+	border: 1px solid #ddd;
 	
-    position: absolute;
-    clip: rect(0,0,0,0);
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
 }
-.org_tree {
-	
-    display: inline-block;
-    min-width: 100%;
-    min-height: 100%;
-    margin: 0;
-    padding: 0;
-    border: 1px solid #222;
+.tree_team{
+	width: 200px;
+	position: relative;
+	top:-30px;
+	left: 15px;
 }
-.org_tree li {
-	border: 1px solid #222;
-    position: relative;
-}
-.org_tree .tree_item.selected {
-    background-color: #e7f2fe;
-}
-.org_tree .btn_toggle_tree {
-	border: 1px solid #222;
-	background-color: transparent;  
-    padding: 6px;
-    overflow: hidden;
-    margin-right: -20px;
-    position: relative;
-    z-index: 10;
-}
-.org_tree .group_name {
-	border: 1px solid #222;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    max-width: 100%;
-    word-wrap: normal;
-    font-size: 14px;
-    color: #222;
-    line-height: 21px;
-    padding: 6px 0 5px 52px;
-}
-.org_tree .group_name, .org_tree .group_name_modify {
-	border: 1px solid #222;
-    display: block;
-    position: relative;
-}
-.org_tree .tree_item .btn_context {
-    opacity: 0;
-    border: 0;
-    background-color: transparent;
-    flex: 0 0 auto;
-    width: 16px;
-    position: relative;
-}
-.org_tree .tree_item {
-    position: relative;
-    margin-bottom: 2px;
-    border-radius: 2px;
-    padding-left: 24px;
-}
-.org_tree .tree_item .drag_handle {
-    display: none;
-    position: absolute;
-    left: 0;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
-    margin-top: 1px;
+/*//////////////////내용///////////////////////////*/
+.selected{
+	margin: 0 0.5em;
 }
 .fix_contents {
-    flex: 1 1 auto;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    flex-direction: column;
+	border: 1px solid #ddd;
+}
+
+.fix_head {
+	border-bottom: 1px solid #ddd;
+	height: 60px;
+	width: 800px;
     position: relative;
-    width: 100%;
-    min-width: 0;
-    box-sizing: border-box;
-    border: 1px solid #e5e5e6;
+    line-height: 20px;
+    padding: 16px 0 16px 20px;
+}
+.fix_body{
+	margin: 2em;
 }
