@@ -17,13 +17,13 @@ public class SecurityConfig {
     MyUserDetailsService customUserDetailsService() {
         return new MyUserDetailsService();
     }
-
+*/
     //패스워드 인코더 빈 등록(@Autowired로 가져올 수 있음)
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
-*/
+
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
