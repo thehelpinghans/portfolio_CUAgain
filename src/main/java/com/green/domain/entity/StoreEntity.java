@@ -16,25 +16,19 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "DOC_agreement")
+@Table
 @Entity
-public class PaymentEntity extends BaseDateEntity{
+public class StoreEntity {
 	
 	@Id
 	private long id;
 	
 	@Column(nullable = false)
-	private String title;
+	private String name;
 	
 	@Column(nullable = false)
-	private String content;
+	private long manager_id;
 	
 	@Column(nullable = false)
-	private long status;
-	
-	@Column(nullable = false)
-	private long employees_id;
-	
-	@Column(nullable = false)
-	private long emp_id;
+	private long address_id;
 }
