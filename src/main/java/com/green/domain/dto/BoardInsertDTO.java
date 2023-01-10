@@ -1,4 +1,4 @@
-package com.green.dto;
+package com.green.domain.dto;
 
 import com.green.domain.entity.EmployeesEntity;
 

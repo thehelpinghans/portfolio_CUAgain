@@ -1,14 +1,16 @@
 package com.green.controller;
 
 import com.green.domain.dto.EmployeesInsertDTO;
+import com.green.domain.entity.Position;
 import com.green.service.EmployeesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -63,18 +65,32 @@ public class AdminController {
 
     //사원 등록 페이지이동
     @GetMapping("/admin/emp/reg")
-    public String empReg(){
-        return "/admin/employee/reg";
+    public String empReg(Model model){
+
+		employeesService.getBaseInfo(model);
+
+        return "admin/employee/reg";
     }
+
+	//부서선택 되었을때 해당하는 팀 이름 리스트 가져오기
+	@ResponseBody
+	@GetMapping("/admin/teamList/{depName}")
+	public List<String> teamListOfDep(@PathVariable String depName){
+		System.out.println(depName);
+		return employeesService.getTeamListOfDef(depName);
+	}
+
     //사원 조회/수정 페이지이동
     @GetMapping("/admin/emp/list")
-    public String empList(){
-        return "/admin/employee/list";
+    public String empList(Model model){
+		employeesService.getEmpList(model);
+        return "admin/employee/list";
     }
 
     //사원디테일가져오기
-    @GetMapping("/admin/member/detailTag")
-    public String empDetail(){
+    @GetMapping("/admin/member/detailTag/{memberId}")
+    public String empDetail(@PathVariable long memberId, Model model){
+		employeesService.getDetail(memberId,model);
         return "admin/employee/detailTag";
     }
 

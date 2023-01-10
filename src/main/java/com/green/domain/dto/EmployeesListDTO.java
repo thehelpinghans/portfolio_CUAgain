@@ -8,6 +8,7 @@ import lombok.Data;
 public class EmployeesListDTO {
 
     //사원정보 처리 필드
+    private long id;
     private String email;
     private String pass;
     private String name;
@@ -15,11 +16,12 @@ public class EmployeesListDTO {
     private String hireDate;
     private String department;
     private String position;
-
+    private String team;
     //주소 처리 필드
     private String address;
 
     public EmployeesListDTO(EmployeesEntity e){
+        id=e.getId();
         email=e.getEmail();
         pass=e.getPass();
         name=e.getName();
@@ -27,6 +29,7 @@ public class EmployeesListDTO {
         hireDate= String.valueOf(e.getHireDate());
         department=e.getDepartment().getName();
         position=e.getPosition().getPosition();
+        team=e.getTeam().getName();
     }
     public EmployeesListDTO address(AddressEntity e){
         address="("+e.getPostcode()+") "+e.getRoadAddress()+" "+e.getJibunAddress()
