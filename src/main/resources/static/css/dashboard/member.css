@@ -1,0 +1,39 @@
+@charset "UTF-8";
+
+.content{
+	float: left;
+    width: 778px;
+    margin: 20px 0 0 20px;
+    display: inline;
+}
+
+.content_att{
+	margin-top: 10px;
+    width: 450px;
+    height: 280px;
+    padding: 17px;
+    border: 2px solid #dedede;
+    border-radius: 5px;
+}
+.content_att .content_att_reg{
+	border-left: 1px solid black;
+	margin-left: 10px;
+}
+.content_att .content_info{
+	margin-top: 20px;
+}
+.content_att .content_info>p{
+	margin-top: 10px;
+}
+.proflie{
+	width: 120px;
+	height: 100px;
+}
+.btn-on{
+	margin-top: 20px;
+
+}
+.btn-off{
+	margin-top: 20px;
+	margin-left: 20px;
+}
