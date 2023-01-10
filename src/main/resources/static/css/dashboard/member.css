@@ -2,18 +2,26 @@
 
 .content{
 	float: left;
-    width: 778px;
+    width: 1000px;
     margin: 20px 0 0 20px;
     display: inline;
 }
-
-.content_att{
+.content_p{
 	margin-top: 10px;
+}
+.content_p2{
+	margin-left: 360px;
+}
+.content_att{
+	margin-top: 20px;
     width: 450px;
     height: 280px;
     padding: 17px;
     border: 2px solid #dedede;
     border-radius: 5px;
+}
+.content_att:first-child{
+	margin-right: 30px;
 }
 .content_att .content_att_reg{
 	border-left: 1px solid black;
@@ -36,4 +44,41 @@
 .btn-off{
 	margin-top: 20px;
 	margin-left: 20px;
+}
+.table{
+	margin-top: 20px;
+    width: 450px;
+    height: 280px;
+    padding: 17px;
+    border-radius: 5px;
+	border-right: 1px solid #d5d5d5;
+	border-bottom: 2px solid #d5d5d5;
+}
+.table tr{
+	border: 1px solid #d5d5d5;
+}
+.table th{
+    padding: 5px 4px;
+    font-size: 14px;
+    color: #333;
+    text-align: center;
+    font-weight: normal;
+    background-size: 10px;
+    background-color: #ededed;
+    border-top: 1px solid #d5d5d5;
+    border-left: 1px solid #d5d5d5;
+}
+.table td{
+	padding: 5px 4px;
+    font-size: 14px;
+    color: #333;
+    text-align: center;
+    font-weight: normal;
+	border-top: 1px solid #d5d5d5;
+	border-left: 1px solid #d5d5d5;
+}
+.table td>p{
+	margin-left: 160px;
+	font-size: 14px;
+	padding: 10px 0;
 }
