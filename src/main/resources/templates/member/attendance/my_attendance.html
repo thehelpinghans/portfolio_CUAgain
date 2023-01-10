@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  th:replace="~{layout/member :: memberLayout(~{this::head}, ~{::main})}">
+<head>
+	<!--필요한 head 추가-->
+	<link rel="stylesheet" href="/css/attendance/attendance.css">
+</head>
+<main>
+<!-- <h1>일별 근태현황 페이지</h1> -->
+	<div id="content">
+		<table>
+			<tr>
+				<td>
+					<b>나의근태현황</b>
+				</td>
+			</tr>
+			<tr>
+				<td height="5"></td>
+			</tr>
+			<tr>
+				<td height="1" bgcolor="black"></td>
+			</tr>
+		</table>
+		<form>
+			<table class="table">
+				<tbody>
+					<tr>
+						<th width="100px;">조회일자</th>
+						<td>
+							<div style="padding-bottom:5px;"></div>
+							<input type="date" class="inputType_left" id="search_sdate" name="search_sdate">
+							~
+							<input type="date" class="inputType_left" id="search_sdate" name="search_sdate">
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<button class="btn_search">검색</button>
+		</form>
+		<table class="table">
+			<tbody>
+				<tr>
+					<th width="5%">근무차수</th>
+					<th width="12%">출근일시</th>
+					<th width="12%">퇴근일시</th>
+					<th width="5%">구분(상태)</th>
+					<th width="10%">상세</th>
+				</tr>
+				<tr th:if="${!#lists.isEmpty(list)}" >
+					<td colspan="9">
+						<p>나중에 dto리스트 데이터 넣어주기</p>
+					</td>
+					
+				</tr>
+				<tr th:if="${#lists.isEmpty(list)}">
+					<td colspan="9">
+						<p>데이터가 없습니다.</p>
+					</td>
+					
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</main>
+</html>
