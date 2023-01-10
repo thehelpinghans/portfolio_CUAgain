@@ -1,4 +1,4 @@
-package com.green.service;
+package com.green.Service;
 
 import com.green.domain.dto.EmployeesInsertDTO;
 import org.springframework.ui.Model;

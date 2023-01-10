@@ -1,7 +1,8 @@
-package com.green.service.impl;
+package com.green.Service.impl;
 
-import com.green.service.BoardService;
 import org.springframework.stereotype.Service;
+
+import com.green.Service.BoardService;
 
 @Service
 public class BoardServiceProcess implements BoardService {
