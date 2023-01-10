@@ -31,7 +31,15 @@ class ConvenienceStoreApplicationTests {
 
     @Autowired
     AddressEntityRepository addrRepo;
-   @Test
+
+    @Autowired
+    TeamEntityRepository teamRepo;
+
+    @Autowired
+    DepartmentEntityRepository depRepo;
+
+
+   // @Test
     void 관리자생성테스트() {
 
 
@@ -45,6 +53,13 @@ class ConvenienceStoreApplicationTests {
                 .role(MyRole.ADMIN)
                 .build());
 
+    }
+    //@Test
+    void 팀데이터추가() {
+    	teamRepo.save(TeamEntity.builder()
+    			.dep(depRepo.findById(4L).get())//부서넘버
+    			.name("오프라인사업팀")
+    			.build());
     }
 
 }
