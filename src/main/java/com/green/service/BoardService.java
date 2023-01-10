@@ -1,6 +1,5 @@
-package com.green.Service;
+package com.green.service;
 
-import com.green.domain.dto.BoardDetailDTO;
 import com.green.domain.dto.BoardInsertDTO;
 import com.green.domain.dto.BoardListDTO;
 import org.springframework.ui.Model;
