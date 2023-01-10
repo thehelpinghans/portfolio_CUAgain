@@ -8,15 +8,44 @@
 	<script src="/js/calendar/main.js"></script>
 	<link rel="stylesheet" href="/css/attendance/main.css">
 	<script>
-
       document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
+        var Calendar = FullCalendar.Calendar;
+   	  	var Draggable = FullCalendar.Draggable;
+   	    var containerEl = document.getElementById('external-events');
+   	    var calendarEl = document.getElementById('calendar');
+   	    
         var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridMonth'
+          initialView: 'dayGridMonth',
+          googleCalendarApiKey : "AIzaSyDBWA82rafMdt-qfzcScMvxtr0frscbY-Y",
+          eventSources :[ 
+              {
+              	googleCalendarId : 'ko.south_korea#holiday@group.v.calendar.google.com'
+                  , color: 'white'   // an option!
+                  , textColor: 'black' // an option!
+              }
+          ],
+          headerToolbar: {
+              left: 'prev,next today',
+              center: 'title',
+              right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            },
+            editable: true,
+            droppable: true, // this allows things to be dropped onto the calendar
+          
         });
+     	// initialize the external events
+     	// -----------------------------------------------------------------
+		new Draggable(containerEl, {
+	   	  itemSelector: '.fc-event',
+	   	  eventData: function(eventEl) {
+	   	    return {
+	   	      title: eventEl.innerText
+	   	    };
+	   	  }
+	   	});
         calendar.render();
       });
-
     </script>
 </head>
 <main><!--내용 채우기-->
@@ -44,7 +73,12 @@
 				<tr>
 					<th width="12%">부서</th>
 					<td>
-						<select style="width: 150px;"></select>
+						<select style="width: 150px;">
+							<option value="인사담당부">인사담당부</option>
+							<option value="경영지원본부">경영지원본부</option>
+							<option value="마케팅부">마케팅부</option>
+							<option value="편의점사업부">편의점사업부</option>
+						</select>
 					</td>
 				</tr>
 			</table>
@@ -61,11 +95,30 @@
 					</tr>
 				</tbody>
 			</table>
+			<div id='external-events'>
+			  <p>
+			    <strong>상태</strong>
+			  </p>
+			  <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
+			    <div class='fc-event-main'>출근</div>
+			  </div>
+			  <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
+			    <div class='fc-event-main'>외근</div>
+			  </div>
+			  <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
+			    <div class='fc-event-main'>연차휴가</div>
+			  </div>
+			  <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
+			    <div class='fc-event-main'>병가</div>
+			  </div>
+			  <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
+			    <div class='fc-event-main'>조퇴</div>
+			  </div>
+			</div>
+			<div id='calendar-container'>
+			  <div id='calendar'></div>
+			</div>
 		</form>
-		<div id="calendar">
-			
-		</div>
-		
 	</div>
 </main>
 </html>

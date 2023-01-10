@@ -11,6 +11,12 @@ public class PageController {
     public String member(){
         return "member/main";
     }
+    
+    //나의 근태현황 페이지(사원페이지)
+    @GetMapping("/member/my_attendance")
+    public String myAttendance(){
+        return "member/attendance/my_attendance.html";
+    }
 
     //임시, 어드민페이지로 이동
     @GetMapping("/admin/main")
@@ -18,13 +24,13 @@ public class PageController {
         return "admin/main";
     }
 
-    //일 근태현황 페이지
+    //일 근태현황 페이지(어드민 페이지)
     @GetMapping("/admin/day_attendance")
     public String dayAttendance() {
     	return "admin/attendance/day_attendance";
     }
 
-    //월 근태현황 페이지
+    //월 근태현황 페이지(어드민 페이지)
     @GetMapping("/admin/month_attendance")
     public String monthAttendance() {
     	return "admin/attendance/month_attendance";
