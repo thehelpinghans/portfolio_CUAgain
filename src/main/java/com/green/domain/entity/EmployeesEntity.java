@@ -10,6 +10,8 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @DynamicUpdate
 @Builder
@@ -40,19 +42,30 @@ public class EmployeesEntity {
 
     @Enumerated(EnumType.STRING)    //직책
     @ManyToOne//속한 팀
-	@JoinColumn(name ="team_id", insertable= false, updatable=false)//관여방지
+	@JoinColumn(name ="team_id")
 	private TeamEntity team;
 
     @ManyToOne//속한 부서
-	@JoinColumn(name ="department_id", insertable= false, updatable=false)//관여방지
+	@JoinColumn(name ="dep_id")
 	private DepartmentEntity department;
 
 
     @Enumerated(EnumType.STRING)
     private Position position;
     //ROLE정보 --enum 사용
+
+    @Builder.Default
+    @CollectionTable(name = "role")
     @Enumerated(EnumType.STRING)    //저장유형 문자열로(롤 확장시 유리) 기본 ordinal(숫자)
-    private MyRole role ;          //시큐리티 role
+    @ElementCollection(fetch = FetchType.EAGER) //1:N member테이블에서만 접근가능한 내장테이블?로 만들어줌
+    private Set<MyRole> roles = new HashSet<>();
+
+    //role적용을 위한 편의메서드
+    public EmployeesEntity addRole(MyRole role){
+        this.roles.add(role);
+        return this;
+    }
+
 
     @JoinColumn //address_id
     @OneToOne

@@ -10,8 +10,11 @@
 		$(function () {
 			$(".currentDate").val(new Date().toISOString().substring(0, 10));
 			$("#passCheckText").hide();
+			$("#teamTag").hide();
 		});
 		/*document.getElementById('currentDate').value = new Date().toISOString().substring(0, 10);;*/
+
+
 
 		function gimgChanged(el) {
 			var fileData = $(el)[0].files[0];
@@ -42,6 +45,31 @@
 				$("#passCheckText").hide();
 			}
 		}
+
+		function depChanged(el){
+			var depName=$(el).val();
+			if(depName=="none"){
+				$("#teamTag").hide();
+				return;
+			}
+			$.ajax({
+				url:`/admin/teamList/${depName}`,
+				type: "get",
+				success:function (result){
+					result=result.toString();
+
+					var list=result.split(',');
+
+					var htmltag="";
+					for(var i=0;i<list.length;i++){
+						htmltag+=`<option value="${list[i]}">${list[i]}</option><br>`;
+					}
+
+					$("#teamList").html(htmltag);
+					$("#teamTag").show();
+				}
+			});
+		}
 	</script>
 	<script src="/js/employee/daumPostcode.js"></script>
 
@@ -50,11 +78,11 @@
 	<h1>사원 등록 페이지입니다.</h1>
 	<form action="/admin/emp/reg" class="regForm flex column" method="post">
 		<div>
-			<label class="img" for="profileImg"></label>
+			<label class="img" for="profileImg" ></label>
 			<input id="profileImg" class="gimg" type="file" name="gimg"
 				   onchange="gimgChanged(this)">
-			<input type="hidden" class="newName" name="newName">
-			<input type="hidden" class="orgName" name="orgName">
+			<input type="hidden" class="newName" name="newName" >
+			<input type="hidden" class="orgName" name="orgName" >
 			<br>
 			<span>프로필 사진</span>
 		</div>
@@ -63,16 +91,19 @@
 		<label><span>비밀번호 확인</span><input type="password" onchange="passSameCheck(this);"><br></label>
 		<label id="passCheckText">비밀번호가 일치하지 않습니다. 다시 설정해 주세요.</label>
 		<label><span>이름</span><input type="text" name="name"><br></label>
-		<label><span>연락처</span><input type="text" name="phone"><br></label>
-		<label><span>입사일</span><input type="date" class="currentDate" name="hireDate"><br></label>
+		<label><span>연락처</span><input type="text" name="phone" ><br></label>
+		<label><span>입사일</span><input type="date" class="currentDate" name="hireDate" ><br></label>
 		<label>
 			<span>부서</span>
-			<select name="department">
-				<option value="none">부서지정</option>
-				<option value="부서1">부서1</option>
-				<option value="부서2">부서2</option>
-				<option value="부서3">부서3</option>
-
+			<select id="depList" name="department" onchange="depChanged(this)">
+				<option value="none" th:text="부서선택"></option>
+				<option th:each="dep : ${depList}" th:value="${dep}" th:text="${dep}"></option>
+			</select>
+			</label>
+		<label id="teamTag">
+			<span>팀</span>
+			<select name="team" id="teamList">
+				<!--/*<option th:each="team : ${teamList}" th:value="${team}" th:text="${team}"></option>*/-->
 			</select>
 			<br></label>
 		<label>

@@ -18,6 +18,7 @@ public class EmployeesInsertDTO {
     private String phone;
     private String hireDate;
     private String department;
+    private String team;
     private String position;
 
     //주소 처리 필드

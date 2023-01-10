@@ -14,36 +14,35 @@
         <div class="board_view_wrap">
             <div class="board_view">
                 <div class="title">
-                    글 제목이 들어갑니다.
+                    [[${detail.title}]]
                 </div>
                 <div class="info">
                     <dl>
                         <dt>번호</dt>
-                        <dd>1</dd>
-                    </dl>
-                    <dl>
-                        <dt>글쓴이</dt>
-                        <dd>김이름</dd>
+                        <dd>[[${detail.id}]]</dd>
                     </dl>
                     <dl>
                         <dt>작성일</dt>
-                        <dd>2021.1.16</dd>
+                        <dd>[[${detail.createdDate}]]</dd>
+                    </dl>
+                    <dl>
+                        <dt>작성자</dt>
+                        <dd>[[${detail.name}]]</dd>
                     </dl>
                     <dl>
                         <dt>조회</dt>
-                        <dd>33</dd>
+                        <dd>[[${detail.readCount}]]</dd>
                     </dl>
                 </div>
                 <div class="cont">
-                    글 내용<br>
-                    글 내용<br>
-                    글 내용<br>
+                    [[${detail.content}]]
+
        
                 </div>
             </div>
             <div class="bt_wrap">
-                <a href="/board/notice" class="on">목록</a>
-                <a href="/board/edit" class="on">수정</a>
+                <a href="/admin/board/noticeList" class="on">목록</a>
+                <a th:href="@{/admin/board/{boardId}(boardId = ${detail.id})}" class="on">수정</a>
             </div>
         </div>
     </div>
