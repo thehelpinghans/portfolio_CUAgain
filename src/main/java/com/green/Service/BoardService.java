@@ -1,4 +1,4 @@
-package com.green.service;
+package com.green.Service;
 
 public interface BoardService {
 
