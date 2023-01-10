@@ -4,19 +4,27 @@ import com.green.security.MyUserDetails;
 import com.green.security.MyUserDetailsService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.green.domain.dto.DepartmentDTO;
+import com.green.service.DepartmentService;
+
 @Controller
 public class PageController {
+
+	@Autowired
+	DepartmentService depaService;
 
     //임시, 사원페이지로 이동
     @GetMapping("/member/main")
     public String member(){
         return "member/main";
     }
-    
+
     //나의 근태현황 페이지(사원페이지)
     @GetMapping("/member/my_attendance")
     public String myAttendance(){
@@ -42,9 +50,16 @@ public class PageController {
     }
   //부서관리 이동
     @GetMapping("/admin/department")
-    public String department(){
+    public String department(Model model){
+    	depaService.getList(model);
         return "admin/depart/department";
     }
+//    //팀명가져올거임
+//    @PostMapping("/admin/teamList")
+//    public String teamList(Model model){
+//    	teamService.getList(model);
+//        return "";
+//    }
   //부서테스트이동
     @GetMapping("/admin/department3")
     public String departTest(){

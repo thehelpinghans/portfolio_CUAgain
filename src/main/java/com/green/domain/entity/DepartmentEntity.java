@@ -33,9 +33,9 @@ public class DepartmentEntity {
     private long id;   //부서번호
 	private String name; //부서이름
 	
-	@OneToOne //담당자
-	@JoinColumn
-	private EmployeesEntity manager;
+//	@OneToOne //담당자
+//	@JoinColumn
+//	private EmployeesEntity manager;
 	/*
 				//테이블이 중복으로 생기지않기위해 (mappedBy=?)
 	@OneToMany(mappedBy="department") //부서에 속한 팀들
