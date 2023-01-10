@@ -17,7 +17,7 @@ public class BoardEntity extends  BaseDateEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; //게시글 번호
+    private long id; //게시글 번호
 
     @Column(nullable = false)
     private String title; //제목
@@ -36,13 +36,21 @@ public class BoardEntity extends  BaseDateEntity {
     private boolean pin; //상단고정 여부 true,false 고정/비고정
 
     @Enumerated(EnumType.STRING)
-    private Type type; //게시판 종류  공지사항/자유게시판
+    private BoardType type; //게시판 종류  공지사항/자유게시판
 
     @JoinColumn
     @ManyToOne(fetch = FetchType.EAGER)
     private EmployeesEntity employees;
 
 
+    public BoardEntity setTitle(String title){
+        this.title=title;
+        return this;
+    }
+    public BoardEntity setContent(String content){
+        this.content=content;
+        return this;
+    }
 
 
 }

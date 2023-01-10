@@ -31,7 +31,7 @@ class ConvenienceStoreApplicationTests {
 
     @Autowired
     AddressEntityRepository addrRepo;
-   // @Test
+   @Test
     void 관리자생성테스트() {
 
 
@@ -39,7 +39,7 @@ class ConvenienceStoreApplicationTests {
         empRepo.save(EmployeesEntity.builder()
                 .email("admin@CUAgain.com")
                 .pass(pe.encode("1234"))
-                .name("관리자")
+                .name("admin")
                 .hireDate(LocalDate.parse("2023-01-09"))
                 .phone("010-1234-5678")
                 .role(MyRole.ADMIN)
