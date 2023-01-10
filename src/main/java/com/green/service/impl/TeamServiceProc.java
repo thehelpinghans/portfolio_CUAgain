@@ -1,8 +1,8 @@
-package com.green.Service.impl;
+package com.green.service.impl;
 
 import org.springframework.stereotype.Service;
 
-import com.green.Service.TeamService;
+import com.green.service.TeamService;
 
 @Service
 public class TeamServiceProc implements TeamService{
