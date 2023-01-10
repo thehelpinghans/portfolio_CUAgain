@@ -1,7 +1,12 @@
 package com.green.controller;
 
+import com.green.security.MyUserDetails;
+import com.green.security.MyUserDetailsService;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class PageController {
@@ -61,5 +66,14 @@ public class PageController {
     @GetMapping("admin/payment-write")
     private String payMentWrite() {
     	return "admin/payment/payment-write";
+    }
+    @PostMapping("/comm/checkRole")
+    public String checkRole(@AuthenticationPrincipal MyUserDetails userDetails){
+        if(userDetails.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))){
+            return "admin/main";
+        }else{
+            return "member/main";
+        }
+
     }
 }
