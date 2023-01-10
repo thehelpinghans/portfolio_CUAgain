@@ -1,6 +1,5 @@
 @charset "UTF-8";
 /*전체적용*/
-*{font-size: 14px; }
 main{height:100%; background-color: white;}
 
 /*아이콘 기본 설정*/
@@ -60,9 +59,11 @@ main{height:100%; background-color: white;}
 	background-color: #e6e6e6;
 }
 /*부서명 호버시 백그라운드컬러 달라지게*/
-.tree_team>:hover{
+.depart_name> .dep-table>tr:hover{
 	background-color: #e6e6e6;
 }
+
+
 /*토글 기본값 안보이게*/
 .org_tree{display: none;}
 .depart_menu{display: none; padding: 0.5em;}
@@ -72,8 +73,7 @@ main{height:100%; background-color: white;}
 .team_name{
 	margin: 0;
 	padding: 0;
-	weight: 200px;
-	height: 20px;
+	height: 30px;
 	background-color: #fff;
 }
 /*부서 수정가능창 여는 버튼*/
@@ -86,7 +86,7 @@ main{height:100%; background-color: white;}
 }
 .depart_menu{
 	position: absolute;
-	margin-left:7em;
+	margin-left:8em;
 	background-color: rgba(255, 255, 255, 0.9);
 	width: 100px;
 	margin-right: 0;
