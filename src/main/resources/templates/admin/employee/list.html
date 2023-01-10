@@ -15,9 +15,9 @@
 
 		function btnDetailClicked(){
 
-			var memberId=$(this).parent(".nameTd").prev().val();
+			var memberId=$(this).parent(".nameTd").prev().text();
 			$.ajax({
-				url:`/admin/member/detailTag`,/*/admin/member/detailTag/${memberId}*/
+				url:`/admin/member/detailTag/${memberId}`,
 				type:"get",
 				success:function (resultHTML){
 					$("#view-list").hide();
@@ -59,7 +59,7 @@
 					<th>사원번호</th>
 					<th>성명</th>
 					<th>직책</th>
-					<th>부서</th>
+					<th>부서(팀)</th>
 					<th>입사일자</th>
 					<th>핸드폰</th>
 					<th>E-MAIL</th>
@@ -67,16 +67,17 @@
 				</tr>
 				</thead>
 				<tbody>
-				<tr>
-					<td>사원번호</td>
-					<td class="nameTd"><button type="button">성명</button></td>
-					<td>직책</td>
-					<td>부서</td>
-					<td>입사일자</td>
-					<td>핸드폰</td>
-					<td>E-MAIL</td>
-					<td>주소</td>
-
+				<tr th:each="dto:${list}">
+					<td th:text="${dto.id}">사원번호</td>
+					<td class="nameTd">
+						<button type="button" th:text="${dto.name}">성명</button>
+					</td>
+					<td th:text="${dto.position}">직책</td>
+					<td th:text="|${dto.department}(${dto.team}))|">부서</td>
+					<td th:text="${dto.hireDate}">입사일자</td>
+					<td th:text="${dto.phone}">핸드폰</td>
+					<td th:text="${dto.email}">E-MAIL</td>
+					<td th:text="${dto.address}">주소</td>
 				</tr>
 				</tbody>
 			</table>

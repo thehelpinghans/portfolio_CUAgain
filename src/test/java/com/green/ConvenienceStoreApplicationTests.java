@@ -31,6 +31,14 @@ class ConvenienceStoreApplicationTests {
 
     @Autowired
     AddressEntityRepository addrRepo;
+
+    @Autowired
+    TeamEntityRepository teamRepo;
+
+    @Autowired
+    DepartmentEntityRepository depRepo;
+
+
    // @Test
     void 관리자생성테스트() {
 
@@ -39,12 +47,19 @@ class ConvenienceStoreApplicationTests {
         empRepo.save(EmployeesEntity.builder()
                 .email("admin@CUAgain.com")
                 .pass(pe.encode("1234"))
-                .name("관리자")
+                .name("admin")
                 .hireDate(LocalDate.parse("2023-01-09"))
                 .phone("010-1234-5678")
                 .role(MyRole.ADMIN)
                 .build());
 
+    }
+    //@Test
+    void 팀데이터추가() {
+    	teamRepo.save(TeamEntity.builder()
+    			.dep(depRepo.findById(4L).get())//부서넘버
+    			.name("오프라인사업팀")
+    			.build());
     }
 
 }

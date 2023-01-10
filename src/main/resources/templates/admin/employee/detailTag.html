@@ -4,21 +4,21 @@
 	<h1>사원 디테일 페이지입니다.</h1>
 	<form class="regForm flex column">
 		<div>
-			<label class="img"></label>
+			<label class="img" th:style="|background-image:url(${dto.url}${dto.newName})|"></label>
 			<input id="defimg" class="gimg" type="file" name="gimg"
 				   onchange="gimgChanged(this)">
-			<input type="hidden" class="newName" name="newName">
-			<input type="hidden" class="orgName" name="orgName">
+			<input type="hidden" class="newName" name="newName" th:value="${dto.newName}">
+			<input type="hidden" class="orgName" name="orgName" th:value="${dto.orgName}">
 			<br>
 			<span>프로필 사진</span>
 			<label class="label-btn" for="defimg">수정</label>
 		</div>
-		<label><span>로그인 이메일</span><span>test@test.com</span><br></label>
+		<label><span>로그인 이메일</span><span th:text="${dto.email}">test@test.com</span><br></label>
 		<label><span>비밀번호 변경</span><input type="password"><br></label>
 		<label><span>비밀번호 확인</span><input type="password"><br></label>
-		<label><span>이름</span><input type="text"><br></label>
-		<label><span>연락처</span><input type="text"><br></label>
-		<label><span>입사일</span><input type="date" class="currentDate" readonly><br></label>
+		<label><span>이름</span><input type="text"  th:value="${dto.name}"><br></label>
+		<label><span>연락처</span><input type="text" th:value="${dto.phone}"><br></label>
+		<label><span>입사일</span><input type="date" class="currentDate" th:value="${dto.hireDate}"><br></label>
 		<label>
 			<span>부서</span>
 			<select name="department">
@@ -39,13 +39,13 @@
 			</select>
 			<br></label>
 		<div>
-			<input type="text" id="postcode" name="postcode" placeholder="우편번호">
+			<input type="text" id="postcode" name="postcode" placeholder="우편번호" th:value="${dto.postcode}">
 			<input type="button" onclick="daumPostcode()" value="우편번호 찾기"><br>
-			<input type="text" id="roadAddress" name="roadAddress" placeholder="도로명주소">
-			<input type="text" id="jibunAddress" name="jibunAddress" placeholder="지번주소">
+			<input type="text" id="roadAddress" name="roadAddress" placeholder="도로명주소" th:value="${dto.roadAddress}">
+			<input type="text" id="jibunAddress" name="jibunAddress" placeholder="지번주소" th:value="${dto.jibunAddress}">
 			<span id="guide" style="color:#999;display:none"></span>
-			<input type="text" id="detailAddress"  name="detailAddress" placeholder="상세주소">
-			<input type="text" id="extraAddress" name="extraAddress" placeholder="참고항목">
+			<input type="text" id="detailAddress"  name="detailAddress" placeholder="상세주소" th:value="${dto.detailAddress}">
+			<input type="text" id="extraAddress" name="extraAddress" placeholder="참고항목" th:value="${dto.extraAddress}">
 		</div>
 		<div>
 			<button>수정완료</button>

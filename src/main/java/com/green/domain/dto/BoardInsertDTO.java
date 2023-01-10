@@ -1,19 +1,17 @@
-package com.green.dto;
+package com.green.domain.dto;
 
+import com.green.domain.entity.BoardType;
 import com.green.domain.entity.EmployeesEntity;
+import lombok.Data;
 
+@Data
 public class BoardInsertDTO {
-
-    private long id;
 
     private String title;
 
     private String content;
 
-    private long readCount;
+    private BoardType boardType;
 
-    private boolean pin;
-
-    private EmployeesEntity employees;
 
 }
