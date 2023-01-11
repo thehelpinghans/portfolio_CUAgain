@@ -2,26 +2,27 @@ package com.green.domain.dto;
 
 import com.green.domain.entity.StoreEntity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class StoreSaveDTO {
 	
 	private long id;
 	
 	private String name;
 	
-	private long managerId;
+	private String content;
 	
-	private long addressId;
+	private String managerName;
+	
+	private String address;
 
 	public StoreSaveDTO(StoreEntity e) {
 		this.id = e.getId();
 		this.name = e.getName();
-		this.managerId = e.getManager_id();
-		this.addressId = e.getAddress_id();
+		this.content = e.getContent();
+		this.managerName = e.getManager().getName();
+		this.address = e.getAddress().getDetailAddress();
 	}
 	
 	
