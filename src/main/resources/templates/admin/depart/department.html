@@ -5,26 +5,65 @@
 	<!--필요한 head 추가-->
 	<script src="https://kit.fontawesome.com/8dd87b7874.js" crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-	<link rel="stylesheet" href="/css/depart/department.css">
-<script type="text/javascript">
-
-$(document).ready(function(){
-	$(".btn_toggle_tree").click(function(){
-    	$(".org_tree").slideToggle(400);
-	});
-	$(".btn_depart_menu").click(function(){
-		var btnId = $(this).prop("id");
-		var count= btnId.slice(-1);
+	<link rel="stylesheet" href="/css/depart/department.css" />
+	<link rel="stylesheet" href="/js/depart/department.js" />
+	<script type="text/javascript">
+	$(function(){
+		$("#btn_toggle_tree").click(function(){
+	    	$(".org_tree").slideToggle(400);
+		});
 		
-		$(`#menuList_${count}`).slideToggle(400);
+		//부서메뉴버튼 클릭 부서메뉴
+		$(".btn_depart_menu").click(function(){
+			//혹시 열려있는 메뉴 모두 닫기
+			var target=$(this).siblings(".depart_menu");
+			$(".depart_menu").not(target).hide();
+			target.slideToggle(400);
+		});
+		
+		
+		//부서명 클릭 팀토글	
+		$(".btn_tree_team").click(function(){
+			$(".team_name").slideToggle(400);
+		});
 	});
-	$(".btn_tree_team").click(function(){
-		$(".team_name").slideToggle(400);
+	//팀 추가 누르면 팀추가사라지고 작성창만나타남 
+	function teamInsert(el){
+		/* $(el).hide(); */
+		$(el).siblings(".teamInsert").show();
+	};
+
+	//부서수정 누르면 부서수정사라지고 작성창만나타남
+	function depUpdate(el){
+		/* $(el).hide(); */
+		$(el).siblings(".depUpdate").show();
+	};
+
+	//부서수정 기능
+	$(document).ready(function(){
+	    $(".depUpdate").on("keyup", function(event) {
+	        if (event.which == 13) {
+	        	target=$(this);
+	        	dept_id=target.siblings(".department-id").val();
+	        	//alert(dept_id);
+	        	//*
+	           	$.ajax({
+	           		url:"/admin/depUpdate/"+dept_id,
+	           		type:"post",
+	           		data: {"departmentName": $(this).val().trim()},
+	           		success:function(result){
+	           			target.parents("td").siblings(".dept-name").text(result);
+	           			target.parents(".depart_menu").hide();
+	           			target.val("");//리셋
+	           			target.hide();
+	           		}
+	            });
+	        	//*/
+	        }
+	    });
 	});
-});
+	</script>	
 
-
-</script>
 </head>
 <main>	
 	<div class="container view_size_depa">
@@ -42,7 +81,7 @@ $(document).ready(function(){
 					<div class="organization">
 					
 						<section>
-							<button type="button" class="btn_toggle_tree">
+							<button type="button" id="btn_toggle_tree">
 								<i class="fa-solid fa-sort-down"></i>&nbsp;
 								<i class="fa-regular fa-building"></i>&nbsp;
 								<span class="corp_name">&nbsp;&nbsp;CUAgain(회사명)</span>
@@ -53,30 +92,47 @@ $(document).ready(function(){
 							<div class="org_tree">
 								<ul class="tree_team">
 									<li class="depart_name">
+									<button type="button" class="btn_tree_team">&nbsp;&nbsp;
 											<table class="dep-table">
 												<tbody>
 													<tr class="dep-tr2" th:each= "dto : ${list}">
-														<button type="button" class="btn_tree_team">&nbsp;&nbsp;
-															<td><i class="fa-solid fa-sort-down"></i></td>
-															&nbsp;&nbsp;&nbsp;&nbsp;
-															<td><i class="fa-solid fa-user-group"></i></td>
-															&nbsp;&nbsp;&nbsp;&nbsp;
-										 					<td th:text="${dto.name}"></td>
-															<td>
-																<button type="button" class="btn_depart_menu" th:id="|menuBtn_${dtoStat.count}|"> 
-																	<i class="fa-regular fa-ellipsis-vertical"></i>
-																</button>
-															</td>
-														</button>
+														<td><i class="fa-solid fa-sort-down"></i>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+														<td><i class="fa-solid fa-user-group"></i>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+									 					<td th:text="${dto.name}" class="dept-name"></td>
+														<td>
+															<div onclick="" class="btn_depart_menu" th:id="|menuBtn_${dtoStat.count}|"> 
+																<i class="fa-regular fa-ellipsis-vertical"></i>
+															</div>
+															<div class="depart_menu flex">
+																<p>
+																	<a href="#" onclick="teamInsert(this)" class="teamIn">팀명 추가</a>
+																	<input class="teamInsert" onkeyup="enterkey()" type="text" placeholder="팀명" />
+																</p>
+																<p>
+																	<a href="#" class="depDelete" onclick="depDelete(this)">부서 삭제</a>
+																</p>
+																<p>
+																	<a href="#" onclick="depUpdate(this)" class="depUp">부서명 수정</a>
+																	<input type="hidden" class="department-id" th:value="${dto.id}">
+																	<input class="depUpdate" onkeyup="enterkey()" type="text" placeholder="부서명">
+																</p>
+																
+																
+															</div>
+															
+														</td>
 								    				</tr>
-							    				</tbody>
+							    			</tbody>
+										</table>
+									</button>
+											<form action="/admin/teamList">
+												<table class="team-table">
+													<tr class="team-tr2" th:each= "dto : ${list}">
+														<td></td>
+														<td></td>
+													</tr>
 											</table>
-											<div th:id="|menuList_${dtoStat.count}|" class="depart_menu flex" th:each= "dto : ${list}">
-												<p><a href="#">부서명 수정</a></p>
-												<p><a href="#">팀명추가</a></p>
-												<p><a href="#">부서 삭제</a></p>
-												
-											</div>
+										</form>
 									</li>
 								</ul>
 							</div><!-- div class="org_tree" 회사명 누르면 나옴  -->

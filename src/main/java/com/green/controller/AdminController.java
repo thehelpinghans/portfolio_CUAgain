@@ -1,7 +1,9 @@
 package com.green.controller;
 
+import com.green.domain.dto.DepartmentDTO;
 import com.green.domain.dto.EmployeesInsertDTO;
 import com.green.domain.entity.Position;
+import com.green.service.DepartmentService;
 import com.green.service.EmployeesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,9 @@ public class AdminController {
 
 	@Autowired
 	EmployeesService employeesService;
+	
+	@Autowired
+	DepartmentService depServise;
 	
 	@GetMapping("/board/notice")
 	public String notice() {
@@ -84,6 +89,19 @@ public class AdminController {
 	public List<String> teamListOfDep(@PathVariable String depName){
 		System.out.println(depName);
 		return employeesService.getTeamListOfDef(depName);
+	}
+	//부서이름 수정 동기
+	@ResponseBody
+	@PostMapping("/admin/depUpdate/{depId}")
+	public String depUpdate(@PathVariable("depId") long depId, String departmentName) {
+		
+		return depServise.depUpdate(depId, departmentName);
+	}
+	//부서 삭제 
+	@GetMapping("/admin/depDelete{depId}")
+	public String depDelete(@PathVariable("depId") long depId) {
+		depServise.depDelete(depId);
+		return "redirect:/admin/department";
 	}
 
     //사원 조회/수정 페이지이동

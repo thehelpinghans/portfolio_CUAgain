@@ -50,7 +50,7 @@ class ConvenienceStoreApplicationTests {
                 .name("admin")
                 .hireDate(LocalDate.parse("2023-01-09"))
                 .phone("010-1234-5678")
-                .role(MyRole.ADMIN)
+//              .role(MyRole.ADMIN)
                 .build());
 
     }
@@ -59,6 +59,12 @@ class ConvenienceStoreApplicationTests {
     	teamRepo.save(TeamEntity.builder()
     			.dep(depRepo.findById(4L).get())//부서넘버
     			.name("오프라인사업팀")
+    			.build());
+    }
+    //@Test
+    void 부서데이터저장() {
+    	depRepo.save(DepartmentEntity.builder()
+    			.name("인사담당부")
     			.build());
     }
 

@@ -1,15 +1,9 @@
 package com.green.domain.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicUpdate;
@@ -32,6 +26,12 @@ public class DepartmentEntity {
     @Id
     private long id;   //부서번호
 	private String name; //부서이름
+	
+
+	public DepartmentEntity updateDepartmentName(String departmentName) {
+		name=departmentName;
+		return this;
+	}
 	
 //	@OneToOne //담당자
 //	@JoinColumn

@@ -44,7 +44,6 @@ main{height:100%; background-color: white;}
 .btn_toggle_tree{
 	background-color: #e7f2fe;
 	padding: 0;
-	width: 200px;
 	height: 30px;
 	margin: 2em 1em ;
 }
@@ -68,6 +67,8 @@ main{height:100%; background-color: white;}
 .org_tree{display: none;}
 .depart_menu{display: none; padding: 0.5em;}
 .team_name{display: none;}
+.teamInsert{display: none;}
+.depUpdate{display: none;}
 
 /*부서명 선택시 크기*/
 .team_name{
@@ -76,25 +77,23 @@ main{height:100%; background-color: white;}
 	height: 30px;
 	background-color: #fff;
 }
+.dep-tr2{
+	min-height: 24px;
+	max-height: 140px;
+}
 /*부서 수정가능창 여는 버튼*/
 .btn_depart_menu{
-	position: absolute;
-	right: 10px;
-	z-index: 80px;
+	
 	width: 20px;
 	height: 20px;
 }
 .depart_menu{
-	position: absolute;
-	margin-left:8em;
 	background-color: rgba(255, 255, 255, 0.9);
 	width: 100px;
-	margin-right: 0;
 	border: 1px solid #ddd;
 	
 }
 .tree_team{
-	width: 200px;
 	position: relative;
 	top:-30px;
 	left: 15px;
