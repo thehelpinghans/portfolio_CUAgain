@@ -52,7 +52,6 @@ border: 1px solid black; border-collapse: collapse }
 								<li class="depart_name">
 								<button type="button" class="btn_tree_team">&nbsp;&nbsp;&nbsp;&nbsp;
 									<table class="dep-table">
-
 										<tr class="dep-tr2" th:each= "dto : ${list}">
 											<td><i class="fa-solid fa-sort-down"></i></td>
 											<td><i class="fa-solid fa-user-group"></i></td>
@@ -68,7 +67,7 @@ border: 1px solid black; border-collapse: collapse }
 									</table>
 								</button>
 								<div class="depart_menu flex">
-									<p><a href="#">부서명 수정</a></p>
+									<p><a href="/admin/depUpdate">부서명 수정</a></p>
 									<p><a href="/admin/team/reg">팀명추가</a></p>
 									<p><a href="#">부서 삭제</a></p>
 									

@@ -3,6 +3,8 @@ package com.green.service.impl;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -26,6 +28,20 @@ public class DepartmentServiceProcess implements DepartmentService{
 				//list = List<DepartmentDTO>			//미리 만든 생성자에 데려오는 리스트의 각 컬럼에다가 넣어주겠다!
 		model.addAttribute("list", list);
 		//모델에 담아서 페이지에 보냈다.
+	}
+	//부서 수정기능
+	@Transactional
+	@Override
+	public String depUpdate(long depId, String departmentName) {
+		depRepo.findById(depId).map(e->e.updateDepartmentName(departmentName)).orElseThrow();
+				
+		return departmentName;
+				
+	}
+	//부서 삭제기능
+	@Override
+	public void depDelete(long depId) {
+		
 	}
 	
 	
