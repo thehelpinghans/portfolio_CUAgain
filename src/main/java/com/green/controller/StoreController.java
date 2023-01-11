@@ -18,15 +18,15 @@ public class StoreController {
 	@Autowired
 	StoreService service;
 	
-	@GetMapping()
+	@GetMapping("/store-list")
 	public String getlist(Model model) {
 		service.getlist(model);
-		return null;
+		return "/admin/store/store";
 	}
 	
-	@PostMapping()
+	@PostMapping("/store-write")
 	public String savestore(StoreSaveDTO dto, @AuthenticationPrincipal MyUserDetails myUserDetails) {
-		service.save(dto, myUserDetails.getId());
-		return null;
+		service.save(dto, myUserDetails.getName());
+		return "/admin/store/store";
 	}
 }

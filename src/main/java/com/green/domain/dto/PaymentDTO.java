@@ -4,11 +4,9 @@ import java.time.LocalDateTime;
 
 import com.green.domain.entity.PaymentEntity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class PaymentDTO {
 	
 	 private long id;
@@ -22,6 +20,10 @@ public class PaymentDTO {
 	 private LocalDateTime updatedDate;
 	 
 	 private long status;
+	 
+	 private String employeesName;
+	 
+	 private String empName;
 
 	public PaymentDTO(PaymentEntity e) {
 		this.id = e.getId();
@@ -30,6 +32,8 @@ public class PaymentDTO {
 		this.createdDate = e.getCreatedDate();
 		this.updatedDate = e.getUpdatedDate();
 		this.status = e.getStatus();
+		this.employeesName = e.getEmployees_id().getName();
+		this.empName = e.getEmployees_id().getName();
 	}
 	 
 	 

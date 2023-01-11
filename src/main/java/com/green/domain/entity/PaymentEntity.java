@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -20,7 +21,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "DOC_agreement")
+@Table(name = "agreement")
 @Entity
 public class PaymentEntity extends BaseDateEntity{
 	
@@ -31,6 +32,7 @@ public class PaymentEntity extends BaseDateEntity{
 	@Column(nullable = false)
 	private String title; //문서이름
 	
+	@Lob
 	@Column(nullable = false)
 	private String content; //문서내용
 	
@@ -41,6 +43,7 @@ public class PaymentEntity extends BaseDateEntity{
 	@ManyToOne
 	private EmployeesEntity employees_id; //사원번호(작성자)
 	
+	@JoinColumn(name = "employees_id")
 	@Column(nullable = false)
 	private long emp_id; //결재자
 }

@@ -8,6 +8,6 @@ public interface StoreService {
 
 	void getlist(Model model);
 
-	void save(StoreSaveDTO dto, long id);
+	void save(StoreSaveDTO dto, String name);
 
 }
