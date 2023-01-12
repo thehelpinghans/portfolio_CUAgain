@@ -1,6 +1,7 @@
 package com.green.domain.entity;
 
 
+import com.green.domain.dto.EmployeesDetailDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -28,4 +29,13 @@ public class AddressEntity {
     private String detailAddress;
     private String extraAddress;
 
+
+    public AddressEntity update(EmployeesDetailDTO e){
+        this.postcode=e.getPostcode();
+        this.roadAddress=e.getRoadAddress();
+        this.jibunAddress=e.getJibunAddress();
+        this.detailAddress=e.getDetailAddress();
+        this.extraAddress=e.getExtraAddress();
+        return this;
+    }
 }
