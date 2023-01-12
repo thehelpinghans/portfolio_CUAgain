@@ -33,5 +33,6 @@ public class MyUserDetails extends User {
         this.email=entity.getEmail();
         this.name=entity.getName();
         this.phone= entity.getPhone();
+        this.id = entity.getId();
     }
 }

@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	  th:replace="~{layout/admin :: adminLayout(~{this::head}, ~{::main})}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
+      th:replace="~{layout/admin :: adminLayout(~{this::head}, ~{::main})}">
 <head>
 	<link rel="stylesheet" href="/css/board/write.css">
 	<link rel="stylesheet" href="/css/board/notice.css">
 	<!--필요한 head 추가-->
 </head>
 <main><!--내용 채우기-->
+    <form action="/admin/board/regfree"  method="post">
 	<div class="board_wrap">
         <div class="board_title">
-            <h1>자유게시판 등록</h1>
+            <strong>자유게시판 등록</strong>
             
         </div>
         <div class="board_write_wrap">
@@ -17,28 +18,20 @@
                 <div class="title">
                     <dl>
                         <dt>제목</dt>
-                        <dd><input type="text" placeholder="제목 입력"></dd>
-                    </dl>
-                </div>
-                <div class="info">
-                    <dl>
-                        <dt>글쓴이</dt>
-                        <dd><input type="text" placeholder="글쓴이 입력"></dd>
-                    </dl>
-                    <dl>
-                        <dt>비밀번호</dt>
-                        <dd><input type="password" placeholder="비밀번호 입력"></dd>
+                        <dd><input type="text" name="title" placeholder="제목 입력"></dd>
                     </dl>
                 </div>
                 <div class="cont">
-                    <textarea placeholder="내용 입력"></textarea>
+                    <textarea placeholder="내용 입력" name="content"></textarea>
                 </div>
+                <input type="hidden" name="boardType" value="자유게시판">
             </div>
             <div class="bt_wrap">
-                <a href="/board/free" class="on">등록</a>
-                <a href="/board/free" class="on">취소</a>
+                <button class="on">등록</button>
+                <a href="/admin/board/freeList" class="on">취소</a>
             </div>
         </div>
     </div>
+    </form>
 </main>
 </html>

@@ -1,6 +1,7 @@
 package com.green.domain.dto;
 
 import com.green.domain.entity.BoardEntity;
+import com.green.domain.entity.BoardType;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -14,6 +15,7 @@ public class BoardListDTO {
     private String content;
     private LocalDateTime createdDate;
     private long readCount;
+    private String type;
 
     public BoardListDTO() {
     }
@@ -25,6 +27,8 @@ public class BoardListDTO {
         this.content = e.getContent();
         this.createdDate=e.getCreatedDate();
         this.readCount=e.getReadCount();
+        this.type=e.getType().name();
+
     }
 
 }

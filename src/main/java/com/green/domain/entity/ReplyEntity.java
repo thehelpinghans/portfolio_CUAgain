@@ -27,11 +27,11 @@ public class ReplyEntity extends BaseDateEntity{
 
     @JoinColumn
     @ManyToOne(fetch = FetchType.EAGER)
-    private BoardEntity board;
+    private BoardEntity board; // 게시글번호
 
     @JoinColumn
     @ManyToOne(fetch = FetchType.EAGER)
-    private EmployeesEntity employees;
+    private EmployeesEntity employees; //작성자
 
 
 

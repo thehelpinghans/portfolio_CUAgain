@@ -6,14 +6,20 @@ import org.springframework.ui.Model;
 
 public interface BoardService {
 
-    void save(BoardInsertDTO dto, long l);
+    
 
-    void boardList(Model model);
+    void boardList(String type, Model model);
 
-    void boardListDetail(Long id, Model model);
-
+    void boardListDetail(Long boardId, Model model);
 
     void getBoardDetail(long boardId, Model model);
 
     void boardUpdate(long boardId, BoardListDTO dto);
+
+    void save(BoardInsertDTO dto, long id);
+
+
+    void freeList(Model model);
+
+
 }

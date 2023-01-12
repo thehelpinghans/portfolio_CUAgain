@@ -86,3 +86,8 @@
 .board_write .info input[type="password"] {
     width: 100%;
 }
+table{
+    margin: auto;
+    border-spacing: 1px;
+    width: 100%;
+}
