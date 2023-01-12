@@ -62,6 +62,8 @@
 	        }
 	    });
 	});
+	//부서 삭제 기능
+
 	</script>	
 
 </head>
@@ -109,17 +111,14 @@
 																	<input class="teamInsert" onkeyup="enterkey()" type="text" placeholder="팀명" />
 																</p>
 																<p>
-																	<a href="#" class="depDelete" onclick="depDelete(this)">부서 삭제</a>
+																	<a href="/admin/depart/delete" class="depDelete" onclick="depDelete(this)">부서 삭제</a>
 																</p>
 																<p>
 																	<a href="#" onclick="depUpdate(this)" class="depUp">부서명 수정</a>
 																	<input type="hidden" class="department-id" th:value="${dto.id}">
 																	<input class="depUpdate" onkeyup="enterkey()" type="text" placeholder="부서명">
 																</p>
-																
-																
 															</div>
-															
 														</td>
 								    				</tr>
 							    			</tbody>

@@ -98,7 +98,7 @@ public class AdminController {
 		return depServise.depUpdate(depId, departmentName);
 	}
 	//부서 삭제 
-	@GetMapping("/admin/depDelete{depId}")
+	@DeleteMapping("/admin/depart/delete")
 	public String depDelete(@PathVariable("depId") long depId) {
 		depServise.depDelete(depId);
 		return "redirect:/admin/department";

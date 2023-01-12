@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
@@ -41,7 +42,7 @@ public class DepartmentServiceProcess implements DepartmentService{
 	//부서 삭제기능
 	@Override
 	public void depDelete(long depId) {
-		
+		depRepo.deleteById(depId);
 	}
 	
 	
