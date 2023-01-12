@@ -35,5 +35,14 @@ public class SalaryEntity {
 	private Long employees_id;
 	
 	@Column
-	private Long tat_pay; 
+	private Long tot_pay;
+
+	@Enumerated(EnumType.STRING)
+	private Position position;
+	
+	
+	static Object builder() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
