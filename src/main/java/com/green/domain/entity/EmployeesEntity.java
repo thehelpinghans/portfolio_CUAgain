@@ -79,6 +79,8 @@ public class EmployeesEntity {
         this.hireDate = LocalDate.parse(dto.getHireDate());
         this.phone = dto.getPhone();
         this.position = Position.valueOf(dto.getPosition());
+        this.end=dto.isEnd();
+        this.endDate= LocalDate.parse(dto.getEndDate());
         return this;
     }
     public EmployeesEntity additionalUpdate(ImagesEntity image, TeamEntity team, DepartmentEntity dep, AddressEntity address){
