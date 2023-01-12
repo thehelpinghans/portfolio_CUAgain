@@ -1,5 +1,6 @@
 package com.green.service;
 
+import com.green.domain.dto.EmployeesDetailDTO;
 import com.green.domain.dto.EmployeesInsertDTO;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,4 +20,10 @@ public interface EmployeesService {
     void getBaseInfo(Model model);
 
     List<String> getTeamListOfDef(String depName);
+
+    void getEmpListBySearch(String type, String data, Model model);
+
+    void update(EmployeesDetailDTO dto);
+
+    void passUpdate(long empId, String pass);
 }

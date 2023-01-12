@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<tr th:each="dto:${list}">
+	<td th:text="${dto.id}">사원번호</td>
+	<td class="nameTd">
+		<button type="button" th:text="${dto.name}">성명</button>
+	</td>
+	<td th:text="${dto.position}">직책</td>
+	<td th:text="|${dto.department}(${dto.team})|">부서</td>
+	<td th:text="${dto.hireDate}">입사일자</td>
+	<td th:text="${dto.phone}">핸드폰</td>
+	<td th:text="${dto.email}">E-MAIL</td>
+	<td th:text="${dto.address}">주소</td>
+</tr>
+</html>
