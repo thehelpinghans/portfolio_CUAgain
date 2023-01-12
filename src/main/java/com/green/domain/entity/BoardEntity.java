@@ -29,11 +29,12 @@ public class BoardEntity extends  BaseDateEntity {
     @Column(nullable = false)
     private long readCount; //조회수
 
-    @Enumerated(EnumType.STRING)
-    private BoardStatus status; //상태  0,1,2 정상/삭제/비활성화
+   //@Enumerated(EnumType.STRING)
+   //private BoardStatus status; //상태  0,1,2 정상/삭제/비활성화
 
-    @Column(nullable = false)
-    private boolean pin; //상단고정 여부 true,false 고정/비고정
+
+    private boolean pin;   //true or false
+
 
     @Enumerated(EnumType.STRING)
     private BoardType type; //게시판 종류  공지사항/자유게시판

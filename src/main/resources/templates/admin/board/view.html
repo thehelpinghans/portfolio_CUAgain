@@ -9,7 +9,7 @@
 <main><!--내용 채우기-->
     <div class="board_wrap">
         <div class="board_title">
-            <strong>공지사항</strong>
+            <strong th:text="${detail.type}"></strong>
         </div>
         <div class="board_view_wrap">
             <div class="board_view">
@@ -41,10 +41,37 @@
                 </div>
             </div>
             <div class="bt_wrap">
-                <a href="/admin/board/noticeList" class="on">목록</a>
+                <a th:href="|admin/board/boardList/${detail.type}|" class="on">목록</a>
                 <a th:href="@{/admin/board/{boardId}(boardId = ${detail.id})}" class="on">수정</a>
             </div>
+            <div id="comment-write">
+                <input type="text" id="writer" placeholder="작성자">
+                <input type="text" id="content" placeholder="내용">
+                <button id="comment-btn" onclick="commentWrtie()">등록</button>
+            </div>
+            <table class="tb">
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>댓글내용</th>
+                        <th>생성일</th>
+                        <th>작성자</th>
+                    </tr>
+                </thead>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+
+            </table>
+
+
+
         </div>
+
+
     </div>
 </main>
 </html>

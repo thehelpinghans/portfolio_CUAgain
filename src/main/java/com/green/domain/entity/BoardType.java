@@ -8,4 +8,6 @@ public enum BoardType {
     자유게시판("자유게시판");
 
     private final String BoardType;
+
+
 }
