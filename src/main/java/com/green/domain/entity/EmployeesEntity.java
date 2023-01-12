@@ -1,6 +1,7 @@
 package com.green.domain.entity;
 
 
+import com.green.domain.dto.EmployeesDetailDTO;
 import com.green.security.MyRole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -47,7 +48,7 @@ public class EmployeesEntity {
 
     @ManyToOne//속한 부서
 	@JoinColumn(name ="dep_id")
-	private DepartmentEntity department;
+	private DepartmentEntity dep;
 
 
     @Enumerated(EnumType.STRING)
@@ -71,16 +72,25 @@ public class EmployeesEntity {
     @OneToOne
     private AddressEntity address;  //주소
 
-    /*
-    //배송지정보
-    @Builder.Default
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "member")
-    private List<DeliveryEntity> delivery = new ArrayList<>();
+    public EmployeesEntity update(EmployeesDetailDTO dto){
 
-    public MemberEntity addAddress(DeliveryEntity dest){
-        this.delivery.add(dest);
+        this.email = dto.getEmail();
+        this.name = dto.getName();
+        this.hireDate = LocalDate.parse(dto.getHireDate());
+        this.phone = dto.getPhone();
+        this.position = Position.valueOf(dto.getPosition());
         return this;
     }
-*/
+    public EmployeesEntity additionalUpdate(ImagesEntity image, TeamEntity team, DepartmentEntity dep, AddressEntity address){
+        this.image=image;
+        this.team=team;
+        this.dep=dep;
+        this.address=address;
+        return this;
+    }
 
+    public EmployeesEntity updatePass(String pass) {
+        this.pass=pass;
+        return this;
+    }
 }

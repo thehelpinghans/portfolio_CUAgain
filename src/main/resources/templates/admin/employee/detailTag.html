@@ -5,51 +5,38 @@
 	<form class="regForm flex column">
 		<div>
 			<label class="img" th:style="|background-image:url(${dto.url}${dto.newName})|"></label>
-			<input id="defimg" class="gimg" type="file" name="gimg"
-				   onchange="gimgChanged(this)">
-			<input type="hidden" class="newName" name="newName" th:value="${dto.newName}">
-			<input type="hidden" class="orgName" name="orgName" th:value="${dto.orgName}">
+			<input class="gimg" type="file" name="gimg">
 			<br>
 			<span>프로필 사진</span>
-			<label class="label-btn" for="defimg">수정</label>
 		</div>
-		<label><span>로그인 이메일</span><span th:text="${dto.email}">test@test.com</span><br></label>
-		<label><span>비밀번호 변경</span><input type="password"><br></label>
-		<label><span>비밀번호 확인</span><input type="password"><br></label>
-		<label><span>이름</span><input type="text"  th:value="${dto.name}"><br></label>
-		<label><span>연락처</span><input type="text" th:value="${dto.phone}"><br></label>
-		<label><span>입사일</span><input type="date" class="currentDate" th:value="${dto.hireDate}"><br></label>
+		<label><span>사원번호</span><span th:text="${dto.id}"></span><br></label>
+		<label><span>로그인 이메일</span><span th:text="${dto.email}"></span><br></label>
+		<label><span>이름</span><span th:text="${dto.name}"></span><br></label>
+		<label><span>연락처</span><span th:text="${dto.phone}"></span><br></label>
+		<label><span>입사일</span><input type="date" th:value="${dto.hireDate}" readonly><br></label>
 		<label>
 			<span>부서</span>
-			<select name="department">
-				<option value="">부서지정</option>
-				<option value="학생">부서1</option>
-				<option value="회사원">부서2</option>
-				<option value="기타">부서3</option>
-			</select>
+			<span th:text="${dto.department}"></span>
+			<br></label>
+		<label>
+			<span>팀</span>
+			<span th:text="${dto.team}">
+			</span>
 			<br></label>
 		<label>
 			<span>직책</span>
-			<select name="position">
-				<option value="">직책</option>
-				<option value="학생">사장</option>
-				<option value="회사원">이사</option>
-				<option value="기타">사원</option>
-
-			</select>
+			<span th:text="${dto.position}"></span>
 			<br></label>
 		<div>
-			<input type="text" id="postcode" name="postcode" placeholder="우편번호" th:value="${dto.postcode}">
-			<input type="button" onclick="daumPostcode()" value="우편번호 찾기"><br>
-			<input type="text" id="roadAddress" name="roadAddress" placeholder="도로명주소" th:value="${dto.roadAddress}">
-			<input type="text" id="jibunAddress" name="jibunAddress" placeholder="지번주소" th:value="${dto.jibunAddress}">
-			<span id="guide" style="color:#999;display:none"></span>
-			<input type="text" id="detailAddress"  name="detailAddress" placeholder="상세주소" th:value="${dto.detailAddress}">
-			<input type="text" id="extraAddress" name="extraAddress" placeholder="참고항목" th:value="${dto.extraAddress}">
+			<label>우편번호 : <span th:text="${dto.postcode}"></span><br></label>
+			<label>주소 :
+				<span th:text="|${dto.roadAddress}(${dto.jibunAddress}) ${dto.detailAddress} ${dto.extraAddress}|"></span>
+			</label>
 		</div>
 		<div>
-			<button>수정완료</button>
-			<button type="button" onclick="btnCancelClicked();">취소</button>
+			<input type="hidden" th:value="${dto.id}">
+			<button type="button" onclick="btnEditClicked(this)">수정</button>
+			<button type="button" onclick="btnListClicked();">목록</button>
 		</div>
 	</form>
 </div>

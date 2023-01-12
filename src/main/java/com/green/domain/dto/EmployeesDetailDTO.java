@@ -12,12 +12,13 @@ public class EmployeesDetailDTO {
     private String url;
 
     //사원정보 처리 필드
+    private long id;
     private String email;
-    private String pass;
     private String name;
     private String phone;
     private String hireDate;
     private String department;
+    private String team;
     private String position;
 
     //주소 처리 필드
@@ -27,24 +28,28 @@ public class EmployeesDetailDTO {
     private String detailAddress;
     private String extraAddress;
 
+
+    public EmployeesDetailDTO() {
+    }
+
     public EmployeesDetailDTO(EmployeesEntity e) {
 
         this.newName = e.getImage().getNewName();
         this.orgName = e.getImage().getOrgName();
         this.url=e.getImage().getUrl();
         this.email = e.getEmail();
-        this.pass = e.getPass();
         this.name = e.getName();
         this.phone = e.getPhone();
         this.hireDate = String.valueOf(e.getHireDate());
-        /*
-        this.department = e.getDepartment().getName();
+        this.id=e.getId();
+
+        this.department = e.getDep().getName();
+        this.team=e.getTeam().getName();
         this.position = e.getPosition().getPosition();
         this.postcode = e.getAddress().getPostcode();
         this.roadAddress = e.getAddress().getRoadAddress();
         this.jibunAddress = e.getAddress().getJibunAddress();
         this.detailAddress = e.getAddress().getDetailAddress();
         this.extraAddress = e.getAddress().getExtraAddress();
-*/
     }
 }

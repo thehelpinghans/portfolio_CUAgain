@@ -11,8 +11,60 @@
 	<script>
 		$(function (){
 			$(".nameTd>button").click(btnDetailClicked);
+			$("#btn-search").click(btnSearchClicked);
+			$("#btn-reset-list").click(btnResetClicked);
 		});
 
+		//이미지변경
+		function gimgChanged(el) {
+			var fileData = $(el)[0].files[0];
+			console.log(fileData);
+
+			var formData = new FormData()
+			formData.append('gimg', fileData);
+
+			$.ajax({
+				url: "/admin/temp-upload",
+				type: "post",
+				contentType: false,
+				processData: false,
+				data: formData,
+				success: function (map) { //서버에 업로드이후 url을 리턴-> 파라미터에 전달
+					console.log(map);
+
+					$(el).siblings(".img").css("background-image", "url(" + map.url + ")");
+					$(el).siblings(".newName").val(map.newName);
+					$(el).siblings(".orgName").val(map.orgName);
+				}
+			});
+		}
+
+		//검색버튼 눌렀을 때
+		function btnSearchClicked(){
+			var type = $("#search_type").val();
+			var data = $("#search_data").val();
+			$.ajax({
+				url:`/admin/emp/searchList/${type}/${data}`,
+				type:"get",
+				success:function (resultHTML){
+					$("#emp-list").html(resultHTML);
+					$(".nameTd>button").click(btnDetailClicked);
+				}
+			});
+		}
+		//초기화 버튼 눌렀을 때
+		function btnResetClicked(){
+			$.ajax({
+				url:`/admin/emp/allList`,
+				type:"get",
+				success:function (resultHTML){
+					$("#emp-list").html(resultHTML);
+					$(".nameTd>button").click(btnDetailClicked);
+				}
+			});
+		}
+
+		/*이름을 눌렀을 때 상세내용 나오게*/
 		function btnDetailClicked(){
 
 			var memberId=$(this).parent(".nameTd").prev().text();
@@ -22,13 +74,85 @@
 				success:function (resultHTML){
 					$("#view-list").hide();
 					$("#view-detail").html(resultHTML).show();
-					$(".currentDate").val(new Date().toISOString().substring(0, 10));
+					/*$(".currentDate").val(new Date().toISOString().substring(0, 10));*/
 				}
 			});
 		}
-		function btnCancelClicked(){
+		//디테일에서 수정버튼 눌렀을 때
+		function btnEditClicked(el){
+			var memberId=$(el).prev().val();
+			$.ajax({
+				url:`/admin/member/editTag/${memberId}`,
+				type:"get",
+				success:function (resultHTML){
+					$("#view-list").hide();
+					$("#view-detail").hide();
+					$("#view-edit").html(resultHTML).show();
+					/*$(".currentDate").val(new Date().toISOString().substring(0, 10));*/
+					$("#passCheckText").hide();
+				}
+			});
+		}
+		//비밀번호 변경하기 버튼 눌렀을 때
+		function btnUpdatePass(){
+			if($("#pass1").val()!=$("#pass2").val()){
+				return;
+			}
+			var empId = $("#empId").text();
+
+			var pass = $("#pass1").val()
+			$.ajax({
+				url:`/admin/emp/passUpdate?empId=${empId}&pass=${pass}`,
+				type:"get",
+				success:function (){
+					alert("비밀번호가 변경되었습니다.")
+				}
+			});
+		}
+		//디테일 상태에서 목록 버튼 눌렀을 때
+		function btnListClicked(){
 			$("#view-list").show();
 			$("#view-detail").hide();
+		}
+		//수정페이지 상태에서 취소버튼 눌렀을 대
+		function btnCancelClicked(){
+			$("#view-edit").hide()
+			$("#view-detail").show();
+		}
+
+		//두 비밀번호 일치 여부
+		function passSameCheck(){
+			if($("#pass1").val()!=$("#pass2").val()){
+				$("#passCheckText").show();
+			}else{
+				$("#passCheckText").hide();
+			}
+		}
+
+		//부서가 변경됐을 때 팀목록 변경
+		function depChanged(el){
+			var depName=$(el).val();
+			if(depName=="none"){
+				$("#teamTag").hide();
+				return;
+			}
+			$.ajax({
+				url:`/admin/teamList/${depName}`,
+				type: "get",
+				success:function (result){
+					result=result.toString();
+
+					var list=result.split(',');
+
+					var htmltag="";
+					for(var i=0;i<list.length;i++){
+						htmltag+=`<option value="${list[i]}">${list[i]}</option><br>`;
+					}
+
+					$("#teamList").html(htmltag);
+					$("#teamTag").show();
+				}
+			});
 		}
 	</script>
 </head>
@@ -41,14 +165,15 @@
 		<div class="flex searchTag">
 
 			<label>검색어
-				<select name="searchType">
-					<option value="">성명</option>
-					<option value="학생">부서명</option>
-					<option value="회사원">사원번호</option>
+				<select id="search_type">
+					<option value="name">성명</option>
+					<option value="dep">부서명</option>
+					<option value="id">사원번호</option>
 				</select>
-				<input type="text">
+				<input id="search_data" type="text">
 			</label>
-			<button class="btn-search">검색</button>
+			<button id="btn-search" class="btn-search">검색</button>
+			<button id="btn-reset-list" class="btn-search">초기화</button>
 		</div>
 
 		<div class="emp-info">
@@ -66,14 +191,14 @@
 					<th>주소</th>
 				</tr>
 				</thead>
-				<tbody>
+				<tbody id="emp-list">
 				<tr th:each="dto:${list}">
 					<td th:text="${dto.id}">사원번호</td>
 					<td class="nameTd">
 						<button type="button" th:text="${dto.name}">성명</button>
 					</td>
 					<td th:text="${dto.position}">직책</td>
-					<td th:text="|${dto.department}(${dto.team}))|">부서</td>
+					<td th:text="|${dto.department}(${dto.team})|">부서</td>
 					<td th:text="${dto.hireDate}">입사일자</td>
 					<td th:text="${dto.phone}">핸드폰</td>
 					<td th:text="${dto.email}">E-MAIL</td>
@@ -86,6 +211,9 @@
 		<p>% 성명을 클릭하면 상세정보로 이동합니다.</p>
 	</div>
 	<div id="view-detail">
+
+	</div>
+	<div id="view-edit">
 
 	</div>
 </main>
