@@ -6,11 +6,11 @@ import java.time.LocalDateTime;
 import com.green.domain.entity.AttendanceEntity;
 import com.green.domain.entity.EmployeesEntity;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
+@Data
 public class AttendanceInsertDTO {
 	
 	
