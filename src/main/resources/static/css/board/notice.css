@@ -24,6 +24,9 @@ a {
 .board_title {
     margin-bottom: 30px;
 }
+.reply_title{
+    margin-bottom: 25px;
+}
 
 .board_title strong {
     font-size: 3rem;
@@ -38,6 +41,7 @@ a {
     margin-top: 30px;
     text-align: center;
     font-size: 0;
+    margin-bottom: 30px;
 }
 
 .bt_wrap a {
@@ -48,6 +52,17 @@ a {
     border: 1px solid #fff;
     border-radius: 2px;
     font-size: 1.4rem;
+}
+.bt_wrap button{
+    display: inline-block;
+    min-width: 80px;
+    margin-left: 10px;
+    padding: 7px;
+    border: 1px solid #fff;
+    border-radius: 2px;
+    font-size: 1.4rem;
+    background: rgb(57, 200, 75);
+    color: #fff;
 }
 
 .bt_wrap a:first-child {
@@ -115,6 +130,15 @@ a {
     width: 10%;
 }
 
+table {
+    width:100%;
+
+}
+table th {
+    background-color: grey;
+    border: 1px solid grey;
+}
+
 .board_page {
     margin-top: 30px;
     text-align: center;
@@ -157,6 +181,7 @@ a {
     width: 100%;
     border-top: 2px solid rgb(180, 52, 148);
 }
+
 
 .board_view .title {
     padding: 20px 15px;
@@ -283,4 +308,13 @@ a {
     box-sizing: border-box;
     border: 0;
     resize: vertical;
+}
+.reply_cont textarea {
+    display: block;
+    width: 50%;
+    height: 50px;
+}
+
+.replybtn {
+    margin-bottom: 20px;
 }

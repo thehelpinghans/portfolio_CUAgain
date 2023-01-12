@@ -16,7 +16,16 @@
 	<link rel="shortcut icon" href="assets/img/kxp_fav.png" type="image/x-icon">
     <link rel="stylesheet" href="/css/main.css">
 	<link rel="stylesheet" href="/css/commons/common.css">
-
+    <script>
+        function btnNoticeClicked(){
+            var type = "공지사항";
+            location.href=`/admin/board/boardList/${type}`;
+        }
+        function btnFreeClicked(){
+            var type = "자유게시판";
+            location.href=`/admin/board/boardList/${type}`;
+        }
+    </script>
 	<th:block th:replace="${head}"/>
 </head>
 
@@ -104,9 +113,10 @@
                 </div>
                 <div class="submenu">
                     
-                    <a href="/admin/board/noticeList" class="link">공지사항</a>
-                    <a href="/admin/board/free" class="link">자유게시판</a>
+                    <button onclick="btnNoticeClicked();"  class="link">공지사항</button>
+                    <button onclick="btnFreeClicked();"  class="link">자유게시판</button>
                 </div>
+
             </li>
 
            	<li class="dropdown">

@@ -23,21 +23,18 @@ public class AdminController {
 	@Autowired
 	EmployeesService employeesService;
 	
-	@GetMapping("/board/notice")
-	public String notice() {
-		return "/admin/board/notice";
-	}
-	//자유게시판 목록
-	@GetMapping("/admin/board/free")
-	public String free() {
-		return "admin/board/free";
-	}
+//	@GetMapping("/board/notice")
+//	public String notice() {
+//		return "/admin/board/notice";
+//	}
+//	//자유게시판 목록
+//	@GetMapping("/admin/board/free")
+//	public String free() {
+//		return "admin/board/free";
+//	}
 
-	//공지사항 등록페이지이동
-	@GetMapping("/admin/board/write")
-	public String write() {
-		return "admin/board/write";
-	}
+
+
 
 	//자유게시판 등록페이지이동
 	@GetMapping("/admin/board/free-write")

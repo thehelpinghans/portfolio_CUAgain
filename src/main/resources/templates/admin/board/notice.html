@@ -15,7 +15,7 @@
 <main><!--내용 채우기-->
 	<div class="board_wrap">
         <div class="board_title">
-            <strong>공지사항</strong>
+            <strong th:text="${type}"></strong>
         </div>
         <div class="board_list_wrap">
             <div class="board_list">
@@ -47,7 +47,7 @@
                 <a href="#" class="bt last">>></a>
             </div>
             <div class="bt_wrap">
-                <a href="/admin/board/write" class="on">등록</a>
+                <a th:href="|/admin/board/write/${type}|" class="on">등록</a>
                 <!--<a href="#">수정</a>-->
             </div>
         </div>
