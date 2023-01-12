@@ -39,7 +39,9 @@ public class AttendServiceProcess implements AttendService {
 			attendRepo.save(dd);
 			System.out.println(attendRepo.save(dd).getOutTime());
 		}else {
-			attendRepo.save(dto.attendanceEntity().employeeId(empRepo.findById(id)).addStatus(AttendStatus.출근));//저장
+			attendRepo.save(dto.attendanceEntity()
+						.employeeId(empRepo.findById(id).orElseThrow())
+						.addStatus(AttendStatus.출근));//저장
 		}
 		
 	}

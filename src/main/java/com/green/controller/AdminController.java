@@ -85,9 +85,9 @@ public class AdminController {
     //부서등록
 
 
-	//부서선택 되었을때 해당하는 팀 이름 리스트 가져오기
+	//부서선택 되었을때 해당하는 부서 이름 리스트 가져오기
 	@ResponseBody
-	@GetMapping("/admin/teamList/{depName}")
+	@GetMapping("/admin/depList/{depName}")
 	public List<String> teamListOfDep(@PathVariable String depName){
 		System.out.println(depName);
 		return employeesService.getTeamListOfDef(depName);
@@ -100,9 +100,9 @@ public class AdminController {
 		return depServise.depUpdate(depId, departmentName);
 	}
 	//부서 삭제
-	@DeleteMapping("/admin/depDelete/{depId}")
-	public String depDelete(@PathVariable("id") long id) {
-		depServise.depDelete(id);
+	@GetMapping("/admin/depDelete/{depId}")
+	public String depDelete(@PathVariable long depId) {
+		depServise.depDelete(depId);
 		return "redirect:/admin/department";
 	}
 	//부서메뉴중 팀 추가
