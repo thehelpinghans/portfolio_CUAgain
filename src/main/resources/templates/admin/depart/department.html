@@ -20,19 +20,59 @@
 			$(".depart_menu").not(target).hide();
 			target.slideToggle(400);
 		});
-		
+		x
 		
 		//부서명 클릭 팀토글	
 		$(".btn_tree_team").click(function(){
 			$(".team_name").slideToggle(400);
 		});
 	});
-	//팀 추가 누르면 팀추가사라지고 작성창만나타남 
+	//팀 추가 누르면 팀추가사라지고 작성창만나타남
 	function teamInsert(el){
 		/* $(el).hide(); */
 		$(el).siblings(".teamInsert").show();
 	};
-
+	//팀 추가 기능 
+	$(document).ready(function(){
+		$(".teamInsert").on("keyup", function(event) {
+			 if (event.which == 13) {
+		        target=$(this);
+		        dept_id=target.siblings(".department-id").val();
+		        alert(dept_id);
+		        $.ajax({
+	           		url:"/admin/teamInsert/"+dept_id,
+	           		type:"post",
+	           		data: {"departmentName": $(this).val().trim()},
+	           		success:function(result){
+	           			target.parents("td").siblings(".dept-name").text(result);
+	           			target.parents(".depart_menu").hide();
+	           			target.val("");//리셋
+	           			target.hide();
+	           		}
+	            });
+			 } 	
+		});
+	});
+	//부서삭제기능 
+	function depDelete(el) {
+		target=$(".depDel");
+		var dep_id = target.next(".department-id").val();
+		alert(dep_id+"");
+		//var dep_id=document.getElementByName("${dto.id}").val();
+		
+		console.log(dep_id);
+			//	if(confirm("정말 삭제하시겠습니까?")){//삭제처리시 물어보기
+//					$.ajax({
+//		           		url:"/admin/depDelete/"+dept_id,
+//		           		type:"post",
+//		           		data:queryString,
+//		           		success:function(result){
+//		           			alert(departmentName+"부서가 삭제되었습니다.");
+//		           		}
+//					});
+				//}
+			
+	};
 	//부서수정 누르면 부서수정사라지고 작성창만나타남
 	function depUpdate(el){
 		/* $(el).hide(); */
@@ -62,8 +102,7 @@
 	        }
 	    });
 	});
-	//부서 삭제 기능
-
+	
 	</script>	
 
 </head>
@@ -108,10 +147,12 @@
 															<div class="depart_menu flex">
 																<p>
 																	<a href="#" onclick="teamInsert(this)" class="teamIn">팀명 추가</a>
-																	<input class="teamInsert" onkeyup="enterkey()" type="text" placeholder="팀명" />
+																	<input type="hidden" class="department-id" th:value="${dto.id}">
+																	<input class="teamInsert" onkeyup="enterkey()" type="text" placeholder="팀명">
 																</p>
 																<p>
-																	<a href="/admin/depart/delete" class="depDelete" onclick="depDelete(this)">부서 삭제</a>
+																	<a href="#" class="depDel" onclick="depDelete(this)">부서 삭제</a>
+																	<input type="text" class="department-id" th:value="${dto.id}">
 																</p>
 																<p>
 																	<a href="#" onclick="depUpdate(this)" class="depUp">부서명 수정</a>
@@ -124,14 +165,14 @@
 							    			</tbody>
 										</table>
 									</button>
-											<form action="/admin/teamList">
+											<div class="teamList">
 												<table class="team-table">
 													<tr class="team-tr2" th:each= "dto : ${list}">
 														<td></td>
 														<td></td>
 													</tr>
 											</table>
-										</form>
+										</div>
 									</li>
 								</ul>
 							</div><!-- div class="org_tree" 회사명 누르면 나옴  -->

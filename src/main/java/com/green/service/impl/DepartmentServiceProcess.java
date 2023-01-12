@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import com.green.domain.dto.DepartmentDTO;
 import com.green.domain.entity.DepartmentEntity;
 import com.green.domain.entity.DepartmentEntityRepository;
+import com.green.domain.entity.TeamEntityRepository;
 import com.green.service.DepartmentService;
 
 @Service
@@ -20,6 +21,9 @@ public class DepartmentServiceProcess implements DepartmentService{
 
 	@Autowired
 	DepartmentEntityRepository depRepo;
+	
+	@Autowired
+	TeamEntityRepository teamRepo;
 	
 	//부서 데이터 보여주기
 	@Override
@@ -41,8 +45,9 @@ public class DepartmentServiceProcess implements DepartmentService{
 	}
 	//부서 삭제기능
 	@Override
-	public void depDelete(long depId) {
-		depRepo.deleteById(depId);
+	public void depDelete(long id) {
+		teamRepo.deleteById(id);
+		depRepo.deleteById(id);
 	}
 	
 	
