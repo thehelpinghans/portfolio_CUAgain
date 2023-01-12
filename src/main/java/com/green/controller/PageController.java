@@ -97,4 +97,14 @@ public class PageController {
         }
 
     }
+    // 점포 리스트페이지
+    @GetMapping("/admin/store")
+    private String store() {
+    	return "admin/store/store";
+    }
+    // 점포추가 작성 페이지
+    @GetMapping("/admin/store-detail")
+    private String storedetail() {
+    	return "/admin/store/store-detail";
+    }
 }
