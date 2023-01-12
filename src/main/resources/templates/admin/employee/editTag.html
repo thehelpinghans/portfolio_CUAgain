@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<div class="view-size-content"><!--내용 채우기-->
+	<h1>사원 수정 페이지입니다.</h1>
+	<form action="/admin/emp/update" class="regForm flex column" method="post">
+		<div>
+			<label class="img" th:style="|background-image:url(${dto.url}${dto.newName})|"></label>
+			<input id="defimg" class="gimg" type="file" name="gimg"
+				   onchange="gimgChanged(this)">
+			<input type="hidden" class="newName" name="newName" th:value="${dto.newName}">
+			<input type="hidden" class="orgName" name="orgName" th:value="${dto.orgName}">
+			<br>
+			<span>프로필 사진</span>
+			<label class="label-btn" for="defimg">수정</label>
+		</div>
+		<label><span>사원번호</span><span id="empId" th:text="${dto.id}"></span><br></label>
+		<input type="hidden" name="id" th:value="${dto.id}">
+		<label><span>로그인 이메일</span><span th:text="${dto.email}"></span><br></label>
+		<input type="hidden" name="email" th:value="${dto.email}">
+		<label><span>비밀번호 변경</span><input type="password" id="pass1" onchange="passSameCheck()"><br></label>
+		<label><span>비밀번호 확인</span><input type="password" id="pass2" onchange="passSameCheck()"><br></label>
+		<button type="button" class="btn-search" onclick="btnUpdatePass()">변경</button>
+		<label id="passCheckText">비밀번호가 일치하지 않습니다. 다시 설정해 주세요.</label>
+
+		<label><span>이름</span><input type="text" name="name"  th:value="${dto.name}"><br></label>
+		<label><span>연락처</span><input type="text" name="phone" th:value="${dto.phone}"><br></label>
+		<label><span>입사일</span><input type="date" name="hireDate" th:value="${dto.hireDate}"><br></label>
+		<label>
+			<span>부서</span>
+			<select id="depList" name="department" th:value="${dto.department}" onchange="depChanged(this)">
+				<option value="none" th:text="부서선택"></option>
+				<option th:selected="${dto.department}==${dep}" th:each="dep : ${depList}" th:value="${dep}" th:text="${dep}"></option>
+			</select>
+		</label>
+		<label id="teamTag" >
+			<span>팀</span>
+			<select name="team" id="teamList" th:value="${dto.team}">
+				<option th:selected="${dto.team}==${team}" th:each="team : ${selectedTeamList}" th:value="${team}" th:text="${team}"></option>
+			</select>
+			<br></label>
+		<label>
+			<span>직책</span>
+			<select name="position" th:value="${dto.position}">
+				<option th:selected="${dto.position}==${position}" th:each="position : ${positionList}" th:value="${position.name()}" th:text="${position.name()}"></option>
+			</select>
+			<br></label>
+		<div>
+			<input type="text" id="postcode" name="postcode" placeholder="우편번호" th:value="${dto.postcode}">
+			<input type="button" onclick="daumPostcode()" value="우편번호 찾기"><br>
+			<input type="text" id="roadAddress" name="roadAddress" placeholder="도로명주소" th:value="${dto.roadAddress}">
+			<input type="text" id="jibunAddress" name="jibunAddress" placeholder="지번주소" th:value="${dto.jibunAddress}">
+			<span id="guide" style="color:#999;display:none"></span>
+			<input type="text" id="detailAddress"  name="detailAddress" placeholder="상세주소" th:value="${dto.detailAddress}">
+			<input type="text" id="extraAddress" name="extraAddress" placeholder="참고항목" th:value="${dto.extraAddress}">
+		</div>
+		<div>
+			<button type="submit">수정완료</button>
+			<button type="button" onclick="btnCancelClicked();">취소</button>
+		</div>
+	</form>
+</div>

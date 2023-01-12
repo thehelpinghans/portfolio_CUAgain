@@ -27,13 +27,13 @@ public class EmployeesListDTO {
         name=e.getName();
         phone=e.getPhone();
         hireDate= String.valueOf(e.getHireDate());
-        department=e.getDepartment().getName();
+        department=e.getDep().getName();
         position=e.getPosition().getPosition();
         team=e.getTeam().getName();
     }
     public EmployeesListDTO address(AddressEntity e){
-        address="("+e.getPostcode()+") "+e.getRoadAddress()+" "+e.getJibunAddress()
-                +" "+e.getDetailAddress()+" "+e.getExtraAddress();
+        address="("+e.getPostcode()+") "+e.getRoadAddress()+"("+e.getJibunAddress()
+                +") "+e.getDetailAddress()+" "+e.getExtraAddress();
         return this;
     }
 }
