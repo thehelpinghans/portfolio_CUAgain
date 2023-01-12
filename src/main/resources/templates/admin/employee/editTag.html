@@ -15,7 +15,12 @@
 		</div>
 		<label><span>사원번호</span><span id="empId" th:text="${dto.id}"></span><br></label>
 		<input type="hidden" name="id" th:value="${dto.id}">
-		<label>퇴사여부</label>
+		<label><span>퇴사여부</span>
+			<input id="btnNotEnd" type="radio" name="end" value="0" th:attr="checked=!${dto.end}" onclick="radioEndCheckd()"><span>재직</span>
+			<input id="btnEnd" type="radio" name="end" value="1" th:attr="checked=${dto.end}" onclick="radioEndCheckd()"><span>퇴사</span>
+			<br>
+		</label>
+		<span class="endDate">퇴사일</span><input class="endDate" type="date" name="endDate" th:value="${dto.endDate}"><br>
 		<label><span>로그인 이메일</span><span th:text="${dto.email}"></span><br></label>
 		<input type="hidden" name="email" th:value="${dto.email}">
 		<label><span>비밀번호 변경</span><input type="password" id="pass1" onchange="passSameCheck()"><br></label>
@@ -42,7 +47,7 @@
 		<label>
 			<span>직책</span>
 			<select name="position" th:value="${dto.position}">
-				<option th:selected="${dto.position}==${position}" th:each="position : ${positionList}" th:value="${position.name()}" th:text="${position.name()}"></option>
+				<option th:selected="${dto.position}==${position.name()}" th:each="position : ${positionList}" th:value="${position.name()}" th:text="${position.name()}"></option>
 			</select>
 			<br></label>
 		<div>
