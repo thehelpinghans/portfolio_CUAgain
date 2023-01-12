@@ -80,7 +80,11 @@ public class EmployeesEntity {
         this.phone = dto.getPhone();
         this.position = Position.valueOf(dto.getPosition());
         this.end=dto.isEnd();
-        this.endDate= LocalDate.parse(dto.getEndDate());
+        if(dto.isEnd()){//퇴직일시  //값있을듯?
+            this.endDate= LocalDate.parse(dto.getEndDate());
+        }else{  //재직일시
+            this.endDate=null;
+        }
         return this;
     }
     public EmployeesEntity additionalUpdate(ImagesEntity image, TeamEntity team, DepartmentEntity dep, AddressEntity address){
