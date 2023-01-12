@@ -5,7 +5,27 @@
 <head>
 	<!--필요한 head 추가-->
 	<link rel="stylesheet" href="/css/dashboard/member.css">
+	<script type="text/javascript">
+	$(function(){
+		$(".btn-on").click(on);
+	});
+	//출근 버튼 누르면 출근시간 보여주고 db저장
+	function on(){
+		var id = $(".id").val();
+		alert(id);
+		$.ajax({
+			url:`/member/attendance/reg/${id}`,
+			type:"post",
+			success:function(){
+				alert("출근시간");
+			},
+			error:function(){
+				alert("go error");	
+			}
+		});
 	
+	}
+	</script>
 </head>
 <main><!--내용 채우기-->
 	<!-- <h1>사원 대쉬보드 페이지입니다.</h1> -->
@@ -21,8 +41,7 @@
 			</p>
 		</div>
 		<div class="flex">
-			<form action="/member/attendance/reg/" method="post">
-				<input type="text" name="id" value="1">
+			<!-- <form action="/member/attendance/reg/" method="post"> -->
 				<div class="content_att">
 					<div class="flex">
 						<script type="text/javascript">
@@ -43,11 +62,16 @@
 			    		<p>스피츠 팀장</p>
 				    </div>
 				    <div class="flex">
-				    	<button type="submit" class="btn-on"><img src="/image/attendance/btn_check01.gif"></button>
-				    	<button type="submit" class="btn-off"><img src="/image/attendance/btn_check02.gif"></button>
+				    	<div>
+				    		<input class="id" type="text" name="id" value="1">
+				    		<button type="submit" class="btn-on"><img src="/image/attendance/btn_check01.gif"></button>
+				    	</div>
+				    	<div>
+				    		<button type="submit" class="btn-off"><img src="/image/attendance/btn_check02.gif"></button>
+			    		</div>
 			    	</div>
 				</div>
-			</form>
+			<!-- </form> -->
 			<table class="table">
 				<tbody>
 					<tr>
