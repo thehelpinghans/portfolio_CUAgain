@@ -2,9 +2,12 @@ package com.green.controller;
 
 import com.green.domain.dto.DepartmentDTO;
 import com.green.domain.dto.EmployeesInsertDTO;
+import com.green.domain.dto.TeamaddtDTO;
 import com.green.domain.entity.Position;
 import com.green.service.DepartmentService;
 import com.green.service.EmployeesService;
+import com.green.service.TeamService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,8 +21,8 @@ import java.util.Map;
 @Controller
 public class AdminController {
 	
-//	@Autowired
-//	private TeamService teamService;
+	@Autowired
+	private TeamService teamService;
 
 	@Autowired
 	EmployeesService employeesService;
@@ -82,7 +85,9 @@ public class AdminController {
 
         return "admin/employee/reg";
     }
-
+    //부서등록 
+    
+    
 	//부서선택 되었을때 해당하는 팀 이름 리스트 가져오기
 	@ResponseBody
 	@GetMapping("/admin/teamList/{depName}")
@@ -90,7 +95,7 @@ public class AdminController {
 		System.out.println(depName);
 		return employeesService.getTeamListOfDef(depName);
 	}
-	//부서이름 수정 동기
+	//부서이름 수정 
 	@ResponseBody
 	@PostMapping("/admin/depUpdate/{depId}")
 	public String depUpdate(@PathVariable("depId") long depId, String departmentName) {
@@ -98,12 +103,18 @@ public class AdminController {
 		return depServise.depUpdate(depId, departmentName);
 	}
 	//부서 삭제 
-	@DeleteMapping("/admin/depart/delete")
-	public String depDelete(@PathVariable("depId") long depId) {
-		depServise.depDelete(depId);
+	@DeleteMapping("/admin/depDelete/{depId}")
+	public String depDelete(@PathVariable("id") long id) {
+		depServise.depDelete(id);
 		return "redirect:/admin/department";
 	}
-
+	//부서메뉴중 팀 추가
+//	@ResponseBody
+//	@PostMapping("/admin/teamInsert/{depId}")
+//	public String teamInsert(@PathVariable("depId") long depId, TeamaddtDTO dto) {
+//		
+//		return teamService.save(depId, departmentName);
+//	}
     //사원 조회/수정 페이지이동
     @GetMapping("/admin/emp/list")
     public String empList(Model model){
