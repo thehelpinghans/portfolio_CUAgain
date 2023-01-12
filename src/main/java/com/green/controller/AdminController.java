@@ -116,6 +116,13 @@ public class AdminController {
 		return "redirect:/admin/emp/list";	//사원리스트 페이지로 이동
 	}
 
+	/*
+	 * //급여 등록?
+	 * 
+	 * @RequestMapping("/insert.sa") public String insert(SalaryVO vo) {
+	 * service.customer_insert(Wvo); return "redirect:list.sa"; }
+	 */
+	
 //    //팀등록
 //    @PostMapping("/admin/teamAdd")
 //    public String teamadd(TeamAddDTO dto, Model model) {
