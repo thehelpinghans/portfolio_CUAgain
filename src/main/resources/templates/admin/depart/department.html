@@ -7,7 +7,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="/css/depart/department.css" />
 	<link rel="stylesheet" href="/js/depart/department.js" />
-	<script type="text/javascript">
+	<script type="text/javascript" th:inline="javascript">
 	$(function(){
 		$("#btn_toggle_tree").click(function(){
 	    	$(".org_tree").slideToggle(400);
@@ -20,13 +20,13 @@
 			$(".depart_menu").not(target).hide();
 			target.slideToggle(400);
 		});
-		x
+		
 		
 		//부서명 클릭 팀토글	
 		$(".btn_tree_team").click(function(){
 			$(".team_name").slideToggle(400);
 		});
-	});
+	}); //close jquery
 	//팀 추가 누르면 팀추가사라지고 작성창만나타남
 	function teamInsert(el){
 		/* $(el).hide(); */
@@ -37,7 +37,7 @@
 		$(".teamInsert").on("keyup", function(event) {
 			 if (event.which == 13) {
 		        target=$(this);
-		        dept_id=target.siblings(".department-id").val();
+		        dept_id=target.siblings(".department-id1").val();
 		        alert(dept_id);
 		        $.ajax({
 	           		url:"/admin/teamInsert/"+dept_id,
@@ -52,30 +52,41 @@
 	            });
 			 } 	
 		});
+		
+		
+
+		
 	});
 	//부서삭제기능 
-	function depDelete(el) {
+	function depDelete(id){
 		target=$(".depDel");
-		var dep_id = target.next(".department-id").val();
-		alert(dep_id+"");
-		//var dep_id=document.getElementByName("${dto.id}").val();
-		
-		console.log(dep_id);
-			//	if(confirm("정말 삭제하시겠습니까?")){//삭제처리시 물어보기
-//					$.ajax({
-//		           		url:"/admin/depDelete/"+dept_id,
-//		           		type:"post",
-//		           		data:queryString,
-//		           		success:function(result){
-//		           			alert(departmentName+"부서가 삭제되었습니다.");
-//		           		}
-//					});
-				//}
-			
+		console.log(id)
+		var dep_id = target.next(".department-id2").val();
+		//alert(id); 부서의 pk값이 나옴 
+			if(confirm("정말 삭제하시겠습니까?")){//삭제처리시 물어보기
+				location.href=`/admin/depDelete/${depId}`;
+				
+				
+				
+				
+				
+				
+				
+//				$.ajax({
+//	           		url:"/admin/depDelete/"+dep_id,
+//	           		type:"post",
+//	           		data:queryString,
+//	           		success:function(result){
+//	           			alert(departmentName+"부서가 삭제되었습니다.");
+//	           		}
+//				});
+			}	
 	};
+	
+	
 	//부서수정 누르면 부서수정사라지고 작성창만나타남
 	function depUpdate(el){
-		/* $(el).hide(); */
+		// /* $(el).hide(); */
 		$(el).siblings(".depUpdate").show();
 	};
 
@@ -84,7 +95,7 @@
 	    $(".depUpdate").on("keyup", function(event) {
 	        if (event.which == 13) {
 	        	target=$(this);
-	        	dept_id=target.siblings(".department-id").val();
+	        	dept_id=target.siblings(".department-id3").val();
 	        	//alert(dept_id);
 	        	//*
 	           	$.ajax({
@@ -145,33 +156,37 @@
 																<i class="fa-regular fa-ellipsis-vertical"></i>
 															</div>
 															<div class="depart_menu flex">
+													
+														
 																<p>
 																	<a href="#" onclick="teamInsert(this)" class="teamIn">팀명 추가</a>
-																	<input type="hidden" class="department-id" th:value="${dto.id}">
+																	<input type="hidden" class="department-id1" th:value="${dto.id}">
 																	<input class="teamInsert" onkeyup="enterkey()" type="text" placeholder="팀명">
 																</p>
 																<p>
-																	<a href="#" class="depDel" onclick="depDelete(this)">부서 삭제</a>
-																	<input type="text" class="department-id" th:value="${dto.id}">
+																	<button type="button" id="del" th:onclick="depDelete([[${dto.id}]])" th:value="${dto.id}" >부서 삭제</button>
+																	<input type="hidden" class="department-id2" th:value="${dto.id}">
 																</p>
 																<p>
 																	<a href="#" onclick="depUpdate(this)" class="depUp">부서명 수정</a>
-																	<input type="hidden" class="department-id" th:value="${dto.id}">
+																	<input type="hidden" class="department-id3" th:value="${dto.id}">
 																	<input class="depUpdate" onkeyup="enterkey()" type="text" placeholder="부서명">
 																</p>
+														
 															</div>
 														</td>
 								    				</tr>
 							    			</tbody>
 										</table>
 									</button>
-											<div class="teamList">
+										<div class="team_name">
+											<form action="/admin/teamList/{depId}" method="post">
 												<table class="team-table">
-													<tr class="team-tr2" th:each= "dto : ${list}">
-														<td></td>
-														<td></td>
+													<tr class="team-tr" th:each= "dto : ${list}">
+														<td>[[${dto.name}]]</td>
 													</tr>
-											</table>
+												</table>
+											</form>
 										</div>
 									</li>
 								</ul>

@@ -10,7 +10,7 @@ public interface DepartmentService {
 
 	String depUpdate(long depId , String departmentName);
 
-	void depDelete(long id);
+	void depDelete(long depId);
 
 
 }
