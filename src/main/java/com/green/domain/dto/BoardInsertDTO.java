@@ -12,17 +12,18 @@ public class BoardInsertDTO {
 
     private String content;
 
-    private String boardType;
-/*
+    private String type;
 
-    public BoardEntity toBoardEntity(){
 
-        return BoardEntity.builder()
-                .title(title)
-                .content(content)
-                .build();
+//    public BoardEntity toBoardEntity(){
+//
+//        return BoardEntity.builder()
+//                .title(title)
+//                .content(content)
+//                .type(type)
+//                .build();
+//
+//    }
 
-    }
-*/
 
 }
