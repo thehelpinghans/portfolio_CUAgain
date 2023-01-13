@@ -18,15 +18,16 @@ public class DocumentController {
 	@Autowired
 	PaymentService service;
 	
-	@GetMapping("/payment")
+	@GetMapping("/member/payment")
 	public String doclist(Model model) {
 		service.getlist(model);
 		return "admin/document/docList";
 	}
 	
-	@PostMapping("/paymant-write")
-	public String docReg(PaymentDTO dto, @AuthenticationPrincipal MyUserDetails myUserDetails) {
-		service.save(dto, myUserDetails.getId(), dto.getEmployeesName());
+	@PostMapping("/member/paymant-write")
+	public String docReg(PaymentDTO dto) {
+		service.save(dto);
+
 		return "admin/document/docReg";
 	}
 	

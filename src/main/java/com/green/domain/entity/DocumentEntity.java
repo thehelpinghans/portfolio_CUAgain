@@ -39,11 +39,11 @@ public class DocumentEntity extends BaseDateEntity{
 	@Column(nullable = false)
 	private long status; //문서상태 0:예정,1:대기,2:승인,3:반려
 	
-	@JoinColumn(name = "employees_id", insertable = false, updatable = false) //employees_id
+	@JoinColumn //employees_id
 	@ManyToOne
-	private EmployeesEntity employees; //사원번호(작성자)
+	private EmployeesEntity writer; //사원번호(작성자)
 	
-	@JoinColumn(name = "employees_id")
-	@Column(nullable = false)
-	private long emp; //결재자
+	@JoinColumn
+	@ManyToOne
+	private EmployeesEntity acceptor; //결재자
 }
