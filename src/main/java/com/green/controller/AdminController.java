@@ -31,47 +31,47 @@ public class AdminController {
 	@Autowired
 	DepartmentService depServise;
 
-	@GetMapping("/board/notice")
-	public String notice() {
-		return "/admin/board/notice";
-	}
-	//자유게시판 목록
-	@GetMapping("/admin/board/free")
-	public String free() {
-		return "admin/board/free";
-	}
-
-
-
-	//자유게시판 등록페이지이동
-	@GetMapping("/admin/board/free-write")
-	public String freewrite() {
-		return "admin/board/free-write";
-	}
-
-	//공지사항 상세페이지
-	@GetMapping("/admin/board/view")
-	public String view() {
-		return "admin/board/view";
-	}
-
-	//자유게시판 상세페이지
-	@GetMapping("/admin/board/free-view")
-	public String freeview() {
-		return "admin/board/free-view";
-	}
-
-	//공지사항 수정페이지
-	@GetMapping("/admin/board/edit")
-	public String edit() {
-		return "admin/board/edit";
-	}
-
-	//자유게시판 수정페이지
-	@GetMapping("/admin/board/free-edit")
-	public String freeedit() {
-		return "admin/board/free-edit";
-	}
+//	@GetMapping("/board/notice")
+//	public String notice() {
+//		return "/admin/board/notice";
+//	}
+//	//자유게시판 목록
+//	@GetMapping("/admin/board/free")
+//	public String free() {
+//		return "admin/board/free";
+//	}
+//
+//
+//
+//	//자유게시판 등록페이지이동
+//	@GetMapping("/admin/board/free-write")
+//	public String freewrite() {
+//		return "admin/board/free-write";
+//	}
+//
+//	//공지사항 상세페이지
+//	@GetMapping("/admin/board/view")
+//	public String view() {
+//		return "admin/board/view";
+//	}
+//
+//	//자유게시판 상세페이지
+//	@GetMapping("/admin/board/free-view")
+//	public String freeview() {
+//		return "admin/board/free-view";
+//	}
+//
+//	//공지사항 수정페이지
+//	@GetMapping("/admin/board/edit")
+//	public String edit() {
+//		return "admin/board/edit";
+//	}
+//
+//	//자유게시판 수정페이지
+//	@GetMapping("/admin/board/free-edit")
+//	public String freeedit() {
+//		return "admin/board/free-edit";
+//	}
 	
 
     //사원 등록 페이지이동

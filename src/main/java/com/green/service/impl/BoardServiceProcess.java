@@ -46,13 +46,13 @@ public class BoardServiceProcess implements BoardService {
 
     }
 
-    //등록한 값이 자유게시판 리스트에 전달해주는 기능
-    @Override
-    public void freeList(Model model) {
-        model.addAttribute("frees", boardRepo.findByType(BoardType.자유게시판).stream().map(BoardListDTO::new)
-                .collect(Collectors.toList()));
-
-    }
+//    //등록한 값이 자유게시판 리스트에 전달해주는 기능
+//    @Override
+//    public void freeList(Model model) {
+//        model.addAttribute("frees", boardRepo.findByType(BoardType.자유게시판).stream().map(BoardListDTO::new)
+//                .collect(Collectors.toList()));
+//
+//    }
 
     //공지사항에 등록한 값을 detail에 전달하는 기능?
     @Override
@@ -84,7 +84,7 @@ public class BoardServiceProcess implements BoardService {
         boardRepo.save(BoardEntity.builder()
                         .title(dto.getTitle())
                         .content(dto.getContent())
-                        .type(BoardType.valueOf(dto.getBoardType()))
+                        .type(BoardType.valueOf(dto.getType().toString()))
                         .employees(emp)
                 .build());
     }
