@@ -18,20 +18,10 @@ public class BoardController {
     @Autowired
     private BoardService service;
 
-    //공지사항 등록     후 다시 리스트페이지로 이동
-    @PostMapping("/admin/board/reg")
-    public String board(BoardInsertDTO dto, @AuthenticationPrincipal MyUserDetails userDetails){
-        System.out.println(">>>등록>>"+dto.getBoardType());
-        service.save(dto, userDetails.getId());
-        return "redirect:/admin/board/boardList/"+dto.getBoardType();
-    }
-//
-//    //자유게시판 등록 후 다시 리스트페이지로 이동
-//    @PostMapping("/admin/board/regfree")
-//    public String free(BoardInsertDTO dto, @AuthenticationPrincipal MyUserDetails userDetails){
-//        service.fsave(dto, userDetails.getId());
-//        return "redirect:/admin/board/freeList";
-//    }
+
+
+
+
     //공지사항 등록페이지이동
     @GetMapping("/admin/board/write/{type}")
     public String write(@PathVariable String type, Model model) {
@@ -39,26 +29,7 @@ public class BoardController {
         return "admin/board/write";
     }
 
-    //리스트페이지
-    @GetMapping("/admin/board/boardList/{type}")
-    public String boardList(@PathVariable String type, Model model) {
-        service.boardList(type, model);
-
-        System.out.println(">>리스트>" + type);
-        model.addAttribute("type",type);
-        return "admin/board/notice";
-
-
-    }
-
-    //자유게시판 리스트페이지
-//    @GetMapping("/admin/board/freeList")
-//    public String freeList(Model model){
-//        service.freeList(model);
-//        return "admin/board/free";
-//    }
-
-    //공지사항 리스트에서 목록 눌렀을때 상세페이지
+    //공지사항 리스트에서 제목 눌렀을때 상세페이지
     @GetMapping("/admin/board/view/{boardId}")
     public String boardListDetail(@PathVariable long boardId, Model model){
         service.boardListDetail(boardId, model);
@@ -73,13 +44,48 @@ public class BoardController {
 
         return "admin/board/edit";
     }
+    //리스트페이지
+    @GetMapping("/admin/board/boardList/{lType}")
+    public String boardList(@PathVariable long lType, Model model) {
+        String type;
+        if(lType==0){
+            type="공지사항";
+        }else{
+            type = "자유게시판";
+        }
+        service.boardList(type, model);
 
+        System.out.println(">>리스트>" + type);
+        model.addAttribute("type",type);
+        return "admin/board/notice";
+
+    }
     //공지사항 수정완료눌렀을때의 페이지?
     @PostMapping("/admin/board/update/{boardId}")
     public String update(@PathVariable("boardId") long boardId, BoardListDTO dto){
+        System.out.println(">>>>>>>>>>>>>"+boardId);
         service.boardUpdate(boardId, dto);
-        return "redirect:/admin/board/boardList";
+        long lType;
+        if(dto.getType().equals("공지사항")){
+            lType=0;
+        }else{
+            lType=1;
+        }
+        return "redirect:/admin/board/boardList/"+lType;
     }
+    //공지사항 등록     후 다시 리스트페이지로 이동
+    @PostMapping("/admin/board/reg")
+    public String board(BoardInsertDTO dto, @AuthenticationPrincipal MyUserDetails userDetails){
+        System.out.println(">>>등록>>"+dto.getType());
+        service.save(dto, userDetails.getId());
 
+        long lType;
+        if(dto.getType().equals("공지사항")){
+            lType=0;
+        }else{
+            lType=1;
+        }
+        return "redirect:/admin/board/boardList/"+lType;
+    }
 
 }
