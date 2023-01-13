@@ -3,6 +3,7 @@ package com.green.controller;
 import com.green.domain.dto.EmployeesDetailDTO;
 import com.green.domain.dto.DepartmentDTO;
 import com.green.domain.dto.EmployeesInsertDTO;
+import com.green.domain.dto.TeamDTO;
 import com.green.domain.dto.TeamaddtDTO;
 import com.green.domain.entity.Position;
 import com.green.service.DepartmentService;
@@ -86,32 +87,40 @@ public class AdminController {
 
 
 	//부서선택 되었을때 해당하는 부서 이름 리스트 가져오기
-	@ResponseBody
-	@GetMapping("/admin/depList/{depName}")
+    @ResponseBody
+	@GetMapping("/admin/teamList/{depName}")
 	public List<String> teamListOfDep(@PathVariable String depName){
 		System.out.println(depName);
 		return employeesService.getTeamListOfDef(depName);
 	}
-	//부서이름 수정
+	//부서이름 수정 
 	@ResponseBody
 	@PostMapping("/admin/depUpdate/{depId}")
 	public String depUpdate(@PathVariable("depId") long depId, String departmentName) {
-
+		
 		return depServise.depUpdate(depId, departmentName);
 	}
-	//부서 삭제
-	@GetMapping("/admin/depDelete/{depId}")
-	public String depDelete(@PathVariable long depId) {
-		depServise.depDelete(depId);
-		return "redirect:/admin/department";
+	//부서 삭제 
+	@ResponseBody
+	@DeleteMapping("/admin/depDelete/{depId}")
+	public void depDelete(@PathVariable("depId") long id) {
+		depServise.depDelete(id);
 	}
 	//부서메뉴중 팀 추가
-//	@ResponseBody
-//	@PostMapping("/admin/teamInsert/{depId}")
-//	public String teamInsert(@PathVariable("depId") long depId, TeamaddtDTO dto) {
-//
-//		return teamService.save(depId, departmentName);
-//	}
+	//@ResponseBody
+	@PostMapping("/admin/teamInsert/{depId}")
+	public String teamInsert(TeamDTO dto) {
+		teamService.save(dto);
+		return  "admin/department";
+		 //   teamService.getTeamList(model);
+		}
+	//부서명클릭시 해당하는 팀리스트 반환(에이잭스)
+	@GetMapping("/admin/getTeamList/{depId}")
+	public String getTeamListHtml(@PathVariable long depId, Model model) {
+		teamService.getTeamListOfDep(depId, model);
+		
+		return "admin/depart/teamTag";
+	}
     //사원 조회/수정 페이지이동
     @GetMapping("/admin/emp/list")
     public String empList(Model model){
