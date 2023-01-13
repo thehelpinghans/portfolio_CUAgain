@@ -18,7 +18,7 @@ public class PaymentController {
 	@Autowired
 	PaymentService service;
 	
-	@GetMapping("/payment")
+	@GetMapping("admin/payment")
 	public String paymentlist(Model model) {
 		service.getlist(model);
 		return "admin/payment/payment";

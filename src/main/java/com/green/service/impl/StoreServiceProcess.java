@@ -1,5 +1,8 @@
 package com.green.service.impl;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.green.service.StoreService;
+import com.green.domain.dto.StoreListDTO;
 import com.green.domain.dto.StoreRegDTO;
 import com.green.domain.dto.StoreSaveDTO;
 import com.green.domain.entity.AddressEntity;
@@ -29,11 +33,6 @@ public class StoreServiceProcess implements StoreService {
 	@Autowired
 	AddressEntityRepository addressRepo;
 	
-	@Override
-	public void getlist(Model model) {
-		model.addAttribute("list",storeRepo.findAll());
-	}
-	
 	@Transactional
 	@Override
 	public void save(StoreSaveDTO dto) {
@@ -48,6 +47,15 @@ public class StoreServiceProcess implements StoreService {
 				.manager(employeesRepo.findById(dto.getManagerId()).orElseThrow())//
 				.content(dto.getContent())
 				.name(dto.getName()).build());
+	}
+
+	@Transactional
+	@Override
+	public void getlist(Model model) {
+		List<StoreEntity> result = storeRepo.findAll();
+		List<StoreListDTO> list = result.stream().map(StoreListDTO :: new).collect(Collectors.toList());
+		model.addAttribute("list" , list);
+		
 	}
 
 }

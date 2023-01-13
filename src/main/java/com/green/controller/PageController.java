@@ -66,11 +66,6 @@ public class PageController {
         return "admin/depart/department3";
     }
 
-    //임시, 결재페이지로 이동
-    @GetMapping("admin/payment")
-    public String payMent() {
-    	return "admin/payment/payment";
-    }
 
  // 급여관리의 등록 페이지로 이동
     @GetMapping("/admin/add")
@@ -97,14 +92,10 @@ public class PageController {
         }
 
     }
-    // 점포 리스트페이지
-    @GetMapping("/admin/store")
-    private String store() {
-    	return "admin/store/store";
-    }
+    
     // 점포추가 작성 페이지
-    @GetMapping("/admin/store-detail")
+    @GetMapping("/admin/store-write")
     private String storedetail() {
-    	return "/admin/store/store-detail";
+    	return "/admin/store/store-write";
     }
 }
