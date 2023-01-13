@@ -7,12 +7,11 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="/css/depart/department.css" />
 	<link rel="stylesheet" href="/js/depart/department.js" />
-	<script type="text/javascript">
+	<script type="text/javascript" th:inline="javascript">
 	$(function(){
 		$("#btn_toggle_tree").click(function(){
 	    	$(".org_tree").slideToggle(400);
 		});
-		
 		//부서메뉴버튼 클릭 부서메뉴
 		$(".btn_depart_menu").click(function(){
 			//혹시 열려있는 메뉴 모두 닫기
@@ -20,64 +19,72 @@
 			$(".depart_menu").not(target).hide();
 			target.slideToggle(400);
 		});
-		x
-		
 		//부서명 클릭 팀토글	
-		$(".btn_tree_team").click(function(){
-			$(".team_name").slideToggle(400);
+		$(".dept-name").click(function(){
+			
+			var teamList = $(this).siblings(".team_name")
+			var depId = $(this).siblings(".department-id").val();
+			$.ajax({
+				url:`/admin/getTeamList/${depId}`,
+				success:function(resultHtml){
+					$(teamList).html(resultHtml);
+					//teamList.show();
+					$(teamList).slideToggle(400);
+				}//1.열릴때만 가져오고 닫을때는 안가져오게 만들기
+				//2.열리면서 팀리스트가 내려오게 만들기. 
+			});
+			
 		});
-	});
+	}); //close jquery
+	
 	//팀 추가 누르면 팀추가사라지고 작성창만나타남
 	function teamInsert(el){
 		/* $(el).hide(); */
 		$(el).siblings(".teamInsert").show();
-	};
+	}; //close jquery
 	//팀 추가 기능 
 	$(document).ready(function(){
 		$(".teamInsert").on("keyup", function(event) {
 			 if (event.which == 13) {
 		        target=$(this);
 		        dept_id=target.siblings(".department-id").val();
-		        alert(dept_id);
-		        $.ajax({
+		        //teamName=target.text();
+		        alert(dept_id+"의 소속되는"+teamName+"을 추가합니다");
+		        $.ajax({//부서이름으로 넘겨서 부서엔티티의 하위그룹인 팀엔티티에 데이터를 추가하는?
 	           		url:"/admin/teamInsert/"+dept_id,
 	           		type:"post",
-	           		data: {"departmentName": $(this).val().trim()},
+	           		data: {"teamName": $(this).val().trim()},
 	           		success:function(result){
-	           			target.parents("td").siblings(".dept-name").text(result);
-	           			target.parents(".depart_menu").hide();
-	           			target.val("");//리셋
-	           			target.hide();
+	           			alert("성공적으로 추가되었습니다.");
 	           		}
 	            });
 			 } 	
 		});
-	});
+	}); //close jquery
+	
 	//부서삭제기능 
-	function depDelete(el) {
-		target=$(".depDel");
-		var dep_id = target.next(".department-id").val();
-		alert(dep_id+"");
-		//var dep_id=document.getElementByName("${dto.id}").val();
-		
-		console.log(dep_id);
-			//	if(confirm("정말 삭제하시겠습니까?")){//삭제처리시 물어보기
-//					$.ajax({
-//		           		url:"/admin/depDelete/"+dept_id,
-//		           		type:"post",
-//		           		data:queryString,
-//		           		success:function(result){
-//		           			alert(departmentName+"부서가 삭제되었습니다.");
-//		           		}
-//					});
-				//}
-			
-	};
+	function depDelete(el){
+		target=$(el);//클릭한 삭제버튼태그
+		var dep_id = target.siblings(".department-id").val();//클릭한 삭제버튼의 부서번호
+		departmentName=target.parents("td").siblings(".dept-name").text();//클릭한 삭제버튼의 부서이름
+		//alert(dep_id); 부서의 pk값이 나옴 
+			if(confirm("정말 삭제하시겠습니까?")){//삭제처리시 물어보기
+				$.ajax({
+	           		url:"/admin/depDelete/"+dep_id, //부서번호로 경로 넘겨주기
+	           		type:"delete",		//딜리트매핑이니까 타입도 딜리트
+	           		success:function(result){	//성공했을경우.
+	           			target.parents("tr").remove(); //삭제되면 주르륵뜬거 삭제해주기 
+	           			alert(departmentName+"부서가 삭제되었습니다.");
+	           		}
+				});
+			}	
+	}; //close jquery
+	
 	//부서수정 누르면 부서수정사라지고 작성창만나타남
 	function depUpdate(el){
-		/* $(el).hide(); */
+		// /* $(el).hide(); */
 		$(el).siblings(".depUpdate").show();
-	};
+	}; //close jquery
 
 	//부서수정 기능
 	$(document).ready(function(){
@@ -98,10 +105,9 @@
 	           			target.hide();
 	           		}
 	            });
-	        	//*/
 	        }
 	    });
-	});
+	}); //close jquery
 	
 	</script>	
 
@@ -119,6 +125,11 @@
 		<!-- 데이터 다 뿌려줘야함. -->
 			<div class="contents_body">
 				<div class="member_view  flex">
+				<div class="depart-insert">
+					<button>
+						<span></span>
+					</button>
+				</div>
 					<div class="organization">
 					
 						<section>
@@ -128,7 +139,6 @@
 								<span class="corp_name">&nbsp;&nbsp;CUAgain(회사명)</span>
 							</button>
 						</section>
-						
 						<section>
 							<div class="org_tree">
 								<ul class="tree_team">
@@ -140,6 +150,7 @@
 														<td><i class="fa-solid fa-sort-down"></i>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 														<td><i class="fa-solid fa-user-group"></i>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 									 					<td th:text="${dto.name}" class="dept-name"></td>
+									 					<input type="hidden" class="department-id" th:value="${dto.id}">
 														<td>
 															<div onclick="" class="btn_depart_menu" th:id="|menuBtn_${dtoStat.count}|"> 
 																<i class="fa-regular fa-ellipsis-vertical"></i>
@@ -151,8 +162,8 @@
 																	<input class="teamInsert" onkeyup="enterkey()" type="text" placeholder="팀명">
 																</p>
 																<p>
-																	<a href="#" class="depDel" onclick="depDelete(this)">부서 삭제</a>
-																	<input type="text" class="department-id" th:value="${dto.id}">
+																	<button type="button" th:onclick="depDelete(this)" >부서 삭제</button>
+																	<input type="hidden" class="department-id" th:value="${dto.id}">
 																</p>
 																<p>
 																	<a href="#" onclick="depUpdate(this)" class="depUp">부서명 수정</a>
@@ -160,22 +171,18 @@
 																	<input class="depUpdate" onkeyup="enterkey()" type="text" placeholder="부서명">
 																</p>
 															</div>
+															<br>
+														</td>
+														<td class="team_name">
+															
 														</td>
 								    				</tr>
 							    			</tbody>
 										</table>
 									</button>
-											<div class="teamList">
-												<table class="team-table">
-													<tr class="team-tr2" th:each= "dto : ${list}">
-														<td></td>
-														<td></td>
-													</tr>
-											</table>
-										</div>
 									</li>
 								</ul>
-							</div><!-- div class="org_tree" 회사명 누르면 나옴  -->
+							</div><!-- div class="org_tree" 회사명 누르면 나옴-->
 						</section>
 					</div><!-- div class="organization" -->
 				</div><!-- div class="member_view  flex" -->
