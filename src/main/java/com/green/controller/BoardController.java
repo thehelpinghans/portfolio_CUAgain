@@ -20,13 +20,7 @@ public class BoardController {
 
 
 
-    //공지사항 등록     후 다시 리스트페이지로 이동
-    @PostMapping("/admin/board/reg")
-    public String board(BoardInsertDTO dto, @AuthenticationPrincipal MyUserDetails userDetails){
-        System.out.println(">>>등록>>"+dto.getType());
-        service.save(dto, userDetails.getId());
-        return "redirect:/admin/board/boardList/"+dto.getType();
-    }
+
 
     //공지사항 등록페이지이동
     @GetMapping("/admin/board/write/{type}")
@@ -51,8 +45,14 @@ public class BoardController {
         return "admin/board/edit";
     }
     //리스트페이지
-    @GetMapping("/admin/board/boardList/{type}")
-    public String boardList(@PathVariable String type, Model model) {
+    @GetMapping("/admin/board/boardList/{lType}")
+    public String boardList(@PathVariable long lType, Model model) {
+        String type;
+        if(lType==0){
+            type="공지사항";
+        }else{
+            type = "자유게시판";
+        }
         service.boardList(type, model);
 
         System.out.println(">>리스트>" + type);
@@ -65,8 +65,27 @@ public class BoardController {
     public String update(@PathVariable("boardId") long boardId, BoardListDTO dto){
         System.out.println(">>>>>>>>>>>>>"+boardId);
         service.boardUpdate(boardId, dto);
-        return "redirect:/admin/board/boardList/";
+        long lType;
+        if(dto.getType().equals("공지사항")){
+            lType=0;
+        }else{
+            lType=1;
+        }
+        return "redirect:/admin/board/boardList/"+lType;
     }
+    //공지사항 등록     후 다시 리스트페이지로 이동
+    @PostMapping("/admin/board/reg")
+    public String board(BoardInsertDTO dto, @AuthenticationPrincipal MyUserDetails userDetails){
+        System.out.println(">>>등록>>"+dto.getType());
+        service.save(dto, userDetails.getId());
 
+        long lType;
+        if(dto.getType().equals("공지사항")){
+            lType=0;
+        }else{
+            lType=1;
+        }
+        return "redirect:/admin/board/boardList/"+lType;
+    }
 
 }

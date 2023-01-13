@@ -34,8 +34,10 @@
                 </div>
             </div>
             <div class="bt_wrap">
+                <input type="hidden" name="type" th:value="${dto.type}">
                 <button type="submit">수정완료</button>
-                <a th:href="|/admin/board/boardList/${type}|" class="on">취소</a>
+                <a th:href="|/admin/board/view/${boardId}|" class="on">취소</a>
+                <!--<a th:href="|/admin/board/boardList/${dto.type}|" class="on">취소</a>-->
 
             </div>
         </div>
