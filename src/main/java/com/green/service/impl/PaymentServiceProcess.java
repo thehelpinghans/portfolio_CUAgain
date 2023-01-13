@@ -9,14 +9,14 @@ import org.springframework.ui.Model;
 import com.green.service.PaymentService;
 import com.green.domain.dto.PaymentDTO;
 import com.green.domain.entity.EmployeesEntityRepository;
-import com.green.domain.entity.PaymentEntity;
-import com.green.domain.entity.PaymentEntityRepository;
+import com.green.domain.entity.DocumentEntity;
+import com.green.domain.entity.DocumentEntityRepository;
 
 @Service
 public class PaymentServiceProcess implements PaymentService {
 	
 	@Autowired
-	PaymentEntityRepository paymentRepo;
+	DocumentEntityRepository paymentRepo;
 	
 	@Autowired
 	EmployeesEntityRepository employeesRepo;
@@ -30,7 +30,7 @@ public class PaymentServiceProcess implements PaymentService {
 	@Transactional
 	@Override
 	public void save(PaymentDTO dto) {
-		PaymentEntity payment = paymentRepo.save(PaymentEntity.builder()
+		DocumentEntity payment = paymentRepo.save(DocumentEntity.builder()
 //				.employees_id(employeesRepo.findByName(Name).orElseThrow())
 				.title(dto.getTitle())
 				.content(dto.getContent())

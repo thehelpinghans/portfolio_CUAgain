@@ -20,6 +20,8 @@ public class EmployeesDetailDTO {
     private String department;
     private String team;
     private String position;
+    private boolean end;
+    private String endDate;
 
     //주소 처리 필드
     private String postcode;
@@ -46,6 +48,9 @@ public class EmployeesDetailDTO {
         this.department = e.getDep().getName();
         this.team=e.getTeam().getName();
         this.position = e.getPosition().getPosition();
+        this.end=e.isEnd();
+        this.endDate= String.valueOf(e.getEndDate());
+
         this.postcode = e.getAddress().getPostcode();
         this.roadAddress = e.getAddress().getRoadAddress();
         this.jibunAddress = e.getAddress().getJibunAddress();
