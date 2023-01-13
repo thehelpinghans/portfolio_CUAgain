@@ -24,9 +24,10 @@ public class StoreController {
 		return "/admin/store/store";
 	}
 	
-	@PostMapping("/store-write")
-	public String savestore(StoreSaveDTO dto, @AuthenticationPrincipal MyUserDetails myUserDetails) {
-		service.save(dto, myUserDetails.getName());
+	@PostMapping("/admin/store-write")
+	public String savestore(StoreSaveDTO dto) {
+		System.err.println("controller");
+		service.save(dto);
 		return "/admin/store/store";
 	}
 }
