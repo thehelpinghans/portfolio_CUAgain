@@ -33,9 +33,9 @@ public class AttendServiceProcess implements AttendService {
 		//LocalDate date=findByOnTime(id).get().getDate();
 		//System.out.println(date);
 		
-		
-		
-		
+
+
+
 		Optional<AttendanceEntity> fot=findByOnTime(id);
 		if(fot.isPresent()) {
 			//attendRepo.save(udto.attendanceEntity().employeeId(empRepo.findById(id)));//수정
@@ -44,7 +44,9 @@ public class AttendServiceProcess implements AttendService {
 			attendRepo.save(dd);
 			System.out.println(attendRepo.save(dd).getOutTime());
 		}else {
-			attendRepo.save(dto.attendanceEntity().employeeId(empRepo.findById(id).orElseThrow()).addStatus(AttendStatus.출근));//저장
+			attendRepo.save(dto.attendanceEntity()
+						.employeeId(empRepo.findById(id).orElseThrow())
+						.addStatus(AttendStatus.출근));//저장
 		}
 		
 	}
@@ -68,7 +70,7 @@ public class AttendServiceProcess implements AttendService {
 	
 	@Override
 	public long principalId(Principal principal) {
-		
+
 		Optional<EmployeesEntity> result=empRepo.findByEmail(principal.getName());
 		long id=result.get().getId();
 		System.err.println(id);
