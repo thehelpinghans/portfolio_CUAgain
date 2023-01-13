@@ -9,7 +9,6 @@ import java.util.Optional;
 @Repository
 public interface EmployeesEntityRepository  extends JpaRepository<EmployeesEntity,Long> {
 
-
     Optional<EmployeesEntity> findByEmailAndEnd(String username, boolean b);
 
 
@@ -18,4 +17,5 @@ public interface EmployeesEntityRepository  extends JpaRepository<EmployeesEntit
     List<EmployeesEntity> findByDepNameContaining(String data);
 
     Optional<EmployeesEntity> findByImageNewName(String s);
+
 }

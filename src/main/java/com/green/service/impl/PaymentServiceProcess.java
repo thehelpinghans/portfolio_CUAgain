@@ -29,7 +29,7 @@ public class PaymentServiceProcess implements PaymentService {
 
 	@Transactional
 	@Override
-	public void save(PaymentDTO dto, long id ,String Name) {
+	public void save(PaymentDTO dto) {
 		PaymentEntity payment = paymentRepo.save(PaymentEntity.builder()
 //				.employees_id(employeesRepo.findByName(Name).orElseThrow())
 				.title(dto.getTitle())
