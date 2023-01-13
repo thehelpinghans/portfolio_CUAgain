@@ -78,11 +78,7 @@ public class PageController {
     public String salaryEdit(){
         return "/admin/salary/edit";
     }
-    
-    @GetMapping("admin/payment-write")
-    private String payMentWrite() {
-    	return "admin/payment/payment-write";
-    }
+
     @PostMapping("/comm/checkRole")
     public String checkRole(@AuthenticationPrincipal MyUserDetails userDetails){
         if(userDetails.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))){

@@ -90,8 +90,22 @@
 					$("#view-edit").html(resultHTML).show();
 					/*$(".currentDate").val(new Date().toISOString().substring(0, 10));*/
 					$("#passCheckText").hide();
+					if($("#btnNotEnd").prop("checked"))
+						$(".endDate").hide();
 				}
 			});
+		}
+		function radioEndCheckd(){
+
+			//퇴직 버튼 눌렸을때
+			if($("#btnEnd").prop("checked")){
+				$(".endDate").show();
+			}
+			//재직 버튼 눌렸을 때
+			else{
+				$(".endDate").hide();
+			}
+
 		}
 		//비밀번호 변경하기 버튼 눌렀을 때
 		function btnUpdatePass(){
