@@ -2,7 +2,7 @@ package com.green.domain.dto;
 
 import java.time.LocalDateTime;
 
-import com.green.domain.entity.PaymentEntity;
+import com.green.domain.entity.DocumentEntity;
 
 import lombok.Data;
 
@@ -25,7 +25,7 @@ public class PaymentDTO {
 	 
 	 private String empName;
 
-	public PaymentDTO(PaymentEntity e) {
+	public PaymentDTO(DocumentEntity e) {
 		this.id = e.getId();
 		this.title = e.getTitle();
 		this.content = e.getContent();

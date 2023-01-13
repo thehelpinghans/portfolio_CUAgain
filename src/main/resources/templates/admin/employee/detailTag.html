@@ -10,7 +10,7 @@
 			<span>프로필 사진</span>
 		</div>
 		<label><span>사원번호</span><span th:text="${dto.id}"></span><br></label>
-		<label><span>퇴사여부 </span>
+		<label><span>재직여부 </span>
 			<span th:if="${dto.end}">퇴사</span>
 			<span th:if="${dto.end}">퇴사일</span>
 			<input th:if="${dto.end}" type="date"  th:value="${dto.endDate}">

@@ -87,16 +87,14 @@ public class EmployeesEntity {
         }
         return this;
     }
-    public EmployeesEntity additionalUpdate(ImagesEntity image, TeamEntity team, DepartmentEntity dep, AddressEntity address){
+    public void additionalUpdate(ImagesEntity image, TeamEntity team, DepartmentEntity dep, AddressEntity address){
         this.image=image;
         this.team=team;
         this.dep=dep;
         this.address=address;
-        return this;
     }
 
-    public EmployeesEntity updatePass(String pass) {
+    public void updatePass(String pass) {
         this.pass=pass;
-        return this;
     }
 }

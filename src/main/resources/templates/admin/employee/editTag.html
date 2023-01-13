@@ -15,7 +15,7 @@
 		</div>
 		<label><span>사원번호</span><span id="empId" th:text="${dto.id}"></span><br></label>
 		<input type="hidden" name="id" th:value="${dto.id}">
-		<label><span>퇴사여부</span>
+		<label><span>재직여부</span>
 			<input id="btnNotEnd" type="radio" name="end" value="0" th:attr="checked=!${dto.end}" onclick="radioEndCheckd()"><span>재직</span>
 			<input id="btnEnd" type="radio" name="end" value="1" th:attr="checked=${dto.end}" onclick="radioEndCheckd()"><span>퇴사</span>
 			<br>
