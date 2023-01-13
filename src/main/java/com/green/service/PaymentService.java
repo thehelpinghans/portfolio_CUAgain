@@ -9,6 +9,6 @@ public interface PaymentService {
 
 	void getlist(Model model);
 
-	void save(PaymentDTO dto, long id, String employeesName);
+	void save(PaymentDTO dto);
 
 }

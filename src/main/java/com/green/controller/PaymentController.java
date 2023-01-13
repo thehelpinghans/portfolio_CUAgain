@@ -24,9 +24,9 @@ public class PaymentController {
 		return "admin/payment/payment";
 	}
 	
-	@PostMapping("/paymant-write")
-	public String paymentsave(PaymentDTO dto, @AuthenticationPrincipal MyUserDetails myUserDetails) {
-		service.save(dto, myUserDetails.getId(), dto.getEmployeesName());
+	@PostMapping("/member/paymant-write")
+	public String paymentsave(PaymentDTO dto) {
+		service.save(dto);
 		return "admin/payment/payment";
 	}
 	
