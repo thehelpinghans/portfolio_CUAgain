@@ -8,18 +8,42 @@
 	<script type="text/javascript">
 	$(function(){
 		$(".btn-on").click(on);
+		$(".btn-off").click(off);
 	});
 	//출근 버튼 누르면 출근시간 보여주고 db저장
 	function on(){
-		var id = $(".id").val();
-		alert(id);
+		
 		$.ajax({
-			url:`/member/attendance/reg`,
+			url:"/member/attendance/in",
 			type:"post",
-			success:function(){
-				alert("출근시간");
+			success:function(data){
+				console.log(data)
+				alert(data);
+				if (data == "출근이 정상적으로 됐습니다."){
+					window.location.reload();
+				} 
 			},
-			error:function(){
+			error:function(data){
+				alert(data)
+				alert("go error");	
+			}
+		});
+	
+	}
+	function off(){
+			
+		$.ajax({
+			url:"/member/attendance/out",
+			type:"post",
+			success:function(data){
+				console.log(data)
+				alert(data);
+				if (data == "퇴근이 정상적으로 됐습니다."){
+					window.location.reload();
+				}
+			},
+			error:function(data){
+				alert(data)
 				alert("go error");	
 			}
 		});
@@ -63,10 +87,11 @@
 				    </div>
 				    <div class="flex">
 				    	<div>
-				    		<input class="id" type="text" >
+				    		<input class="id" type="text">
 				    		<button type="submit" class="btn-on"><img src="/image/attendance/btn_check01.gif"></button>
 				    	</div>
 				    	<div>
+				    		<input class="id" type="text">
 				    		<button type="submit" class="btn-off"><img src="/image/attendance/btn_check02.gif"></button>
 			    		</div>
 			    	</div>
@@ -74,60 +99,27 @@
 			<!-- </form> -->
 			<table class="table">
 				<tbody>
-					<tr>
+					<tr >
 						<th width="7%" height="15px">일자</th>
 						<th width="5%" height="15px">요일</th>
 						<th width="5%" height="15px">구분</th>
 						<th width="10%" height="15px">출근시간</th>
 						<th width="10%" height="15px">퇴근시간</th>
 					</tr>
-					<tr th:if="${!#lists.isEmpty(list)}" >
-						<td colspan="5">
-							<p>나중에 근태dto 데이터 넣어주기</p>
-						</td>
-						
+					<tr th:each="dto : ${list}" th:if="${!#lists.isEmpty(list)}" >
+						<td th:text="${dto.date}"></td>
+						<td th:text="${dto.employeeId}"></td>
+						<td th:text="${dto.attendStatus}"></td>
+						<td th:text="${dto.inTime}"></td>
+						<td th:text="${dto.outTime}"></td>
 					</tr>
 					<!-- 나중에 데이터 넣고 반복문 돌리기! 일단은 데이터 직접 넣어봄..예시.. -->
+					
 					<tr th:if="${#lists.isEmpty(list)}" >
-						<!-- <td><p>데이터가 없습니다.</p></td> -->
-						<td>2023-01-05</td>
-						<td>목</td>
-						<td>출근</td>
-						<td>08:59</td>
-						<td>17:59</td>
+						<td><p>데이터가 없습니다.</p></td>
 					</tr>
-					<tr th:if="${#lists.isEmpty(list)}" >
-						<!-- <td><p>데이터가 없습니다.</p></td> -->
-						<td>2023-01-06</td>
-						<td>금</td>
-						<td>조퇴</td>
-						<td>08:59</td>
-						<td>12:00</td>
-					</tr>
-					<tr th:if="${#lists.isEmpty(list)}" >
-						<!-- <td><p>데이터가 없습니다.</p></td> -->
-						<td>2023-01-06</td>
-						<td>금</td>
-						<td>조퇴</td>
-						<td>08:59</td>
-						<td>12:00</td>
-					</tr>
-					<tr th:if="${#lists.isEmpty(list)}" >
-						<!-- <td><p>데이터가 없습니다.</p></td> -->
-						<td>2023-01-06</td>
-						<td>금</td>
-						<td>조퇴</td>
-						<td>08:59</td>
-						<td>12:00</td>
-					</tr>
-					<tr th:if="${#lists.isEmpty(list)}" >
-						<!-- <td><p>데이터가 없습니다.</p></td> -->
-						<td>2023-01-06</td>
-						<td>금</td>
-						<td>조퇴</td>
-						<td>08:59</td>
-						<td>12:00</td>
-					</tr>
+					
+					
 				</tbody>
 			</table>
 		</div>
