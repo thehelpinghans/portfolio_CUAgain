@@ -4,6 +4,9 @@ import com.green.security.MyUserDetails;
 import com.green.security.MyUserDetailsService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.green.domain.dto.DepartmentDTO;
+import com.green.service.AttendService;
 import com.green.service.DepartmentService;
 
 @Controller
@@ -18,17 +22,24 @@ public class PageController {
 
 	@Autowired
 	DepartmentService depaService;
-
+	
+	@Autowired
+	private AttendService service;
+	
     //임시, 사원페이지로 이동
     @GetMapping("/member/main")
-    public String member(){
+    public String member(Principal principal, Model model){
+    	long id=service.principalId(principal);
+		service.attedList(id, model);
         return "member/main";
     }
 
     //나의 근태현황 페이지(사원페이지)
     @GetMapping("/member/my_attendance")
-    public String myAttendance(){
-        return "member/attendance/my_attendance.html";
+    public String myAttendance(Principal principal, Model model){
+    	long id=service.principalId(principal);
+//    	service.myAttList(id, model)
+        return "member/attendance/my_attendance";
     }
 
     //임시, 어드민페이지로 이동
