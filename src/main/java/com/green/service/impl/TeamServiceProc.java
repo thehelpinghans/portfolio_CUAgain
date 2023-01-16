@@ -32,12 +32,14 @@ public class TeamServiceProc implements TeamService{
 	
 	//팀 데이터 등록하기 
 	@Override
-	public void save(TeamDTO dto) {
+	public void save(TeamDTO dto , long dep_id) {
+		System.err.println("팀등록");
 		teamRepo.save(TeamEntity.builder()
-				.id(dto.getId())
-				.name(dto.getName())
-				.dep(depRepo.findById(dto.getId()).orElseThrow())
-				.build());
+				.id(dto.getId())//team id
+				.name(dto.getName()) //team name 
+				.build()
+				.teamEntity(depRepo.findById(dep_id).orElseThrow())
+				);
 	}
 
 	@Override

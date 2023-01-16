@@ -8,9 +8,10 @@ public interface TeamService {
 
 	void getTeamList(Model model);
 
-	void save(TeamDTO dto);
+	void save(TeamDTO dto, long dep_id);
 
 	void getTeamListOfDep(long depId, Model model);
+
 
 
 }
