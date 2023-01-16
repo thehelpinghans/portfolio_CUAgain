@@ -30,6 +30,7 @@
 		});
 	
 	}
+	//퇴근
 	function off(){
 			
 		$.ajax({
@@ -39,6 +40,8 @@
 				console.log(data)
 				alert(data);
 				if (data == "퇴근이 정상적으로 됐습니다."){
+					window.location.reload();
+				}else if(data == "조퇴처리가 되었습니다."){
 					window.location.reload();
 				}
 			},
@@ -66,8 +69,8 @@
 		</div>
 		<div class="flex">
 			<!-- <form action="/member/attendance/reg/" method="post"> -->
-				<div class="content_att">
-					<div class="flex">
+				<div class="content_att" th:each="employee : ${employee}">
+					<div class="flex" >
 						<script type="text/javascript">
 							let today = new Date();   
 							let week = new Array('일','월','화','수','목','금','토');
@@ -77,41 +80,39 @@
 							let weekDay = week[today.getDay()];
 							document.write(year + '년 ' + month + '월 ' + date + '일 ' + weekDay + '요일');
 					    </script>
-					    <p class="content_att_reg">&nbsp;&nbsp;OO님 출,퇴근을 등록하세요.</p>
+					    <p class="content_att_reg" th:text="'&nbsp&nbsp&nbsp'+${employee.name}+'님 출, 퇴근을 등록하세요.'"></p>
 			    	</div>
 			    	<div class="content_info">
 			    		<!-- 여기에는 나중에 사원등록 되면 불러오고 싶은 데이터 넣어주면 될 거 같아요. 아래는 예시로 직접 값 넣었슴다..(프사,부서,팀,직책,이름) -->
 			    		<p><img class="proflie" src="/image/attendance/profile_sample.jpg"></p>
-			    		<p>[인사담당부 인사운영팀]</p>
-			    		<p>스피츠 팀장</p>
+			    		<p th:text="${employee.department}+' '+${employee.team}">부서,팀</p>
+			    		<p th:text="${employee.name}+' '+${employee.position}">스피츠 팀장</p>
 				    </div>
-				    <div class="flex">
-				    	<div>
-				    		<input class="id" type="text">
-				    		<button type="submit" class="btn-on"><img src="/image/attendance/btn_check01.gif"></button>
-				    	</div>
-				    	<div>
-				    		<input class="id" type="text">
-				    		<button type="submit" class="btn-off"><img src="/image/attendance/btn_check02.gif"></button>
-			    		</div>
+				    <div class="btn_att flex">
+			    		<input class="id" type="hidden">
+			    		<button class="btn-on"><img src="/image/attendance/btn_check01.gif"></button>
+			    		<input class="id" type="hidden">
+			    		<button class="btn-off"><img src="/image/attendance/btn_check02.gif"></button>
 			    	</div>
 				</div>
 			<!-- </form> -->
 			<table class="table">
 				<tbody>
-					<tr >
-						<th width="7%" height="15px">일자</th>
+					<tr>
+						<th width="8%" height="15px">일자</th>
+						<th width="8%" height="15px">출근시간</th>
+						<th width="8%" height="15px">퇴근시간</th>
 						<th width="5%" height="15px">요일</th>
 						<th width="5%" height="15px">구분</th>
-						<th width="10%" height="15px">출근시간</th>
-						<th width="10%" height="15px">퇴근시간</th>
+						
 					</tr>
-					<tr th:each="dto : ${list}" th:if="${!#lists.isEmpty(list)}" >
+					<tr class="att_data" th:each="dto : ${list}" th:if="${!#lists.isEmpty(list)}" >
 						<td th:text="${dto.date}"></td>
-						<td th:text="${dto.employeeId}"></td>
+						<td th:text="${#dates.format(dto.inTime, 'HH:mm')}"></td>
+						<td th:text="${#dates.format(dto.outTime, 'HH:mm')}"></td>
+						<td th:text="${#temporals.format(dto.date, 'E')}"></td>
 						<td th:text="${dto.attendStatus}"></td>
-						<td th:text="${dto.inTime}"></td>
-						<td th:text="${dto.outTime}"></td>
+						
 					</tr>
 					<!-- 나중에 데이터 넣고 반복문 돌리기! 일단은 데이터 직접 넣어봄..예시.. -->
 					

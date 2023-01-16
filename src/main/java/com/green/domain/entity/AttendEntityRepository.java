@@ -21,7 +21,7 @@ public interface AttendEntityRepository extends JpaRepository<AttendanceEntity, 
 	List<AttendanceEntity> findTop5ByEmployee_idOrderByDateDesc(long id);
 
 
-	Page<AttendanceEntity> findByEmployee_idAndDateBetweenOrderByDate(long id, LocalDate start, LocalDate end,
+	Page<AttendanceEntity> findByEmployee_idAndDateBetweenOrderByDateDesc(long id, LocalDate start, LocalDate end,
 			Pageable pageable);
 
 
