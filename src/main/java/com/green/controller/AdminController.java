@@ -107,13 +107,14 @@ public class AdminController {
 		depServise.depDelete(id);
 	}
 	//부서메뉴중 팀 추가
-	//@ResponseBody
-	@PostMapping("/admin/teamInsert/{depId}")
-	public String teamInsert(TeamDTO dto) {
-		teamService.save(dto);
-		return  "admin/department";
-		 //   teamService.getTeamList(model);
-		}
+	@PostMapping("/admin/team/reg/{dep_id}")
+	public String teamReg(TeamDTO dto ,@PathVariable long dep_id) {
+		//등록하면 dto에 업데이트! 하고 사원 리스트로 리턴
+		System.err.println("팀등록");
+		teamService.save(dto, dep_id);
+		return "redirect:/admin/department";	
+	}
+	
 	//부서명클릭시 해당하는 팀리스트 반환(에이잭스)
 	@GetMapping("/admin/getTeamList/{depId}")
 	public String getTeamListHtml(@PathVariable long depId, Model model) {

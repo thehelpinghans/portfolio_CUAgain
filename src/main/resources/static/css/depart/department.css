@@ -77,10 +77,8 @@ main{height:100%; background-color: white;}
 	height: 30px;
 	background-color: #fff;
 }
-.dep-tr2{ 
-	min-height: 24px;
-	max-height: 140px;
-}
+/*회사-부서등록 메뉴*/
+.dep_reg{}
 /*부서 수정가능창 여는 버튼*/
 .btn_depart_menu{
 	

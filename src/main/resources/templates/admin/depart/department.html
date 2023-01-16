@@ -27,10 +27,15 @@
 			$.ajax({
 				url:`/admin/getTeamList/${depId}`,
 				success:function(resultHtml){
-					$(teamList).html(resultHtml);
 					//teamList.show();
 					$(teamList).slideToggle(400);
-				}//1.열릴때만 가져오고 닫을때는 안가져오게 만들기
+					$(teamList).html(resultHtml);
+				},
+				error:function(){
+           			console.log("비정상");
+           		}
+				
+				//1.열릴때만 가져오고 닫을때는 안가져오게 만들기
 				//2.열리면서 팀리스트가 내려오게 만들기. 
 			});
 			
@@ -46,18 +51,28 @@
 	$(document).ready(function(){
 		$(".teamInsert").on("keyup", function(event) {
 			 if (event.which == 13) {
-		        target=$(this);
-		        dept_id=target.siblings(".department-id").val();
-		        //teamName=target.text();
-		        alert(dept_id+"의 소속되는"+teamName+"을 추가합니다");
+		      	var target=$(this);
+		      	var team_id=$(this).val;
+		      	var deptName=target.parents("td").siblings(".dept-name").text();
+		        var dep_id=target.siblings(".department-id").val();
+		        var teamName=target.val().trim();
+		        alert(deptName+"의 하위그룹인 "+teamName+"을 추가합니다");
 		        $.ajax({//부서이름으로 넘겨서 부서엔티티의 하위그룹인 팀엔티티에 데이터를 추가하는?
-	           		url:"/admin/teamInsert/"+dept_id,
+	           		url:"/admin/team/reg/"+dep_id,
 	           		type:"post",
-	           		data: {"teamName": $(this).val().trim()},
+	           		dataType: json,
+	           		data:JSON.stringify({id:team_id, name:teamName }),
 	           		success:function(result){
-	           			alert("성공적으로 추가되었습니다.");
+	           			target.parents("td").siblings(".dept-name").text(result);
+	           			target.parents(".depart_menu").hide();
+	           			target.val("");//리셋
+	           			target.hide();
+	           		},
+	           		error:function(){
+	           			console.log("비정상");
 	           		}
 	            });
+		        
 			 } 	
 		});
 	}); //close jquery
@@ -115,14 +130,17 @@
 <main>	
 	<div class="container view_size_depa">
 		<!-- 부서관리 타이틀 -->
-		<div class="content_head">
+		<div class="content_head between">
 			<div class="title_cover flex">
 				<span>부서관리</span>
+			</div>
+			<div class="dep_reg">
+				<button type="button" class="btn_dep_reg">부서등록</button>
+				<!-- 등록 창 가져올겁니데이~ -->
 			</div>			
 		</div>
 		<div class="content_depart center">
 		<!-- 부서관리 내용 -->
-		<!-- 데이터 다 뿌려줘야함. -->
 			<div class="contents_body">
 				<div class="member_view  flex">
 				<div class="depart-insert">
@@ -156,25 +174,24 @@
 																<i class="fa-regular fa-ellipsis-vertical"></i>
 															</div>
 															<div class="depart_menu flex">
-																<p>
-																	<a href="#" onclick="teamInsert(this)" class="teamIn">팀명 추가</a>
-																	<input type="hidden" class="department-id" th:value="${dto.id}">
-																	<input class="teamInsert" onkeyup="enterkey()" type="text" placeholder="팀명">
-																</p>
-																<p>
-																	<button type="button" th:onclick="depDelete(this)" >부서 삭제</button>
-																	<input type="hidden" class="department-id" th:value="${dto.id}">
-																</p>
-																<p>
-																	<a href="#" onclick="depUpdate(this)" class="depUp">부서명 수정</a>
-																	<input type="hidden" class="department-id" th:value="${dto.id}">
-																	<input class="depUpdate" onkeyup="enterkey()" type="text" placeholder="부서명">
-																</p>
+																	<p>
+																		<a href="#" onclick="teamInsert(this)" class="teamIn">팀 등록</a>
+																		<input type="hidden" class="department-id" th:value="${dto.id}">
+																		<input class="teamInsert" onkeyup="enterkey()" type="text" placeholder="팀명">
+																	</p>
+																	<p>
+																		<button type="button" th:onclick="depDelete(this)" >부서 삭제</button>
+																		<input type="hidden" class="department-id" th:value="${dto.id}">
+																	</p>
+																	<p>
+																		<a href="#" onclick="depUpdate(this)" class="depUp">부서명 수정</a>
+																		<input type="hidden" class="department-id" th:value="${dto.id}">
+																		<input class="depUpdate" onkeyup="enterkey()" type="text" placeholder="부서명">
+																	</p>
 															</div>
 															<br>
 														</td>
 														<td class="team_name">
-															
 														</td>
 								    				</tr>
 							    			</tbody>
