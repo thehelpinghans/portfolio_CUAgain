@@ -208,7 +208,9 @@
     font-weight: 600;
 }
 
-
+.pagination {
+	padding-left: 250px;
+}
 
 
 /* ============ Responsive / Breakpoints ========== */

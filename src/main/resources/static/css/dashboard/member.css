@@ -14,7 +14,7 @@
 }
 .content_att{
 	margin-top: 20px;
-    width: 450px;
+    /* width: 450px; */
     height: 280px;
     padding: 17px;
     border: 2px solid #dedede;
@@ -81,4 +81,7 @@
 	margin-left: 160px;
 	font-size: 14px;
 	padding: 10px 0;
+}
+.att_data>td{
+	padding-top: 15px;
 }

@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import com.green.domain.dto.AttendanceInsertDTO;
 import com.green.domain.dto.AttendanceListDTO;
 import com.green.domain.dto.AttendanceListRequestDTO;
+import com.green.domain.dto.EmployeesListDTO;
 import com.green.domain.entity.AttendEntityRepository;
 import com.green.domain.entity.AttendanceEntity;
 import com.green.domain.entity.EmployeesEntity;
@@ -112,12 +113,13 @@ public class AttendServiceProcess implements AttendService {
 	@Override
 	public void attedList(long id, Model model) {
 		model.addAttribute("list", attendRepo.findTop5ByEmployee_idOrderByDateDesc(id).stream().map(AttendanceListDTO::new).collect(Collectors.toList()));
+		model.addAttribute("employee", empRepo.findById(id).stream().map(EmployeesListDTO::new).collect(Collectors.toList()));
 		
 	}
 	//마이근태현황페이지
 	@Override
 	public List<AttendanceListDTO> getList(long id, Pageable pageable, AttendanceListRequestDTO dto) {
-		Page<AttendanceEntity> result= attendRepo.findByEmployee_idAndDateBetweenOrderByDate(id, dto.getStart(), dto.getEnd(), pageable);
+		Page<AttendanceEntity> result= attendRepo.findByEmployee_idAndDateBetweenOrderByDateDesc(id, dto.getStart(), dto.getEnd(), pageable);
 		List<AttendanceListDTO> attendanceListDTO = new ArrayList<>();
 		
 		int total = result.getTotalPages();

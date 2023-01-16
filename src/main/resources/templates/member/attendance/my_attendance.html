@@ -20,20 +20,20 @@
 				type:"get",
 				data:{page:page, size:size, start:start, end:end},
 				success:function(data){
-					
 					$.each(data, function(index, item){
 						myList = "<tr>"
 						myList += "<td>"
 						myList += item.date
 						myList += "</td>"
 						myList += "<td>"
+						var options = { hour: "numeric", minute: "numeric", hour12: false};
 						if(item.inTime!=null){
-							myList += new Date(item.inTime).toLocaleDateString();
+							myList += new Date(item.inTime).toLocaleTimeString("en-US", options);
 						}
 						myList += "</td>"
 						myList += "<td>"
 						if(item.outTime!=null){
-							myList += new Date(item.outTime).toLocaleDateString();
+							myList += new Date(item.outTime).toLocaleTimeString("en-US", options);
 						}
 						myList += "</td>"
 						myList += "<td>"
@@ -134,8 +134,8 @@
 		<table class="table">
 			<tbody>
 				<tr>
-					<th width="100px;">조회일자</th>
-					<td>
+					<th style="width:100px; padding-top: 15px;">조회일자</th>
+					<td class="date">
 						<div style="padding-bottom:5px;"></div>
 						<input type="date" id="start">
 						~
@@ -149,10 +149,10 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th width="5%">근무차수</th>
-					<th width="12%">출근일시</th>
-					<th width="12%">퇴근일시</th>
-					<th width="5%">구분(상태)</th>
+					<th width="5%">근무일</th>
+					<th width="5%">출근시간</th>
+					<th width="5%">퇴근시간</th>
+					<th width="5%">구분</th>
 					<th width="10%">상세</th>
 				</tr>
 			</thead>
@@ -160,7 +160,7 @@
 				
 			</tbody>
 		</table>
-		<ul class="pagination" id="pagination">
+		<ul class="pagination" id="pagination" style="margin-left: 250px;">
 		   
 		</ul>
 	</div>
@@ -206,6 +206,13 @@
 		document.getElementById("pagination").innerHTML = pageList
 		onSetting(1)
 	}
+	$(function(){
+	     var pageBtn = $("li");    //  li 이를 pageBtn 으로 칭한다. (클릭이벤트는 li에 적용 된다.)
+	      pageBtn .find("a").click(function(){   // pageBtn 에 속해 있는  a 찾아 클릭.
+	      pageBtn .removeClass("active");     // pageBtn 속에 (active) 클래스를 삭제.
+	      $(this).parent().addClass("active"); // 클릭한 a에 (active)클래스를 넣는다.
+	     })
+	    });
 	</script>
 </main>
 

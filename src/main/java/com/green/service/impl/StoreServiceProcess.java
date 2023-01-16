@@ -9,17 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import com.green.service.StoreService;
 import com.green.domain.dto.StoreListDTO;
-import com.green.domain.dto.StoreRegDTO;
 import com.green.domain.dto.StoreSaveDTO;
 import com.green.domain.entity.AddressEntity;
 import com.green.domain.entity.AddressEntityRepository;
-import com.green.domain.entity.AttendStatus;
-import com.green.domain.entity.EmployeesEntity;
 import com.green.domain.entity.EmployeesEntityRepository;
 import com.green.domain.entity.StoreEntity;
 import com.green.domain.entity.StoreEntityRepository;
+import com.green.service.StoreService;
 
 @Service
 public class StoreServiceProcess implements StoreService {
