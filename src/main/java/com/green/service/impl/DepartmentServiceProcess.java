@@ -30,8 +30,6 @@ public class DepartmentServiceProcess implements DepartmentService{
 		List<DepartmentEntity> result = depRepo.findAll();//result =  List<DepartmentEntity> 
 		List<DepartmentDTO> list = result.stream().map(DepartmentDTO::new).collect(Collectors.toList());
 				//list = List<DepartmentDTO>			//미리 만든 생성자에 데려오는 리스트의 각 컬럼에다가 넣어주겠다!
-		
-		
 		model.addAttribute("list", list);
 		//모델에 담아서 페이지에 보낸다.
 	}

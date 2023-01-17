@@ -14,30 +14,68 @@
 		$(".btn_toggle_tree").click(function(){
 	    	$(".depart_name").slideToggle(400);
 		});
-		//부서명 클릭시 하위그룹(팀리스트)토글
-		$(".btn_depart_name").click(function(){
-			$(".team_name").slideToggle(400);
 		
-	    	/* $(".team_name").slideToggle(400); */
+		//부서명 클릭시 하위그룹(팀리스트)토글(html데려오기)
+		$(".btn_depart_name").click(function(){
+			var teamList = $(this).siblings(".team_name");
+			var depId = $(this).siblings(".department-id").val();
+			$.ajax({
+				url:`/admin/getTeamList/${depId}`,
+				success:function(resultHtml){
+					$(teamList).html(resultHtml);
+					$(teamList).slideToggle(400);
+					
+					//팀의 메뉴아이콘 클릭시 팀메뉴리스트 토글
+					//페이지를 불어왔기때문에 해당 페이지에 관한 함수는 여기서 처리
+					$(".team-icon-menu").click(function(){
+						var target=$(this).siblings(".team_manu");
+						$(".team_manu").not(target).hide();//다른 팀의 메뉴아이콘 클릭시 닫아주기
+						target.slideToggle(400);
+					});
+				},
+				error: function(){
+					alert("에러");
+				}
+				//1.열릴때만 가져오고 닫을때는 안가져오게 만들기
+				//2.열리면서 팀리스트가 내려오게 만들기. 
+			});
 		});
-	});	//close jquery
-	
-	$(function(){
+		
 		//부서의 메뉴아이콘 클릭시 부서메뉴리스트 토글
 		$(".dep-icon-menu").click(function(){
-	    	/* $(".depart_menu").slideToggle(400); */
-	    	$(this).siblings(".depart_menu").slideToggle(400);
+			var target=$(this).siblings(".depart_menu");
+			//다른 부서의 메뉴아이콘 클릭시 닫아주기
+			$(".depart_menu").not(target).hide();
+			target.slideToggle(400);
 		});
-		
-		//팀의 메뉴아이콘 클릭시 팀메뉴리스트 토글
-		$(".team-icon-menu").click(function(){
-			$(this).siblings(".team_manu").slideToggle(400);
-	    	/* $(".team_menu").slideToggle(400); */
-		});
-	});	//close jquery
-		
 		//부메리-팀 등록
-		//부메리-부서 삭제
+		
+		//부메리-부서 삭제 기능 
+		function depDelete(el){
+			var target=$(el);//클릭한 삭제버튼태그
+			var dep_id = target.siblings(".department-id").val();//클릭한 삭제버튼의 부서번호
+			var departmentName=target.parents("span").siblings(".dept-name").text();//클릭한 삭제버튼의 부서이름
+			//alert(dep_id); 부서의 pk값이 나옴 
+				if(confirm("정말 삭제하시겠습니까?")){//삭제처리시 물어보기
+					$.ajax({
+		           		url:"/admin/depDelete/"+dep_id, //부서번호로 경로 넘겨주기
+		           		type:"delete",		//딜리트매핑이니까 타입도 딜리트
+		           		success:function(result){	//성공했을경우.
+		           			target.parents(".depart_name").remove(); //삭제되면 주르륵뜬거 삭제해주기 
+		           			alert(departmentName+"부서가 삭제되었습니다.");
+		           		}//success:function
+					});//$.ajax
+				}	//if
+			} //function depDelete
+		
+		
+		}); //close jquery
+	
+	
+	
+		
+		
+		
 		//부메리-부서명 수정 
 	
 	
@@ -87,40 +125,37 @@
 						<!-- 회사명 밑 박스 -->
 						<div class="org_tree">
 							<!-- 부서명 회사누르면 토글되서 내려오는거-->
-							<ul class="depart_name">
-								<li  class="flex">
+							<ul class="depart_name" th:each= "dto : ${list}">
+							
+								<li class="flex">
 									<p class="icon-drag"><i class="fa-regular fa-bars"></i></p>
 									<button type="button" class="btn_depart_name">
 										<i class="fa-solid fa-sort-down"></i>
 									</button>
-									<span>부서리스트</span>
+									<span th:text="${dto.name}" class="dept-name"></span>
+									<input type="hidden" class="department-id" th:value="${dto.id}">
 									<p class="dep-icon-menu"><i class="fa-regular fa-ellipsis-vertical"></i></p>
 									
 									<!-- 부서메뉴 -->
-									<ul class="depart_menu">
-										<li>부서메뉴리스트</li>
-										<li>팀 등록</li>
-										<li>부서 삭제</li>
-										<li>부서명 수정</li>
+									<ul class="depart_menu"  th:id="|menuBtn_${dtoStat.count}|">
+										<li onclick="teamInsert(this)" class="teamIn">팀 등록</li>
+										<input type="hidden" class="department-id" th:value="${dto.id}">
+										
+										<li>
+											<button type="button" th:onclick="depDelete(this)" >부서 삭제</button>
+											<input type="hidden" class="department-id" th:value="${dto.id}">
+										</li>
+										
+										<li onclick="depUpdate(this)" class="depUp">부서명 수정</a></li>
+										<input type="hidden" class="department-id" th:value="${dto.id}">
+										<input class="depUpdate" onkeyup="enterkey()" type="text" placeholder="부서명">
+										
 									</ul> <!-- class="depart_menu flex" -->
 									
 									<!-- 팀리스트 박스-->
 									<ul class="team_name">
-										<!-- 팀리스트 -->
-										<li class="flex">
-											<p class="icon-drag"><i class="fa-regular fa-bars"></i><p>
-											<span>팀리스트</span>
-											<p class="team-icon-menu"><i class="fa-regular fa-ellipsis-vertical"></i></p>
-											
-											<!-- 팀메뉴 -->
-												<ul class="team_manu">
-													<li>팀 메뉴리스트<li>
-													<li>팀 삭제</li>
-													<li>팀명 수정</li>
-												</ul> 
-										</li><!--  class="team_name" -->
-									</ul><!-- class="team_list" -->
-								</li>
+									</ul>
+								</li><!-- class="team_list" -->
 							</ul> <!--  class="depart_name" -->
 						</div> <!--  class="org_tree" -->
 					</div> <!--class="organization" -->
