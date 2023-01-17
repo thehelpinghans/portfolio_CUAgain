@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.green.service.StoreService;
 import com.green.service.impl.StoreServiceProcess;
+import com.green.domain.dto.StoreListDTO;
 import com.green.domain.dto.StoreSaveDTO;
 import com.green.security.MyUserDetails;
 
@@ -18,15 +19,17 @@ public class StoreController {
 	@Autowired
 	StoreService service;
 	
-	@GetMapping("/store-list")
+	@GetMapping("/admin/store")
 	public String getlist(Model model) {
+		System.out.println("eeeeeeeeeeeeeeeeeeee");
 		service.getlist(model);
 		return "/admin/store/store";
 	}
 	
-	@PostMapping("/store-write")
-	public String savestore(StoreSaveDTO dto, @AuthenticationPrincipal MyUserDetails myUserDetails) {
-		service.save(dto, myUserDetails.getName());
+	@PostMapping("/admin/store-write")
+	public String savestore(StoreSaveDTO dto) {
+		System.err.println("controller");
+		service.save(dto);
 		return "/admin/store/store";
 	}
 }

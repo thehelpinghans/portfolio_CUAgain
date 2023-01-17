@@ -1,5 +1,6 @@
 package com.green.service;
 
+import java.security.Principal;
 import java.util.Optional;
 
 import com.green.domain.dto.AttendanceInsertDTO;
@@ -11,5 +12,8 @@ public interface AttendService {
 	void save(long id, AttendanceInsertDTO dto, AttendanceUpdateDTO udto);
 
 	Optional<AttendanceEntity> findByOnTime(long id);
+
+
+	long principalId(Principal principal);
 
 }

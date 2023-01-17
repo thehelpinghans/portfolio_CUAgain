@@ -19,7 +19,7 @@ public interface BoardService {
     void save(BoardInsertDTO dto, long id);
 
 
-    void freeList(Model model);
+    //void freeList(Model model);
 
 
 }

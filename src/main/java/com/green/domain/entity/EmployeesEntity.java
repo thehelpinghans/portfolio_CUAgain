@@ -79,18 +79,22 @@ public class EmployeesEntity {
         this.hireDate = LocalDate.parse(dto.getHireDate());
         this.phone = dto.getPhone();
         this.position = Position.valueOf(dto.getPosition());
+        this.end=dto.isEnd();
+        if(dto.isEnd()){//퇴직일시  //값있을듯?
+            this.endDate= LocalDate.parse(dto.getEndDate());
+        }else{  //재직일시
+            this.endDate=null;
+        }
         return this;
     }
-    public EmployeesEntity additionalUpdate(ImagesEntity image, TeamEntity team, DepartmentEntity dep, AddressEntity address){
+    public void additionalUpdate(ImagesEntity image, TeamEntity team, DepartmentEntity dep, AddressEntity address){
         this.image=image;
         this.team=team;
         this.dep=dep;
         this.address=address;
-        return this;
     }
 
-    public EmployeesEntity updatePass(String pass) {
+    public void updatePass(String pass) {
         this.pass=pass;
-        return this;
     }
 }

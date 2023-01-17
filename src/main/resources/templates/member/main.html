@@ -14,7 +14,7 @@
 		var id = $(".id").val();
 		alert(id);
 		$.ajax({
-			url:`/member/attendance/reg/${id}`,
+			url:`/member/attendance/reg`,
 			type:"post",
 			success:function(){
 				alert("출근시간");
@@ -63,7 +63,7 @@
 				    </div>
 				    <div class="flex">
 				    	<div>
-				    		<input class="id" type="text" name="id" value="1">
+				    		<input class="id" type="text" >
 				    		<button type="submit" class="btn-on"><img src="/image/attendance/btn_check01.gif"></button>
 				    	</div>
 				    	<div>
