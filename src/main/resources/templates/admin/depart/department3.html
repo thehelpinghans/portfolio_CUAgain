@@ -22,13 +22,12 @@
 		//부서명 클릭 팀토글	
 		$(".dept-name").click(function(){
 
-			var teamList = $(this).siblings(".team_name")
+			var teamList = $(this).siblings(".team_name");
 			var depId = $(this).siblings(".department-id").val();
 			$.ajax({
 				url:`/admin/getTeamList/${depId}`,
 				success:function(resultHtml){
 					$(teamList).html(resultHtml);
-					//teamList.show();
 					$(teamList).slideToggle(400);
 				}//1.열릴때만 가져오고 닫을때는 안가져오게 만들기
 				//2.열리면서 팀리스트가 내려오게 만들기. 
