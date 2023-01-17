@@ -11,5 +11,11 @@ public interface StoreService {
 
 	void getlist(Model model);
 
+	void detail(long id, Model model);
+
+	void delete(long id);
+
+	void update(StoreSaveDTO dto, long id);
+
 
 }

@@ -1,5 +1,7 @@
 package com.green.domain.dto;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import com.green.domain.entity.EmployeesEntity;
 import com.green.domain.entity.StoreEntity;
 
@@ -14,7 +16,7 @@ public class StoreSaveDTO {
 	
 	private String content;
 	
-	private long managerId;
+	private long manager;
 	
 	private String postcode;
 	
@@ -25,6 +27,8 @@ public class StoreSaveDTO {
 	private String detailAddress;
 	
 	private String extraAddress;
+	
+	private String managerName;
 
 	public StoreSaveDTO() {
 		
@@ -34,12 +38,14 @@ public class StoreSaveDTO {
 		this.id = e.getId();
 		this.name = e.getName();
 		this.content = e.getContent();
-		this.managerId = e.getManager().getId();
+		this.manager = e.getManager().getId();
 		this.postcode = e.getAddress().getPostcode();
 		this.roadAddress = e.getAddress().getRoadAddress();
 		this.jibunAddress = e.getAddress().getJibunAddress();
 		this.detailAddress = e.getAddress().getDetailAddress();
 		this.extraAddress = e.getAddress().getExtraAddress();
+		this.managerName = e.getManager().getName();
 	}
+	
 	
 }

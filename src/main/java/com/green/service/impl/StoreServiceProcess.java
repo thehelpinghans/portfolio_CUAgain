@@ -11,12 +11,9 @@ import org.springframework.ui.Model;
 
 import com.green.service.StoreService;
 import com.green.domain.dto.StoreListDTO;
-import com.green.domain.dto.StoreRegDTO;
 import com.green.domain.dto.StoreSaveDTO;
 import com.green.domain.entity.AddressEntity;
 import com.green.domain.entity.AddressEntityRepository;
-import com.green.domain.entity.AttendStatus;
-import com.green.domain.entity.EmployeesEntity;
 import com.green.domain.entity.EmployeesEntityRepository;
 import com.green.domain.entity.StoreEntity;
 import com.green.domain.entity.StoreEntityRepository;
@@ -44,7 +41,7 @@ public class StoreServiceProcess implements StoreService {
 						.postcode(dto.getPostcode())
 						.roadAddress(dto.getRoadAddress())
 						.build())
-				.manager(employeesRepo.findById(dto.getManagerId()).orElseThrow())//
+				.manager(employeesRepo.findById(dto.getManager()).orElseThrow())//
 				.content(dto.getContent())
 				.name(dto.getName()).build());
 	}
@@ -56,6 +53,24 @@ public class StoreServiceProcess implements StoreService {
 		List<StoreListDTO> list = result.stream().map(StoreListDTO :: new).collect(Collectors.toList());
 		model.addAttribute("list" , list);
 		
+	}
+	
+	@Transactional
+	@Override
+	public void detail(long id, Model model) {
+		model.addAttribute("list",storeRepo.findById(id).map(StoreSaveDTO :: new).orElseThrow());
+		
+	}
+
+	@Override
+	public void delete(long id) {
+		storeRepo.deleteById(id);
+	}
+	
+	@Transactional
+	@Override
+	public void update(StoreSaveDTO dto, long id) {
+		storeRepo.findById(id).map(entity->entity.update(dto));
 	}
 
 }
