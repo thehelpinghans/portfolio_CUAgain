@@ -41,15 +41,42 @@
 			});
 		});
 		
-		//부서의 메뉴아이콘 클릭시 부서메뉴리스트 토글
+		//부메클릭시 부메리 토글
 		$(".dep-icon-menu").click(function(){
 			var target=$(this).siblings(".depart_menu");
 			//다른 부서의 메뉴아이콘 클릭시 닫아주기
 			$(".depart_menu").not(target).hide();
 			target.slideToggle(400);
 		});
-		//부메리-팀 등록
-		
+		//부메리-팀 등록클릭시 작성창 토글
+		function teamInsert(el){
+			$(el).hide();//자기자신 숨기고 
+			$(el).siblings(".teamInsert").show(); //작성창이 나타남
+		}; //close jquery
+
+		//팀 추가 기능구현 
+		$(document).ready(function(){
+			$(".teamInsert").on("keyup", function(event) {
+				 if (event.which == 13) {//인풋태그에 값을 입력하고 엔터키실행시
+					 
+			        target=$(this);//인풋태그
+			        dept_id=target.siblings(".department-id").val();//해당부서의 pk
+			        
+			        teamName=target.text(); //팀명이 입력되는 인풋값에 텍스트
+			        alert(dept_id+"의 소속되는"+teamName+"을 추가합니다");
+//			        오류남 질문예정
+//			        $.ajax({//부서이름으로 넘겨서 부서엔티티의 하위그룹인 팀엔티티에 데이터를 추가하는?
+//		           		url:"/admin/teamInsert/"+dept_id,
+//		           		type:"post",
+//		           		data: {"teamName": $(this).val().trim()},
+//		           		success:function(result){
+//		           			alert("성공적으로 추가되었습니다.");
+//		           		}
+
+//		            });
+				 } 	
+			});
+		}); //close jquery
 		//부메리-부서 삭제 기능 
 		function depDelete(el){
 			var target=$(el);//클릭한 삭제버튼태그
@@ -67,16 +94,37 @@
 					});//$.ajax
 				}	//if
 			} //function depDelete
-		
-		
 		}); //close jquery
-	
-	
-	
 		
-		
+		//부서수정 클릭이벤트시
+		function depUpdate(el){
+			$(el).hide(); //부서수정사라지고
+			$(el).siblings(".depUpdate").show();//작성창만나타남
+		}; //close jquery
 		
 		//부메리-부서명 수정 
+		$(document).ready(function(){
+	    $(".depUpdate").on("keyup", function(event) {
+	        if (event.which == 13) {//엔터키가 실행될 경우
+
+	        	var target=$(this);//엔터키가 실행된 태그
+	        	var dept_id=target.siblings(".department-id").val();//엔터키가 실행된 태그 중에서 department-id의 클래스 이름을 가지고 있는 형제태그
+	        	//alert(dept_id);//해당 부서의 pk값
+	        	//*
+	           	$.ajax({ 
+	           		url:"/admin/depUpdate/"+dept_id, 
+	           		type:"post",							//공백제거
+	           		data: {"departmentName": $(this).val().trim()}, //입력된 값의 변수이름:입력창.변수.공백제거
+	           		success:function(result){
+	           			target.parents("span").siblings(".dept-name").text(result); //부모태그의 dept-name로 입력된 부서명 보여주기
+	           			target.parents(".depart_menu").hide(); //열린 부서메뉴 숨겨주기
+	           			target.val("");//부서의 pk값 리셋 
+	           			target.hide();//클릭되서 열린거 다시 숨겨주기
+	           		}
+	            });
+	        }
+	    });
+	}); //부메리-수정 close jquery
 	
 	
 		//팀메리-팀 삭제
@@ -141,7 +189,7 @@
 										<li onclick="teamInsert(this)" class="teamIn">팀 등록</li>
 										<input type="hidden" class="department-id" th:value="${dto.id}">
 										
-										<li>
+										<li>													<!-- 여기서 오류   -->
 											<button type="button" th:onclick="depDelete(this)" >부서 삭제</button>
 											<input type="hidden" class="department-id" th:value="${dto.id}">
 										</li>

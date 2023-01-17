@@ -37,7 +37,7 @@ main{height:100%; background-color: white;}
 .depart_menu{display: none;}
 .team_name{display: none;}
 .team_manu{display: none;}
-
+.depUpdate{display: none;}
 /*회사명 박스*/
 .corp_name_box{
 	padding: 1em;
@@ -74,7 +74,7 @@ main{height:100%; background-color: white;}
 .depart_menu{
 	position:absolute;
 	left:200px;
-	z-index:100px;
+	z-index: 10;
 	background-color: rgba(255, 255, 255, 0.9);
 	border: 1px solid #ddd;
 	width:200px;
@@ -82,6 +82,7 @@ main{height:100%; background-color: white;}
 }
 /*팀이름*/
 .team_name{
+	z-index: 10;
 	border: 1px solid #ddd;
 	padding: 1em;
 }
