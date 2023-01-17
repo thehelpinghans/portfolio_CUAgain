@@ -7,16 +7,18 @@ import lombok.Data;
 @Data
 public class StoreListDTO {
 	
+	private long id;
 	
 	private String name;
 	
-	private long managerId;
+	private String managerId;
 	
 	private String jibunAddress;
 	
 	public StoreListDTO(StoreEntity e) {
+		this.id = e.getId();
 		this.name = e.getName();
-		this.managerId = e.getManager().getId();
+		this.managerId = e.getManager().getName();
 		this.jibunAddress = e.getAddress().getJibunAddress();
 	}
 	
