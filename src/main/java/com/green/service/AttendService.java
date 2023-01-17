@@ -26,6 +26,8 @@ public interface AttendService {
 
 	List<AttendanceListDTO> getList(long id, Pageable pageable, AttendanceListRequestDTO dto);
 
+	AttendanceEntity outCheck(Optional<AttendanceEntity> last);
+
 	
 
 }
