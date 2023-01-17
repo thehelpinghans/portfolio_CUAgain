@@ -3,12 +3,12 @@
 main{height:100%; background-color: white;}
 
 /*아이콘 기본 설정*/
-.fa-duotone, .fa-solid, .fa-regular, .fa-solid{
+.fa-duotone, .fa-solid, .fa-regular{
 	font-family: "FontAwesome";
 	color: #a9a9a9;
-	margin: 0 0.2em;
+	padding: 0.3em;
 }
-
+/*전체사이즈*/
 .view_size_depa{
 	margin: 10em auto;
 	width: 900px;
@@ -16,85 +16,82 @@ main{height:100%; background-color: white;}
 	padding: 3em;
 }
 /*개별적용*/
+
 .organization{
 	border: 1px solid #ddd;
-	width: 300px;
+	width: 500px;
 	height: 700px;
 	padding: 0 auto;
 }
-.content_depart{
-	height: 800px;
-}
-/*//////////////////부서조회 추가 수정 삭제 등///////////////////////////*/
+
+/*************************부서조회 추가 수정 삭제 등*************************/
 /*부서헤더*/
-.content_head>div>span{
-	margin: -1em 2em;
-	height: 100px;
-	padding: 0.5em;
-	font-size: 24px;
-	font-weight: 600px;
-}
+
 /*부서바디*/
 .contents_body{
 	padding: 1em;
-	height: 800px;
 	
 }
-/*회사명 btn_toggle_tree누르면 부서org_tree보이게 안보이게 */
-.btn_toggle_tree{
-	background-color: #e7f2fe;
-	padding: 0;
-	height: 30px;
-	margin: 2em 1em ;
+/*****************************************************/
+.depart_name{display: none;}
+.depart_menu{display: none;}
+.team_name{display: none;}
+.team_manu{display: none;}
+
+/*회사명 박스*/
+.corp_name_box{
+	padding: 1em;
+	border: 1px solid #ddd;
+}
+/*회사명,부서명,팀명 호버시 백그라운드컬러 달라지고*/
+.corp_name:hover, .depart_name:hover, .team_name:hover{
+	background-color: #e6e6e6;
+	color: #157efb;
 }
 /*회사명*/
-.btn_toggle_tree>.corp_name{
-	color: #157efb;
-	padding: 2em 0em;
+.corp_name{
+	padding: 1em;
 }
-
-/*회사명 btn_toggle_tree호버시 백그라운드컬러 달라지게*/
-.btn_toggle_tree:hover{
-	background-color: #e6e6e6;
+/*부서명*/
+.depart_name{
+	border: 1px solid #ddd;
+	padding-top: 1em;
+	position: relative;
+	
 }
-/*부서명 호버시 백그라운드컬러 달라지게*/
-.depart_name> .dep-table>tr:hover{
-	background-color: #e6e6e6;
-}
-
-
-/*토글 기본값 안보이게*/
-.org_tree{display: none;}
-.depart_menu{display: none; padding: 0.5em;}
-.team_name{display: none;}
-.teamInsert{display: none;}
-.depUpdate{display: none;}
-
-/*부서명 선택시 크기*/
+/*팀명*/
 .team_name{
-	margin: 0;
-	padding: 0;
-	height: 30px;
 	background-color: #fff;
+	border: 1px solid #ddd;
+	padding: 1em;
 }
 /*회사-부서등록 메뉴*/
 .dep_reg{}
-/*부서 수정가능창 여는 버튼*/
-.btn_depart_menu{
-	
-	width: 20px;
-	height: 20px;
-}
+/*클릭시 부서메뉴리스트가 토글되는 아이콘*/
+.dep-icon-menu{}
+
+/*부서메뉴리스트*/
 .depart_menu{
+	position:absolute;
+	left:200px;
 	background-color: rgba(255, 255, 255, 0.9);
-	width: 100px;
 	border: 1px solid #ddd;
-	
+	width:200px;
+	padding: 1em 2em;
 }
-.tree_team{
-	position: relative;
-	top:-30px;
-	left: 15px;
+/*팀이름*/
+.team_name{
+	border: 1px solid #ddd;
+	padding: 1em;
+}
+/*클릭시 팀메뉴리스트가 토글되는 아이콘*/
+.team-icon-menu{}
+/*팀메뉴리스트*/
+.team_manu{
+	background-color: rgba(255, 255, 255, 0.9);
+	border: 1px solid #ddd;
+	width:200px;
+	padding: 1em;
 }
 /*//////////////////내용///////////////////////////*/
 .selected{
