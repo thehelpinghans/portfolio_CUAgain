@@ -43,7 +43,7 @@ public class AttendServiceProcess implements AttendService {
 		
 		// 이미 오늘 기록이 있을 경우
 		if(attenEntity.isPresent()) {		
-			return "이미 출근 체크가 되었습니다.";
+			return "이미 출근 처리가 되었습니다.";
 
 		}else {
 			
@@ -56,7 +56,7 @@ public class AttendServiceProcess implements AttendService {
 			attendRepo.save(dto.toEntity()
 					.employeeId(empRepo.findById(id).orElseThrow())
 					);//저장
-			return "출근이 정상적으로 됐습니다.";
+			return "출근 처리가 되었습니다.";
 		}
 		
 		
@@ -92,21 +92,39 @@ public class AttendServiceProcess implements AttendService {
 	public String updateOut(long id) {
 		//맨 마지막 출근기록 찾기(status 출근인경우)
 		Optional<AttendanceEntity> last=attendRepo.findFirstByEmployee_idAndAttendStatusOrderByInTimeDesc(id, "출근");
-		
-		// 만약 마지막 기록이 존재하면
-		if (last.isPresent()) {
-			Date outTime=new Date();
-			AttendanceEntity lastEntity=last.get();
-			lastEntity.setOutTime(outTime);
-			// 조퇴, 퇴근 체크
-			lastEntity.checkStatus();
-			AttendanceEntity nowAttendance = attendRepo.save(lastEntity);//저장
-			return nowAttendance.getAttendStatus()+"처리가 되었습니다.";
+		Optional<AttendanceEntity> last2=attendRepo.findFirstByEmployee_idAndAttendStatusOrderByInTimeDesc(id, "조퇴");
+		Optional<AttendanceEntity> last3=attendRepo.findFirstByEmployee_idAndAttendStatusOrderByInTimeDesc(id, "퇴근");
+		// 만약 마지막 출근 기록이 존재하면
+		if (last.isPresent()) { 
+			//퇴근 등록 처음했을 때 "퇴근or조퇴 처리가 되었습니다."
+			return outCheck(last).getAttendStatus()+" 처리가 되었습니다.";
+		} else if(last2.isPresent()) {
+			if(outCheck(last2).getAttendStatus()=="조퇴") {
+				return "이미 조퇴처리가 되었습니다.";
+			}
+			return outCheck(last2).getAttendStatus()+" 처리가 되었습니다.";
+		} else if(last3.isPresent()) {
+			if(outCheck(last3).getAttendStatus()=="퇴근") {
+				return "이미 퇴근처리가 되었습니다.";
+			}
+			return outCheck(last3).getAttendStatus()+" 처리가 되었습니다.";
+		} else {
+			// 마지막 기록이 없으면 출근을 하라고 해야 됨
+			return "출근등록이 되어 있지 않습니다.";
 		}
-		
-		// 마지막 기록이 없으면 출근을 하라고 해야 됨
-		
-		return "출근등록은 했니?ㅋ";
+
+	}
+	
+	//조퇴, 퇴근 등록 편의메서드
+	@Override
+	public AttendanceEntity outCheck(Optional<AttendanceEntity> last) {
+		Date outTime=new Date();
+		AttendanceEntity lastEntity=last.get();
+		lastEntity.setOutTime(outTime);
+		// 조퇴, 퇴근 체크
+		lastEntity.checkStatus();
+		AttendanceEntity nowAttendance = attendRepo.save(lastEntity);//저장
+		return nowAttendance;
 	}
 	
 	//근태 리스트
