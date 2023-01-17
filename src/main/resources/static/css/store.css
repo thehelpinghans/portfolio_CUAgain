@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+.store-list{
+	width: 1000px;
+	margin: auto;
+	margin-left: 200px;
+	padding: 1em;
+	border-bottom: 1px solid black;
+}
+.stoname{
+	width: 1000px;
+	margin: auto;
+	margin-left: 200px;
+	padding: 1em;
+}
+.stodle{
+	width: 1000px;
+	margin: auto;
+	margin-left: 200px;
+	padding: 1em;
+}
+.stoadre{
+	width: 1000px;
+	margin: auto;
+	margin-left: 150px;
+	padding: 1em;
+}

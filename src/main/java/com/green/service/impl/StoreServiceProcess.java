@@ -1,5 +1,8 @@
 package com.green.service.impl;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,8 +10,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.green.service.StoreService;
+import com.green.domain.dto.StoreListDTO;
+import com.green.domain.dto.StoreRegDTO;
 import com.green.domain.dto.StoreSaveDTO;
+import com.green.domain.entity.AddressEntity;
 import com.green.domain.entity.AddressEntityRepository;
+import com.green.domain.entity.AttendStatus;
+import com.green.domain.entity.EmployeesEntity;
 import com.green.domain.entity.EmployeesEntityRepository;
 import com.green.domain.entity.StoreEntity;
 import com.green.domain.entity.StoreEntityRepository;
@@ -25,21 +33,29 @@ public class StoreServiceProcess implements StoreService {
 	@Autowired
 	AddressEntityRepository addressRepo;
 	
-	@Override
-	public void getlist(Model model) {
-		model.addAttribute("list",storeRepo.findAll());
-	}
-	
 	@Transactional
 	@Override
-	public void save(StoreSaveDTO dto, String Name) {
-		StoreEntity store = storeRepo.save(StoreEntity.builder()
-//				.manager(employeesRepo.findByName(Name).orElseThrow())
-//				.address(dto.getAddress())
+	public void save(StoreSaveDTO dto) {
+		storeRepo.save(StoreEntity.builder()
+				.address(AddressEntity.builder()
+						.detailAddress(dto.getDetailAddress())
+						.extraAddress(dto.getExtraAddress())
+						.jibunAddress(dto.getJibunAddress())
+						.postcode(dto.getPostcode())
+						.roadAddress(dto.getRoadAddress())
+						.build())
+				.manager(employeesRepo.findById(dto.getManagerId()).orElseThrow())//
 				.content(dto.getContent())
 				.name(dto.getName()).build());
+	}
+
+	@Transactional
+	@Override
+	public void getlist(Model model) {
+		List<StoreEntity> result = storeRepo.findAll();
+		List<StoreListDTO> list = result.stream().map(StoreListDTO :: new).collect(Collectors.toList());
+		model.addAttribute("list" , list);
 		
 	}
-	
-	
+
 }

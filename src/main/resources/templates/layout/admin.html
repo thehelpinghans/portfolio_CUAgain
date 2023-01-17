@@ -18,11 +18,11 @@
 	<link rel="stylesheet" href="/css/commons/common.css">
     <script>
         function btnNoticeClicked(){
-            var type = "공지사항";
+            var type = 0;
             location.href=`/admin/board/boardList/${type}`;
         }
         function btnFreeClicked(){
-            var type = "자유게시판";
+            var type = 1;
             location.href=`/admin/board/boardList/${type}`;
         }
     </script>
@@ -129,8 +129,8 @@
                 </div>
                 <div class="submenu">
                     <a href="#" class="link submenu-title">결재관리</a>
-                    <a href="/admin/payment-write" class="link">문서작성</a>
-                    <a href="/admin/payment" class="link">문서관리</a>               
+                    <a href="/member/doc/reg" class="link">문서작성</a>
+                    <a href="/member/doc/list" class="link">문서관리</a>
                 </div>
             </li>
             <li class="dropdown">
@@ -143,7 +143,7 @@
                 </div>
                 <div class="submenu">
                     <a href="#" class="link submenu-title">영업점 관리</a>
-                    <a href="/admin/store-detail" class="link">등록</a>
+                    <a href="/admin/store-write" class="link">등록</a>
                     <a href="/admin/store" class="link">조회/수정</a>
                     <a href="#" class="link">삭제</a>
                 </div>

@@ -1,8 +1,11 @@
 package com.green.domain.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -25,6 +28,7 @@ import lombok.Setter;
 @Entity
 public class StoreEntity {
 	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
 	private long id;
 	
@@ -36,11 +40,11 @@ public class StoreEntity {
 	private String content;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "employees_id")
+	@JoinColumn
 	private EmployeesEntity manager;
 	
-	@OneToOne
-	@JoinColumn(name="address")
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn
 	private AddressEntity address;
 	
 	public StoreEntity setName(String name) {
@@ -50,6 +54,11 @@ public class StoreEntity {
 	
 	public StoreEntity setContent(String content) {
 		this.content=content;
+		return this;
+	}
+	
+	public StoreEntity employeeId(EmployeesEntity manager) {
+		this.manager = manager;
 		return this;
 	}
 }

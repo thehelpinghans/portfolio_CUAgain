@@ -1,5 +1,6 @@
 package com.green.service.impl;
 
+import java.security.Principal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -13,6 +14,7 @@ import com.green.domain.dto.AttendanceUpdateDTO;
 import com.green.domain.entity.AttendEntityRepository;
 import com.green.domain.entity.AttendStatus;
 import com.green.domain.entity.AttendanceEntity;
+import com.green.domain.entity.EmployeesEntity;
 import com.green.domain.entity.EmployeesEntityRepository;
 import com.green.service.AttendService;
 
@@ -31,6 +33,9 @@ public class AttendServiceProcess implements AttendService {
 		//LocalDate date=findByOnTime(id).get().getDate();
 		//System.out.println(date);
 		
+
+
+
 		Optional<AttendanceEntity> fot=findByOnTime(id);
 		if(fot.isPresent()) {
 			//attendRepo.save(udto.attendanceEntity().employeeId(empRepo.findById(id)));//수정
@@ -63,6 +68,14 @@ public class AttendServiceProcess implements AttendService {
 		return attendRepo.findById(id);
 	}
 	
+	@Override
+	public long principalId(Principal principal) {
+
+		Optional<EmployeesEntity> result=empRepo.findByEmail(principal.getName());
+		long id=result.get().getId();
+		System.err.println(id);
+		return id;
+	}
 
 
 }
