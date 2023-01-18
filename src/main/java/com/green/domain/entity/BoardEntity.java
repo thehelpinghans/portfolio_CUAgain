@@ -21,7 +21,10 @@ public class BoardEntity extends  BaseDateEntity {
 
     @Column(nullable = false)
     private String title; //제목
-
+    
+    @Column(nullable = false, unique = false)
+    private String name;
+    
     @Lob
     @Column(nullable = false)
     private String content; //내용

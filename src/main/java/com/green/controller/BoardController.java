@@ -4,7 +4,14 @@ import com.green.domain.dto.BoardInsertDTO;
 import com.green.domain.dto.BoardListDTO;
 import com.green.security.MyUserDetails;
 import com.green.service.BoardService;
+
+import net.bytebuddy.asm.Advice.OffsetMapping.Sort;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,8 +25,23 @@ public class BoardController {
     @Autowired
     private BoardService service;
 
-
-
+    
+//    @GetMapping("/")
+//    public String paging(@PageableDefault(page=1) Pageable pageable, Model model) {
+//    	Page<BoardListDTO> boardList= service.paging(pageable); 
+//    	
+//    }
+    
+//    @GetMapping("/")
+//    public String paging(Model model, @PageableDefault(sort = "id", direction = Sort.Direction.DESC)
+//    Pageable pageable) {
+//    	model.addAttribute("posts", service.pageList(pageable));
+//    	
+//    	return "";
+//    		
+//    }
+    
+    
 
 
     //공지사항 등록페이지이동
@@ -88,4 +110,11 @@ public class BoardController {
         return "redirect:/admin/board/boardList/"+lType;
     }
 
+    @GetMapping("/admin/board/searchList/{type}/{data}")
+    public String boardListBySearch(@PathVariable String type, @PathVariable String data, Model model) {
+    	service.getBoardListBySearch(type,data,model);
+    	return "admin/board/searchResult";
+    }
+	 
+	
 }

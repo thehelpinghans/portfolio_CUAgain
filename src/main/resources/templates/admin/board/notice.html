@@ -8,6 +8,19 @@
             var boardId= $(el).prev().text();
             location.href=`/admin/board/view/${boardId}`;
         }
+        
+        function btnSearchClicked(){
+        	var type = $("#search_type").val();
+        	var data = $("#search_data").val();
+        	$.ajax({
+        		url:`/admin/board/searchList/${type}/${data}`,
+        		type: "get",
+        		success: function (resultHTML){
+        			$("#board-list").html(resultHTML);
+        			
+        		}
+        	});
+        }
 
     </script>
 	<!--필요한 head 추가-->
@@ -15,8 +28,17 @@
 <main><!--내용 채우기-->
 	<div class="board_wrap">
         <div class="board_title">
-            <strong th:text="${type}"></strong>
+            <strong th:text="${type}"></strong>                  
         </div>
+        <label>검색
+        	<select id="search_type">
+        		<option value="num">번호</option>
+        		<option value="title">제목</option>
+        		<option value="name">작성자</option>
+        	</select>
+        	<input id="search_data" type="text">
+        </label>
+        <button id="btn-search" class="btn-search">검색</button>
         <div class="board_list_wrap">
             <div class="board_list">
                 <div class="top">
@@ -26,7 +48,7 @@
                     <div class="name">이름</div>
                     <div class="count">조회</div>
                 </div>
-                <div th:each="board:${boards}">
+                <div id="board-list" th:each="board:${boards}">
                     <div th:text="${board.id}" class="num" ></div>
                     <div th:text="${board.title}"class="title" onclick="getBoardDetail(this)" ></div>
                     <div th:text="${board.createdDate}" class="date"></div>

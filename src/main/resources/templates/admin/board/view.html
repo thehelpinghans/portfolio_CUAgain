@@ -8,7 +8,7 @@
     <script th:inline="javascript">
 
             function btnListClicked(){
-                var type=[[${detail.type}]];
+                var type=[[$(detail.type)]];
                 var lType;
                 if(type=="공지사항"){
                     lType=0;
@@ -58,7 +58,7 @@
                 <a th:href="@{/admin/board/{boardId}(boardId = ${detail.id})}" class="on">수정</a>
                 <!--<a th:href="@{/admin/board/{boardId}(boardId = ${detail.id})}" class="on">수정</a>-->
             </div>
-            <div id="comment-write">
+            <!-- <div id="comment-write">
                 <input type="text" id="writer" placeholder="작성자">
                 <input type="text" id="content" placeholder="내용">
                 <button id="comment-btn" onclick="commentWrtie()">등록</button>
@@ -79,7 +79,7 @@
                         <td></td>
                     </tr>
 
-            </table>
+            </table> -->
 
 
 
