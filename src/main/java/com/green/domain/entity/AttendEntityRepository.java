@@ -7,7 +7,11 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import com.green.domain.dto.AdminAttendanceListDTO;
 
 @Repository
 public interface AttendEntityRepository extends JpaRepository<AttendanceEntity, Long>{
@@ -25,5 +29,16 @@ public interface AttendEntityRepository extends JpaRepository<AttendanceEntity, 
 			Pageable pageable);
 
 
+	List<AttendanceEntity> findAllByEmployee_name(String string);
 
+	List<AttendanceEntity> findAllByEmployeeNameOrEmployeeDepNameContaining(String keyword, String department);
+	
+	List<AttendanceEntity> findAllByEmployeeNameAndEmployeeDepNameContaining(String keyword, String department);
+	
+	//List<AttendanceEntity> findAllByEmployeeDepNameContaining(String keyword);
+//	@Query("SELECT * FROM attendance a join employees b on a.employee_id=b.employee_id where b.employee_name LIKE %:keyword%")
+//	List<AttendanceEntity> searchAllByEmployee_nameLike(@Param("keyword") String keyword);
+
+
+	
 }

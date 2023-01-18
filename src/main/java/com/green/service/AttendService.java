@@ -8,6 +8,7 @@ import java.util.Optional;
 import org.springframework.data.domain.Pageable;
 import org.springframework.ui.Model;
 
+import com.green.domain.dto.AdminAttendanceListDTO;
 import com.green.domain.dto.AttendanceListDTO;
 import com.green.domain.dto.AttendanceListRequestDTO;
 import com.green.domain.entity.AttendanceEntity;
@@ -27,6 +28,13 @@ public interface AttendService {
 	List<AttendanceListDTO> getList(long id, Pageable pageable, AttendanceListRequestDTO dto);
 
 	AttendanceEntity outCheck(Optional<AttendanceEntity> last);
+
+	void adminList(Model model, AdminAttendanceListDTO dto);
+	
+	void search(String keyword, Model model, String department);
+
+	
+	
 
 	
 

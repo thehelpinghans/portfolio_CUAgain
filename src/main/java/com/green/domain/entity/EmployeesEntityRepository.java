@@ -19,4 +19,5 @@ public interface EmployeesEntityRepository  extends JpaRepository<EmployeesEntit
     Optional<EmployeesEntity> findByImageNewName(String s);
 
     Optional<EmployeesEntity> findByEmail(String name);
+    
 }
