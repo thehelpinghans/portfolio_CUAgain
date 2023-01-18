@@ -15,7 +15,7 @@ public interface StoreService {
 
 	void delete(long id);
 
-	void update(StoreSaveDTO dto, long id);
+	void update(StoreSaveDTO dto, long id, long employeeId);
 
 
 }

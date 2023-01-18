@@ -71,14 +71,15 @@ public class StoreEntity {
 		this.id = e.getId();
 		this.name = e.getName();
 		this.content = e.getContent();
-		this.manager = EmployeesEntity.builder().name(getManager().getName()).build();
-		this.address = AddressEntity.builder()
-				.detailAddress(getAddress().getDetailAddress())
-				.extraAddress(getAddress().getExtraAddress())
-				.jibunAddress(getAddress().getJibunAddress())
-				.roadAddress(getAddress().getRoadAddress())
-				.postcode(getAddress().getPostcode())
-				.build();
+		//this.manager = EmployeesEntity.builder().name(getManager().getName()).build();
 		return this;
 	}
+	
+	public StoreEntity storeupdate(EmployeesEntity manager, AddressEntity address) {
+		this.manager=manager;
+		this.address=address;
+		return this;
+		
+	}
+	
 }

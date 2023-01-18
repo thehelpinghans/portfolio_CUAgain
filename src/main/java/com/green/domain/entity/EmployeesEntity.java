@@ -2,6 +2,7 @@ package com.green.domain.entity;
 
 
 import com.green.domain.dto.EmployeesDetailDTO;
+import com.green.domain.dto.StoreSaveDTO;
 import com.green.security.MyRole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -97,4 +98,5 @@ public class EmployeesEntity {
     public void updatePass(String pass) {
         this.pass=pass;
     }
+    
 }

@@ -18,6 +18,8 @@
 			function btnEditClicked(){
 				$("#default").hide();
 				$("#editForm").show();
+				var test =  $(".test").val();
+				alert(test);
 			}
 		</script>
 		<style type="text/css">#editForm{display: none;}</style>
@@ -25,7 +27,7 @@
 <body>
 	<main>
 		<h1>점포상세페이지</h1>
-			<ul id="default" class="flex"  th:each="dto : ${list}">
+			<ul id="default" class="flex" >
 				<li>
 					<span th:text="${dto.name}">점포명</span>
 				</li>
@@ -58,10 +60,11 @@
 					</form>
 				</li>
 			</ul>
-		<th:block th:each="dto : ${list}">
+	
 		<form id="editForm" th:action="|/store/store-detail/${dto.id}|" method="post">
 			<ul class="flex">
 				<li>
+					<input type="hidden" class="test" th:value="${dto.id}">
 					<span th:text="${dto.name}">점포명</span>
 					<input type="text" name="name" th:value="${dto.name}">
 				</li>
@@ -100,7 +103,7 @@
 				</li>
 			</ul>
 		</form>
-		</th:block>
+	
 	</main>
 </body>
 </html>
