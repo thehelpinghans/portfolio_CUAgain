@@ -5,10 +5,18 @@ import com.green.domain.dto.BoardInsertDTO;
 import com.green.domain.dto.BoardListDTO;
 import com.green.domain.entity.*;
 import com.green.service.BoardService;
+
+import net.bytebuddy.asm.Advice.OffsetMapping.Sort;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -88,6 +96,40 @@ public class BoardServiceProcess implements BoardService {
                         .employees(emp)
                 .build());
     }
+
+	@Override
+	public void getBoardListBySearch(String type, String data, Model model) {
+		if(type.equals("title")) {
+			List<BoardListDTO> list= boardRepo.findByTitleContaining(data).stream()
+					.map(e-> new BoardListDTO(e)).collect(Collectors.toList());
+			model.addAttribute("list", list);
+		} else if(type.equals("name")) {
+			List<BoardListDTO> list= boardRepo.findByNameContaining(data).stream()
+					.map(e-> new BoardListDTO(e)).collect(Collectors.toList());
+			model.addAttribute("list", list);
+		}
+		
+	}
+    
+//    @Override
+//    @Transactional(readOnly = true)
+//    public Page<BoardEntity> pageList(Pageable pageable) {
+//        return boardRepo.findAll(pageable);
+//    }
+   
+    
+//    //페이징처리
+//	@Override
+//	public Page<BoardListDTO> paging(Pageable pageable) {
+//		int page= pageable.getPageNumber()-1;
+//		int pageLimit= 3;
+//		
+//		Page<BoardEntity> boardEntity= 
+//				boardRepo.findAll(PageRequest.of(page, pageLimit, Sort.by(org.springframework.data.domain.Sort.Direction.DESC, "id")));
+		
+//	}
+    
+    
 
 
 

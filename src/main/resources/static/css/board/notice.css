@@ -73,6 +73,13 @@ a {
     background: rgb(57, 200, 75);
     color: #fff;
 }
+.btn-search{
+    line-height: 2em;
+    height: 2em;
+    width: 3em;
+    background-color: white;
+    border: 1px solid black;
+}
 
 .board_list {
     width: 100%;
