@@ -9,11 +9,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.green.domain.dto.AdminAttendanceListDTO;
 import com.green.domain.dto.AttendanceListDTO;
 import com.green.domain.dto.AttendanceListRequestDTO;
+import com.green.domain.entity.AttendanceEntity;
 import com.green.service.AttendService;
 
 @Controller
@@ -65,5 +68,12 @@ public class AttendanceController {
 		return result;
 	}
 	
+	//관리자페이지 검색
+	@GetMapping("/admin/day_attendance/search")
+    public String search(String keyword, String department, Model model) {
+       service.search(keyword,model,department);
+ 
+       return "admin/attendance/attendSearch";
+    }
 	
 }

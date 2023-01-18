@@ -8,12 +8,15 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.green.domain.dto.AdminAttendanceListDTO;
 import com.green.domain.dto.AttendanceInsertDTO;
 import com.green.domain.dto.AttendanceListDTO;
 import com.green.domain.dto.AttendanceListRequestDTO;
@@ -151,6 +154,30 @@ public class AttendServiceProcess implements AttendService {
 		}
 		
 		return attendanceListDTO;
+	}
+
+	@Override
+	public void adminList(Model model, AdminAttendanceListDTO dto) {
+		
+		model.addAttribute("list", attendRepo.findAll().stream().map(AdminAttendanceListDTO::new).collect(Collectors.toList()));
+		
+	}
+	
+	//관리자 페이지 근태검색
+	@Transactional
+	@Override
+	public void search(String keyword, Model model, String department) {
+		System.out.println("keyword: " + keyword);
+		List<AdminAttendanceListDTO> postsList=null;
+		if(keyword==""||department=="") {
+			postsList = attendRepo.findAllByEmployeeNameOrEmployeeDepNameContaining(keyword, department).stream().map(AdminAttendanceListDTO::new).collect(Collectors.toList());
+		}else {
+			postsList = attendRepo.findAllByEmployeeNameAndEmployeeDepNameContaining(keyword, department).stream().map(AdminAttendanceListDTO::new).collect(Collectors.toList());
+		}
+	  //List<AdminAttendanceListDTO> postsList = attendRepo.findAllByAttendStatusLike(keyword).stream().map(AdminAttendanceListDTO::new).collect(Collectors.toList());
+	  model.addAttribute("list", postsList);
+
+
 	}
 	
 
