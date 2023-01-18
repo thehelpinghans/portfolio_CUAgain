@@ -1,13 +1,15 @@
 package com.green.service.impl;
 
-import java.util.List;
 import java.util.stream.Collectors;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.green.domain.dto.TeamDTO;
+import com.green.domain.entity.DepartmentEntity;
 import com.green.domain.entity.DepartmentEntityRepository;
 import com.green.domain.entity.TeamEntity;
 import com.green.domain.entity.TeamEntityRepository;
@@ -22,23 +24,17 @@ public class TeamServiceProc implements TeamService{
 	@Autowired
 	DepartmentEntityRepository depRepo;
 	
-	//팀 데이터 모델에 담아서 가져가기
-	@Override
-	public void getTeamList(Model model) {
-		List<TeamEntity> result = teamRepo.findAll();
-		List<TeamDTO> teamList= result.stream().map(TeamDTO::new).collect(Collectors.toList());
-		model.addAttribute("teamList", teamList);
-	}
+	
 	
 	//팀 데이터 등록하기 
 	@Override
 	public void save(TeamDTO dto , long dep_id) {
 		System.err.println("팀등록");
 		teamRepo.save(TeamEntity.builder()
-				.id(dto.getId())//team id
 				.name(dto.getName()) //team name 
+				.dep(DepartmentEntity.builder().id(dep_id).build())
 				.build()
-				.teamEntity(depRepo.findById(dep_id).orElseThrow())
+				//.teamEntity(depRepo.findById(dep_id).orElseThrow())
 				);
 	}
 
@@ -50,6 +46,12 @@ public class TeamServiceProc implements TeamService{
 											   .map(e->e.getName())
 											   .collect(Collectors.toList()));
 		
+	}
+	//팀 삭제기능
+	@Transactional
+	@Override
+	public void teamDelete(long id) {
+		teamRepo.deleteById(id);
 	}
 	
 	

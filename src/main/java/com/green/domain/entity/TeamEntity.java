@@ -31,7 +31,7 @@ public class TeamEntity {
 	private String name; //팀이름
 	
 	@OneToOne //담당자
-	@JoinColumn
+	@JoinColumn(nullable = true)
 	private EmployeesEntity manager;
 	/*
 	@Builder.Default//테이블이 중복으로 생기지않기위해 (mappedBy=?)
