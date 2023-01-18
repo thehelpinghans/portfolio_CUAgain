@@ -16,7 +16,7 @@ public class StoreSaveDTO {
 	
 	private String content;
 	
-	private long manager;
+	private long managerId;
 	
 	private String postcode;
 	
@@ -38,7 +38,7 @@ public class StoreSaveDTO {
 		this.id = e.getId();
 		this.name = e.getName();
 		this.content = e.getContent();
-		this.manager = e.getManager().getId();
+		this.managerId = e.getManager().getId();
 		this.postcode = e.getAddress().getPostcode();
 		this.roadAddress = e.getAddress().getRoadAddress();
 		this.jibunAddress = e.getAddress().getJibunAddress();

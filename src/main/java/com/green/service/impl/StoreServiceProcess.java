@@ -14,6 +14,7 @@ import com.green.domain.dto.StoreListDTO;
 import com.green.domain.dto.StoreSaveDTO;
 import com.green.domain.entity.AddressEntity;
 import com.green.domain.entity.AddressEntityRepository;
+import com.green.domain.entity.EmployeesEntity;
 import com.green.domain.entity.EmployeesEntityRepository;
 import com.green.domain.entity.StoreEntity;
 import com.green.domain.entity.StoreEntityRepository;
@@ -41,7 +42,7 @@ public class StoreServiceProcess implements StoreService {
 						.postcode(dto.getPostcode())
 						.roadAddress(dto.getRoadAddress())
 						.build())
-				.manager(employeesRepo.findById(dto.getManager()).orElseThrow())//
+				.manager(employeesRepo.findById(dto.getManagerId()).orElseThrow())
 				.content(dto.getContent())
 				.name(dto.getName()).build());
 	}
@@ -58,7 +59,7 @@ public class StoreServiceProcess implements StoreService {
 	@Transactional
 	@Override
 	public void detail(long id, Model model) {
-		model.addAttribute("list",storeRepo.findById(id).map(StoreSaveDTO :: new).orElseThrow());
+		model.addAttribute("dto",storeRepo.findById(id).map(StoreSaveDTO :: new).orElseThrow());
 		
 	}
 
@@ -69,8 +70,13 @@ public class StoreServiceProcess implements StoreService {
 	
 	@Transactional
 	@Override
-	public void update(StoreSaveDTO dto, long id) {
-		storeRepo.findById(id).map(entity->entity.update(dto));
+	public void update(StoreSaveDTO dto, long id, long employeeId) {
+		System.out.println(">>>수자ㅓㅇ");
+		storeRepo.findById(id).map(e->{
+			e.getAddress().update(dto);
+			return e.update(dto);
+		}).orElseThrow();
+	
 	}
 
 }
