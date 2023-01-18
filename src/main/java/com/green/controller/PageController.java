@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.green.domain.dto.DepartmentDTO;
 import com.green.service.DepartmentService;
+import com.green.service.TeamService;
 
 @Controller
 public class PageController {
@@ -48,18 +49,20 @@ public class PageController {
     public String monthAttendance() {
     	return "admin/attendance/month_attendance";
     }
+    
+    //부서관리 회사명 클릭시 부서관련 다 가져오기 
+    @GetMapping("/admin/departments")
+    public String departments(Model model){
+    	depaService.getList(model);
+        return "admin/depart/department-list";
+    }
   //부서관리 이동
     @GetMapping("/admin/department")
-    public String department(Model model){
-    	depaService.getList(model);
+    public String department(){
+    	//depaService.getList(model);
         return "admin/depart/department";
     }
-//    //팀명가져올거임
-//    @PostMapping("/admin/teamList")
-//    public String teamList(Model model){
-//    	teamService.getList(model);
-//        return "";
-//    }
+
   //부서테스트이동
     @GetMapping("/admin/department3")
     public String departTest(){

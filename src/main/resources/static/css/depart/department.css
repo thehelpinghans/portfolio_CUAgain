@@ -35,9 +35,11 @@ main{height:100%; background-color: white;}
 /*****************************************************/
 .depart_name{display: none;}
 .depart_menu{display: none;}
-.team_name{display: none;}
+.team_list{display: none;}
 .team_manu{display: none;}
 .depUpdate{display: none;}
+.teamInsert{display: none;}
+.teamUpdate{display: none;}
 /*회사명 박스*/
 .corp_name_box{
 	padding: 1em;
@@ -45,7 +47,7 @@ main{height:100%; background-color: white;}
 }
 /*회사명,부서명,팀명 호버시 백그라운드컬러 달라지고*/
 .corp_name:hover, .depart_name:hover, .team_name:hover{
-	background-color: #e6e6e6;
+	background-color: #d6d6d6;
 	color: #157efb;
 }
 /*회사명*/
@@ -60,20 +62,27 @@ main{height:100%; background-color: white;}
 	
 }
 /*팀명*/
-.team_name{
-	background-color: #fff;
+.team_list{
 	border: 1px solid #ddd;
+}
+.team_name{
+	z-index: 10;
+	padding: 1em;
+	background-color: #fff;
+	
 	padding: 1em;
 }
 /*회사-부서등록 메뉴*/
 .dep_reg{}
 /*클릭시 부서메뉴리스트가 토글되는 아이콘*/
-.dep-icon-menu{}
+.dep-icon-menu{
+	position: relative;
+}
 
 /*부서메뉴리스트*/
 .depart_menu{
 	position:absolute;
-	left:200px;
+	left:400px;
 	z-index: 10;
 	background-color: rgba(255, 255, 255, 0.9);
 	border: 1px solid #ddd;
@@ -82,16 +91,14 @@ main{height:100%; background-color: white;}
 }
 /*팀이름*/
 .team_name{
-	z-index: 10;
-	border: 1px solid #ddd;
-	padding: 1em;
+	
 }
 /*클릭시 팀메뉴리스트가 토글되는 아이콘*/
 .team-icon-menu{}
 /*팀메뉴리스트*/
 .team_manu{
 	background-color: rgba(255, 255, 255, 0.9);
-	border: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
 	width:200px;
 	padding: 1em;
 }

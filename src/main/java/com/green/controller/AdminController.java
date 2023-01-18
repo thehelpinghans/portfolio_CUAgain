@@ -83,16 +83,23 @@ public class AdminController {
 
         return "admin/employee/reg";
     }
-    //부서등록
-
-
-	//부서선택 되었을때 해당하는 부서 이름 리스트 가져오기
+   
+   //부서선택 되었을때 해당하는 부서 이름 리스트 가져오기
     @ResponseBody
 	@GetMapping("/admin/teamList/{depName}")
 	public List<String> teamListOfDep(@PathVariable String depName){
 		System.out.println(depName);
 		return employeesService.getTeamListOfDef(depName);
 	}
+
+    
+///////////////////////////////////////////////////////////////
+    
+   
+    
+    //부서등록
+    
+    
 	//부서이름 수정 
 	@ResponseBody
 	@PostMapping("/admin/depUpdate/{depId}")
@@ -106,22 +113,23 @@ public class AdminController {
 	public void depDelete(@PathVariable("depId") long id) {
 		depServise.depDelete(id);
 	}
-	//부서메뉴중 팀 추가
-	@PostMapping("/admin/team/reg/{dep_id}")
-	public String teamReg(TeamDTO dto ,@PathVariable long dep_id) {
+	//부서메뉴중 팀 등록
+	@ResponseBody
+	@PostMapping("/admin/teamInsert/{dep_id}")
+	public void teamReg(TeamDTO dto ,@PathVariable long dep_id) {
 		//등록하면 dto에 업데이트! 하고 사원 리스트로 리턴
 		System.err.println("팀등록");
 		teamService.save(dto, dep_id);
-		return "redirect:/admin/department";	
+		//return "redirect:/admin/department";	
+	}
+	//팀 삭제"/admin/depDelete/"+teamId
+	@ResponseBody
+	@DeleteMapping("/admin/depDelete/{teamId}")
+	public void teamDelete(@PathVariable("teamId") long id) {
+		teamService.teamDelete(id);
 	}
 	
-	//부서명클릭시 해당하는 팀리스트 반환(에이잭스)
-	@GetMapping("/admin/getTeamList/{depId}")
-	public String getTeamListHtml(@PathVariable long depId, Model model) {
-		teamService.getTeamListOfDep(depId, model);
-		
-		return "admin/depart/teamTag";
-	}
+//////////////////////////////////////////////////////////////////////	
     //사원 조회/수정 페이지이동
     @GetMapping("/admin/emp/list")
     public String empList(Model model){

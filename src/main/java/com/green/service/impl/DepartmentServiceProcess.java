@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.green.domain.dto.DepartmentDTO;
+import com.green.domain.dto.TeamDTO;
 import com.green.domain.entity.DepartmentEntity;
 import com.green.domain.entity.DepartmentEntityRepository;
+import com.green.domain.entity.TeamEntity;
 import com.green.domain.entity.TeamEntityRepository;
 import com.green.service.DepartmentService;
 
@@ -24,14 +26,24 @@ public class DepartmentServiceProcess implements DepartmentService{
 	@Autowired
 	TeamEntityRepository teamRepo;
 	
-	//부서 데이터 보여주기
+	//부서+팀 데이터 담아가기
 	@Override
 	public void getList(Model model) {
 		List<DepartmentEntity> result = depRepo.findAll();//result =  List<DepartmentEntity> 
-		List<DepartmentDTO> list = result.stream().map(DepartmentDTO::new).collect(Collectors.toList());
+		List<DepartmentDTO> list = result.stream().map(e->{
+				DepartmentDTO dto=new DepartmentDTO(e);
+				dto.setTeams(
+				teamRepo.findAllBydep(e).stream().map(TeamDTO::new).collect(Collectors.toList())
+				);
+				return dto;
+			}).collect(Collectors.toList());
 				//list = List<DepartmentDTO>			//미리 만든 생성자에 데려오는 리스트의 각 컬럼에다가 넣어주겠다!
 		model.addAttribute("list", list);
 		//모델에 담아서 페이지에 보낸다.
+		//List<TeamEntity> teamResult = teamRepo.findAll();
+		//List<TeamDTO> teamlist = teamResult.stream().map(TeamDTO::new).collect(Collectors.toList());
+		//model.addAttribute("teamlist", teamlist);
+		
 	}
 	//부서 수정기능
 	@Transactional
