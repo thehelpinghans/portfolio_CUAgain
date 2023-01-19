@@ -18,6 +18,12 @@ public class MyUserDetails extends User {
     private String email;
     private String name;
 
+
+
+    private long depId;
+    private String depName;
+    private String depManagerName;
+    private long depManagerId;
     private String phone;
 
     public MyUserDetails(String username, String password, Collection<? extends GrantedAuthority> authorities) {
@@ -32,6 +38,10 @@ public class MyUserDetails extends User {
                         .collect(Collectors.toSet()));
         this.email=entity.getEmail();
         this.name=entity.getName();
+        this.depId=entity.getDep().getId();
+        this.depName=entity.getDep().getName();
+        this.depManagerName=entity.getDep().getManager().getName();
+        this.depManagerId=entity.getDep().getManager().getId();
         this.phone= entity.getPhone();
         this.id = entity.getId();
     }
