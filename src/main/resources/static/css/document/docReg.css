@@ -1,5 +1,7 @@
 @charset "UTF-8";
-
+main{
+	background-color: #f0f0f0;
+}
 h1{
 	font-size: 36px;
 	font-weight: 600px;

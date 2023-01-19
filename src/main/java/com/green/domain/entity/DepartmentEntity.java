@@ -1,10 +1,6 @@
 package com.green.domain.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -33,9 +29,9 @@ public class DepartmentEntity {
 		return this;
 	}
 	
-//	@OneToOne //담당자
-//	@JoinColumn
-//	private EmployeesEntity manager;
+	@OneToOne //담당자
+	@JoinColumn
+	private EmployeesEntity manager;
 	/*
 				//테이블이 중복으로 생기지않기위해 (mappedBy=?)
 	@OneToMany(mappedBy="department") //부서에 속한 팀들
