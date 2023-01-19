@@ -51,4 +51,9 @@ public class TeamEntity {
 		this.dep=dep;
 		return this;
 	}
+
+	public TeamEntity updateTeamName(String teamName) {
+		name=teamName;
+		return this;
+	}
 }
