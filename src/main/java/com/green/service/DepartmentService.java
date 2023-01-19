@@ -12,5 +12,7 @@ public interface DepartmentService {
 
 	void depDelete(long depId);
 
+	void getEmpList(Model model);
+
 
 }
