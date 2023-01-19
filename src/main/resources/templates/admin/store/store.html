@@ -10,22 +10,20 @@
 <body>
 	<main>
 		<table class="flex">
-			<thead>
-				<tr class="store-list">
-					<td class="stoname">직영점명</td>
-					<td class="stodle">담당자</td>
-					<td class="stoadre">직영점 주소</td>
-				</tr>
-			</thead>
-			<tbody>
-				<th:block th:each=" dto : ${list}">
-				<tr class="store-list">
-					<td class="stoname" th:text="${dto.name}">직영점명</td>
-					<td class="stodle" th:text="${dto.managerId}">담당자</td>
-					<td class="stoadre" th:text="${dto.jibunAddress}">직영점 주소</td>
-				</tr>
-				</th:block>
-			</tbody>
+			<tr class="store-list">
+				<td class="stoname">직영점명</td>
+				<td class="stodle">담당자</td>
+				<td class="stoadre">직영점 주소</td>
+			</tr>
+		</table>
+		<table class="flex">
+			<th:block th:each=" dto : ${list}">
+			<tr class="store-list">
+				<td class="stoname" th:text="${dto.name}" th:onclick="|location.href='/store/store-detail/${dto.id}'|"></td>
+				<td class="stodle" th:text="${dto.managerId}">담당자</td>
+				<td class="stoadre" th:text="${dto.jibunAddress}">직영점 주소</td>
+			</tr>
+			</th:block>
 		</table>
 	</main>
 </body>

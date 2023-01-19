@@ -4,24 +4,106 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/css/commons/common.css">
-<<<<<<< HEAD
-
-=======
-<link rel="stylesheet" href="/css/document/docReg.css">
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/js/employee/daumPostcode.js"></script>
->>>>>>> refs/remotes/origin/CKJ2
+<script type="text/javascript">
+			$(function(){
+				$("#btnEdit").click(btnEditClicked);
+				$("#btnCancel").click(function(){
+					$("#default").show();
+					$("#editForm").hide();
+				});
+			});
+			
+			function btnEditClicked(){
+				$("#default").hide();
+				$("#editForm").show();
+				var test =  $(".test").val();
+				alert(test);
+			}
+		</script>
+		<style type="text/css">#editForm{display: none;}</style>
 </head>
 <body>
 	<main>
-		<h1>점포등록</h1>
-		<form >
-			<table class="flex">
-				<tr>
-					<td></td>
-				</tr>
-			</table>
+		<h1>점포상세페이지</h1>
+			<ul id="default" class="flex" >
+				<li>
+					<span th:text="${dto.name}">점포명</span>
+				</li>
+				<li>
+					<span th:text="${dto.managerName}">메니저 이름</span>
+				</li>
+				<li>
+					<span th:text="${dto.content}">상세정보</span>
+				</li>
+				<li>
+					<span th:text="${dto.postcode}">우편번호</span>
+				</li>
+				<li>
+					<span th:text="${dto.roadAddress}">도로명주소</span>
+				</li>
+				<li>
+					<span th:text="${dto.jibunAddress}">지번주소</span>
+				</li>
+				<li>
+					<span th:text="${dto.detailAddress}">주소상세정보</span>
+				</li>
+				<li>
+					<span th:text="${dto.extraAddress}">동이름</span>
+				</li>
+				<li>
+					<form th:action="|/store/store-detail/${dto.id}|" method="post">
+						<input type="hidden" name="_method" value="DELETE">
+						<button>삭제</button>
+						<button type="button" id="btnEdit">수정</button>
+					</form>
+				</li>
+			</ul>
+	
+		<form id="editForm" th:action="|/store/store-detail/${dto.id}|" method="post">
+			<ul class="flex">
+				<li>
+					<input type="hidden" class="test" th:value="${dto.id}">
+					<span th:text="${dto.name}">점포명</span>
+					<input type="text" name="name" th:value="${dto.name}">
+				</li>
+				<li>
+					<span th:text="${dto.managerName}">메니저 이름</span>
+					<input type="text" name="managerName" th:value="${dto.managerName}">
+				</li>
+				<li>
+					<span th:text="${dto.content}">상세정보</span>
+					<input type="text" name="content" th:value="${dto.content}">
+				</li>
+				<li>
+					<span th:text="${dto.postcode}">우편번호</span>
+					<input type="text" name="postcode" th:value="${dto.postcode}">
+				</li>
+				<li>
+					<span th:text="${dto.roadAddress}">도로명주소</span>
+					<input type="text" name="roadAddress" th:value="${dto.roadAddress}">
+				</li>
+				<li>
+					<span th:text="${dto.jibunAddress}">지번주소</span>
+					<input type="text" name="jibunAddress" th:value="${dto.jibunAddress}">
+				</li>
+				<li>
+					<span th:text="${dto.detailAddress}">주소상세정보</span>
+					<input type="text" name="detailAddress" th:value="${dto.detailAddress}">
+				</li>
+				<li>
+					<span th:text="${dto.extraAddress}">동이름</span>
+					<input type="text" name="extraAddress" th:value="${dto.extraAddress}">
+				</li>
+				<li>
+					<input type="hidden" name="_method" value="PUT">
+					<button type="submit">수정완료</button>
+					<button type="button" id="btnCancel">취소</button>
+				</li>
+			</ul>
 		</form>
+	
 	</main>
 </body>
 </html>
