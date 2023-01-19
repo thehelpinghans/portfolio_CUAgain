@@ -71,7 +71,7 @@ public class BoardController {
     //리스트페이지
     @GetMapping("/admin/board/boardList/{lType}")
     public String boardList(@PathVariable long lType, Model model, Pageable pageable) {
-        boardRepo.findAll(pageable);
+//        boardRepo.findAll(pageable);
         String type;
         if(lType==0){
             type="공지사항";
