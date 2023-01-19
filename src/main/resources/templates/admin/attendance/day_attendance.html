@@ -3,7 +3,33 @@
 	  th:replace="~{layout/admin :: adminLayout(~{this::head}, ~{::main})}">
 <head>
 	<!--필요한 head 추가-->
-	<link rel="stylesheet" href="/css/attendance/attendance.css">
+	<link rel="stylesheet" href="/css/attendance/attendanceAdimin.css">
+	<script>
+	$(document).ready(function(){
+		$("#department").change(function(){
+			console.log("값변경 테스트 :"+$(this).val());
+			$("#department").val($(this).val());
+		});
+		
+	});
+	function search(){
+		
+		var keyword=$(".dep").val();
+		var department=$("#department").val();
+		alert(keyword);
+		$.ajax({
+			url:"/admin/day_attendance/search",
+			data:{keyword:keyword, department:department},
+			success:function(result){
+				//alert(result);
+				$(".input").html(result);
+			},
+			error:function(){
+				alert("문제발생");
+			}
+		});
+	}
+	</script>
 </head>
 <main><!--내용 채우기-->
 	<!-- <h1>일별 근태현황 페이지</h1> -->
@@ -11,7 +37,7 @@
 		<table>
 			<tr>
 				<td>
-					<b>일별근태현황</b>
+					<b>사원별 근태현황</b>
 				</td>
 			</tr>
 			<tr>
@@ -23,64 +49,84 @@
 		</table>
 		<div class="img">
 			<img src="/image/attendance/round.gif">
-			일별 근태현황 관리입니다.
+			사원별 근태현황 관리 페이지입니다.
 		</div>
-		<form>
-			<table class="table">
-				<tbody>
-					<tr>
-						<th width="100px;">검색기간</th>
-						<td>
-							<div style="padding-bottom:5px;"></div>
-							<input type="date" class="inputType_left" id="search_sdate" name="search_sdate">
-						</td>
-					</tr>
-					<tr>
-						<th width="100px;">부서</th>
-						<td>
-							<select id="category_depth" name="category_depth" style="width: 150px;">
-								<option value="인사담당부">인사담당부</option>
-								<option value="경영지원본부">경영지원본부</option>
-								<option value="마케팅부">마케팅부</option>
-								<option value="편의점사업부">편의점사업부</option>
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<th width="100px;">사원명</th>
-						<td>
-							<input type="text">
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			<button class="btn_search">검색</button>
-		</form>
 		<table class="table">
 			<tbody>
 				<tr>
-					<th width="8%">사원번호</th>
-					<th width="8%">사원명</th>
-					<th width="7%">부서</th>
-					<th width="7%">직책</th>
-					<th width="7%">상태</th>
-					<th width="12%">출근기록</th>
-					<th width="12%">퇴근기록</th>
-				</tr>
-				<tr th:if="${!#lists.isEmpty(list)}" >
-					<td colspan="9">
-						<p>나중에 dto리스트 데이터 넣어주기</p>
+					<th style="width: 100px; padding-bottom: 15px;">검색기간</th>
+					<td style="padding-right: 390px;">
+						<div style="padding-bottom:5px;"></div>
+						<input type="date" id="start" value="yyyy-MM-dd">
+						~
+						<input type="date" id="end">
 					</td>
-					
+				</tr>
+				<tr>
+					<th style="width: 100px; padding-bottom: 15px;">부서</th>
+					<td style="padding-right: 515px;">
+						<select id="department" style="width: 150px;">
+							<option value="">--부서선택--</option>
+							<option value="인사담당부">인사담당부</option>
+							<option value="경영지원본부">경영지원본부</option>
+							<option value="마케팅부">마케팅부</option>
+							<option value="편의점사업부">편의점사업부</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th style="width: 100px; padding-bottom: 15px;">사원명</th>
+					<td style="padding-right: 515px;">
+						<input type="text" name="keyword" class="dep">
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<button class="btn_search" onclick="search()">검색</button>
+		
+		<table class="table input">
+		<thead>
+			<tr>
+				<th width="3%">사번</th>
+				<th width="4%">사원명</th>
+				<th width="7%">부서</th>
+				<th width="4%">직책</th>
+				<th width="15%" >출근기록</th>
+				<th width="17%">퇴근기록</th>
+				<th width="4%">상태</th>
+			</tr>
+		</thead>
+			<tbody>
+				<tr th:each="dto:${list}" th:if="${!#lists.isEmpty(list)}" >
+					<td th:text="${dto.employeeId}">사원번호</td>
+					<td th:text="${dto.name}">사원명</td>
+					<td th:text="${dto.department}">부서</td>
+					<td th:text="${dto.position}">직책</td>
+					<td th:text="${dto.inTime}">출근기록</td>
+					<td th:text="${dto.outTime}">퇴근기록</td>
+					<td th:text="${dto.attendStatus}">상태</td>
 				</tr>
 				<tr th:if="${#lists.isEmpty(list)}">
 					<td colspan="9">
 						<p>데이터가 없습니다.</p>
 					</td>
-					
 				</tr>
 			</tbody>
 		</table>
+		
 	</div>
+	<script>
+	//날짜 기본 세팅
+	first();
+	function first(){
+		date = new Date();//오늘날짜
+		end = date.toISOString().slice(0, 10);
+		document.querySelector("#end").value = end;
+		date.setDate(date.getDate() - 7) ;//7일전 날짜
+		start = date.toISOString().slice(0, 10);
+		document.querySelector("#start").value = start;
+	}
+	</script>
 </main>
 </html>

@@ -181,7 +181,6 @@
 /* =============== Home Section =============== */
 .home{
     position: relative;
-    background-color: rgba(196, 196, 196, 0.7);
     left: 260px;
     width: calc(100% - 260px);
     height: 100vh;
@@ -209,7 +208,9 @@
     font-weight: 600;
 }
 
-
+.pagination {
+	padding-left: 250px;
+}
 
 
 /* ============ Responsive / Breakpoints ========== */

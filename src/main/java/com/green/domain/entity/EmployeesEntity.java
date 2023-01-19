@@ -49,8 +49,7 @@ public class EmployeesEntity {
     @ManyToOne//속한 부서
 	@JoinColumn(name ="dep_id")
 	private DepartmentEntity dep;
-
-
+    
     @Enumerated(EnumType.STRING)
     private Position position;
     //ROLE정보 --enum 사용

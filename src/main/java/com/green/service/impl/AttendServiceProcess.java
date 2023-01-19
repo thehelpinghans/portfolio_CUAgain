@@ -2,17 +2,29 @@ package com.green.service.impl;
 
 import java.security.Principal;
 import java.time.LocalDate;
-import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
+import com.green.domain.dto.AdminAttendanceListDTO;
 import com.green.domain.dto.AttendanceInsertDTO;
-import com.green.domain.dto.AttendanceUpdateDTO;
+import com.green.domain.dto.AttendanceListDTO;
+import com.green.domain.dto.AttendanceListRequestDTO;
+import com.green.domain.dto.EmployeesListDTO;
 import com.green.domain.entity.AttendEntityRepository;
-import com.green.domain.entity.AttendStatus;
 import com.green.domain.entity.AttendanceEntity;
 import com.green.domain.entity.EmployeesEntity;
 import com.green.domain.entity.EmployeesEntityRepository;
@@ -29,37 +41,41 @@ public class AttendServiceProcess implements AttendService {
 	
 	//@Transactional
 	@Override
-	public void save(long id, AttendanceInsertDTO dto, AttendanceUpdateDTO udto) {
+	public String save(long id) {
 		//LocalDate date=findByOnTime(id).get().getDate();
 		//System.out.println(date);
+		LocalDate now = LocalDate.now();
+		Optional<AttendanceEntity> attenEntity=findByOnTime(id, now);
 		
+		// 이미 오늘 기록이 있을 경우
+		if(attenEntity.isPresent()) {		
+			return "이미 출근 처리가 되었습니다.";
 
-
-
-		Optional<AttendanceEntity> fot=findByOnTime(id);
-		if(fot.isPresent()) {
-			//attendRepo.save(udto.attendanceEntity().employeeId(empRepo.findById(id)));//수정
-			AttendanceEntity dd=fot.get();
-			dd.update(udto);
-			attendRepo.save(dd);
-			System.out.println(attendRepo.save(dd).getOutTime());
 		}else {
-			attendRepo.save(dto.attendanceEntity()
-						.employeeId(empRepo.findById(id).orElseThrow())
-						.addStatus(AttendStatus.출근));//저장
+			
+			Date date = new Date();
+			AttendanceInsertDTO dto=new AttendanceInsertDTO();
+			dto.setDate(now);
+			dto.setInTime(date);
+			//dto.setAttendStatus("출근");
+			
+			attendRepo.save(dto.toEntity()
+					.employeeId(empRepo.findById(id).orElseThrow())
+					);//저장
+			return "출근 처리가 되었습니다.";
 		}
+		
 		
 	}
 
 	@Override
-	public Optional<AttendanceEntity> findByOnTime(long eid) {
+	public Optional<AttendanceEntity> findByOnTime(long eid,LocalDate now) {
 		List<AttendanceEntity> entity=attendRepo.findAllByEmployee_id(eid);
-		
-		LocalDate date=LocalDate.now();
+		// TODO: 전체 리스트가 아닌 오늘 날짜와 일치하는 출근 기록을 불러온다.
 		long id=0L;
 		
 		for(AttendanceEntity i : entity) {
-			if(i.getDate().equals(date)) {
+			if(i.getDate().equals(now)) {
 				//System.out.println(i.getEmployee().getId());
 				id=i.getId();//오늘날짜랑 같은 at pk
 			}
@@ -76,6 +92,99 @@ public class AttendServiceProcess implements AttendService {
 		System.err.println(id);
 		return id;
 	}
+	
+	//퇴근 등록
+	@Override
+	public String updateOut(long id) {
+		//맨 마지막 출근기록 찾기(status 출근인경우)
+		Optional<AttendanceEntity> last=attendRepo.findFirstByEmployee_idAndAttendStatusOrderByInTimeDesc(id, "출근");
+		Optional<AttendanceEntity> last2=attendRepo.findFirstByEmployee_idAndAttendStatusOrderByInTimeDesc(id, "조퇴");
+		Optional<AttendanceEntity> last3=attendRepo.findFirstByEmployee_idAndAttendStatusOrderByInTimeDesc(id, "퇴근");
+		// 만약 마지막 출근 기록이 존재하면
+		if (last.isPresent()) { 
+			//퇴근 등록 처음했을 때 "퇴근or조퇴 처리가 되었습니다."
+			return outCheck(last).getAttendStatus()+" 처리가 되었습니다.";
+		} else if(last2.isPresent()) {
+			if(outCheck(last2).getAttendStatus()=="조퇴") {
+				return "이미 조퇴처리가 되었습니다.";
+			}
+			return outCheck(last2).getAttendStatus()+" 처리가 되었습니다.";
+		} else if(last3.isPresent()) {
+			if(outCheck(last3).getAttendStatus()=="퇴근") {
+				return "이미 퇴근처리가 되었습니다.";
+			}
+			return outCheck(last3).getAttendStatus()+" 처리가 되었습니다.";
+		} else {
+			// 마지막 기록이 없으면 출근을 하라고 해야 됨
+			return "출근등록이 되어 있지 않습니다.";
+		}
 
+	}
+	
+	//조퇴, 퇴근 등록 편의메서드
+	@Override
+	public AttendanceEntity outCheck(Optional<AttendanceEntity> last) {
+		Date outTime=new Date();
+		AttendanceEntity lastEntity=last.get();
+		lastEntity.setOutTime(outTime);
+		// 조퇴, 퇴근 체크
+		lastEntity.checkStatus();
+		AttendanceEntity nowAttendance = attendRepo.save(lastEntity);//저장
+		return nowAttendance;
+	}
+	
+	//근태 리스트
+	@Override
+	public void attedList(long id, Model model) {
+		model.addAttribute("list", attendRepo.findTop5ByEmployee_idOrderByDateDesc(id).stream().map(AttendanceListDTO::new).collect(Collectors.toList()));
+		model.addAttribute("employee", empRepo.findById(id).stream().map(EmployeesListDTO::new).collect(Collectors.toList()));
+		
+	}
+	//마이근태현황페이지
+	@Override
+	public List<AttendanceListDTO> getList(long id, Pageable pageable, AttendanceListRequestDTO dto) {
+		Page<AttendanceEntity> result= attendRepo.findByEmployee_idAndDateBetweenOrderByDateDesc(id, dto.getStart(), dto.getEnd(), pageable);
+		List<AttendanceListDTO> attendanceListDTO = new ArrayList<>();
+		
+		int total = result.getTotalPages();
+		
+		System.out.println(result.getContent()+".............................");
+		
+		for(AttendanceEntity attendanceEntity: result.getContent()) {
+			AttendanceListDTO listDto = attendanceEntity.toListDTO();
+			listDto.setTotalPage(total);
+			attendanceListDTO.add(listDto);
+		}
+		
+		return attendanceListDTO;
+	}
+
+	@Override
+	public void adminList(Model model, AdminAttendanceListDTO dto, AttendanceListRequestDTO rdto, Pageable pageable) {
+		
+		Page<AttendanceEntity> result = attendRepo.findByEmployee_idAndDateBetweenOrderByDateDesc(dto.getEmployeeId(), rdto.getStart(), rdto.getEnd(), pageable);
+		
+	}
+	
+	//관리자 페이지 근태검색
+	@Transactional
+	@Override
+	public void search(String keyword, Model model, String department) {
+		System.out.println("keyword: " + keyword);
+		List<AdminAttendanceListDTO> postsList=null;
+		postsList = attendRepo.findAllByEmployeeNameContainingAndEmployeeDepNameContaining(keyword, department).stream().map(AdminAttendanceListDTO::new).collect(Collectors.toList());
+//		if(keyword!=null&&department=="") {
+//			postsList = attendRepo.findAllByEmployeeNameContainingAndEmployeeDepNameContaining(keyword, department).stream().map(AdminAttendanceListDTO::new).collect(Collectors.toList());
+//		}else if(keyword==""&&department!=null){
+//			postsList = attendRepo.findAllByEmployeeNameContainingAndEmployeeDepNameContaining(keyword, department).stream().map(AdminAttendanceListDTO::new).collect(Collectors.toList());
+//		}else {
+//			postsList = attendRepo.findAllByEmployeeNameContainingAndEmployeeDepNameContaining(keyword, department).stream().map(AdminAttendanceListDTO::new).collect(Collectors.toList());
+//		}
+	  //List<AdminAttendanceListDTO> postsList = attendRepo.findAllByAttendStatusLike(keyword).stream().map(AdminAttendanceListDTO::new).collect(Collectors.toList());
+	  model.addAttribute("list", postsList);
+
+
+	}
+	
 
 }
