@@ -46,7 +46,7 @@ public class EmployeesEntity {
 	@JoinColumn(name ="team_id")
 	private TeamEntity team;
 
-    @ManyToOne(cascade = CascadeType.ALL)//속한 부서
+    @ManyToOne//속한 부서
 	@JoinColumn(name ="dep_id")
 	private DepartmentEntity dep;
     

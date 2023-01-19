@@ -29,9 +29,10 @@ public interface AttendService {
 
 	AttendanceEntity outCheck(Optional<AttendanceEntity> last);
 
-	void adminList(Model model, AdminAttendanceListDTO dto);
+	void adminList(Model model, AdminAttendanceListDTO dto, AttendanceListRequestDTO rdto, Pageable pageable);
 	
 	void search(String keyword, Model model, String department);
+
 
 	
 	

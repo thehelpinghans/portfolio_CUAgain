@@ -44,7 +44,7 @@ public class AttendanceEntity{
 	
 	//사원번호
 	@JoinColumn
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.DETACH)
 	private EmployeesEntity employee;
 
 	//날짜

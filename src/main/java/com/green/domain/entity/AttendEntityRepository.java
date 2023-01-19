@@ -28,14 +28,13 @@ public interface AttendEntityRepository extends JpaRepository<AttendanceEntity, 
 	Page<AttendanceEntity> findByEmployee_idAndDateBetweenOrderByDateDesc(long id, LocalDate start, LocalDate end,
 			Pageable pageable);
 
-
 	List<AttendanceEntity> findAllByEmployee_name(String string);
 
-	List<AttendanceEntity> findAllByEmployeeNameOrEmployeeDepNameContaining(String keyword, String department);
+	List<AttendanceEntity> findAllByEmployeeNameContainingOrEmployeeDepNameContaining(String keyword, String department);
 	
-	List<AttendanceEntity> findAllByEmployeeNameAndEmployeeDepNameContaining(String keyword, String department);
+	List<AttendanceEntity> findAllByEmployeeNameContainingAndEmployeeDepNameContaining(String keyword, String department);
 	
-	//List<AttendanceEntity> findAllByEmployeeDepNameContaining(String keyword);
+//List<AttendanceEntity> findAllByEmployeeDepNameContaining(String keyword);
 //	@Query("SELECT * FROM attendance a join employees b on a.employee_id=b.employee_id where b.employee_name LIKE %:keyword%")
 //	List<AttendanceEntity> searchAllByEmployee_nameLike(@Param("keyword") String keyword);
 
