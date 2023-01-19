@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<th:block th:each="dto:${list}">
+	<tr th:if="${dto.id}">
+		<td th:text="${dto.id}"></td>
+		<td class="titleTd">
+			<button type="button" th:text="${dto.title}"></button>
+		</td>
+		<td th:text="${dto.depName}"></td>
+		<td th:text="${dto.writerName}"></td>
+		<td th:text="${dto.createdDate}"></td>
+		<td th:text="${dto.acceptorName}"></td>
+		<td th:text="${dto.docStatus}"></td>
+		<td th:text="${dto.checkStatus}"></td>
+		<td th:text="${dto.approvalDate}"></td>
+	</tr>
+	<tr th:if="!${dto.id}">
+		<td colspan="9">데이터가 없습니다.</td>
+	</tr>
+</th:block>
+
+</html>

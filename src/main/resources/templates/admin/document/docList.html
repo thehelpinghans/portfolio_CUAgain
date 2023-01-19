@@ -2,49 +2,230 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	  th:replace="~{layout/admin :: adminLayout(~{this::head}, ~{::main})}">
 <head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="/css/commons/common.css">
-<link rel="stylesheet" href="/css/document/docList.css">
-<title>결재</title>
-</head>
-<body>
-	<main>
-		<div class="flex searchbox">
-			<input type="text">
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="/css/commons/common.css">
+	<link rel="stylesheet" href="/css/document/docList.css">
+	<title>결재</title>
+	<script>
+		$(function (){
+			$(".titleTd>button").click(btnDetailClicked);
+			$("#btn-search").click(btnSearchClicked);
+			$("#btn-my-list").click(btnMyDocClicked);
+			$("#btn-all-list").click(btnAllListClicked)
+		});
 
-			<span>기안자</span><input type="text">
-			<span>양식명</span><input type="text">
-			<span>문서제목</span><input type="text">
-			<span>배정일</span><input type="date">
-			<button type="button">search</button>
+		//모든 문서 버튼 눌렀을 때
+		function btnAllListClicked(){
+			$.ajax({
+				url:`/member/doc/AllList`,
+				type:"get",
+				success:function (resultHTML){
+					$("#doc-list").html(resultHTML);
+					$(".titleTd>button").click(btnDetailClicked);
+				}
+			});
+		}
+
+		/*제목을 눌렀을 때 상세내용 나오게*/
+		function btnDetailClicked(){
+			var docId=$(this).parent(".titleTd").prev().text();
+			$.ajax({
+				url:`/member/doc/detailTag/${docId}`,
+				type:"get",
+				success:function (resultHTML){
+					$("#view-list").hide();
+					$("#view-detail").html(resultHTML).show();
+					/*$(".currentDate").val(new Date().toISOString().substring(0, 10));*/
+					$("#btn-detail-cancel").click(btnDetailCancel);
+					$("#btn-approval").click(docApproval);
+					$("#btn-rejection").click(docRejection);
+					setCheckStatus();
+					$("#doc-edit").click(docEdit);
+
+				}
+			});
+		}
+		//기안문 작성자가 수정버튼 눌렀을 때
+		function docEdit(){
+			var docId=$("#doc-id").text();
+
+			$.ajax({
+				url:`/member/doc/editTag/${docId}`,
+				type:"get",
+				success:function (resultHTML){
+					$("#view-detail").html(resultHTML);
+
+					$("#doc-edit-done").click(btnEditDoneClicked);
+					$("#btn-edit-cancel").click(btnEditCancelClicked);
+				}
+			});
+		}
+		//수정완료 버튼 눌렸을 시
+		function btnEditDoneClicked(){
+			var docId=$("#doc-id").text();
+
+			var formData = new FormData();
+			formData.append("docId", docId);
+			formData.append("title", $("#doc-title").val());
+			formData.append("content", $("#doc-content").val());
+			$.ajax({
+				url:"/member/doc/edit",
+				type:"post",
+				data:formData,
+				contentType: false,
+				processData: false,
+				success:function (){
+					btnEditCancelClicked();
+				}
+			});
+		}
+
+		//수정 페이지에서 취소 버튼 눌렸을 때
+		function btnEditCancelClicked(){
+			var docId=$("#doc-id").text();
+			$.ajax({
+				url:`/member/doc/detailTag/${docId}`,
+				type:"get",
+				success:function (resultHTML){
+					$("#view-detail").html(resultHTML);
+					$("#btn-detail-cancel").click(btnDetailCancel);
+					$("#btn-approval").click(docApproval);
+					$("#btn-rejection").click(docRejection);
+					$("#doc-edit").click(docEdit);
+				}
+			});
+		}
+		//상세정보 본 사람이 결재자면 확인상태 변경
+		function setCheckStatus(){
+			var userId=$("#userId").val();
+			var acceptorId=$("#acceptorId").val();
+			var docId=$("#doc-id").text();
+			var checkStatus=$("#checkStatus").val();
+			if(userId!=acceptorId){
+				return;
+			}else if(checkStatus=="확인"){
+				return;
+			}else{
+				$.ajax({
+					url:`/member/doc/checkStatus/${docId}`,
+					type:"get",
+					success:function (){
+
+					}
+				});
+			}
+		}
+		//디테일페이지에서 승인버튼 눌렀을 때
+		function docApproval(){
+			var docId = $("#doc-id").text();
+			$.ajax({
+				url:`/member/doc/docStatus/${docId}/1`,
+				type:"get",
+				success:function (){
+					btnDetailCancel();
+				}
+			})
+
+		}
+		//디테일페이지에서 반려버튼 눌렸을 때
+		function docRejection(){
+			var docId = $("#doc-id").text();
+			$.ajax({
+				url:`/member/doc/docStatus/${docId}/2`,
+				type:"get",
+				success:function (){
+					btnDetailCancel();
+				}
+			})
+		}
+
+		//디테일페이지에서 취소버튼 눌렀을 때
+		function btnDetailCancel(){
+			$("#view-detail").hide();
+			btnAllListClicked();
+			$("#view-list").show();
+		}
+
+		//검색버튼 눌렀을 때
+		function btnSearchClicked(){
+			var type = $("#search_type").val();
+			var data = $("#search_data").val();
+			$.ajax({
+				url:`/member/doc/searchList/${type}/${data}`,
+				type:"get",
+				success:function (resultHTML){
+					$("#doc-list").html(resultHTML);
+					$(".nameTd>button").click(btnDetailClicked);
+				}
+			});
+		}
+
+		//내 문서 버튼 눌렸을 때
+		function btnMyDocClicked(){
+			$.ajax({
+				url:`/member/doc/myList`,
+				type:"get",
+				success:function (resultHTML){
+					$("#doc-list").html(resultHTML);
+					$(".titleTd>button").click(btnDetailClicked);
+				}
+			});
+		}
+
+	</script>
+</head>
+<main id="main-tag">
+	<div id="view-list">
+		<div class="flex searchTag">
+			<label>검색어
+				<select id="search_type">
+					<option value="Name">이름</option>
+					<option value="depName">부서명</option>
+					<option value="docId">문서번호</option>
+				</select>
+				<input id="search_data" type="text">
+			</label>
+			<button id="btn-search" class="btn-search">검색</button>
+			<button id="btn-all-list" class="btn-search">모든문서</button>
+			<button id="btn-my-list" class="btn-search">내문서</button>
 		</div>
-		<table>
-			<tr class="flex between pay-list1">
-				<td>NO</td>
-				<td>서식함</td>
-				<td>유형</td>
-				<td>문서제목</td>
-				<td>기안자</td>
-				<td>기안부서</td>
-				<td>기안일</td>
-				<td>배정일</td>
-			</tr>
-		</table>
-		<table>
-			<tr class="flex between pay-list2">
-				<td>1</td>
-				<td>서식함</td>
-				<td>유형</td>
-				<td>문서제목</td>
-				<td>기안자</td>
-				<td>기안부서</td>
-				<td>2023-01-05</td>
-				<td>2023-01-06</td>
-			</tr>
-			<div class="delandup">
-				<button>일괄결재</button>
-			</div>
-		</table>
-	</main>
-</body>
+		<div class="doc-info">
+			<table class="doc-list-table">
+				<thead>
+				<tr>
+					<th>No</th>
+					<th>제목</th>
+					<th>부서</th>
+					<th>기안자</th>
+					<th>기안일</th>
+					<th>결재자</th>
+					<th>문서상태</th>
+					<th>확인상태</th>
+					<th>결재일</th>
+				</tr>
+				</thead>
+				<tbody id="doc-list">
+					<tr th:each="dto:${list}">
+						<td th:text="${dto.id}"></td>
+						<td class="titleTd" >
+							<button type="button" th:text="${dto.title}"></button>
+						</td>
+						<td th:text="${dto.depName}"></td>
+						<td th:text="${dto.writerName}"></td>
+						<td th:text="${dto.createdDate}"></td>
+						<td th:text="${dto.acceptorName}"></td>
+						<td th:text="${dto.docStatus}"></td>
+						<td th:text="${dto.checkStatus}"></td>
+						<td th:text="${dto.approvalDate}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<p>% 제목을 클릭하면 상세정보로 이동합니다.</p>
+	</div>
+	<div id="view-detail">
+
+	</div>
+
+</main>
 </html>
