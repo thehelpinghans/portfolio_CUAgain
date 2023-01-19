@@ -30,7 +30,7 @@ public class AdminController {
 	EmployeesService employeesService;
 	
 	@Autowired
-	DepartmentService depServise;
+	DepartmentService depService;
 
 //	@GetMapping("/board/notice")
 //	public String notice() {
@@ -105,13 +105,13 @@ public class AdminController {
 	@PostMapping("/admin/depUpdate/{depId}")
 	public String depUpdate(@PathVariable("depId") long depId, String departmentName) {
 		
-		return depServise.depUpdate(depId, departmentName);
+		return depService.depUpdate(depId, departmentName);
 	}
 	//부서 삭제 
 	@ResponseBody
 	@DeleteMapping("/admin/depDelete/{depId}")
 	public void depDelete(@PathVariable("depId") long id) {
-		depServise.depDelete(id);
+		depService.depDelete(id);
 	}
 	//부서메뉴중 팀 등록
 	@ResponseBody
@@ -124,10 +124,17 @@ public class AdminController {
 	}
 	//팀 삭제"/admin/depDelete/"+teamId
 	@ResponseBody
-	@DeleteMapping("/admin/depDelete/{teamId}")
+	@DeleteMapping("/admin/teamDelete/{teamId}")
 	public void teamDelete(@PathVariable("teamId") long id) {
 		teamService.teamDelete(id);
 	}
+	//팀이름 수정 
+		@ResponseBody
+		@PostMapping("/admin/teamUpdate/{teamId}")
+		public String teamUpdate(@PathVariable("teamId") long teamId, String teamName) {
+			
+			return teamService.teamUpdate(teamId, teamName);
+		}
 	
 //////////////////////////////////////////////////////////////////////	
     //사원 조회/수정 페이지이동

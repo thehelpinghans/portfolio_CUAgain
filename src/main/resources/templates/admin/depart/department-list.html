@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<ul class="depart flex" th:each= "dto : ${list}">
+<ul class="departBox flex" th:each= "dto : ${list}">
 							
 	<li class="flex">
 		<p class="icon-drag"><i class="fa-regular fa-bars"></i></p>
@@ -9,22 +9,22 @@
 			<i class="fa-solid fa-sort-down"></i>
 			<span th:text="${dto.name}" class="dept-name"></span>
 		</button>
-		<input type="hidden" class="department-id" th:value="${dto.id}">
+		<input type="hidden" class="department_id" th:value="${dto.id}">
 		<p class="dep-icon-menu" onclick="depIconMenuClicked(this)"><i class="fa-regular fa-ellipsis-vertical"></i></p>
 		
 		<!-- 부서메뉴 -->
 		<ul class="depart_menu"  th:id="|menuBtn_${dtoStat.count}|">
 			<li onclick="btnTeamInsertClicked(this)" class="teamIn">팀 등록</li>
-			<input type="hidden" class="department-id" th:value="${dto.id}">
+			<input type="hidden" class="department_id" th:value="${dto.id}">
 			<input type="text" class="teamInsert" onkeyup="addTeam(this,event)" placeholder="팀명 등록">
 			
 			<li>													
 				<button type="button" th:onclick="depDelete(this)" >부서 삭제</button>
-				<input type="hidden" class="department-id" th:value="${dto.id}">
+				<input type="hidden" class="department_id" th:value="${dto.id}">
 			</li>
 			
 			<li onclick="depUpdate(this)" class="depUp">부서명 수정</a></li>
-			<input type="hidden" class="department-id" th:value="${dto.id}">
+			<input type="hidden" class="department_id" th:value="${dto.id}">
 			<input class="depUpdate" onkeyup="depUpdateKeyup(this,event)" type="text" placeholder="부서명">
 			
 		</ul> <!-- class="depart_menu flex" -->
@@ -43,7 +43,7 @@
 					<input type="hidden" class="team_id" th:value="${team.id}" >
 				</li>
 				<li onclick="teamUpdate(this)" class="teamUp">팀명 수정</li>
-				<input type="hidden" class="team-id" th:value="${team.id}">
+				<input type="hidden" class="team_id" th:value="${team.id}">
 				<input class="teamUpdate" onkeyup="teamUpdateKeyup(this,event)" type="text" placeholder="팀명">
 				
 			</ul> 

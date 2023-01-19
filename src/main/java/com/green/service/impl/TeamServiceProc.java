@@ -54,6 +54,14 @@ public class TeamServiceProc implements TeamService{
 		teamRepo.deleteById(id);
 	}
 	
+	//팀 수정기능
+	@Transactional
+	@Override
+	public String teamUpdate(long teamId, String teamName) {
+		teamRepo.findById(teamId).map(e->e.updateTeamName(teamName)).orElseThrow();
+		return teamName;
+	}
+	
 	
 
 	

@@ -13,6 +13,8 @@ public interface TeamService {
 
 	void teamDelete(long id);
 
+	String teamUpdate(long teamId, String teamName);
+
 
 
 }
