@@ -2,9 +2,16 @@ package com.green.controller;
 
 import com.green.domain.dto.BoardInsertDTO;
 import com.green.domain.dto.BoardListDTO;
+import com.green.domain.entity.BoardEntityRepository;
 import com.green.security.MyUserDetails;
 import com.green.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +25,23 @@ public class BoardController {
     @Autowired
     private BoardService service;
 
+    @Autowired
+    private BoardEntityRepository boardRepo;
+
+//    @GetMapping("/")
+//    public String paging(@PageableDefault(page=1) Pageable pageable, Model model) {
+//    	Page<BoardListDTO> boardList= service.paging(pageable);
+//
+//    }
+
+//    @GetMapping("/")
+//    public String paging(Model model, @PageableDefault(sort = "id", direction = Sort.Direction.DESC)
+//    Pageable pageable) {
+//    	model.addAttribute("posts", service.pageList(pageable));
+//
+//    	return "";
+//
+//    }
 
 
 
@@ -46,7 +70,8 @@ public class BoardController {
     }
     //리스트페이지
     @GetMapping("/admin/board/boardList/{lType}")
-    public String boardList(@PathVariable long lType, Model model) {
+    public String boardList(@PathVariable long lType, Model model, Pageable pageable) {
+        boardRepo.findAll(pageable);
         String type;
         if(lType==0){
             type="공지사항";
@@ -87,5 +112,12 @@ public class BoardController {
         }
         return "redirect:/admin/board/boardList/"+lType;
     }
+    //목록에서 제목,번호,작성자로 검색하여 찾는 기능구현
+    @GetMapping("/admin/board/searchList/{type}/{data}")
+    public String boardListBySearch(@PathVariable String type, @PathVariable String data, Model model) {
+    	service.getBoardListBySearch(type,data,model);
+    	return "admin/board/searchResult";
+    }
+
 
 }

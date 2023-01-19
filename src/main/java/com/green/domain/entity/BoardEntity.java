@@ -22,6 +22,8 @@ public class BoardEntity extends  BaseDateEntity {
     @Column(nullable = false)
     private String title; //제목
 
+
+    
     @Lob
     @Column(nullable = false)
     private String content; //내용
@@ -41,7 +43,7 @@ public class BoardEntity extends  BaseDateEntity {
 
     @JoinColumn
     @ManyToOne(fetch = FetchType.EAGER)
-    private EmployeesEntity employees;
+    private EmployeesEntity writer;
 
 
     public BoardEntity setTitle(String title){
@@ -54,4 +56,8 @@ public class BoardEntity extends  BaseDateEntity {
     }
 
 
+    public BoardEntity setReadCount(long resultCount) {
+        this.readCount = resultCount;
+        return this;
+    }
 }
