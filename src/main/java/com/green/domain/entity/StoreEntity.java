@@ -13,12 +13,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicUpdate;
+
+import com.green.domain.dto.StoreSaveDTO;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@DynamicUpdate
 @Builder
 @Getter
 @Setter
@@ -61,4 +66,20 @@ public class StoreEntity {
 		this.manager = manager;
 		return this;
 	}
+	
+	public StoreEntity update(StoreSaveDTO e) {
+		this.id = e.getId();
+		this.name = e.getName();
+		this.content = e.getContent();
+		//this.manager = EmployeesEntity.builder().name(getManager().getName()).build();
+		return this;
+	}
+	
+	public StoreEntity storeupdate(EmployeesEntity manager, AddressEntity address) {
+		this.manager=manager;
+		this.address=address;
+		return this;
+		
+	}
+	
 }

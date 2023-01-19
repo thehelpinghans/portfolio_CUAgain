@@ -1,5 +1,8 @@
 @charset "UTF-8";
 
+input:not([type=checkbox]), button{
+	width: 100%; 
+}
 .store-list{
 	width: 1000px;
 	margin: auto;
