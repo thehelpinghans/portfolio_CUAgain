@@ -1,7 +1,6 @@
 package com.green.domain.dto;
 
 import com.green.domain.entity.BoardEntity;
-import com.green.domain.entity.BoardType;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -23,7 +22,7 @@ public class BoardListDTO {
     public BoardListDTO(BoardEntity e){
         this.id=e.getId();
         this.title = e.getTitle();
-        this.name=e.getEmployees().getName();  //조인컬럼이 있어서 가능!
+        this.name=e.getWriter().getName();  //조인컬럼이 있어서 가능!
         this.content = e.getContent();
         this.createdDate=e.getCreatedDate();
         this.readCount=e.getReadCount();

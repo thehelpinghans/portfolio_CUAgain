@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -63,10 +64,14 @@ public class BoardServiceProcess implements BoardService {
 //    }
 
     //공지사항에 등록한 값을 detail에 전달하는 기능?
+
     @Override
     public void boardListDetail(Long boardId, Model model) {
-        model.addAttribute("detail", boardRepo.findById(boardId)
-                .map(BoardDetailDTO::new).orElseThrow());
+
+        BoardEntity entity=boardRepo.findById(boardId).orElseThrow();
+        boardRepo.save(entity.setReadCount(entity.getReadCount()+1));
+       BoardDetailDTO dto=new BoardDetailDTO(entity);
+        model.addAttribute("detail", dto);
     }
 
     //공지사항 값을  수정하기위해서 수정버튼 눌렀을때 값 그대로 가져오기위한 기능
@@ -93,10 +98,10 @@ public class BoardServiceProcess implements BoardService {
                         .title(dto.getTitle())
                         .content(dto.getContent())
                         .type(BoardType.valueOf(dto.getType().toString()))
-                        .employees(emp)
+                        .writer(emp)
                 .build());
     }
-
+    @Transactional
 	@Override
 	public void getBoardListBySearch(String type, String data, Model model) {
 		if(type.equals("title")) {
@@ -104,11 +109,19 @@ public class BoardServiceProcess implements BoardService {
 					.map(e-> new BoardListDTO(e)).collect(Collectors.toList());
 			model.addAttribute("list", list);
 		} else if(type.equals("name")) {
-			List<BoardListDTO> list= boardRepo.findByNameContaining(data).stream()
-					.map(e-> new BoardListDTO(e)).collect(Collectors.toList());
+			List<BoardListDTO> list= boardRepo.findByWriterNameContaining(data)
+                    .stream()
+					.map(e-> new BoardListDTO(e))
+                    .collect(Collectors.toList());
 			model.addAttribute("list", list);
-		}
-		
+		}else {
+            BoardListDTO dto=boardRepo.findById(Long.valueOf(data))
+                    .map(BoardListDTO::new)
+                    .orElseThrow();
+            model.addAttribute("list", dto);
+
+        }
+
 	}
     
 //    @Override
