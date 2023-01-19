@@ -69,10 +69,10 @@ public class PageController {
     	depaService.getList(model);
         return "admin/depart/department-list";
     }
-  //부서관리 이동
+  //부서관리 이동시 사원데이터 가져오기 
     @GetMapping("/admin/department")
-    public String department(){
-    	//depaService.getList(model);
+    public String department(Model model){
+    	depaService.getEmpList(model);
         return "admin/depart/department";
     }
 

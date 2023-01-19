@@ -47,7 +47,7 @@ main{height:100%; background-color: white;}
 }
 /*회사명,부서명,팀명 호버시 백그라운드컬러 달라지고*/
 .corp_name:hover, .depart_name:hover, .team_name:hover{
-	background-color: #d6d6d6;
+	background-color: rgb(171, 81, 177);
 	color: #157efb;
 }
 /*회사명*/
@@ -113,7 +113,7 @@ main{height:100%; background-color: white;}
 .fix_head {
 	border-bottom: 1px solid #ddd;
 	height: 60px;
-	width: 800px;
+	width: 500px;
     position: relative;
     line-height: 20px;
     padding: 16px 0 16px 20px;
