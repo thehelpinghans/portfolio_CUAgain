@@ -12,7 +12,10 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
@@ -157,9 +160,9 @@ public class AttendServiceProcess implements AttendService {
 	}
 
 	@Override
-	public void adminList(Model model, AdminAttendanceListDTO dto) {
+	public void adminList(Model model, AdminAttendanceListDTO dto, AttendanceListRequestDTO rdto, Pageable pageable) {
 		
-		model.addAttribute("list", attendRepo.findAll().stream().map(AdminAttendanceListDTO::new).collect(Collectors.toList()));
+		Page<AttendanceEntity> result = attendRepo.findByEmployee_idAndDateBetweenOrderByDateDesc(dto.getEmployeeId(), rdto.getStart(), rdto.getEnd(), pageable);
 		
 	}
 	
@@ -169,11 +172,14 @@ public class AttendServiceProcess implements AttendService {
 	public void search(String keyword, Model model, String department) {
 		System.out.println("keyword: " + keyword);
 		List<AdminAttendanceListDTO> postsList=null;
-		if(keyword==""||department=="") {
-			postsList = attendRepo.findAllByEmployeeNameOrEmployeeDepNameContaining(keyword, department).stream().map(AdminAttendanceListDTO::new).collect(Collectors.toList());
-		}else {
-			postsList = attendRepo.findAllByEmployeeNameAndEmployeeDepNameContaining(keyword, department).stream().map(AdminAttendanceListDTO::new).collect(Collectors.toList());
-		}
+		postsList = attendRepo.findAllByEmployeeNameContainingAndEmployeeDepNameContaining(keyword, department).stream().map(AdminAttendanceListDTO::new).collect(Collectors.toList());
+//		if(keyword!=null&&department=="") {
+//			postsList = attendRepo.findAllByEmployeeNameContainingAndEmployeeDepNameContaining(keyword, department).stream().map(AdminAttendanceListDTO::new).collect(Collectors.toList());
+//		}else if(keyword==""&&department!=null){
+//			postsList = attendRepo.findAllByEmployeeNameContainingAndEmployeeDepNameContaining(keyword, department).stream().map(AdminAttendanceListDTO::new).collect(Collectors.toList());
+//		}else {
+//			postsList = attendRepo.findAllByEmployeeNameContainingAndEmployeeDepNameContaining(keyword, department).stream().map(AdminAttendanceListDTO::new).collect(Collectors.toList());
+//		}
 	  //List<AdminAttendanceListDTO> postsList = attendRepo.findAllByAttendStatusLike(keyword).stream().map(AdminAttendanceListDTO::new).collect(Collectors.toList());
 	  model.addAttribute("list", postsList);
 

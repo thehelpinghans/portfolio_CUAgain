@@ -3,6 +3,7 @@ package com.green.controller;
 import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.green.domain.dto.AdminAttendanceListDTO;
+import com.green.domain.dto.AttendanceListRequestDTO;
 import com.green.security.MyUserDetails;
 import com.green.service.AttendService;
 import com.green.service.DepartmentService;
@@ -48,8 +50,8 @@ public class PageController {
 
     //일 근태현황 페이지(어드민 페이지)
     @GetMapping("/admin/day_attendance")
-    public String dayAttendance(Model model, AdminAttendanceListDTO dto) {
-    	service.adminList(model, dto);
+    public String dayAttendance(Model model, AdminAttendanceListDTO dto, AttendanceListRequestDTO rdto, Pageable pageable) {
+		service.adminList(model, dto, rdto, pageable);
     	
     	return "admin/attendance/day_attendance";
     }

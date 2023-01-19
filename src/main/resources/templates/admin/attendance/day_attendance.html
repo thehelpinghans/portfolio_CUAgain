@@ -66,6 +66,7 @@
 					<th style="width: 100px; padding-bottom: 15px;">부서</th>
 					<td style="padding-right: 515px;">
 						<select id="department" style="width: 150px;">
+							<option value="">--부서선택--</option>
 							<option value="인사담당부">인사담당부</option>
 							<option value="경영지원본부">경영지원본부</option>
 							<option value="마케팅부">마케팅부</option>
@@ -84,7 +85,7 @@
 		
 		<button class="btn_search" onclick="search()">검색</button>
 		
-		<table class="table">
+		<table class="table input">
 		<thead>
 			<tr>
 				<th width="3%">사번</th>
@@ -96,9 +97,8 @@
 				<th width="4%">상태</th>
 			</tr>
 		</thead>
-			<tbody class="input">
-				
-				<tr  th:each="dto:${list}" th:if="${!#lists.isEmpty(list)}" >
+			<tbody>
+				<tr th:each="dto:${list}" th:if="${!#lists.isEmpty(list)}" >
 					<td th:text="${dto.employeeId}">사원번호</td>
 					<td th:text="${dto.name}">사원명</td>
 					<td th:text="${dto.department}">부서</td>
@@ -111,10 +111,10 @@
 					<td colspan="9">
 						<p>데이터가 없습니다.</p>
 					</td>
-					
 				</tr>
 			</tbody>
 		</table>
+		
 	</div>
 	<script>
 	//날짜 기본 세팅

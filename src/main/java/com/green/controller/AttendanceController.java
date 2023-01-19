@@ -54,7 +54,7 @@ public class AttendanceController {
 		return result;
 	}
 	
-	//근태 리스트
+	//근태 리스트+페이징
 	@GetMapping("/member/myAttList")
 	@ResponseBody
 	public List<AttendanceListDTO> attList(Principal principal, Pageable pageable, @ModelAttribute AttendanceListRequestDTO dto) {
@@ -75,5 +75,7 @@ public class AttendanceController {
  
        return "admin/attendance/attendSearch";
     }
+	
+	
 	
 }
