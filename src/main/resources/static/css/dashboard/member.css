@@ -14,7 +14,7 @@
 }
 .content_att{
 	margin-top: 20px;
-    width: 450px;
+    /* width: 450px; */
     height: 280px;
     padding: 17px;
     border: 2px solid #dedede;
@@ -77,8 +77,10 @@
 	border-top: 1px solid #d5d5d5;
 	border-left: 1px solid #d5d5d5;
 }
-.table td>p{
-	margin-left: 160px;
+.table .no_data>td{
 	font-size: 14px;
-	padding: 10px 0;
+	padding-top: 100px;
+}
+.att_data>td{
+	padding-top: 15px;
 }

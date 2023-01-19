@@ -1,43 +1,37 @@
 package com.green.domain.entity;
 
+import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Date;
 
-import javax.persistence.CollectionTable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
-import com.green.domain.dto.AttendanceInsertDTO;
-import com.green.domain.dto.AttendanceUpdateDTO;
-
+import com.green.domain.dto.AttendanceListDTO;
+import com.green.domain.dto.AttendanceListRequestDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
+@Data
 @Table(name = "attendance")
 @Entity
 public class AttendanceEntity{
@@ -50,7 +44,7 @@ public class AttendanceEntity{
 	
 	//사원번호
 	@JoinColumn
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.DETACH)
 	private EmployeesEntity employee;
 
 	//날짜
@@ -59,25 +53,23 @@ public class AttendanceEntity{
 	private LocalDate date;
 	
 	//출근시간
-	@Column
-	@CreationTimestamp
-	private LocalDateTime inTime;
+	@Column(nullable = true)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date inTime;
 	
 	//퇴근시간
-	@Column
-	@UpdateTimestamp
-	private LocalDateTime outTime; 
+	@Column(nullable = true)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date outTime; 
 	
 	//상태
-	@Builder.Default
-	@CollectionTable(name = "attend_status")
-	@Enumerated(EnumType.STRING)
-	@ElementCollection(fetch = FetchType.EAGER)
-	private Set<AttendStatus> status=new HashSet<>();
+	@Column(columnDefinition = "VARCHAR(255) default '출근'")
+	private String attendStatus;
 	
-	public AttendanceEntity addStatus(AttendStatus atStatus) {
-		status.add(atStatus);
-		return this;
+	
+	@PrePersist
+	public void attendStatus() {
+		this.attendStatus = this.attendStatus == null ? "출근" : this.attendStatus;
 	}
 	
 
@@ -86,9 +78,28 @@ public class AttendanceEntity{
 		return this;
 	}
 
-	public AttendanceEntity update(AttendanceUpdateDTO udto) {
-		this.outTime= udto.getOutTime();
-		return this;
-	}
 
+	public void checkStatus() {
+		//출근+9시간 check
+		Date check=Date.from(this.inTime.toInstant().plus(Duration.ofHours(9)));
+		//출근+9시간인걸 퇴근시간 이전인지 비교
+		System.out.println(inTime);
+		System.out.println(check.before(this.outTime));
+		//퇴근시간이 check시간보다 이전이면 조퇴
+		if(this.outTime.before(check)) {
+			this.attendStatus = "조퇴";
+			return;
+		}
+		this.attendStatus = "퇴근";
+	}
+	
+	public AttendanceListDTO toListDTO() {
+		return AttendanceListDTO.builder()
+		.date(date)
+		.inTime(inTime)
+		.outTime(outTime)
+		.attendStatus(attendStatus)
+		.build();
+	}
+	
 }
