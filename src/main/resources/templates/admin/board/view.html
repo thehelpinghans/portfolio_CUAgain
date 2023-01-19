@@ -8,7 +8,7 @@
     <script th:inline="javascript">
 
             function btnListClicked(){
-                var type=[[$(detail.type)]];
+                var type=[[${detail.type}]];
                 var lType;
                 if(type=="공지사항"){
                     lType=0;

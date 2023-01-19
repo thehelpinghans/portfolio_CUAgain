@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
-<div id="board-list" th:each="board:${boards}">
+<html>
+<th:block th:each="board:${list}">
     <div th:text="${board.id}" class="num" ></div>
     <div th:text="${board.title}"class="title" onclick="getBoardDetail(this)" ></div>
     <div th:text="${board.createdDate}" class="date"></div>
     <div th:text="${board.name}"></div>
     <div th:text="${board.readCount}" class="count"></div>
-</div>
+</th:block>
 </html>
