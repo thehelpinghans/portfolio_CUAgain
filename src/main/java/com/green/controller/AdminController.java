@@ -3,11 +3,16 @@ package com.green.controller;
 import com.green.domain.dto.EmployeesDetailDTO;
 import com.green.domain.dto.DepartmentDTO;
 import com.green.domain.dto.EmployeesInsertDTO;
+import com.green.domain.dto.SalaryResponseDTO;
+import com.green.domain.dto.SalarySaveDTO;
+import com.green.domain.dto.SalaryUpdateDTO;
 import com.green.domain.dto.TeamDTO;
 import com.green.domain.dto.TeamaddtDTO;
 import com.green.domain.entity.Position;
+import com.green.domain.entity.SalaryEntity;
 import com.green.service.DepartmentService;
 import com.green.service.EmployeesService;
+import com.green.service.SalaryService;
 import com.green.service.TeamService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -199,14 +204,29 @@ public class AdminController {
 		long numEmpId = Long.parseLong(empId);
 		employeesService.passUpdate(numEmpId,pass);
 	}
-
-
-	/*
-	 * //급여 등록?
-	 *
-	 * @RequestMapping("/insert.sa") public String insert(SalaryVO vo) {
-	 * service.customer_insert(Wvo); return "redirect:list.sa"; }
-	 */
+	//급여 등록
+	/* private final SalaryService salaryService; */
+	@PostMapping("/admin/salary/add")
+	public Long save(@RequestBody SalarySaveDTO requestDTO) {
+		return SalaryService.save(requestDTO);
+	}
+	// 급여 수정
+	@PostMapping("/admin/salary/adit")
+    public Long update(@PathVariable Long id, @RequestBody SalaryUpdateDTO requestDto) {
+        return SalaryService.update(id, requestDto);
+    }
+	// 급여 조회
+	@GetMapping("/admin/salary/adit")
+    public SalaryResponseDTO findById (@PathVariable Long id) {
+        return SalaryService.findById(id);
+    }
+	//급여 삭제
+	@DeleteMapping("/admin/salary/adit")
+    public Long delete(@PathVariable Long id) {
+		SalaryService.delete(id);
+        return id;
+    }
+	
 
 //    //팀등록
 //    @PostMapping("/admin/teamAdd")

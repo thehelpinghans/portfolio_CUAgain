@@ -2,20 +2,20 @@ package com.green.domain.dto;
 
 import com.green.domain.entity.SalaryStatus;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Builder
+@Getter
 @NoArgsConstructor
-@AllArgsConstructor
-@Data
-public class SalaryDTO {
-
-	private Long id;
+public class SalaryUpdateDTO {
 	private SalaryStatus s_status;
-	private String payment;
-	private Long employees_id;
 	private Long tot_pay;
+
+
+	@Builder
+	public SalaryUpdateDTO(SalaryStatus s_status, Long tot_pay) {
+		this.s_status = s_status;
+		this.tot_pay = tot_pay;
+	}
 }

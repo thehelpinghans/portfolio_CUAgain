@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -40,9 +41,19 @@ public class SalaryEntity {
 	@Enumerated(EnumType.STRING)
 	private Position position;
 	
-	
-	static Object builder() {
-		// TODO Auto-generated method stub
-		return null;
+	@Builder
+	public SalaryEntity(Long id, SalaryStatus s_status, String payment, Long employees_id, Long tot_pay, Position position) {
+		this.id = id;
+		this.s_status = s_status;
+		this.payment = payment;
+		this.employees_id = employees_id;
+		this.tot_pay = tot_pay;
+		this.position = position;
 	}
+	
+	public void update(SalaryStatus s_status, Long tot_pay) {
+		this.s_status = s_status;
+		this.tot_pay = tot_pay;
+	}
+	
 }
