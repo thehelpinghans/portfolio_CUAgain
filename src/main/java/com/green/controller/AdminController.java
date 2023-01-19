@@ -208,23 +208,22 @@ public class AdminController {
 	/* private final SalaryService salaryService; */
 	@PostMapping("/admin/salary/add")
 	public Long save(@RequestBody SalarySaveDTO requestDTO) {
-		return SalaryService.save(requestDTO);
+		return null;
 	}
 	// 급여 수정
 	@PostMapping("/admin/salary/adit")
     public Long update(@PathVariable Long id, @RequestBody SalaryUpdateDTO requestDto) {
-        return SalaryService.update(id, requestDto);
+		return null;
     }
 	// 급여 조회
 	@GetMapping("/admin/salary/adit")
     public SalaryResponseDTO findById (@PathVariable Long id) {
-        return SalaryService.findById(id);
+		return null;
     }
 	//급여 삭제
 	@DeleteMapping("/admin/salary/adit")
     public Long delete(@PathVariable Long id) {
-		SalaryService.delete(id);
-        return id;
+		return null;
     }
 	
 
