@@ -1,7 +1,9 @@
 package com.green.domain.dto;
 
+import java.time.LocalDateTime;
+
+import com.green.domain.entity.EmployeesEntity;
 import com.green.domain.entity.SalaryEntity;
-import com.green.domain.entity.SalaryStatus;
 
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -12,28 +14,25 @@ import lombok.NoArgsConstructor;
 public class SalarySaveDTO {
 
 	private Long id;
-	private SalaryStatus s_status;
-	private String payment;
-	private Long employees_id;
-	private Long tot_pay;
+	private LocalDateTime payday;
+	private EmployeesEntity employee;
+	private Long totPay;
 
 
 	@Builder
-	public SalarySaveDTO(Long id, SalaryStatus s_status, String payment, Long employees_id, Long tot_pay) {
+	public SalarySaveDTO(Long id, LocalDateTime payday, EmployeesEntity employee, Long totPay) {
 		this.id = id;
-		this.s_status = s_status;
-		this.payment = payment;
-		this.employees_id = employees_id;
-		this.tot_pay = tot_pay;
+		this.payday = payday;
+		this.employee = employee;
+		this.totPay = totPay;
 	}
 	
 	public SalaryEntity toEntity() {
 		return SalaryEntity.builder()
 				.id(id)
-				.s_status(s_status)
-				.payment(payment)
-				.employees_id(employees_id)
-				.tot_pay(tot_pay)
+				.payday(payday)
+				.employee(employee)
+				.totPay(totPay)
 				.build();
 	}
 	

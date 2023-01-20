@@ -1,4 +1,4 @@
-package com.green.domain.entity;
+                                                                                                                  package com.green.domain.entity;
 
 
 import com.green.domain.dto.EmployeesDetailDTO;
