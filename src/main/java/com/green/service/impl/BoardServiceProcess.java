@@ -6,18 +6,14 @@ import com.green.domain.dto.BoardListDTO;
 import com.green.domain.entity.*;
 import com.green.service.BoardService;
 
-import net.bytebuddy.asm.Advice.OffsetMapping.Sort;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,16 +25,12 @@ public class BoardServiceProcess implements BoardService {
     @Autowired
     private EmployeesEntityRepository empRepo;
 
-//    @Override
-//    public void save(BoardInsertDTO dto, long eid) {
-//        boardRepo.save(BoardEntity.builder()
-//                        .title(dto.getTitle())
-//                        .content(dto.getContent())
-//                        .type(BoardType.공지사항)
-//                        .employees(empRepo.findById(eid).get())
-//
-//                .build());
-//    }
+    @Override
+    @Transactional(readOnly = true)
+    public Page<BoardEntity> pageList(BoardType type, Pageable pageable){
+        return boardRepo.findByType(type, pageable);
+    }
+
 
     //등록한 값이 공지사항 리스트에 전달해주는 기능
     @Override
@@ -108,7 +100,7 @@ public class BoardServiceProcess implements BoardService {
 			List<BoardListDTO> list= boardRepo.findByTitleContaining(data).stream()
 					.map(e-> new BoardListDTO(e)).collect(Collectors.toList());
 			model.addAttribute("list", list);
-		} else if(type.equals("name")) {
+		} else if(type.equals("writer")) {
 			List<BoardListDTO> list= boardRepo.findByWriterNameContaining(data)
                     .stream()
 					.map(e-> new BoardListDTO(e))
