@@ -21,8 +21,7 @@ import com.green.service.TeamService;
 @Controller
 public class PageController {
 
-	@Autowired
-	DepartmentService depaService;
+	
 	
 	@Autowired
 	private AttendService service;
@@ -63,19 +62,13 @@ public class PageController {
     	return "admin/attendance/month_attendance";
     }
     
-    //부서관리 회사명 클릭시 부서관련 다 가져오기 
-    @GetMapping("/admin/departments")
-    public String departments(Model model){
-    	depaService.getList(model);
-        return "admin/depart/department-list";
-    }
+    
+
   //부서관리 이동시 사원데이터 가져오기 
     @GetMapping("/admin/department")
-    public String department(Model model){
-    	depaService.getEmpList(model);
+    public String department(){
         return "admin/depart/department";
     }
-
   //부서테스트이동
     @GetMapping("/admin/department3")
     public String departTest(){

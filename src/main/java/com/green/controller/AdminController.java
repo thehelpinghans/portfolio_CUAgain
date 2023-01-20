@@ -37,6 +37,7 @@ public class AdminController {
 	
 	@Autowired
 	DepartmentService depService;
+	
 
 //	@GetMapping("/board/notice")
 //	public String notice() {
@@ -101,7 +102,20 @@ public class AdminController {
     
 ///////////////////////////////////////////////////////////////
     
-   
+  //부서관리 회사명 클릭시 부서관련 다 가져오기 
+    @GetMapping("/admin/departments")
+    public String departments(Model model){
+    	depService.getList(model);
+        return "admin/depart/department-list";
+    }
+    
+    //회사명클릭시 모든사원리스트 HTML 반환
+    
+	@GetMapping("/admin/all/empList")
+	public String depAllList(Model model) {
+		depService.getEmpList(model);
+		return "admin/depart/depEmpList";
+	}
     
     //부서등록
     
@@ -227,19 +241,4 @@ public class AdminController {
 		SalaryService.delete(id);
         return id;
     }
-	
-
-//    //팀등록
-//    @PostMapping("/admin/teamAdd")
-//    public String teamadd(TeamAddDTO dto, Model model) {
-//    	teamService.save(dto, model);
-//    	return "admin/depart/department";
-//    } 
-    //이런식으로해야하나? 
-//    @PostMapping("/admin/teamAdd")
-//	public String teamadd(TeamAddDTO dto, Model model) {
-//    	teamService.updateMember(dto, model);
-//		return "redirect:/admin/depart/department";
-//	}
-    
 }
