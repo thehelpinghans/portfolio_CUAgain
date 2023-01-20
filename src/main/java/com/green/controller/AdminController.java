@@ -16,15 +16,29 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.green.domain.dto.EmployeesDetailDTO;
+import com.green.domain.dto.DepartmentDTO;
 import com.green.domain.dto.EmployeesInsertDTO;
 import com.green.domain.dto.SalaryResponseDTO;
 import com.green.domain.dto.SalarySaveDTO;
 import com.green.domain.dto.SalaryUpdateDTO;
 import com.green.domain.dto.TeamDTO;
+import com.green.domain.dto.TeamaddtDTO;
+import com.green.domain.entity.Position;
+import com.green.domain.entity.SalaryEntity;
 import com.green.service.DepartmentService;
 import com.green.service.EmployeesService;
 import com.green.service.SalaryService;
 import com.green.service.TeamService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class AdminController {
@@ -37,7 +51,9 @@ public class AdminController {
 	
 	@Autowired
 	DepartmentService depService;
-	
+
+	@Autowired
+	SalaryService salService;
 
 //	@GetMapping("/board/notice")
 //	public String notice() {
@@ -102,13 +118,13 @@ public class AdminController {
     
 ///////////////////////////////////////////////////////////////
     
-  //부서관리 회사명 클릭시 부서관련 다 가져오기 
+  //부서관리 회사명 클릭시 부서관련 다 가져오기
     @GetMapping("/admin/departments")
     public String departments(Model model){
     	depService.getList(model);
         return "admin/depart/department-list";
     }
-    
+
     //회사명클릭시 모든사원리스트 HTML 반환
     
 	@GetMapping("/admin/all/empList")
@@ -116,7 +132,7 @@ public class AdminController {
 		depService.getEmpList(model);
 		return "admin/depart/depEmpList";
 	}
-    
+
     //부서등록
     
     
@@ -219,6 +235,14 @@ public class AdminController {
 		long numEmpId = Long.parseLong(empId);
 		employeesService.passUpdate(numEmpId,pass);
 	}
+
+	//사원 검색
+	@GetMapping("/admin/salary/search/{empId}")
+	public String empSearch(Model model, @PathVariable long empId) {
+		salService.searchEmp(model, empId);
+		return "admin/salary/empSearchResult";
+	}
+
 	//급여 등록
 	/* private final SalaryService salaryService; */
 	@PostMapping("/admin/salary/add")
@@ -240,4 +264,19 @@ public class AdminController {
     public Long delete(@PathVariable Long id) {
 		return null;
     }
+	
+
+//    //팀등록
+//    @PostMapping("/admin/teamAdd")
+//    public String teamadd(TeamAddDTO dto, Model model) {
+//    	teamService.save(dto, model);
+//    	return "admin/depart/department";
+//    } 
+    //이런식으로해야하나? 
+//    @PostMapping("/admin/teamAdd")
+//	public String teamadd(TeamAddDTO dto, Model model) {
+//    	teamService.updateMember(dto, model);
+//		return "redirect:/admin/depart/department";
+//	}
+    
 }

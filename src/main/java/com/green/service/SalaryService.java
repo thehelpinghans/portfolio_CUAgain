@@ -23,6 +23,8 @@ public interface SalaryService {
 	void salaryList(Model model);
 	
 	void salaryUpdate(SalaryUpdateDTO dto);
+
+	void searchEmp(Model model, long empId);
 	
 
 	/*
