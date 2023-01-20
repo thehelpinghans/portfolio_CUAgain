@@ -3,65 +3,37 @@
 	  th:replace="~{layout/admin :: adminLayout(~{this::head}, ~{::main})}">
 <head>
 	<link rel="stylesheet" href="/css/salary/add.css">
+	
+	<script>
+		$(function(){
+			$("#btn-search").click(searchBtnClicked);
+		});
+		function searchBtnClicked(){
+			var empId=$("#empId-input").val();
+			$.ajax({
+				url:`/admin/salary/search/${empId}`,
+				type:"get",
+				success:function (resultHtml){
+					$("#search-result").html(resultHtml);
+				}
+			});
+			
+		}
+	</script>
 </head>
 <main><!--내용 채우기-->
 	<h1>급여 등록 페이지</h1>
 	<h2>급여 등록 대상 선택</h2>
-		<form>
-			<div class="searchContents">
-				<span>사원 id를 입력해주세요</span>
-				<div class="IdSearchArea">
-					<input type="search" placeholder="사원 id" onfocus="this.placeholder=''" onblur="this.placeholder='사원 id'">
-					<input class="inquireBtn" type="submit" value="사원 검색">
-				</div>
-			</div>
-		</form>
-	<h2>급여 상세</h2>
-	<form>
-	<div class="previewContents">
-		
-		<div class="MemberSelectArea">
-			<span>부서</span>
-			<select class="MemberSelect">
-				<option value="none" hidden="">선택</option>
-				<option>부서1</option>
-				<option>부서2</option>
-				<option>부서3</option>
-				<option>부서4</option>
-				<option>부서5</option>
-				<option>부서6</option>
-			</select>
+	<div class="searchContents">
+		<span>사원 id를 입력해주세요</span>
+		<div class="IdSearchArea">
+			<input id="empId-input" type="search">
+			<button id="btn-search">사원 검색</button>
 		</div>
-		<div class="MemberSelectArea">
-			<span>사원명</span>
-			<select class="MemberSelect">
-				<option value="none" hidden="">선택</option>
-				<option>김다은</option>
-				<option>안원모</option>
-				<option>이현정</option>
-				<option>최광진</option>
-				<option>홍대표</option>
-				<option>홍원기</option>
-			</select>
-		</div>
-		<div class="MemberSelectArea">
-			<span>신고귀속일자</span>
-			<input type="date">
-		</div>
-		<div class="MemberSelectArea">
-			<span>기본급</span>
-			<input placeholder="금액 입력" onfocus="this.placeholder=''" onblur="this.placeholder='금액 입력'">
-		</div>
-		<div class="MemberSelectArea">
-			<span>상여금</span>
-			<input placeholder="금액 입력" onfocus="this.placeholder=''" onblur="this.placeholder='금액 입력'">
-		</div>
-		<div class="MemberSelectArea">
-			<span>지급총액</span>
-			<input placeholder="금액 입력" onfocus="this.placeholder=''" onblur="this.placeholder='금액 입력'">
-		</div>
-		<button class="inquireBtn">급여 등록</button>
 	</div>
-	</form>
+	<div id="search-result">
+	
+	
+	</div>
 </main>
 </html>

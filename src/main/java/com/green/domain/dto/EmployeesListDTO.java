@@ -17,6 +17,7 @@ public class EmployeesListDTO {
     private String department;
     private String position;
     private String team;
+    private long baseSalary;
     //주소 처리 필드
     private String address;
 
@@ -29,6 +30,7 @@ public class EmployeesListDTO {
         hireDate= String.valueOf(e.getHireDate());
         department=e.getDep().getName();
         position=e.getPosition().getPosition();
+        baseSalary=e.getPosition().getBaseSalary();
         team=e.getTeam().getName();
     }
     public EmployeesListDTO address(AddressEntity e){

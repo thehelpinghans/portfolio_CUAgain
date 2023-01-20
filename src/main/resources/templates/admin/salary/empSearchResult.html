@@ -1,0 +1,38 @@
+<h2>급여 상세</h2>
+<form>
+	<div class="previewContents">
+		<div class="MemberSelectArea">
+			<span>부서</span>
+			<span th:text="${dto.department}"></span>
+		</div>
+		<div class="MemberSelectArea">
+			<span>팀명</span>
+			<span th:text="${dto.team}"></span>
+		</div>
+		<div class="MemberSelectArea">
+			<span>직책</span>
+			<span th:text="${dto.position}"></span>
+		</div>
+		<div class="MemberSelectArea">
+			<span>사원명</span>
+			<span th:text="${dto.name}"></span>
+		</div>
+		<div class="MemberSelectArea">
+			<span>신고귀속일자</span>
+			<input type="date">
+		</div>
+		<div class="MemberSelectArea">
+			<span>기본급</span>
+			<span th:text="${dto.baseSalary}"></span>원
+		</div>
+		<div class="MemberSelectArea">
+			<span>상여금</span>
+			<input placeholder="금액 입력" onfocus="this.placeholder=''" onblur="this.placeholder='금액 입력'">
+		</div>
+		<div class="MemberSelectArea">
+			<span>지급총액</span>
+			<span></span>
+		</div>
+		<button class="inquireBtn">급여 등록</button>
+	</div>
+	</form>
