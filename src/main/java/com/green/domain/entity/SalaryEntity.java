@@ -45,8 +45,8 @@ public class SalaryEntity {
 	 * 
 	 * this.payday = e.getPayday(); this.payment = payment; this.employees_id =
 	 * employees_id; this.tot_pay = tot_pay; this.position = position; }
-	 */
-	/*
+	
+	
 	 * public void update(SalaryStatus s_status, Long tot_pay) { this.s_status =
 	 * s_status; this.tot_pay = tot_pay; }
 	 */

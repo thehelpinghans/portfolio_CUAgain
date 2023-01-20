@@ -1,6 +1,7 @@
 package com.green.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.green.domain.dto.SalaryResponseDTO;
 import com.green.domain.dto.SalarySaveDTO;
@@ -17,20 +18,25 @@ public interface SalaryService {
 	 * default SalaryEntity dtoToEntity(SalarySaveDTO dto) { return null; }
 	 */
 
+	void salarySave(SalarySaveDTO dto);
+	
+	void salaryList(Model model);
+	
+	void salaryUpdate(SalaryUpdateDTO dto);
 	
 
-	static Long update(Long id, SalaryUpdateDTO requestDto) {
-		
-		return null;
-	}
-
-	static SalaryResponseDTO findById(Long id) {
-		
-		return null;
-	}
-
-	static void delete(Long id) {
-		
-		
-	}
+	/*
+	 * static Long update(Long id, SalaryUpdateDTO requestDto) {
+	 * 
+	 * return null; }
+	 * 
+	 * static SalaryResponseDTO findById(Long id) {
+	 * 
+	 * return null; }
+	 * 
+	 * static void delete(Long id) {
+	 * 
+	 * 
+	 * }
+	 */
 }
