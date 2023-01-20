@@ -183,7 +183,9 @@ table th {
 .board_page a:first-child {
     border-left: 1px solid #ddd;
 }
-
+.disabled{
+    color:grey;
+}
 .board_view {
     width: 100%;
     border-top: 2px solid rgb(180, 52, 148);
