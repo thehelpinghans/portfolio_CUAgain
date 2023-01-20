@@ -1,6 +1,41 @@
 .view-size-content{
     padding: 20px 10px 20px 30px;
 }
+.search-post{
+    background-color: #e4e4e4;
+    border-radius: 5px;
+}
+.search-post>*{
+    margin: 0.5em 1em;
+
+}
+.bgtrans{
+    background-color: transparent;
+
+}
+.bgtrans:focus{
+    outline: none;
+}
+.regForm>div.detail-address>label:first-child{
+    display: block;
+    padding-bottom: 10px;
+}
+
+.search-post>input[type=button]{
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 2px;
+}
+
+.regForm{
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px 10%;
+    width: 80%;
+    background-color: #f0f0f0;
+    margin-top: 20px;
+}
 
 .regForm>*{
     margin-bottom: 20px;
@@ -9,8 +44,9 @@
 
     display: flex;
     justify-content: space-around;
-    width: 50%;
+    width: 70%;
 }
+
 .regForm>label>*{
     width: 50%;
 }

@@ -96,13 +96,8 @@ public class PageController {
     }
 
     @PostMapping("/comm/checkRole")
-    public String checkRole(@AuthenticationPrincipal MyUserDetails userDetails){
-        if(userDetails.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))){
-            return "admin/main";
-        }else{
-            return "member/main";
-        }
-
+    public String checkRole(){
+        return "admin/main";
     }
     
     // 점포추가 작성 페이지
