@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.ui.Model;
 
@@ -29,9 +30,15 @@ public interface AttendService {
 
 	AttendanceEntity outCheck(Optional<AttendanceEntity> last);
 
-	void adminList(Model model, AdminAttendanceListDTO dto, AttendanceListRequestDTO rdto, Pageable pageable);
-	
-	void search(String keyword, Model model, String department);
+	//List<AdminAttendanceListDTO> getAdminList(Model model, AdminAttendanceListDTO dto, AttendanceListRequestDTO rdto, Pageable pageable);
+
+	//void adminList(Model model, AdminAttendanceListDTO dto);
+
+	void adminList(Model model, AdminAttendanceListDTO dto, int page);
+
+	void search(String keyword, Model model, String department, int page);
+
+
 
 
 	
