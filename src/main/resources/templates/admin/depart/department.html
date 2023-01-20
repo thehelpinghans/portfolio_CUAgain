@@ -7,14 +7,14 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="/css/depart/department.css"/>
 	<script type="text/javascript">
-	//부서등록버튼 누르면 새창이 떠서 등록페이지 기능구현 
-	//회사명,부서명,팀명 호버시 드래그랑 메뉴아이콘보임
 	
-	//회사명 클릭시 하위그룹(부서리스트) 토글
-	function viewDepartList(){
-		$("#org_tree").slideToggle(400);
-	}
-	
+	//문서가 로딩되면 자동으로 실행하는 함수
+	$(function(){
+		setDepartList();
+		$("#org_tree").hide();
+		
+	});
+	//부서+팀 데이터를 가져오는 함수
 	function setDepartList(){
 		$.ajax({
 	   		url:"/admin/departments",
@@ -24,17 +24,49 @@
 	   			//ajax를이용해서 동적으로 부서관련 태그들 생성된다
 	   			//동적으로 생성된 태그의 이벤트는 태그인라인 이벤트를 활용했습니다.
 	   			$("#org_tree").html(result);
+	   			viewmemberList();
+	   		}
+	    });
+	}//close jquery
+	//사원정보를 가져오는 함수
+	function viewmemberList(){
+		$.ajax({
+	   		url:"/admin/all/empList",
+	   		type:"get",
+	   		success:function(resultHtml){
+	   			$("#sel_memList").html(resultHtml);
 	   		}
 	    });
 	}//close jquery
 	
+	//부서등록버튼 누르면 새창이 떠서 등록페이지 기능구현 
 	
+	//회사명,부서명,팀명 호버시 드래그랑 메뉴아이콘보임
 	
+	//회사명 클릭시 하위그룹(부서리스트) 토글
+	function viewDepartList(){
+		$("#org_tree").slideToggle(400);
+		//회사명 눌렸을때 해당 소속 사원 리스트 조회
+		if($("#org_tree").css("display")!="none"){
+			viewmemberList();
+		}
+	}
 	//부서이름 클릭시 팀 리스트 토글
 	function btnDepartNameClicked(el){
 		target=$(el).siblings(".team_list");
 		$(".team_list").not(target).hide();
 		target.slideToggle(400);
+		var department=$(el).children(".dept-name").text();
+		if(target.css("display")!="none"){
+			$.ajax({
+				url:"/admin/all/empList",
+				type:"get",
+				data: {"department": $(el).val().trim()},
+				success:function(resultHtml){
+					$("#sel_memList").html(resultHtml);
+				}
+			});
+		}
 	}//close jquery
 	 
 	//부메클릭시 부서메뉴리스트 토글
@@ -72,7 +104,6 @@
            			//target.hide();//클릭되서 열린거 다시 숨겨주기
            			//target.siblings(".teamIn").show();	
            			setDepartList();
-           			
 				}
 			});
 		} 	
@@ -125,7 +156,6 @@
             });
         }
     }
-
 	//팀메클릭시 팀메뉴리스트 토글
 	function TeamIconMenuClicked(el){
 		var target=$(el).siblings(".team_manu");
@@ -175,17 +205,7 @@
            		}
             });
         }
-    }	
-	
-	//문서가 로딩되면 자동으로 실행하는 함수
-	$(function(){
-		setDepartList();
-		
-		
-	});
-	
-		
-		
+    }
 	</script>
 </head>
 <main>
@@ -216,15 +236,16 @@
 				<!-- 조직도-커버 -->
 				<div class="member_view flex">
 					<!-- 조직도 -->
-					<div class="organization">
+					<div class="organization fix_contents">
 						<!-- 회사명 -->
 						<div class="corp_name">
 							<!--  <button type="button" class="btn_toggle_tree">-->
 							<button type="button" class="btn_toggle_tree" onclick="viewDepartList(this)">
 								<i class="fa-solid fa-sort-down"></i>
-							</button>
+							
 							<i class="fa-regular fa-building"></i>
 							<span>CUAgain</span>
+							</button>
 						</div> <!-- class="corp_name" -->
 						
 						<!-- 회사명 밑 박스 -->
@@ -233,32 +254,10 @@
 							<!-- 부서명이 삽입되는 영역입니다. -->
 						</div> <!--  class="org_tree" -->
 					</div> <!--class="organization" -->
-					
-					<section class="fix_contents member_list">
-						<div class="fix_head memlist_head">
-							<div class="list_head"></div>
-							<div class="list_body">회사명 + 소속직원 수 </div>
-						</div>
-						<!-- 팀 선택시 팀 구성원 사원데이터를 받아서 뿌려주기 -->
-						<div class="memberlist">
-							<ul class="memberlist_head flex">
-								<li>성명</li>
-								<li>직책</li>
-								<li>핸드폰</li>
-								<li>E-MAIL</li>
-							</ul>
-						</div>
-						<br>	
-						<div>
-							
-							<ul id="emp-list" th:each="emp:${empList}">
-								<li th:text="${emp.name}">성명<li>
-								<li th:text="${emp.position}">직책<li>
-								<li th:text="${emp.phone}">핸드폰<li>
-								<li th:text="${emp.email}">E-MAIL<li>
-							</ul>
-						</div>	
-					</section> <!--  class="fix_contents member_list" -->
+					<div id="sel_memList">
+					<!-- 해당 소속사원의 정보가 나오는 영역입니다. -->
+						
+					</div>
 				</div> <!-- class="member_view" -->
 			</div> <!-- class="contents_body" -->
 		</div> <!-- class="content_depart center" -->

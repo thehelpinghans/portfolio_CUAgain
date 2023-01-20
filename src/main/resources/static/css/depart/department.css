@@ -1,7 +1,11 @@
 @charset "UTF-8";
 /*전체적용*/
 main{height:100%; background-color: white;}
-
+.contents_body{
+	margin: 5em auto;;
+	width: 1200px;
+	height: 900px;
+}
 /*아이콘 기본 설정*/
 .fa-duotone, .fa-solid, .fa-regular{
 	font-family: "FontAwesome";
@@ -10,17 +14,13 @@ main{height:100%; background-color: white;}
 }
 /*전체사이즈*/
 .view_size_depa{
-	margin: 10em auto;
-	width: 900px;
-	height: 700px;
-	padding: 3em;
+	padding: 3em auto;
 }
 /*개별적용*/
 
 .organization{
 	border: 1px solid #ddd;
-	width: 500px;
-	height: 700px;
+	width: 300px;
 	padding: 0 auto;
 }
 
@@ -40,6 +40,8 @@ main{height:100%; background-color: white;}
 .depUpdate{display: none;}
 .teamInsert{display: none;}
 .teamUpdate{display: none;}
+
+
 /*회사명 박스*/
 .corp_name_box{
 	padding: 1em;
@@ -69,7 +71,6 @@ main{height:100%; background-color: white;}
 	z-index: 10;
 	padding: 1em;
 	background-color: #fff;
-	
 	padding: 1em;
 }
 /*회사-부서등록 메뉴*/
@@ -82,7 +83,7 @@ main{height:100%; background-color: white;}
 /*부서메뉴리스트*/
 .depart_menu{
 	position:absolute;
-	left:400px;
+	left:310px;
 	z-index: 10;
 	background-color: rgba(255, 255, 255, 0.9);
 	border: 1px solid #ddd;
@@ -90,9 +91,7 @@ main{height:100%; background-color: white;}
 	padding: 1em 2em;
 }
 /*팀이름*/
-.team_name{
-	
-}
+.team_name{}
 /*클릭시 팀메뉴리스트가 토글되는 아이콘*/
 .team-icon-menu{}
 /*팀메뉴리스트*/
@@ -108,16 +107,19 @@ main{height:100%; background-color: white;}
 }
 .fix_contents {
 	border: 1px solid #ddd;
+	height: 700px;
 }
 
 .fix_head {
 	border-bottom: 1px solid #ddd;
 	height: 60px;
-	width: 500px;
     position: relative;
     line-height: 20px;
     padding: 16px 0 16px 20px;
 }
 .fix_body{
 	margin: 2em;
+}
+#sel_memList{
+	width:700px;
 }

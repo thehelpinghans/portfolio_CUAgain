@@ -74,6 +74,7 @@ public class DepartmentServiceProcess implements DepartmentService{
 	public void getEmpList(Model model) {
 		List<EmployeesEntity> result = empRepo.findAll();
 		List<EmployeesListDTO> empList = result.stream().map(EmployeesListDTO::new).collect(Collectors.toList());
+		model.addAttribute("title","CUAgain");
 		model.addAttribute("empList", empList);
 	}
 	
