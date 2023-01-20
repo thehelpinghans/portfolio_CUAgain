@@ -49,14 +49,6 @@ public class PageController {
         return "admin/main";
     }
 
-    //일 근태현황 페이지(어드민 페이지)
-    @GetMapping("/admin/day_attendance")
-    public String dayAttendance(Model model, AdminAttendanceListDTO dto, AttendanceListRequestDTO rdto, Pageable pageable) {
-		service.adminList(model, dto, rdto, pageable);
-    	
-    	return "admin/attendance/day_attendance";
-    }
-
     //월 근태현황 페이지(어드민 페이지)
     @GetMapping("/admin/month_attendance")
     public String monthAttendance() {

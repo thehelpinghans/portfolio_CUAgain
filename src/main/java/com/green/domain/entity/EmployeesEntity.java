@@ -67,7 +67,6 @@ public class EmployeesEntity {
         return this;
     }
 
-
     @JoinColumn //address_id
     @OneToOne
     private AddressEntity address;  //주소
