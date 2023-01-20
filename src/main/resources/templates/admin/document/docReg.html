@@ -14,40 +14,40 @@
 	</script>
 </head>
 <body>
-	<main>
-		<h1>결재등록</h1>
-		<form action="/member/docReg" method="post">
-			<table class="flex aicenter payment-table">
-				<tbody>
+	<main class="view-size-content">
+		<form action="/member/docReg" method="post" class="regForm">
+			<h1>결재등록</h1><br>
+			<table class="info-table">
+				<tbody class="info-body">
 				<tr>
-					<td>문서번호</td>
+					<td class="e4e4e4">문서번호</td>
 					<td>자동채번</td>
-					<td>기안일자</td>
-					<td><input type="date" class="currentDate" readonly></td>
+					<td class="e4e4e4">기안일자</td>
+					<td><input type="date" class="currentDate bgtrans" readonly></td>
 				</tr>
 
 				<tr>
-					<td>기안자</td>
+					<td class="e4e4e4">기안자</td>
 					<td>
 						<input type="hidden" th:value="${user.id}" name="writerId">
 						[[${user.name}]]
 					</td>
-					<td>기안부서</td>
+					<td class="e4e4e4">기안부서</td>
 					<td>[[${user.depName}]]</td>
 				</tr>
 				<tr>
-					<td>결재자</td>
+					<td class="e4e4e4">결재자</td>
 					<td colspan="3">
 						<input type="hidden" th:value="${user.depManagerId}" name="acceptorId">
 						<span th:text="${user.depManagerName}"></span>
 					</td>
 				</tr>
 				<tr>
-					<td>문서제목</td>
-					<td colspan="3"><input type="text" name="title" placeholder="문서명을 입력해주세요"></td>
+					<td class="e4e4e4">문서제목</td>
+					<td colspan="3"><input class="doc-title" type="text" name="title" placeholder="문서명을 입력해주세요"></td>
 				</tr>
 				<tr>
-					<td colspan="4">상세내용</td>
+					<td class="e4e4e4" colspan="4">상세내용</td>
 				</tr>
 				<tr>
 					<td colspan="4">

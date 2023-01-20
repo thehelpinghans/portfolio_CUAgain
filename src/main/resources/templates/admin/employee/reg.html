@@ -86,7 +86,7 @@
 			<br>
 			<span>프로필 사진</span>
 		</div>
-		<label><span>로그인 이메일</span><input type="text" name="email">@CUAgain.com<br></label>
+		<label><span>로그인 이메일</span><div><input type="text" name="email">@CUAgain.com</div><br></label>
 		<label><span>비밀번호</span><input type="password" id="pass1" onchange="passSameCheck();" name="pass"><br></label>
 		<label><span>비밀번호 확인</span><input type="password" id="pass2" onchange="passSameCheck();"><br></label>
 		<label id="passCheckText">비밀번호가 일치하지 않습니다. 다시 설정해 주세요.</label>
@@ -113,7 +113,7 @@
 			</select>
 			<br></label>
 
-		<div>
+		<div class="search-post">
 			<input type="text" id="postcode" name="postcode" placeholder="우편번호">
 			<input type="button" onclick="daumPostcode()" value="우편번호 찾기"><br>
 			<input type="text" id="roadAddress" name="roadAddress" placeholder="도로명주소">

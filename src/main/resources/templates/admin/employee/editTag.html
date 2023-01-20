@@ -15,9 +15,12 @@
 		</div>
 		<label><span>사원번호</span><span id="empId" th:text="${dto.id}"></span><br></label>
 		<input type="hidden" name="id" th:value="${dto.id}">
-		<label><span>재직여부</span>
-			<input id="btnNotEnd" type="radio" name="end" value="0" th:attr="checked=!${dto.end}" onclick="radioEndCheckd()"><span>재직</span>
-			<input id="btnEnd" type="radio" name="end" value="1" th:attr="checked=${dto.end}" onclick="radioEndCheckd()"><span>퇴사</span>
+		<label class="isend">
+			<span>재직여부</span>
+			<div>
+				<input id="btnNotEnd" type="radio" name="end" value="0" th:attr="checked=!${dto.end}" onclick="radioEndCheckd()"><label for="btnNotEnd">재직</label>
+				<input id="btnEnd" type="radio" name="end" value="1" th:attr="checked=${dto.end}" onclick="radioEndCheckd()"><label for="btnEnd">퇴사</label>
+			</div>
 			<br>
 		</label>
 		<span class="endDate">퇴사일</span><input class="endDate" type="date" name="endDate" th:value="${dto.endDate}"><br>
@@ -50,7 +53,7 @@
 				<option th:selected="${dto.position}==${position.name()}" th:each="position : ${positionList}" th:value="${position.name()}" th:text="${position.name()}"></option>
 			</select>
 			<br></label>
-		<div>
+		<div class="search-post">
 			<input type="text" id="postcode" name="postcode" placeholder="우편번호" th:value="${dto.postcode}">
 			<input type="button" onclick="daumPostcode()" value="우편번호 찾기"><br>
 			<input type="text" id="roadAddress" name="roadAddress" placeholder="도로명주소" th:value="${dto.roadAddress}">
