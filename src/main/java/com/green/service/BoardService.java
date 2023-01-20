@@ -3,13 +3,15 @@ package com.green.service;
 import com.green.domain.dto.BoardInsertDTO;
 import com.green.domain.dto.BoardListDTO;
 
+import com.green.domain.entity.BoardEntity;
+import com.green.domain.entity.BoardType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.ui.Model;
 
 public interface BoardService {
 
-    
+    Page<BoardEntity> pageList(BoardType type, Pageable pageable);
 
     void boardList(String type, Model model);
 
