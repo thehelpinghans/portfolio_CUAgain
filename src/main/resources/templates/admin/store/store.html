@@ -9,21 +9,31 @@
 </head>
 <body>
 	<main>
-		<table class="flex">
-			<tr class="store-list">
-				<td class="stoname">직영점명</td>
-				<td class="stodle">담당자</td>
-				<td class="stoadre">직영점 주소</td>
-			</tr>
-		</table>
-		<table class="flex">
-			<th:block th:each=" dto : ${list}">
-			<tr class="store-list">
-				<td class="stoname" th:text="${dto.name}" th:onclick="|location.href='/store/store-detail/${dto.id}'|"></td>
-				<td class="stodle" th:text="${dto.managerId}">담당자</td>
-				<td class="stoadre" th:text="${dto.jibunAddress}">직영점 주소</td>
-			</tr>
-			</th:block>
+		<div class="serch-zone">
+			<label>
+				<select id="serch-type">
+					<option value="storeName">지점명</option>
+					<option value="managerName">매니저이름</option>
+				</select>
+				 <input type="search" class="search-box" />
+			</label>
+			<button class="btn_search">검색</button>
+		</div>
+		<table class="store-table">
+			<thead>
+				<tr class="store-list">
+					<td class="stoname">직영점명</td>
+					<td class="stodle">담당자</td>
+					<td class="stoadre">직영점 주소</td>
+				</tr>
+			</thead>
+			<tbody th:each=" dto : ${list}">
+				<tr class="store-list">
+					<td class="stoname1" th:text="${dto.name}" th:onclick="|location.href='/store/store-detail/${dto.id}'|"></td>
+					<td class="stodle1" th:text="${dto.managerId}">담당자</td>
+					<td class="stoadre1" th:text="${dto.jibunAddress}">직영점 주소</td>
+				</tr>
+			</tbody>
 		</table>
 	</main>
 </body>

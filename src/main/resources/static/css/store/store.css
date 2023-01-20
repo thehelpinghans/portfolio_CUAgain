@@ -1,30 +1,72 @@
 @charset "UTF-8";
 
-input:not([type=checkbox]), button{
-	width: 100%; 
+.serch-zone{
+	width: 100%;
+    margin: 30px 0 0 0;
+    font-size: 16px;
 }
 .store-list{
-	width: 1000px;
-	margin: auto;
-	margin-left: 200px;
-	padding: 1em;
-	border-bottom: 1px solid black;
+	display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
 }
 .stoname{
-	width: 1000px;
-	margin: auto;
-	margin-left: 200px;
-	padding: 1em;
+	height: 50px;
+    padding: 3px 15px;
+    color: #333;
+    font-weight: normal;
+    vertical-align: middle;
+    border-right: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    background: #f6f6f6;
 }
 .stodle{
-	width: 1000px;
-	margin: auto;
-	margin-left: 200px;
-	padding: 1em;
+	height: 50px;
+    padding: 3px 15px;
+    color: #333;
+    font-weight: normal;
+    vertical-align: middle;
+    border-right: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    background: #f6f6f6;
 }
 .stoadre{
-	width: 1000px;
-	margin: auto;
-	margin-left: 150px;
-	padding: 1em;
+	height: 50px;
+    padding: 3px 15px;
+    vertical-align: middle;
+    border-right: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    background: #f6f6f6;
+}
+.store-table{
+	width: 100%;
+    margin: 30px 0 0 0;
+    font-size: 16px;
+    border-top: 1px solid #e5e5e5;
+    border-left: 1px solid #e5e5e5;
+}
+.stoname1{
+	height: 50px;
+    padding: 3px 15px;
+    color: #333;
+    font-weight: normal;
+    vertical-align: middle;
+    border-right: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+}
+.stodle1{
+	height: 50px;
+    padding: 3px 15px;
+    color: #333;
+    font-weight: normal;
+    vertical-align: middle;
+    border-right: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+}
+.stoadre1{
+	height: 50px;
+    padding: 3px 15px;
+    vertical-align: middle;
+    border-right: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
 }

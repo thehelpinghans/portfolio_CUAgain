@@ -71,6 +71,7 @@ public class StoreEntity {
 		this.id = e.getId();
 		this.name = e.getName();
 		this.content = e.getContent();
+		address.update(e);
 		//this.manager = EmployeesEntity.builder().name(getManager().getName()).build();
 		return this;
 	}
