@@ -18,6 +18,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.green.domain.dto.AdminAttendanceListDTO;
 import com.green.domain.dto.AttendanceInsertDTO;
@@ -133,7 +134,7 @@ public class AttendServiceProcess implements AttendService {
 		return nowAttendance;
 	}
 	
-	//근태 리스트
+	//마이 근태 리스트
 	@Override
 	public void attedList(long id, Model model) {
 		model.addAttribute("list", attendRepo.findTop5ByEmployee_idOrderByDateDesc(id).stream().map(AttendanceListDTO::new).collect(Collectors.toList()));
@@ -158,33 +159,61 @@ public class AttendServiceProcess implements AttendService {
 		
 		return attendanceListDTO;
 	}
-
+	//관리자 근태현황 들어갔을 때
 	@Override
-	public void adminList(Model model, AdminAttendanceListDTO dto, AttendanceListRequestDTO rdto, Pageable pageable) {
+	public void adminList(Model model, AdminAttendanceListDTO dto, int page) {
+	
+		int size=5;
 		
-		Page<AttendanceEntity> result = attendRepo.findByEmployee_idAndDateBetweenOrderByDateDesc(dto.getEmployeeId(), rdto.getStart(), rdto.getEnd(), pageable);
-		
+
+		Sort sort=Sort.by(Direction.DESC, "employeeId");
+		Pageable pageable=PageRequest.of(page-1, size, sort);
+		System.err.println("레포지토리 실행작동");
+		Page<AttendanceEntity> result=attendRepo.findAll(pageable);
+		int nowPage = result.getNumber()+1;
+		int startPage = Math.max(nowPage -4, 1);
+		int endPage = Math.min(nowPage +5, result.getTotalPages());
+		model.addAttribute("nowPage", nowPage);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("p", result);
+
+		model.addAttribute("list", result.stream().map(AdminAttendanceListDTO::new).collect(Collectors.toList()));
 	}
+	
 	
 	//관리자 페이지 근태검색
 	@Transactional
 	@Override
-	public void search(String keyword, Model model, String department) {
+	public void search(String keyword, Model model, String department, int page) {
+		System.err.println("실행작동");
+		
 		System.out.println("keyword: " + keyword);
-		List<AdminAttendanceListDTO> postsList=null;
-		postsList = attendRepo.findAllByEmployeeNameContainingAndEmployeeDepNameContaining(keyword, department).stream().map(AdminAttendanceListDTO::new).collect(Collectors.toList());
-//		if(keyword!=null&&department=="") {
-//			postsList = attendRepo.findAllByEmployeeNameContainingAndEmployeeDepNameContaining(keyword, department).stream().map(AdminAttendanceListDTO::new).collect(Collectors.toList());
-//		}else if(keyword==""&&department!=null){
-//			postsList = attendRepo.findAllByEmployeeNameContainingAndEmployeeDepNameContaining(keyword, department).stream().map(AdminAttendanceListDTO::new).collect(Collectors.toList());
-//		}else {
-//			postsList = attendRepo.findAllByEmployeeNameContainingAndEmployeeDepNameContaining(keyword, department).stream().map(AdminAttendanceListDTO::new).collect(Collectors.toList());
-//		}
-	  //List<AdminAttendanceListDTO> postsList = attendRepo.findAllByAttendStatusLike(keyword).stream().map(AdminAttendanceListDTO::new).collect(Collectors.toList());
-	  model.addAttribute("list", postsList);
+		
+		int size=5;
 
+		Sort sort=Sort.by(Direction.DESC, "employeeId");
+		Pageable pageable=PageRequest.of(page-1, size, sort);
+		Page<AttendanceEntity> result=attendRepo.findAllByEmployeeNameContainingAndEmployeeDepNameContaining(keyword, department,pageable);
+		System.err.println("정상실행");
+		int nowPage = result.getNumber()+1;
+		int startPage = Math.max(nowPage -4, 1);
+		int endPage = Math.min(nowPage +5, result.getTotalPages());
+		model.addAttribute("nowPage", nowPage);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		System.err.println(result.hasPrevious());
+		model.addAttribute("p",result);//.stream().map(entity->entity.toListDTO2()).collect(Collectors.toList());
+		model.addAttribute("department", department);
+		model.addAttribute("keyword", keyword);
+		
+		
+		System.err.println(result.map(AdminAttendanceListDTO::new));
+		model.addAttribute("list", result.map(AdminAttendanceListDTO::new));
 
 	}
+
+
 	
 
 }

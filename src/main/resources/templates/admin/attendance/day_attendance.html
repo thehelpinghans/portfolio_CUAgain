@@ -12,23 +12,7 @@
 		});
 		
 	});
-	function search(){
-		
-		var keyword=$(".dep").val();
-		var department=$("#department").val();
-		alert(keyword);
-		$.ajax({
-			url:"/admin/day_attendance/search",
-			data:{keyword:keyword, department:department},
-			success:function(result){
-				//alert(result);
-				$(".input").html(result);
-			},
-			error:function(){
-				alert("문제발생");
-			}
-		});
-	}
+	
 	</script>
 </head>
 <main><!--내용 채우기-->
@@ -51,40 +35,41 @@
 			<img src="/image/attendance/round.gif">
 			사원별 근태현황 관리 페이지입니다.
 		</div>
-		<table class="table">
-			<tbody>
-				<tr>
-					<th style="width: 100px; padding-bottom: 15px;">검색기간</th>
-					<td style="padding-right: 390px;">
-						<div style="padding-bottom:5px;"></div>
-						<input type="date" id="start" value="yyyy-MM-dd">
-						~
-						<input type="date" id="end">
-					</td>
-				</tr>
-				<tr>
-					<th style="width: 100px; padding-bottom: 15px;">부서</th>
-					<td style="padding-right: 515px;">
-						<select id="department" style="width: 150px;">
-							<option value="">--부서선택--</option>
-							<option value="인사담당부">인사담당부</option>
-							<option value="경영지원본부">경영지원본부</option>
-							<option value="마케팅부">마케팅부</option>
-							<option value="편의점사업부">편의점사업부</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<th style="width: 100px; padding-bottom: 15px;">사원명</th>
-					<td style="padding-right: 515px;">
-						<input type="text" name="keyword" class="dep">
-					</td>
-				</tr>
-			</tbody>
-		</table>
-		
-		<button class="btn_search" onclick="search()">검색</button>
-		
+		<form action="/admin/day_attendance/search" method="get">
+			<table class="table">
+				<tbody>
+					<tr>
+						<th style="width: 100px; padding-bottom: 15px;">검색기간</th>
+						<td style="padding-right: 390px;">
+							<div style="padding-bottom:5px;"></div>
+							<input type="date" id="start" value="yyyy-MM-dd">
+							~
+							<input type="date" id="end">
+						</td>
+					</tr>
+					<tr>
+						<th style="width: 100px; padding-bottom: 15px;">부서</th>
+						<td style="padding-right: 515px;">
+							<select id="department" name="department" style="width: 150px;">
+								<option value="">--부서선택--</option>
+								<option value="인사담당부">인사담당부</option>
+								<option value="경영지원본부">경영지원본부</option>
+								<option value="마케팅부">마케팅부</option>
+								<option value="편의점사업부">편의점사업부</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<th style="width: 100px; padding-bottom: 15px;">사원명</th>
+						<td style="padding-right: 515px;">
+							<input type="text" name="keyword" class="dep">
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<button class="btn_search" >검색</button>
+		</form>
 		<table class="table input">
 		<thead>
 			<tr>
@@ -100,7 +85,9 @@
 			<tbody>
 				<tr th:each="dto:${list}" th:if="${!#lists.isEmpty(list)}" >
 					<td th:text="${dto.employeeId}">사원번호</td>
-					<td th:text="${dto.name}">사원명</td>
+					<td >
+						<a href="/admin/day_attendance/update" th:text="${dto.name}"></a>
+					</td>
 					<td th:text="${dto.department}">부서</td>
 					<td th:text="${dto.position}">직책</td>
 					<td th:text="${dto.inTime}">출근기록</td>
@@ -108,13 +95,24 @@
 					<td th:text="${dto.attendStatus}">상태</td>
 				</tr>
 				<tr th:if="${#lists.isEmpty(list)}">
-					<td colspan="9">
+					<td colspan="5">
 						<p>데이터가 없습니다.</p>
 					</td>
 				</tr>
 			</tbody>
-		</table>
-		
+		</table>	
+	</div>
+	<div class="pageNumber" th:if="${!#lists.isEmpty(p)}">
+		<a th:if="${p.hasPrevious()}"
+			th:href="|/admin/day_attendance?page=${p.getNumber()}|">&lt;</a>
+
+		<th:block th:each="p:${#numbers.sequence(startPage, endPage)}">
+			<a th:if="${p != nowPage}" th:href="@{/admin/day_attendance?(page=${p})}"
+				th:text="${p}"></a>
+			<a th:if="${p == nowPage}" th:text="${p}" class="active"></a>
+		</th:block>
+		<!-- th:href="@{notice-boards?(page=${p})}" -->
+		<a th:if="${p.hasNext()}" th:href="|/admin/day_attendance?page=${p.getNumber()+2}|">&gt;</a>
 	</div>
 	<script>
 	//날짜 기본 세팅
@@ -126,7 +124,8 @@
 		date.setDate(date.getDate() - 7) ;//7일전 날짜
 		start = date.toISOString().slice(0, 10);
 		document.querySelector("#start").value = start;
-	}
+		
+	}	
 	</script>
 </main>
 </html>
