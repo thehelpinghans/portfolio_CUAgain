@@ -31,7 +31,7 @@ public class PageController {
     public String member(Principal principal, Model model){
     	long id=service.principalId(principal);
 		service.attedList(id, model);
-        return "member/main";
+        return "admin/main";
     }
 
     //나의 근태현황 페이지(사원페이지)
