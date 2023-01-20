@@ -39,7 +39,7 @@
         	<select id="search_type">
         		<option value="boardId">번호</option>
         		<option value="title">제목</option>
-        		<option value="name">작성자</option>
+        		<option value="writer">작성자</option>
         	</select>
         	<input id="search_data" type="text">
         </label>
@@ -54,26 +54,29 @@
                     <div class="count">조회</div>
                 </div>
                 <div id="board-list">
-                    <th:block th:each="board:${boards}">
+                    <th:block th:each="board:${pages}">
                         <div th:text="${board.id}" class="num" ></div>
                         <div th:text="${board.title}"class="title" onclick="getBoardDetail(this)" ></div>
                         <div th:text="${board.createdDate}" class="date"></div>
-                        <div th:text="${board.name}" class="name"></div>
+                        <div th:text="${board.writer}" class="name"></div>
                         <div th:text="${board.readCount}" class="count"></div>
                     </th:block>
                 </div>
 
             </div>
             <div class="board_page">
-                <a href="#" class="bt first"><<</a>
-                <a href="#" class="bt prev"><</a>
-                <a href="#" class="num on">1</a>
-                <a href="#" class="num">2</a>
-                <a href="#" class="num">3</a>
-                <a href="#" class="num">4</a>
-                <a href="#" class="num">5</a>
-                <a href="#" class="bt next">></a>
-                <a href="#" class="bt last">>></a>
+                <th:block th:if="${hasPrev}">
+                    <a th:href="|/admin/board/boardList/${lType}?page=${previous}|" role="button" class="bt prev">&lt;</a>
+                </th:block>
+
+                    <a >&lt;</a>
+                <th:block th:if="${hasNext}">
+                    <a  th:href="|/admin/board/boardList/${lType}?page=${next}|" role="button" class="bt next">&gt;</a>
+                </th:block>
+                <th:block >
+                    <a>&gt;</a>
+                </th:block>
+
             </div>
             <div class="bt_wrap">
                 <a th:href="|/admin/board/write/${type}|" class="on">등록</a>
