@@ -72,10 +72,7 @@ public class StoreServiceProcess implements StoreService {
 	@Override
 	public void update(StoreSaveDTO dto, long id, long employeeId) {
 		System.out.println(">>>수자ㅓㅇ");
-		storeRepo.findById(id).map(e->{
-			e.getAddress().update(dto);
-			return e.update(dto);
-		}).orElseThrow();
+		storeRepo.findById(id).map(e->e.update(dto));
 
 	}
 
