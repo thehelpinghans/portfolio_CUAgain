@@ -3,6 +3,7 @@ package com.green.domain.entity;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 //Enum
 @RequiredArgsConstructor //final 필드를 파라미터로 구성하는 생성자

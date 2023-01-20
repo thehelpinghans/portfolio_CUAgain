@@ -20,6 +20,7 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.green.domain.dto.AdminAttendanceListDTO;
 import com.green.domain.dto.AttendanceListDTO;
 import com.green.domain.dto.AttendanceListRequestDTO;
 
@@ -101,5 +102,16 @@ public class AttendanceEntity{
 		.attendStatus(attendStatus)
 		.build();
 	}
+	
+//	public AttendanceEntity toListDTO2(AdminAttendanceListDTO dto) {
+//		 this.employee.setId(dto.getEmployeeId());
+//		 this.employee.setName(dto.getName());
+//		 this.employee.getDep().setName(dto.getDepartment());
+//		 //this.employee.getPosition().getPosition();
+//		 this.inTime=dto.getInTime();
+//		 this.outTime=dto.getOutTime();
+//		 this.attendStatus=dto.getAttendStatus();
+//		 return this;
+//	}
 	
 }
