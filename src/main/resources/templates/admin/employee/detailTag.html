@@ -19,7 +19,7 @@
 		<label><span>로그인 이메일</span><span th:text="${dto.email}"></span><br></label>
 		<label><span>이름</span><span th:text="${dto.name}"></span><br></label>
 		<label><span>연락처</span><span th:text="${dto.phone}"></span><br></label>
-		<label><span>입사일</span><input type="date" th:value="${dto.hireDate}" readonly><br></label>
+		<label><span>입사일</span><input class="bgtrans" type="date" th:value="${dto.hireDate}" readonly><br></label>
 		<label>
 			<span>부서</span>
 			<span th:text="${dto.department}"></span>
@@ -33,7 +33,7 @@
 			<span>직책</span>
 			<span th:text="${dto.position}"></span>
 			<br></label>
-		<div>
+		<div class="detail-address">
 			<label>우편번호 : <span th:text="${dto.postcode}"></span><br></label>
 			<label>주소 :
 				<span th:text="|${dto.roadAddress}(${dto.jibunAddress}) ${dto.detailAddress} ${dto.extraAddress}|"></span>

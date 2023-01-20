@@ -1,8 +1,16 @@
 
 .endDate{
     display: inline-block;
-    width: 15%;
-    margin-left: 30%;
+    width: 20%;
+    margin-left: 50%;
+}
+.isend>*{
+    width: 50%;
+}
+.isend>div>*{
+    display: inline-block;
+    width: 2em;
+    height: 1em;
 }
 #view-list{
     width: 80%;
@@ -15,7 +23,7 @@
     align-items: center;
 }
 .searchTag>*{
-    margin-left: 20px;
+    margin-right: 10px;
 }
 .btn-search{
     line-height: 2em;
@@ -24,10 +32,33 @@
     background-color: white;
     border: 1px solid black;
 }
+#view-list>*{
+    width:90%;
+    margin: 0 auto;
 
+}
+.searchTag i{
+    font-size: 30px;
+    height: 30px;
+    min-width: 30px;
+    text-align: center;
+    line-height: 30px;
+    transition: all .5s ease;
+}
+.bx-info-square{
+    font-size: 13px;
+    height: 13px;
+    min-width: 20px;
+    text-align: center;
+    line-height: 13px;
+    transition: all .5s ease;
+    margin-top: 1px;
+
+}
 .emp-info{
-    width: 100%; overflow: auto;
-    height: 400px;
+    width:90%; overflow: auto;
+    height: 600px;
+    margin: 0 auto;
     border: 1px solid black;
     border-radius: 5px;
 }
@@ -76,7 +107,13 @@
 .emp-list-table>tbody>tr>td:nth-child(8){
     width: 30%;
 }
-
+#view-list{
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 80%;
+    background-color: #f0f0f0;
+    margin-top: 20px;
+}
 #view-list>p{
     font-size: 12px;
 
