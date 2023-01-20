@@ -36,6 +36,9 @@ public class AdminController {
 	
 	@Autowired
 	DepartmentService depService;
+	
+	@Autowired
+	SalaryService salService;
 
 //	@GetMapping("/board/notice")
 //	public String notice() {
@@ -204,6 +207,14 @@ public class AdminController {
 		long numEmpId = Long.parseLong(empId);
 		employeesService.passUpdate(numEmpId,pass);
 	}
+	
+	//사원 검색
+	@GetMapping("/admin/salary/search/{empId}")
+	public String empSearch(Model model, @PathVariable long empId) {
+		salService.searchEmp(model, empId);
+		return "admin/salary/empSearchResult";
+	}
+	
 	//급여 등록
 	/* private final SalaryService salaryService; */
 	@PostMapping("/admin/salary/add")
