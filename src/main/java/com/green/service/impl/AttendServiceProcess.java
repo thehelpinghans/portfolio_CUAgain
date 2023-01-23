@@ -2,6 +2,7 @@ package com.green.service.impl;
 
 import java.security.Principal;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,6 +19,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.green.domain.dto.AdminAttendanceListDTO;
@@ -185,16 +187,24 @@ public class AttendServiceProcess implements AttendService {
 	//관리자 페이지 근태검색
 	@Transactional
 	@Override
-	public void search(String keyword, Model model, String department, int page) {
+	public void search(String keyword, String department, String start, String end, Model model, @RequestParam(defaultValue = "1")int page) {
 		System.err.println("실행작동");
 		
 		System.out.println("keyword: " + keyword);
+		
+		DateTimeFormatter formatter=DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		System.out.println(formatter);
+		//DateTimeFormatter formatter2=DateTimeFormatter.ofPattern(end);
+		System.out.println(start);
+		LocalDate startDate=LocalDate.parse(start, formatter);
+		LocalDate endDate=LocalDate.parse(end, formatter);
+		//LocalDate.parse(end, formatter2);
 		
 		int size=5;
 
 		Sort sort=Sort.by(Direction.DESC, "employeeId");
 		Pageable pageable=PageRequest.of(page-1, size, sort);
-		Page<AttendanceEntity> result=attendRepo.findAllByEmployeeNameContainingAndEmployeeDepNameContaining(keyword, department,pageable);
+		Page<AttendanceEntity> result=attendRepo.findAllByEmployeeNameContainingAndEmployeeDepNameContainingAndDateBetweenOrderByDateDesc(keyword,department,startDate,endDate, pageable);
 		System.err.println("정상실행");
 		int nowPage = result.getNumber()+1;
 		int startPage = Math.max(nowPage -4, 1);
@@ -209,7 +219,10 @@ public class AttendServiceProcess implements AttendService {
 		
 		
 		System.err.println(result.map(AdminAttendanceListDTO::new));
+		
 		model.addAttribute("list", result.map(AdminAttendanceListDTO::new));
+		System.err.println("start : "+start);
+		System.err.println("end : "+end);
 
 	}
 
