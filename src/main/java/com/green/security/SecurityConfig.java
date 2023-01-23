@@ -41,6 +41,7 @@ public class SecurityConfig {
                         .loginPage("/")             //[GET]
                         .loginProcessingUrl("/signin")      //[POST] form태그의 action
                         .successForwardUrl("/comm/checkRole")
+                        .defaultSuccessUrl("/admin/main")
                         .usernameParameter("email")         //username -> email
                         .passwordParameter("pass")          //password -> pass
                         .permitAll()

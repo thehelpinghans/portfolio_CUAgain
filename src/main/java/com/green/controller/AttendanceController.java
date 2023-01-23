@@ -1,6 +1,7 @@
 package com.green.controller;
 
 import java.security.Principal;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,9 +81,12 @@ public class AttendanceController {
 	
 	//관리자페이지 근태관리 검색(부서, 이름)
 	@GetMapping("/admin/day_attendance/search")
-    public String search(String keyword, String department, Model model, @RequestParam(defaultValue = "1")int page) {
-       service.search(keyword,model,department,page);
- 
+    public String search(String keyword, String department, String start, String end, Model model, @RequestParam(defaultValue = "1")int page) {
+    System.out.println(start);  
+    
+	service.search(keyword,department,start,end,model,page);
+       System.out.println(department);
+       System.out.println(keyword);
        return "admin/attendance/attendSearch";
     }
 	

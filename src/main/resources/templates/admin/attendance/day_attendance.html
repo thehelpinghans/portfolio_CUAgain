@@ -42,9 +42,9 @@
 						<th style="width: 100px; padding-bottom: 15px;">검색기간</th>
 						<td style="padding-right: 390px;">
 							<div style="padding-bottom:5px;"></div>
-							<input type="date" id="start" value="yyyy-MM-dd">
+							<input type="date" name="start" id="start" value="yyyy-MM-dd">
 							~
-							<input type="date" id="end">
+							<input type="date" name="end" id="end" value="yyyy-MM-dd">
 						</td>
 					</tr>
 					<tr>
@@ -62,7 +62,7 @@
 					<tr>
 						<th style="width: 100px; padding-bottom: 15px;">사원명</th>
 						<td style="padding-right: 515px;">
-							<input type="text" name="keyword" class="dep">
+							<input type="text" name="keyword" class="dep" id="keyword">
 						</td>
 					</tr>
 				</tbody>
@@ -100,32 +100,38 @@
 					</td>
 				</tr>
 			</tbody>
-		</table>	
+		</table>
+		<ul class="pagination" id="pagination">
+			<li class="pageNumber" th:if="${!#lists.isEmpty(p)}">
+				<a th:if="${p.hasPrevious()}" th:onclick="'goSearch('+${p.getNumber()}+')'">&lt;</a>
+		
+				<th:block th:each="p:${#numbers.sequence(startPage, endPage)}">
+					<a th:if="${p != nowPage}" th:onclick="'goSearch('+${p}+')'" th:text="${p}"></a>
+					<a th:if="${p == nowPage}" th:text="${p}" class="active"></a>
+				</th:block>
+				<!-- th:href="@{notice-boards?(page=${p})}" -->
+				<a th:if="${p.hasNext()}" th:onclick="'goSearch('+${p.getNumber()+2}+')'">&gt;</a>
+			</li>
+		</ul>
 	</div>
-	<div class="pageNumber" th:if="${!#lists.isEmpty(p)}">
-		<a th:if="${p.hasPrevious()}"
-			th:href="|/admin/day_attendance?page=${p.getNumber()}|">&lt;</a>
-
-		<th:block th:each="p:${#numbers.sequence(startPage, endPage)}">
-			<a th:if="${p != nowPage}" th:href="@{/admin/day_attendance?(page=${p})}"
-				th:text="${p}"></a>
-			<a th:if="${p == nowPage}" th:text="${p}" class="active"></a>
-		</th:block>
-		<!-- th:href="@{notice-boards?(page=${p})}" -->
-		<a th:if="${p.hasNext()}" th:href="|/admin/day_attendance?page=${p.getNumber()+2}|">&gt;</a>
-	</div>
+	
 	<script>
 	//날짜 기본 세팅
 	first();
 	function first(){
 		date = new Date();//오늘날짜
-		end = date.toISOString().slice(0, 10);
+		end = date.getFullYear()+"-"+date.getMonth()+1+"-"+date.getDate();
 		document.querySelector("#end").value = end;
+		console.log(end);
 		date.setDate(date.getDate() - 7) ;//7일전 날짜
-		start = date.toISOString().slice(0, 10);
+		start = date.getFullYear()+"-"+date.getMonth()+1+"-"+date.getDate();
 		document.querySelector("#start").value = start;
-		
+		console.log(start);
 	}	
+	function goSearch(page){
+		location.href="/admin/day_attendance/search?"+"start="+document.querySelector("#start").value+"&"+"end="+document.querySelector("#end").value+"&"
+				+"department="+document.querySelector("#department").value+"&"+"keyword="+document.querySelector("#keyword").value+"&"+"page="+page;
+	}
 	</script>
 </main>
 </html>

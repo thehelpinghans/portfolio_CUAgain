@@ -2,6 +2,7 @@ package com.green.service;
 
 import java.security.Principal;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,7 +37,11 @@ public interface AttendService {
 
 	void adminList(Model model, AdminAttendanceListDTO dto, int page);
 
-	void search(String keyword, Model model, String department, int page);
+	//void search(String keyword, Model model, String department, int page);
+
+
+	void search(String keyword, String department, String start, String end, Model model, int page);
+
 
 
 
