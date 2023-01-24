@@ -6,10 +6,16 @@ import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.green.service.StoreService;
+import com.green.domain.dto.AdminAttendanceListDTO;
 import com.green.domain.dto.StoreListDTO;
 import com.green.domain.dto.StoreSaveDTO;
 import com.green.domain.entity.AddressEntity;
@@ -74,6 +80,28 @@ public class StoreServiceProcess implements StoreService {
 		System.out.println(">>>수자ㅓㅇ");
 		storeRepo.findById(id).map(e->e.update(dto));
 
+	}
+
+	@Override
+	public void search(String keyword, String manager, Model model, int page) {
+		
+		int size=5;
+		
+		Sort sort=Sort.by(Direction.DESC, "managerId");
+		Pageable pageable=PageRequest.of(page-1, size, sort);
+		Page<StoreEntity> result = storeRepo.findByManagerNameContainingAndNameContaining(keyword,manager,pageable);
+		System.err.println("정상실행");
+		int nowPage = result.getNumber()+1;
+		int startPage = Math.max(nowPage -4, 1);
+		int endPage = Math.min(nowPage +5, result.getTotalPages());
+		model.addAttribute("nowPage", nowPage);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("p",result);
+		model.addAttribute("employees", manager);
+		model.addAttribute("keyword", keyword);
+		
+		model.addAttribute("list", result.map(StoreSaveDTO::new));
 	}
 
 }
