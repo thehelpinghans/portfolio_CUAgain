@@ -4,6 +4,8 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.DynamicUpdate;
 
+import com.green.domain.dto.DepartmentStringDTO;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -37,4 +39,12 @@ public class DepartmentEntity {
 	@OneToMany(mappedBy="department") //부서에 속한 팀들
 	private List<TeamEntity> department = new ArrayList<>();
 	*/
+	
+	//캘린더
+	public DepartmentStringDTO toDepartmentStringDTO() {
+        DepartmentStringDTO dto = new DepartmentStringDTO();
+        dto.setDepartment(this.name);
+        dto.setId(this.id);
+        return dto;
+    }
 }

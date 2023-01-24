@@ -2,6 +2,8 @@ package com.green.service.impl;
 
 import java.security.Principal;
 import java.time.LocalDate;
+import java.time.YearMonth;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,12 +25,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.green.domain.dto.AdminAttendanceListDTO;
+import com.green.domain.dto.AttendanceCalendarDTO;
+import com.green.domain.dto.AttendanceDetailDTO;
 import com.green.domain.dto.AttendanceInsertDTO;
 import com.green.domain.dto.AttendanceListDTO;
 import com.green.domain.dto.AttendanceListRequestDTO;
+import com.green.domain.dto.DepartmentStringDTO;
 import com.green.domain.dto.EmployeesListDTO;
 import com.green.domain.entity.AttendEntityRepository;
 import com.green.domain.entity.AttendanceEntity;
+import com.green.domain.entity.DepartmentEntity;
+import com.green.domain.entity.DepartmentEntityRepository;
 import com.green.domain.entity.EmployeesEntity;
 import com.green.domain.entity.EmployeesEntityRepository;
 import com.green.service.AttendService;
@@ -41,6 +48,9 @@ public class AttendServiceProcess implements AttendService {
 	
 	@Autowired
 	private EmployeesEntityRepository empRepo;
+	
+	@Autowired
+	private DepartmentEntityRepository departRepo;
 	
 	//@Transactional
 	@Override
@@ -225,7 +235,37 @@ public class AttendServiceProcess implements AttendService {
 		System.err.println("end : "+end);
 
 	}
-
+	
+	//풀캘린더
+	@Override
+    public List<AttendanceDetailDTO> getAttendance(AttendanceCalendarDTO dto){
+        LocalDate date = dto.getMonth().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        YearMonth month = YearMonth.from(date);
+        LocalDate start = month.atDay(1);
+        LocalDate end = month.atEndOfMonth();
+        List<AttendanceEntity> attendance;
+        if (dto.getDepartmentId() == null) { // 전체 검색일 경우 넘어오는 데이터 없음
+            attendance = attendRepo.findAllByDateBetween(start, end);
+        } else {
+            attendance = attendRepo.findAllByDateBetweenAndEmployeeDepId(start, end, dto.getDepartmentId());
+            System.out.println("?");
+        }
+        List<AttendanceDetailDTO> attendanceDetailDTOs = new ArrayList<AttendanceDetailDTO>();
+        for (AttendanceEntity entity : attendance) {
+            attendanceDetailDTOs.add(entity.toAttendDetailDTO());
+        }
+        return attendanceDetailDTOs;
+    }
+    @Override
+    public void getDepartmentList(Model model) {
+        // TODO Auto-generated method stub
+        List<DepartmentEntity> entities = departRepo.findAll();
+        List<DepartmentStringDTO> dto = new ArrayList<DepartmentStringDTO>();
+        for (DepartmentEntity entity : entities) {
+            dto.add(entity.toDepartmentStringDTO());
+        }
+        model.addAttribute("departments", dto);
+    }
 
 	
 

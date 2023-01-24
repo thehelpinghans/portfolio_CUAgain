@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.green.domain.dto.AdminAttendanceListDTO;
+import com.green.domain.dto.AttendanceCalendarDTO;
+import com.green.domain.dto.AttendanceDetailDTO;
 import com.green.domain.dto.AttendanceListDTO;
 import com.green.domain.dto.AttendanceListRequestDTO;
 import com.green.domain.entity.AttendanceEntity;
@@ -96,4 +98,12 @@ public class AttendanceController {
 		return "/admin/attendance/attendanceUpdate";
 	}
 	
+	// 월 근태 현환
+    @GetMapping("month/attendance")
+    @ResponseBody
+    public List<AttendanceDetailDTO> getMonthAttendance(@ModelAttribute AttendanceCalendarDTO dto){
+        System.out.println(dto);
+        List<AttendanceDetailDTO> attendanceDetailDTOs = service.getAttendance(dto);
+        return attendanceDetailDTOs;
+    }
 }

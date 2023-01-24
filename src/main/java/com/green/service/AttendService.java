@@ -11,6 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.ui.Model;
 
 import com.green.domain.dto.AdminAttendanceListDTO;
+import com.green.domain.dto.AttendanceCalendarDTO;
+import com.green.domain.dto.AttendanceDetailDTO;
 import com.green.domain.dto.AttendanceListDTO;
 import com.green.domain.dto.AttendanceListRequestDTO;
 import com.green.domain.entity.AttendanceEntity;
@@ -41,6 +43,10 @@ public interface AttendService {
 
 
 	void search(String keyword, String department, String start, String end, Model model, int page);
+
+	List<AttendanceDetailDTO> getAttendance(AttendanceCalendarDTO dto);
+
+	void getDepartmentList(Model model);
 
 
 

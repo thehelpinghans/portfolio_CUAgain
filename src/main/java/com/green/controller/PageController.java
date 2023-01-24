@@ -50,8 +50,9 @@ public class PageController {
 
     //월 근태현황 페이지(어드민 페이지)
     @GetMapping("/admin/month_attendance")
-    public String monthAttendance() {
-    	return "admin/attendance/month_attendance";
+    public String monthAttendance(Model model) {
+        service.getDepartmentList(model);
+        return "admin/attendance/month_attendance";
     }
     
     
