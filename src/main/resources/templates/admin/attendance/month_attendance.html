@@ -109,7 +109,7 @@
                 <tr>
                     <th width="12%">부서</th>
                     <td>
-                        <select style="width: 150px;" id="department">
+                        <select style="width: 150px; margin-right: 520px; margin-top: 5px;" id="department">
                             <option value="" selected>전체</option>
                             <div th:each="d : ${departments}">
                                 <option th:value="${d.id}" th:text="${d.department}"></option>
