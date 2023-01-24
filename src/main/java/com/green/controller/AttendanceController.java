@@ -1,7 +1,6 @@
 package com.green.controller;
 
 import java.security.Principal;
-import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,7 +18,6 @@ import com.green.domain.dto.AttendanceCalendarDTO;
 import com.green.domain.dto.AttendanceDetailDTO;
 import com.green.domain.dto.AttendanceListDTO;
 import com.green.domain.dto.AttendanceListRequestDTO;
-import com.green.domain.entity.AttendanceEntity;
 import com.green.service.AttendService;
 
 @Controller
@@ -98,12 +95,17 @@ public class AttendanceController {
 		return "/admin/attendance/attendanceUpdate";
 	}
 	
-	// 월 근태 현환
+	// 월 근태 현황
     @GetMapping("month/attendance")
     @ResponseBody
     public List<AttendanceDetailDTO> getMonthAttendance(@ModelAttribute AttendanceCalendarDTO dto){
         System.out.println(dto);
         List<AttendanceDetailDTO> attendanceDetailDTOs = service.getAttendance(dto);
         return attendanceDetailDTOs;
+    }
+    
+    @GetMapping("/admin/scheduleCalendar")
+    public String schedule() {
+    	return "admin/attendance/scheduleCalendar";
     }
 }
