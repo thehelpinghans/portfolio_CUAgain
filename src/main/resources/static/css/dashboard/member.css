@@ -84,3 +84,12 @@
 .att_data>td{
 	padding-top: 15px;
 }
+.img{
+	width: 100px;
+	height: 100px;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	position: relative;
+	display: inline-block;
+}
