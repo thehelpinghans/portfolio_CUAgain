@@ -109,4 +109,12 @@ public class EmployeesEntity {
         this.pass=pass;
     }
     
+    //캘린더
+    public EmployeesDetailDTO toEmployDTO() {
+        return EmployeesDetailDTO.builder()
+        .id(id)
+        .name(name)
+        .team(this.team.getName())
+        .build();
+    }
 }
