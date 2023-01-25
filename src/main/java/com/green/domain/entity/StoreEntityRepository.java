@@ -9,9 +9,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StoreEntityRepository extends JpaRepository<StoreEntity, Long>{
 
-
 	Page<StoreEntity> findByNameContaining(String name, Pageable pageable);
 
 	Page<StoreEntity> findByManagerNameContaining(String name, Pageable pageable);
 
+	Page<StoreEntity> findAll(Pageable pageable);
+
+	
 }

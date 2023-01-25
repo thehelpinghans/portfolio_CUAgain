@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/css/commons/common.css">
-<link rel="stylesheet" href="/css/admin/store-detail.css">
+<link rel="stylesheet" href="/css/store/store-detail.css">
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/js/employee/daumPostcode.js"></script>
 <script type="text/javascript">
@@ -28,36 +28,36 @@
 <body>
 	<main>
 		<h1>점포상세페이지</h1>
-			<ul id="default" class="flex" >
-				<li>
+			<ul id="default" class="det-p flex" >
+				<li class="det-li">
 					<span th:text="${dto.name}">점포명</span>
 				</li>
-				<li>
+				<li class="det-li">
 					<span th:text="${dto.managerName}">메니저 이름</span>
 				</li>
-				<li>
+				<li class="det-li">
 					<span th:text="${dto.content}">상세정보</span>
 				</li>
-				<li>
+				<li class="det-li">
 					<span th:text="${dto.postcode}">우편번호</span>
 				</li>
-				<li>
+				<li class="det-li">
 					<span th:text="${dto.roadAddress}">도로명주소</span>
 				</li>
-				<li>
+				<li class="det-li">
 					<span th:text="${dto.jibunAddress}">지번주소</span>
 				</li>
-				<li>
+				<li class="det-li">
 					<span th:text="${dto.detailAddress}">주소상세정보</span>
 				</li>
-				<li>
+				<li class="det-li">
 					<span th:text="${dto.extraAddress}">동이름</span>
 				</li>
-				<li>
+				<li class="det-li">
 					<form th:action="|/store/store-detail/${dto.id}|" method="post">
 						<input type="hidden" name="_method" value="DELETE">
 						<button>삭제</button>
-						<button type="button" id="btnEdit">수정</button>
+						<button class="btn-ed" type="button" id="btnEdit">수정</button>
 					</form>
 				</li>
 			</ul>
