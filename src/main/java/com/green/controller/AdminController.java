@@ -119,7 +119,7 @@ public class AdminController {
 ///////////////////////////////////////////////////////////////
     
   //부서관리 회사명 클릭시 부서관련 다 가져오기
-    @GetMapping("/admin/departments")
+    @GetMapping("/member/departments")
     public String departments(Model model){
     	depService.getList(model);
         return "admin/depart/department-list";
@@ -127,7 +127,7 @@ public class AdminController {
 
     //회사명클릭시 모든사원리스트 HTML 반환
     
-	@GetMapping("/admin/all/empList")
+	@GetMapping("/member/all/empList")
 	public String depAllList(Model model) {
 		depService.getEmpList(model);
 		return "admin/depart/depEmpList";
