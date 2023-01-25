@@ -33,7 +33,7 @@ public class StoreController {
 	public String getlist(Model model) {
 		System.out.println("eeeeeeeeeeeeeeeeeeee");
 		service.getlist(model);
-		return "/admin/store/store";
+		return "admin/store/store";
 	}
 	
 	@PostMapping("/admin/store-write")
@@ -63,9 +63,9 @@ public class StoreController {
 	}
 	
 	@GetMapping("/admin/store-search")
-	public String search(String keyword, String manager, Model model, @RequestParam(defaultValue = "1")int page) {
-		service.search(keyword, manager, model, page);
+	public String search(String name, String type, Model model, @RequestParam(defaultValue = "1")int page) {
+		service.search(name, type, model, page);
 		
-		return "redirect:/admin/store";
+		return "admin/store/store";
 	}
 }

@@ -17,7 +17,7 @@ public interface StoreService {
 
 	void update(StoreSaveDTO dto, long id, long employeeId);
 
-	void search(String ketword, String manager, Model model, int page);
+	void search(String name, String type, Model model, int page);
 
 
 }
