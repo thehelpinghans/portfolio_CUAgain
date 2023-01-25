@@ -39,7 +39,7 @@ public class PageController {
     public String myAttendance(Principal principal, Model model){
     	long id=service.principalId(principal);
 //    	service.myAttList(id, model)
-        return "member/attendance/my_attendance";
+        return "admin/attendance/my_attendance";
     }
 
 //    //임시, 어드민페이지로 이동

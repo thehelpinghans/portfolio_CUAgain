@@ -9,6 +9,10 @@
 	$(function(){
 		$(".btn-on").click(on);
 		$(".btn-off").click(off);
+		var img=$(".img2").val();
+		$(".img").css("background-image", "url("+img+")");
+		console.log(img);
+		
 	});
 	//출근 버튼 누르면 출근시간 보여주고 db저장
 	function on(){
@@ -84,7 +88,9 @@
 			    	</div>
 			    	<div class="content_info">
 			    		<!-- 여기에는 나중에 사원등록 되면 불러오고 싶은 데이터 넣어주면 될 거 같아요. 아래는 예시로 직접 값 넣었슴다..(프사,부서,팀,직책,이름) -->
-			    		<p><img class="proflie" src="/image/attendance/profile_sample.jpg"></p>
+			    		<label class="img"> </label>
+			    		<input class="img2" type="hidden" th:value="${employee.image}">
+			    		<!-- <p><img th:src="${employee.image}" th:value="${employee.image}"> --><!-- <img class="proflie" src="/image/attendance/profile_sample.jpg"> --></p>
 			    		<p th:text="${employee.department}+' '+${employee.team}">부서,팀</p>
 			    		<p th:text="${employee.name}+' '+${employee.position}">스피츠 팀장</p>
 				    </div>
