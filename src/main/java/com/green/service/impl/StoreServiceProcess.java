@@ -53,10 +53,25 @@ public class StoreServiceProcess implements StoreService {
 				.name(dto.getName()).build());
 	}
 
+	/**
+	 * 기본 페이지 -> 페이징 처리
+	 */
 	@Transactional
 	@Override
-	public void getlist(Model model) {
-		List<StoreEntity> result = storeRepo.findAll();
+	public void getlist(Model model, int page) {
+		int size=2;
+		Sort sort=Sort.by(Direction.DESC, "managerId");
+		Pageable pageable=PageRequest.of(page-1, size, sort);
+		Page<StoreEntity> result = storeRepo.findAll(pageable);
+		
+		int nowPage = result.getNumber()+1;
+		int startPage = Math.max(nowPage -4, 1);
+		int endPage = Math.min(nowPage +5, result.getTotalPages());
+		model.addAttribute("nowPage", nowPage);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("p",result);
+		
 		List<StoreListDTO> list = result.stream().map(StoreListDTO :: new).collect(Collectors.toList());
 		model.addAttribute("list" , list);
 		
@@ -81,15 +96,19 @@ public class StoreServiceProcess implements StoreService {
 		storeRepo.findById(id).map(e->e.update(dto));
 
 	}
-
+	/**
+	 * 검색 이후 페이징 처리
+	 */
 	@Override
 	public void search(String name, String type, Model model, int page) {
 		
-		int size=5;
+		int size=2;
 		
 		Sort sort=Sort.by(Direction.DESC, "managerId");
 		Pageable pageable=PageRequest.of(page-1, size, sort);
-		Page<StoreEntity> result;
+		Page<StoreEntity> result = storeRepo.findAll(pageable);
+		
+		System.err.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+result.getNumber());
 		if(type.equals("Name")) {
 			 result = storeRepo.findByNameContaining(name,pageable);
 		}else {
@@ -104,6 +123,7 @@ public class StoreServiceProcess implements StoreService {
 		model.addAttribute("endPage", endPage);
 		model.addAttribute("type", type);
 		model.addAttribute("name", name);
+		model.addAttribute("p",result);
 		
 		model.addAttribute("list", result.map(StoreSaveDTO::new));
 

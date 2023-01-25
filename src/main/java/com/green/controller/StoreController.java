@@ -30,9 +30,9 @@ public class StoreController {
 	AttendService aService;
 	
 	@GetMapping("/admin/store")
-	public String getlist(Model model) {
+	public String getlist(Model model ,@RequestParam(defaultValue = "1") int page) {
 		System.out.println("eeeeeeeeeeeeeeeeeeee");
-		service.getlist(model);
+		service.getlist(model , page);
 		return "admin/store/store";
 	}
 	

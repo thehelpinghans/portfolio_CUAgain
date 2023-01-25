@@ -37,6 +37,18 @@
 					</tr>
 				</tbody>
 			</table>
+		<div class="pageNumber" th:if="${p.getNumberOfElements()>0}">
+			<a th:if="${p.hasPrevious()}"
+				th:href="|/admin/store?page=${p.getNumber()}|">&lt;</a>
+
+			<th:block th:each="p:${#numbers.sequence(startPage, endPage)}">
+				<a th:if="${p != nowPage}" th:href="@{/admin/store?(page=${p})}"
+					th:text="${p}"></a>
+				<a th:if="${p == nowPage}" th:text="${p}" class="active"></a>
+			</th:block>
+			<!-- th:href="@{notice-boards?(page=${p})}" -->
+			<a th:if="${p.hasNext()}" th:href="|/admin/store?page=${p.getNumber()+2}|">&gt;</a>
+		</div>
 		</main>
 	</body>
 </html>

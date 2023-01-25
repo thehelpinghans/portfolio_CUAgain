@@ -9,7 +9,7 @@ public interface StoreService {
 
 	void save(StoreSaveDTO dto);
 
-	void getlist(Model model);
+	void getlist(Model model, int page);
 
 	void detail(long id, Model model);
 

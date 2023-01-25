@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+h1{
+	font-size: 34px;
+	font-weight: 600;
+	text-align: center;
+}
+
+.store-table{
+	padding: 10px 10%;
+    width: 80%;
+    margin-top: 20px;
+    border: 1px solid #444444;
+    margin-left: 50px;
+}
+.inp-t{
+	border: 1px solid #444444;
+    padding: 10px;
+	margin: 5px;
+}
+.inp-titel{
+	width: 100px;
+	height: 20px;
+	font-size: 18px;
+	font-weight: 500;
+}
+.suecs{
+	border: 1px solid #444444;
+	background-color: #e9e9e9;
+}
+.cont-t{
+	border: 1px solid #444444;
+    padding: 10px;
+	margin: 5px;
+	width: 590px;
+    height: 444px;
+}
