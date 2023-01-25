@@ -1,9 +1,15 @@
 package com.green.domain.dto;
 
 import com.green.domain.entity.EmployeesEntity;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
+
 @Data
+@Builder
+@AllArgsConstructor
 public class EmployeesDetailDTO {
 
     //증명사진처리 필드

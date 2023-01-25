@@ -1,124 +1,128 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org"
-	  th:replace="~{layout/admin :: adminLayout(~{this::head}, ~{::main})}">
+      th:replace="~{layout/admin :: adminLayout(~{this::head}, ~{::main})}">
 <head>
-	<!--필요한 head 추가-->
-	<link rel="stylesheet" href="/css/attendance/attendance.css">
-	<!-- full calendar 적용 -->
-	<script src="/js/calendar/main.js"></script>
-	<link rel="stylesheet" href="/css/attendance/main.css">
-	<script>
+    <!--필요한 head 추가-->
+    <link rel="stylesheet" href="/css/attendance/attendance.css">
+    <!-- full calendar 적용 -->
+    <script src="/js/calendar/main.js"></script>
+    <link rel="stylesheet" href="/css/attendance/main.css">
+    <script>
       document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
         var Calendar = FullCalendar.Calendar;
-   	  	var Draggable = FullCalendar.Draggable;
-   	    var containerEl = document.getElementById('external-events');
-   	    var calendarEl = document.getElementById('calendar');
-   	    
+        var Draggable = FullCalendar.Draggable;
         var calendar = new FullCalendar.Calendar(calendarEl, {
           initialView: 'dayGridMonth',
           googleCalendarApiKey : "AIzaSyDBWA82rafMdt-qfzcScMvxtr0frscbY-Y",
-          eventSources :[ 
-              {
-              	googleCalendarId : 'ko.south_korea#holiday@group.v.calendar.google.com'
-                  , color: 'white'   // an option!
-                  , textColor: 'black' // an option!
-              }
-          ],
+          defaultDate: new Date(),
+          customButtons: {
+            prev: {
+                text: "Prev month",
+                click: function(){
+                    calendar.prev()
+                    getCalendar(calendar.getDate())
+                }
+            },
+            next: {
+                text: "Next month",
+                click: function(){
+                    calendar.next()
+                    getCalendar(calendar.getDate())
+                }
+            },
+            today: {
+                text: "today",
+                click: function(){
+                    console.log(calendar.gotoDate(new Date()))
+                    getCalendar(calendar.getDate())
+                }
+            }
+          },
+          eventSources :[],
           headerToolbar: {
               left: 'prev,next today',
               center: 'title',
-              right: 'dayGridMonth,timeGridWeek,timeGridDay'
-            },
-            editable: true,
+          },
+            editable: false,
             droppable: true, // this allows things to be dropped onto the calendar
-          
         });
-     	// initialize the external events
-     	// -----------------------------------------------------------------
-		new Draggable(containerEl, {
-	   	  itemSelector: '.fc-event',
-	   	  eventData: function(eventEl) {
-	   	    return {
-	   	      title: eventEl.innerText
-	   	    };
-	   	  }
-	   	});
+        $("#btn_search").click(function(){
+            result = getCalendar(calendar.getDate())
+        })
+        function getCalendar(date){
+            calendar.removeAllEvents();
+            var result;
+            month = date.getMonth() + 1
+            if (month < 10){
+                month = "0" + month
+            }
+            $.ajax({
+                url: "/month/attendance?"
+                    + $.param({
+                        month: date.getFullYear() + "-" + month,
+                        departmentId: document.getElementById("department").value
+                }),
+                dataType: "json",
+                async: false,
+                success: function(data){
+                    // console.log(data);
+                    $.each(data, function(index, element){
+                        calendar.addEvent({
+                            title:element.employee.name + "(" + element.attendStatus + ")",
+                            start: element.date
+                        })
+                    })
+                    result = data
+                }
+            })
+            return result
+        }
+        calendar.addEvent({title:"금요일" ,start:"2023-01-20"})
         calendar.render();
-      });
+        getCalendar(calendar.getDate())
+    });
     </script>
 </head>
 <main><!--내용 채우기-->
-	<!-- <h1>월 근태현황 페이지</h1> -->
-	<div id="content">
-		<form>
-			<table>
-				<tr>
-					<td>
-						<b>월별근태현황</b>
-					</td>
-				</tr>
-				<tr>
-					<td height="5"></td>
-				</tr>
-				<tr>
-					<td height="1" bgcolor="black"></td>
-				</tr>
-			</table>
-			<div class="img">
-				<img src="/image/attendance/round.gif">
-				월별 근태현황 관리입니다.
-			</div>
-			<table class="table">
-				<tr>
-					<th width="12%">부서</th>
-					<td>
-						<select style="width: 150px;">
-							<option value="인사담당부">인사담당부</option>
-							<option value="경영지원본부">경영지원본부</option>
-							<option value="마케팅부">마케팅부</option>
-							<option value="편의점사업부">편의점사업부</option>
-						</select>
-					</td>
-				</tr>
-			</table>
-			<button class="btn_search">검색</button>
-			<table>
-				<tbody>
-					<tr>
-						
-					</tr>
-					<tr>
-						<td>
-							<button class="btn_dayD">일별상세보기</button>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			<div id='external-events'>
-			  <p>
-			    <strong>상태</strong>
-			  </p>
-			  <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
-			    <div class='fc-event-main'>출근</div>
-			  </div>
-			  <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
-			    <div class='fc-event-main'>외근</div>
-			  </div>
-			  <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
-			    <div class='fc-event-main'>연차휴가</div>
-			  </div>
-			  <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
-			    <div class='fc-event-main'>병가</div>
-			  </div>
-			  <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
-			    <div class='fc-event-main'>조퇴</div>
-			  </div>
-			</div>
-			<div id='calendar-container'>
-			  <div id='calendar'></div>
-			</div>
-		</form>
-	</div>
+    <!-- <h1>월 근태현황 페이지</h1> -->
+    <div id="content">
+        <!-- <form> -->
+            <table>
+                <tr>
+                    <td>
+                        <b>월별근태현황</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td height="5"></td>
+                </tr>
+                <tr>
+                    <td height="1" bgcolor="black"></td>
+                </tr>
+            </table>
+            <div class="img">
+                <img src="/image/attendance/round.gif">
+                월별 근태현황 관리입니다.
+            </div>
+            <table class="table">
+                <tr>
+                    <th width="12%">부서</th>
+                    <td>
+                        <select style="width: 150px; margin-right: 520px; margin-top: 5px;" id="department">
+                            <option value="" selected>전체</option>
+                            <div th:each="d : ${departments}">
+                                <option th:value="${d.id}" th:text="${d.department}"></option>
+                            </div>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <button class="btn_search" id="btn_search">검색</button>
+            <div id='calendar-container'>
+              <div id='calendar'></div>
+            </div>
+        <!-- </form> -->
+    </div>
 </main>
 </html>
