@@ -66,6 +66,10 @@ public class EmployeesEntity {
         this.roles.add(role);
         return this;
     }
+    public EmployeesEntity removeRole(MyRole role){
+        this.roles.remove(role);
+        return this;
+    }
 
     @JoinColumn //address_id
     @OneToOne
@@ -78,6 +82,14 @@ public class EmployeesEntity {
         this.hireDate = LocalDate.parse(dto.getHireDate());
         this.phone = dto.getPhone();
         this.position = Position.valueOf(dto.getPosition());
+
+        if(dto.getPosition().equals("사원")||dto.getPosition().equals("점장")||
+                dto.getPosition().equals("매니저")||dto.getPosition().equals("직원")){
+            this.removeRole(MyRole.ADMIN);
+        }else{
+            this.addRole(MyRole.ADMIN);
+        }
+
         this.end=dto.isEnd();
         if(dto.isEnd()){//퇴직일시  //값있을듯?
             this.endDate= LocalDate.parse(dto.getEndDate());

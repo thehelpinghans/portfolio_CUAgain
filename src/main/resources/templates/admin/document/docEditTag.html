@@ -1,42 +1,42 @@
-<table class="flex aicenter doc-table">
-	<tbody>
+<table class="doc-table">
+	<tbody class="info-body">
 	<tr>
-		<td>문서번호</td>
+		<td class="e4e4e4">문서번호</td>
 		<td id="doc-id" th:text="${dto.id}">자동채번</td>
-		<td>기안일자</td>
+		<td class="e4e4e4">기안일자</td>
 		<td th:text="${dto.createdDate}"></td>
 	</tr>
 
 	<tr>
-		<td>기안자</td>
+		<td class="e4e4e4">기안자</td>
 		<td th:text="${dto.writerName}">
 		</td>
-		<td>최종수정일자</td>
+		<td class="e4e4e4">최종수정일자</td>
 		<td th:text="${dto.updatedDate}"></td>
 	</tr>
 	<tr>
-		<td>기안부서</td>
+		<td class="e4e4e4">기안부서</td>
 		<td th:text="${dto.depName}"></td>
-		<td>결재자</td>
+		<td class="e4e4e4">결재자</td>
 		<td th:text="${dto.acceptorName}">
 		</td>
 	</tr>
 	<tr>
-		<td>문서상태</td>
+		<td class="e4e4e4">문서상태</td>
 		<td th:text="${dto.docStatus}"></td>
-		<td>확인상태</td>
+		<td class="e4e4e4">확인상태</td>
 		<td th:text="${dto.checkStatus}"></td>
 	</tr>
 	<tr>
-		<td>결재일</td>
+		<td class="e4e4e4">결재일</td>
 		<td colspan="3" th:text="${dto.approvalDate}"></td>
 	</tr>
 	<tr>
-		<td>문서제목</td>
+		<td class="e4e4e4">문서제목</td>
 		<td colspan="3"><input type="text" id="doc-title" th:value="${dto.title}"></td>
 	</tr>
 	<tr>
-		<td colspan="4">상세내용</td>
+		<td class="e4e4e4" colspan="4">상세내용</td>
 	</tr>
 	<tr>
 		<td colspan="4">
@@ -46,7 +46,7 @@
 	<tr>
 		<td colspan="4">
 			<button id="doc-edit-done">수정완료</button>
-			<button id="btn-edit-cancel">취소</button>
+			<button id="btn-edit-cancel">수정취소</button>
 		</td>
 	</tr>
 	</tbody>
