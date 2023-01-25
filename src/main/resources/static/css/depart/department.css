@@ -1,8 +1,17 @@
 @charset "UTF-8";
 /*전체적용*/
-main{height:100%; background-color: white;}
+.content_head{
+	margin: 3em auto;
+	padding: 2em;
+	width: 1200px;
+	height: 100px;
+}
+.title_cover{
+	font-size: 24px;
+	font-weight: 600px;
+}
 .contents_body{
-	margin: 5em auto;;
+	margin: 3em auto;
 	width: 1200px;
 	height: 900px;
 }
@@ -10,7 +19,7 @@ main{height:100%; background-color: white;}
 .fa-duotone, .fa-solid, .fa-regular{
 	font-family: "FontAwesome";
 	color: #a9a9a9;
-	padding: 0.3em;
+	
 }
 /*전체사이즈*/
 .view_size_depa{
@@ -25,14 +34,10 @@ main{height:100%; background-color: white;}
 }
 
 /*************************부서조회 추가 수정 삭제 등*************************/
-/*부서헤더*/
 
-/*부서바디*/
-.contents_body{
-	padding: 1em;
-	
-}
+
 /*****************************************************/
+.corp_manu{display: none;}
 .depart_name{display: none;}
 .depart_menu{display: none;}
 .team_list{display: none;}
@@ -44,61 +49,81 @@ main{height:100%; background-color: white;}
 
 /*회사명 박스*/
 .corp_name_box{
-	padding: 1em;
 	border: 1px solid #ddd;
 }
-/*회사명,부서명,팀명 호버시 백그라운드컬러 달라지고*/
-.corp_name:hover, .depart_name:hover, .team_name:hover{
-	background-color: rgb(171, 81, 177);
-	color: #157efb;
+.corp_name>div>p{
+	padding: 0.3em;
 }
-/*회사명*/
-.corp_name{
-	padding: 1em;
-	border-bottom: 1px solid #ddd;
+.btn_toggle_tree>p{
+	padding: 0.3em;
+}
+.ooo{
+	position: relative;
+}
+.corp_manu{
+	position: absolute;
+}
+/*회사명,부서명,팀명 호버시 백그라운드컬러 달라지고*/
+.corp_name:hover, .departList:hover, .teamBox:hover ,.team_name:hover{
+	background-color: rgb(171, 81, 177);
+}
+
+.departList{
+	padding: 0.2em;
+}
+.departList>p {
+	padding: 0.3em 1em;
 }
 /*부서명*/
 .depart_name{
 	padding-top: 1em;
-	position: relative;
-	
-}
-/*팀명*/
-.team_list{
-	border: 1px solid #ddd;
-}
-.team_name{
-	z-index: 10;
-	padding: 1em;
-	background-color: #fff;
-	padding: 1em;
-}
-/*회사-부서등록 메뉴*/
-.dep_reg{}
-/*클릭시 부서메뉴리스트가 토글되는 아이콘*/
-.dep-icon-menu{
-	position: relative;
 }
 
+/*회사-부서등록 메뉴*/
+.dep_reg{}
+/*부서리스트*/
+.aaa{
+	position: relative;
+	width: 200px;
+	padding: 0 auto;
+}
 /*부서메뉴리스트*/
 .depart_menu{
 	position:absolute;
-	left:310px;
-	z-index: 10;
+	top:0;
+	right: -200px;
+	z-index: 20;
 	background-color: rgba(255, 255, 255, 0.9);
 	border: 1px solid #ddd;
-	width:200px;
+	width:150px;
 	padding: 1em 2em;
 }
+/*팀명*/
+.team_list{
+	margin-left: 40px;
+	padding: 0.2em;
+}
+.teamBox>p{
+	padding: 0.3em 1em;
+}
 /*팀이름*/
-.team_name{}
-/*클릭시 팀메뉴리스트가 토글되는 아이콘*/
-.team-icon-menu{}
+.team_name{
+}
+/**/
+.bbb{
+	position: relative;
+	width: 200px;
+	padding: 0 auto;
+}
 /*팀메뉴리스트*/
 .team_manu{
+	position:absolute;
+	top:0;
+	right: -160px;
+	z-index: 20;
 	background-color: rgba(255, 255, 255, 0.9);
-	border-bottom: 1px solid #ddd;
-	width:200px;
+	border: 1px solid #ddd;
+	width:150px;
 	padding: 1em;
 }
 /*//////////////////내용///////////////////////////*/
@@ -112,14 +137,46 @@ main{height:100%; background-color: white;}
 
 .fix_head {
 	border-bottom: 1px solid #ddd;
-	height: 60px;
-    position: relative;
+	height: 50px;
     line-height: 20px;
-    padding: 16px 0 16px 20px;
+    padding: 1em;
+}
+.lh_select>li{
+	color: #157efb;
+	margin-right: 2em;
 }
 .fix_body{
-	margin: 2em;
+	margin: 0.5em 0.5em 0.5em 1.5em;
 }
 #sel_memList{
 	width:700px;
+}
+.memberlist{
+	padding: 0.2em;
+	height: 40px;
+}
+.memberlist>li{
+	margin: 0.4em auto;
+}
+.memberlist>ul>li{
+	margin: 0.4em auto;
+}	
+.empName{
+	width: 70px;
+}
+.empPosi{
+	width: 40px;
+}
+.empPhone{
+	width: 120px;
+}
+.empEmail{
+	width: 220px;
+}
+.empli{
+	height:600px;
+	overflow: scroll;
+}
+::-webkit-scrollbar {
+  display: none;
 }

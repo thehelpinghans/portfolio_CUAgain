@@ -57,7 +57,7 @@ public class PageController {
     
 
   //부서관리 이동시 사원데이터 가져오기 
-    @GetMapping("/admin/department")
+    @GetMapping("/member/department")
     public String department(){
         return "admin/depart/department";
     }
