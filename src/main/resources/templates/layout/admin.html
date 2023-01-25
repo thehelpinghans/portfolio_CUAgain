@@ -63,8 +63,8 @@
                 </div>
                 <div class="submenu">
                     <a href="#" class="link submenu-title">사원관리</a>
-                    <a href="/admin/emp/reg" class="link">등록</a>
-                    <a href="/admin/emp/list" class="link">조회/수정</a>
+                    <a sec:authorize="hasRole('ADMIN')" href="/admin/emp/reg" class="link">등록</a>
+                    <a href="/member/emp/list" class="link">조회/수정</a>
                 </div>
             </li>
 
@@ -162,7 +162,15 @@
                     <a href="#" class="link">삭제</a>
                 </div>
             </li>   
-                   
+
+			<li sec:authorize="isAuthenticated()">
+				<div class="title">
+					<a href="/logout" class="link">
+						<i class='bx bx-log-out' ></i>
+						<span class="name">로그아웃</span>
+					</a>
+				</div>
+			</li>
       	</ul>
     </div>
 

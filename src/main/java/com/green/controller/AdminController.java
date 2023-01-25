@@ -174,7 +174,7 @@ public class AdminController {
 	
 //////////////////////////////////////////////////////////////////////	
     //사원 조회/수정 페이지이동
-    @GetMapping("/admin/emp/list")
+    @GetMapping("/member/emp/list")
     public String empList(Model model){
 		employeesService.getEmpList(model);
         return "admin/employee/list";
@@ -219,14 +219,14 @@ public class AdminController {
 	public String empReg(EmployeesInsertDTO dto) {
 		//등록하면 dto에 업데이트! 하고 사원 리스트로 리턴
 		employeesService.save(dto);
-		return "redirect:/admin/emp/list";	//사원리스트 페이지로 이동
+		return "redirect:/member/emp/list";	//사원리스트 페이지로 이동
 	}
 	//사원 수정시
 	@PostMapping("/admin/emp/update")
 	public String empUpdate(EmployeesDetailDTO dto) {
 		//등록하면 dto에 업데이트! 하고 사원 리스트로 리턴
 		employeesService.update(dto);
-		return "redirect:/admin/emp/list";	//사원리스트 페이지로 이동
+		return "redirect:/member/emp/list";	//사원리스트 페이지로 이동
 	}
 	//사원 비밀번호 수정시
 	@ResponseBody
