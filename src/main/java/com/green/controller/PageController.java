@@ -26,7 +26,7 @@ public class PageController {
 	@Autowired
 	private AttendService service;
 	
-    //임시, 사원페이지로 이동
+    //대시보드 페이지(출퇴근 등록, 최근 근태리스트) 
     @GetMapping("/member/main")
     public String member(Principal principal, Model model){
     	long id=service.principalId(principal);
@@ -42,16 +42,17 @@ public class PageController {
         return "member/attendance/my_attendance";
     }
 
-    //임시, 어드민페이지로 이동
-    @GetMapping("/admin/main")
-    public String admin(){
-        return "admin/main";
-    }
+//    //임시, 어드민페이지로 이동
+//    @GetMapping("/admin/main")
+//    public String admin(){
+//        return "admin/main";
+//    }
 
     //월 근태현황 페이지(어드민 페이지)
     @GetMapping("/admin/month_attendance")
-    public String monthAttendance() {
-    	return "admin/attendance/month_attendance";
+    public String monthAttendance(Model model) {
+        service.getDepartmentList(model);
+        return "admin/attendance/month_attendance";
     }
     
     

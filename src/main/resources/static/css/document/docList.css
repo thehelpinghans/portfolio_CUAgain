@@ -123,6 +123,36 @@
 .doc-table>tbody{
     width: 100%;
 }
-.doc-table>tbody>*{
+.doc-table>tbody>tr{
     width: 100%;
+    border: 1px solid #444444;
+    padding: 10px;
+}
+.e4e4e4{
+    background-color: #e4e4e4;
+
+}
+.doc-table>tbody>tr>td{
+    border: 1px solid #444444;
+    padding: 10px;
+}
+.doc-table>tbody>tr>td>textarea{
+    overflow: auto;
+    resize:none;
+    width: 100%;
+    height: 40vh;
+}
+.doc-table button{
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    background-color: white;
+}
+.doc-table button{
+    margin-right: 1em;
+    display: inline-block;
+    width: 4em;
+    height: 30px;
+    line-height: 30px;
+    background-color: white;
 }

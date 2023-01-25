@@ -12,6 +12,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Repository;
+import org.springframework.ui.Model;
 
 import com.green.domain.dto.AdminAttendanceListDTO;
 
@@ -35,12 +36,16 @@ public interface AttendEntityRepository extends JpaRepository<AttendanceEntity, 
 
 	Page<AttendanceEntity> findAll(Pageable pageable);
 
+	//List<AttendanceEntity> findAllByDateContainingAndEmployeeNameContainingAndEmployeeDepNameContaining(LocalDate date, String keyword, String department);
 
-	Page<AttendanceEntity> findAllByEmployeeNameContainingAndEmployeeDepNameContaining(String keyword,
-			String department, Pageable pageable);
+	Page<AttendanceEntity> findAllByEmployeeNameContainingAndEmployeeDepNameContainingAndDateBetweenOrderByDateDesc(String keyword,
+			String department, LocalDate startDate, LocalDate endDate, Pageable pageable);
 
 
-	List<AttendanceEntity>  findAllByEmployeeNameContainingAndEmployeeDepNameContaining(String keyword, String department);
+	List<AttendanceEntity> findAllByDateBetween(LocalDate start, LocalDate end);
+
+
+	List<AttendanceEntity> findAllByDateBetweenAndEmployeeDepId(LocalDate start, LocalDate end, Long departmentId);
 
 //List<AttendanceEntity> findAllByEmployeeDepNameContaining(String keyword);
 //	@Query("SELECT * FROM attendance a join employees b on a.employee_id=b.employee_id where b.employee_name LIKE %:keyword%")

@@ -30,7 +30,7 @@
 .regForm>label{
     display: flex;
     justify-content: space-around;
-    width: 50%;
+    width: 70%;
 }
 .regForm>label>*{
     width: 50%;

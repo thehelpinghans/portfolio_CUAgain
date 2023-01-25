@@ -162,7 +162,8 @@ public class EmployeesServiceProcess implements EmployeesService {
                 .extraAddress(dto.getExtraAddress())
                 .build());
         //사원엔티티 저장
-        empRepo.save(EmployeesEntity.builder()
+        Position position = Position.valueOf(dto.getPosition());
+        EmployeesEntity entity = EmployeesEntity.builder()
                 .email(dto.getEmail() + "@CUAgain.com")
                 .pass(pe.encode(dto.getPass()))
                 .name(dto.getName())
@@ -171,11 +172,15 @@ public class EmployeesServiceProcess implements EmployeesService {
                 .image(img)
                 .team(teamRepo.findByName(dto.getTeam()).orElseThrow())
                 .dep(depaRepo.findByName(dto.getDepartment()).orElseThrow())
-                .position(Position.valueOf(dto.getPosition()))
+                .position(position)
                 .address(address)
-                .build().addRole(MyRole.USER).addRole(MyRole.ADMIN)//일단임시로롤다줌
-        );
-
+                .build().addRole(MyRole.USER);
+        if(dto.getPosition().equals("사장")||dto.getPosition().equals("이사")||
+                dto.getPosition().equals("부장")||dto.getPosition().equals("팀장")||
+                dto.getPosition().equals("대리")){
+            entity.addRole(MyRole.ADMIN);
+        }
+        empRepo.save(entity);//대리 이상이면 관리자 Role 부여
     }
 
     //사원 비밀번호 수정 처리

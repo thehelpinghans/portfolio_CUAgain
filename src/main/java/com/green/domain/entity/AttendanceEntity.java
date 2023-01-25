@@ -7,7 +7,6 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,9 +19,8 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.green.domain.dto.AdminAttendanceListDTO;
+import com.green.domain.dto.AttendanceDetailDTO;
 import com.green.domain.dto.AttendanceListDTO;
-import com.green.domain.dto.AttendanceListRequestDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -103,6 +101,17 @@ public class AttendanceEntity{
 		.build();
 	}
 	
+	//캘린더
+	public AttendanceDetailDTO toAttendDetailDTO() {
+        return AttendanceDetailDTO.builder()
+        .date(this.date)
+        .id(this.id)
+        .inTime(this.inTime)
+        .outTime(this.outTime)
+        .attendStatus(this.attendStatus)
+        .employee(this.employee.toEmployDTO())
+        .build();
+    }
 //	public AttendanceEntity toListDTO2(AdminAttendanceListDTO dto) {
 //		 this.employee.setId(dto.getEmployeeId());
 //		 this.employee.setName(dto.getName());
