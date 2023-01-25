@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.green.service.AttendService;
 import com.green.service.StoreService;
@@ -58,6 +59,13 @@ public class StoreController {
 	public String update(StoreSaveDTO dto, @PathVariable long id,Principal principal) {
 		long employeeId= aService.principalId(principal);
 		service.update(dto,id,employeeId);
+		return "redirect:/admin/store";
+	}
+	
+	@GetMapping("/admin/store-search")
+	public String search(String keyword, String manager, Model model, @RequestParam(defaultValue = "1")int page) {
+		service.search(keyword, manager, model, page);
+		
 		return "redirect:/admin/store";
 	}
 }
