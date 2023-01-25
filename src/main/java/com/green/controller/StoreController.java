@@ -38,7 +38,7 @@ public class StoreController {
 	
 	@PostMapping("/admin/store-write")
 	public String savestore(StoreSaveDTO dto) {
-		System.err.println("controller");
+		//System.err.println("controller");
 		service.save(dto);
 		return "redirect:/admin/store";
 	}

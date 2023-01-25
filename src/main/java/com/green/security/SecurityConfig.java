@@ -29,9 +29,9 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests(authorize -> authorize
-                        .antMatchers("/**").permitAll()
-                        .antMatchers("/comm/checkRole").permitAll() //롤 별로 움직
-                        .antMatchers("/css/**", "/js/**","/images/**").permitAll()
+                       // .antMatchers("/**").permitAll()
+                        .antMatchers("/comm/checkRole","/member/main").permitAll() //롤 별로 움직
+                        .antMatchers("/css/**", "/js/**","/image/**").permitAll()
                         .antMatchers("/", "/comm/**").permitAll()
                         .antMatchers("/member/**","/logout").hasRole("USER")
                         .antMatchers("/admin/**").hasRole("ADMIN")
@@ -40,7 +40,8 @@ public class SecurityConfig {
                 .formLogin(form->form
                         .loginPage("/")             //[GET]
                         .loginProcessingUrl("/signin")      //[POST] form태그의 action
-                        .successForwardUrl("/comm/checkRole")
+                        .defaultSuccessUrl("/member/main")
+                        //.successForwardUrl("/comm/checkRole")
                         .usernameParameter("email")         //username -> email
                         .passwordParameter("pass")          //password -> pass
                         .permitAll()
