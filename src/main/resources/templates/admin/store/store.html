@@ -12,11 +12,11 @@
 		<form action="/admin/store-search" method="get">
 			<div class="serch-zone">
 				<label>
-					<select id="serch-type" name="manager">
+					<select id="serch-type" name="type">
 						<option value="Name">지점명</option>
 						<option value="managerName">매니저이름</option>
 					</select>
-					 <input type="text" name="keyword" class="search-box" />
+					 <input type="text" name="name" class="search-box" />
 				</label>
 				<button class="btn-search">검색</button>
 			</div>
@@ -32,7 +32,7 @@
 				<tbody th:each=" dto : ${list}">
 					<tr class="store-list">
 						<td class="stoname1" th:text="${dto.name}" th:onclick="|location.href='/store/store-detail/${dto.id}'|"></td>
-						<td class="stodle1" th:text="${dto.managerId}">담당자</td>
+						<td class="stodle1" th:text="${dto.managerName}">담당자</td>
 						<td class="stoadre1" th:text="${dto.jibunAddress}">직영점 주소</td>
 					</tr>
 				</tbody>

@@ -83,25 +83,31 @@ public class StoreServiceProcess implements StoreService {
 	}
 
 	@Override
-	public void search(String keyword, String manager, Model model, int page) {
+	public void search(String name, String type, Model model, int page) {
 		
 		int size=5;
 		
 		Sort sort=Sort.by(Direction.DESC, "managerId");
 		Pageable pageable=PageRequest.of(page-1, size, sort);
-		Page<StoreEntity> result = storeRepo.findByManagerNameContainingAndNameContaining(keyword,manager,pageable);
-		System.err.println("정상실행");
+		Page<StoreEntity> result;
+		if(type.equals("Name")) {
+			 result = storeRepo.findByNameContaining(name,pageable);
+		}else {
+			result = storeRepo.findByManagerNameContaining(name,pageable);
+		}
+		
 		int nowPage = result.getNumber()+1;
 		int startPage = Math.max(nowPage -4, 1);
 		int endPage = Math.min(nowPage +5, result.getTotalPages());
 		model.addAttribute("nowPage", nowPage);
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
-		model.addAttribute("p",result);
-		model.addAttribute("employees", manager);
-		model.addAttribute("keyword", keyword);
+		model.addAttribute("type", type);
+		model.addAttribute("name", name);
 		
 		model.addAttribute("list", result.map(StoreSaveDTO::new));
+
+		System.err.println("정상실행");
 	}
 
 }
