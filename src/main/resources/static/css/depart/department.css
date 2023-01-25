@@ -14,11 +14,12 @@
 	margin: 3em auto;
 	width: 1200px;
 	height: 900px;
+	
 }
 /*아이콘 기본 설정*/
 .fa-duotone, .fa-solid, .fa-regular{
 	font-family: "FontAwesome";
-	color: #a9a9a9;
+	color: #bebebe;
 	
 }
 /*전체사이즈*/
@@ -28,7 +29,6 @@
 /*개별적용*/
 
 .organization{
-	border: 1px solid #ddd;
 	width: 300px;
 	padding: 0 auto;
 }
@@ -37,7 +37,8 @@
 
 
 /*****************************************************/
-.corp_manu{display: none;}
+.departAdd{display: none;}
+.corp_menu{display: none;}
 .depart_name{display: none;}
 .depart_menu{display: none;}
 .team_list{display: none;}
@@ -47,10 +48,7 @@
 .teamUpdate{display: none;}
 
 
-/*회사명 박스*/
-.corp_name_box{
-	border: 1px solid #ddd;
-}
+
 .corp_name>div>p{
 	padding: 0.3em;
 }
@@ -59,9 +57,16 @@
 }
 .ooo{
 	position: relative;
+	width: 200px;
+	padding: 0 auto;
 }
 .corp_manu{
 	position: absolute;
+	z-index:10;
+	width: 150px;
+}
+.departAdd{
+	width: 140px;
 }
 /*회사명,부서명,팀명 호버시 백그라운드컬러 달라지고*/
 .corp_name:hover, .departList:hover, .teamBox:hover ,.team_name:hover{
@@ -79,8 +84,6 @@
 	padding-top: 1em;
 }
 
-/*회사-부서등록 메뉴*/
-.dep_reg{}
 /*부서리스트*/
 .aaa{
 	position: relative;
@@ -131,8 +134,9 @@
 	margin: 0 0.5em;
 }
 .fix_contents {
-	border: 1px solid #ddd;
+	border: 2px solid #ddd;
 	height: 700px;
+	box-shadow: 1px 1px rgba(251, 211, 138,0.25);
 }
 
 .fix_head {

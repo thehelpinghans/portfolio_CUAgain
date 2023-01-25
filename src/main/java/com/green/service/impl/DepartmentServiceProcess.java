@@ -77,6 +77,13 @@ public class DepartmentServiceProcess implements DepartmentService{
 		model.addAttribute("title","CUAgain");
 		model.addAttribute("empList", empList);
 	}
+	//부서등록
+	@Override
+	public void save(DepartmentDTO dto) {
+		depRepo.save(DepartmentEntity.builder()
+				.name(dto.getName())
+				.build());
+	}
 	
 
 }

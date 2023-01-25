@@ -134,8 +134,13 @@ public class AdminController {
 	}
 
     //부서등록
-    
-    
+	@ResponseBody
+	@PostMapping("/admin/addDepart/")
+	public void depratReg(DepartmentDTO dto) {
+		//등록하면 dto에 업데이트! 하고 사원 리스트로 리턴
+		depService.save(dto);
+		//return "redirect:/admin/department";	
+	}
 	//부서이름 수정 
 	@ResponseBody
 	@PostMapping("/admin/depUpdate/{depId}")
