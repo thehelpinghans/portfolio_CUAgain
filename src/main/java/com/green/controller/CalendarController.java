@@ -22,6 +22,7 @@ public class CalendarController {
     private CalendarService calendarService;
     @Autowired
     private AttendService attendService;
+    
     @GetMapping
     @ResponseBody
     public List<CalendarDetailDTO> getCalendar(Principal principal, @ModelAttribute AttendanceCalendarDTO dto) {
@@ -29,6 +30,7 @@ public class CalendarController {
         List<CalendarDetailDTO> calendarDTO = calendarService.getCalendar(employeeId, dto.getMonth());
         return calendarDTO;
     }
+    //일정 저장
     @PostMapping
     @ResponseBody
     public void setCalendar(Principal principal, @ModelAttribute CalendarDetailDTO dto) {

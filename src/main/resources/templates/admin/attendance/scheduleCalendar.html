@@ -81,7 +81,8 @@
           eventSources :[],
           headerToolbar: {
               left: 'prev,next today',
-              center: 'AddEventButton',
+              center: 'title',
+              right:'AddEventButton'
           },
             editable: false,
             droppable: true, // this allows things to be dropped onto the calendar
@@ -142,7 +143,7 @@
             <table>
                 <tr>
                     <td>
-                        <b>월별근태현황</b>
+                        <b>일정 캘린더</b>
                     </td>
                 </tr>
                 <tr>
@@ -154,22 +155,8 @@
             </table>
             <div class="img">
                 <img src="/image/attendance/round.gif">
-                월별 근태현황 관리입니다.
+                나의 일정 캘린더입니다.
             </div>
-            <table class="table">
-                <tr>
-                    <th width="12%">부서</th>
-                    <td>
-                        <select style="width: 150px;" id="department">
-                            <option value="" selected>전체</option>
-                            <div th:each="d : ${departments}">
-                                <option th:value="${d.id}" th:text="${d.department}"></option>
-                            </div>
-                        </select>
-                    </td>
-                </tr>
-            </table>
-            <button class="btn_search" id="btn_search">검색</button>
             <div id='calendar-container'>
               <div id='calendar'></div>
             </div>
