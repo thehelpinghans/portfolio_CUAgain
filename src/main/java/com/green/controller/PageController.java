@@ -27,7 +27,7 @@ public class PageController {
 	private AttendService service;
 	
     //대시보드 페이지(출퇴근 등록, 최근 근태리스트) 
-    @GetMapping("/admin/main")
+    @GetMapping("/member/main")
     public String member(Principal principal, Model model){
     	long id=service.principalId(principal);
 		service.attedList(id, model);
