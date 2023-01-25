@@ -40,12 +40,15 @@
 	}//close jquery
 	//부서명 클릭시 부서소속사원데려오기
 	//팀명 클릭시 팀소속사원데려오기
-	
-	//회사명메뉴아이콘클릭시 회사메뉴창토글
-	function corpIconMenuClicked(el){
-		var target=$(el).parents("div").siblings(".corp_menu");
-		target.slideToggle(400);
+	//회사명메뉴아이콘클릭시 회사메뉴토글
+	function corpIconMenuClicked(){
+		$("#corp_menu").slideToggle(400);
 	}
+	//부서등록 클릭시 작성 창 보여주기
+	function btnDepartInsertClicked(el){
+		$(el).hide();//자기자신 숨기고 
+		$(el).siblings(".departAdd").show(); //작성창이 나타남
+	}; //close jquery
 	//회사명 클릭시 하위그룹(부서리스트) 토글
 	function viewDepartList(){
 		$("#org_tree").slideToggle(400);
@@ -53,6 +56,22 @@
 		if($("#org_tree").css("display")!="none"){
 			viewmemberList();
 		}
+	}
+	//부서등록
+	function addDepart(el,event) {
+		 if (event.which == 13) {//인풋태그에 값을 입력하고 엔터키실행시
+			var target=$(el);//인풋태그
+	        var name=target.text(); 
+	        $.ajax({
+         		url:"/admin/addDepart/",
+         		type:"post",
+         		data: {"name": $(el).val().trim()},
+         		success:function(result){
+         			target.parents(".depart_menu").siblings(".departList").children(".btn_depart_name").find(".dept-name").text(result); 
+           			setDepartList();
+				}
+			});
+		} 	
 	}
 	//부서이름 클릭시 팀 리스트 토글
 	function btnDepartNameClicked(el){
@@ -67,12 +86,11 @@
 				data: {"department": $(el).val().trim()},
 				success:function(resultHtml){
 					$("#sel_memList").html(resultHtml);
-					
 				}
 			});
 		}
 	}//close jquery
-	 
+	
 	//부메클릭시 부서메뉴리스트 토글
 	function depIconMenuClicked(el){
 		var target=$(el).parents("ul").siblings(".depart_menu");
@@ -97,7 +115,7 @@
 	        var dept_id=target.siblings(".department_id").val();//해당부서의 pk
 	        var departmentName=target.parents(".depart_menu").siblings(".departList").children(".btn_depart_name").find(".dept-name").text();
 	        var name=target.text(); //팀명이 입력되는 인풋값에 텍스트
-	        alert(departmentName+"의 소속되는"+name+"을 추가합니다");
+	        alert(departmentName+"의 소속되는 그룹으로 추가합니다");
 	        $.ajax({
          		url:"/admin/teamInsert/"+dept_id,
          		type:"post",
@@ -233,7 +251,7 @@
 					<div class="organization fix_contents">
 						<div>
 							<!-- 회사명 -->
-							<div class="corp_name fix_head">
+							<div class="corp_name fix_head flex">
 							<!--  <button type="button" class="btn_toggle_tree">-->
 								<div class= "ooo flex"> 
 									<button type="button" class="btn_toggle_tree flex" onclick="viewDepartList(this)">
@@ -241,12 +259,12 @@
 										<p><i class="fa-regular fa-building"></i><p>
 										<span>CUAgain</span>
 									</button>
-									<p class="corp-icon-menu" onclick="corpIconMenuClicked(this)" sec:authorize="hasRole('ADMIN')"><i class="fa-regular fa-ellipsis-vertical"></i></p>
+									<p class="corp-icon-menu" onclick="corpIconMenuClicked()" sec:authorize="hasRole('ADMIN')"><i class="fa-regular fa-ellipsis-vertical"></i></p>
 								</div>
 								
-								<div class="corp_manu">
-									<li onclick="btnDepartInsertClicked(this)" class="teamIn">부서 등록</li>
-									<input type="text" class="departInsert" onkeyup="addDepart(this,event)" placeholder="부서명 입력">
+								<div class="corp_menu" id="corp_menu">
+									<li onclick="btnDepartInsertClicked(this)" class="dertIn">부서 등록</li>
+									<input type="text" class="departAdd" onkeyup="addDepart(this,event)" placeholder="부서명 입력">
 								</div>
 							</div> <!-- class="corp_name" -->
 								
