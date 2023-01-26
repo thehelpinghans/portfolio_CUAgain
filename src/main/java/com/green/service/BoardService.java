@@ -3,6 +3,7 @@ package com.green.service;
 import com.green.domain.dto.BoardInsertDTO;
 import com.green.domain.dto.BoardListDTO;
 
+import com.green.domain.dto.ReplyInsertDTO;
 import com.green.domain.entity.BoardEntity;
 import com.green.domain.entity.BoardType;
 import org.springframework.data.domain.Page;
@@ -23,9 +24,13 @@ public interface BoardService {
 
     void save(BoardInsertDTO dto, long id);
 
-	void getBoardListBySearch(String type, String data, Model model);
+	void getBoardListBySearch(String type, String data,long boardType, Model model);
 
-	//Object pageList(Pageable pageable);
+    //void replyReg(long boardId, String comment, long id, Model model);
+
+    void replyReg(ReplyInsertDTO dto, Model model);
+
+    //Object pageList(Pageable pageable);
 
 	//Page<BoardListDTO> paging(Pageable pageable);
 

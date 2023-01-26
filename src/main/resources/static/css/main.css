@@ -138,6 +138,9 @@
 .submenu-title{
     display: none;
 }
+.submenu button{
+    text-align: left;
+}
 
 /* ---------------- Submenu Close ------------- */
 .sidebar.close .logo-name,

@@ -2,6 +2,7 @@ package com.green.controller;
 
 import com.green.domain.dto.BoardInsertDTO;
 import com.green.domain.dto.BoardListDTO;
+import com.green.domain.dto.ReplyInsertDTO;
 import com.green.domain.entity.BoardEntity;
 import com.green.domain.entity.BoardEntityRepository;
 import com.green.domain.entity.BoardType;
@@ -20,6 +21,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.stream.Collectors;
 
@@ -42,15 +44,15 @@ public class BoardController {
 
 
 
-    //공지사항 등록페이지이동
-    @GetMapping("/admin/board/write/{type}")
+    // 등록페이지이동
+    @GetMapping("/member/board/write/{type}")
     public String write(@PathVariable String type, Model model) {
         model.addAttribute("type",type);
         return "admin/board/write";
     }
 
     //공지사항 리스트에서 제목 눌렀을때 상세페이지
-    @GetMapping("/admin/board/view/{boardId}")
+    @GetMapping("/member/board/view/{boardId}")
     public String boardListDetail(@PathVariable long boardId, Model model){
         service.boardListDetail(boardId, model);
 
@@ -58,14 +60,14 @@ public class BoardController {
     }
 
     //공지사항 상세페이지에서 수정버튼눌렀을때의 페이지
-    @GetMapping("/admin/board/{boardId}")
+    @GetMapping("/member/board/{boardId}")
     public String boardmodify(@PathVariable("boardId") long boardId, Model model){
         service.getBoardDetail(boardId, model);
 
         return "admin/board/edit";
     }
     //리스트페이지
-    @GetMapping("/admin/board/boardList/{lType}")
+    @GetMapping("/member/board/boardList/{lType}")
     public String boardList(@PathVariable long lType, Model model, @PageableDefault(sort = "id", size = 4, direction = Sort.Direction.DESC)
     Pageable pageable) {
 
@@ -77,7 +79,8 @@ public class BoardController {
         }
         //service.boardList(String.valueOf(type), model);
         System.out.println(">>리스트>" + type);
-        model.addAttribute("type",type);
+        //type.ordinal();
+        model.addAttribute("type",type.name());
 
         Page<BoardEntity> list2= service.pageList(type, pageable);
         Page<BoardListDTO> list=list2.map(e->new BoardListDTO(e));
@@ -93,7 +96,7 @@ public class BoardController {
 
     }
     //공지사항 수정완료눌렀을때의 페이지?
-    @PostMapping("/admin/board/update/{boardId}")
+    @PostMapping("/member/board/update/{boardId}")
     public String update(@PathVariable("boardId") long boardId, BoardListDTO dto){
         System.out.println(">>>>>>>>>>>>>"+boardId);
         service.boardUpdate(boardId, dto);
@@ -103,10 +106,10 @@ public class BoardController {
         }else{
             lType=1;
         }
-        return "redirect:/admin/board/boardList/"+lType;
+        return "redirect:/member/board/boardList/"+lType;
     }
     //공지사항 등록     후 다시 리스트페이지로 이동
-    @PostMapping("/admin/board/reg")
+    @PostMapping("/member/board/reg")
     public String board(BoardInsertDTO dto, @AuthenticationPrincipal MyUserDetails userDetails){
         System.out.println(">>>등록>>"+dto.getType());
         service.save(dto, userDetails.getId());
@@ -117,13 +120,23 @@ public class BoardController {
         }else{
             lType=1;
         }
-        return "redirect:/admin/board/boardList/"+lType;
+        return "redirect:/member/board/boardList/"+lType;
     }
     //목록에서 제목,번호,작성자로 검색하여 찾는 기능구현
-    @GetMapping("/admin/board/searchList/{type}/{data}")
-    public String boardListBySearch(@PathVariable String type, @PathVariable String data, Model model) {
-    	service.getBoardListBySearch(type,data,model);
+    @GetMapping("/member/board/searchList/{type}/{data}/{boardType}")
+    public String boardListBySearch(@PathVariable String type, @PathVariable String data, @PathVariable long boardType, Model model) {
+    	service.getBoardListBySearch(type,data,boardType,model);
     	return "admin/board/searchResult";
+    }
+    //댓글 등록 기능구현
+    @PostMapping("/member/comment/reg")
+    public String replyReg(/*@RequestBody*/ ReplyInsertDTO dto, @AuthenticationPrincipal MyUserDetails myUserDetails, Model model){
+        System.out.println(">>>>boardId" + dto.getBoardId());
+        System.out.println(">>>>comment" + dto.getComment());
+        dto.setWriteId(myUserDetails.getId());
+
+        service.replyReg(dto, model);
+        return "admin/reply/replyList";
     }
 
 
