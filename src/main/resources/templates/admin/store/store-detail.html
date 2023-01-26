@@ -19,8 +19,6 @@
 			function btnEditClicked(){
 				$("#default").hide();
 				$("#editForm").show();
-				var test =  $(".test").val();
-				alert(test);
 			}
 		</script>
 		<style type="text/css">#editForm{display: none;}</style>
@@ -28,83 +26,106 @@
 <body>
 	<main>
 		<h1>점포상세페이지</h1>
-			<ul id="default" class="det-p flex" >
-				<li class="det-li">
-					<span th:text="${dto.name}">점포명</span>
-				</li>
-				<li class="det-li">
-					<span th:text="${dto.managerName}">메니저 이름</span>
-				</li>
-				<li class="det-li">
-					<span th:text="${dto.content}">상세정보</span>
-				</li>
-				<li class="det-li">
-					<span th:text="${dto.postcode}">우편번호</span>
-				</li>
-				<li class="det-li">
-					<span th:text="${dto.roadAddress}">도로명주소</span>
-				</li>
-				<li class="det-li">
-					<span th:text="${dto.jibunAddress}">지번주소</span>
-				</li>
-				<li class="det-li">
-					<span th:text="${dto.detailAddress}">주소상세정보</span>
-				</li>
-				<li class="det-li">
-					<span th:text="${dto.extraAddress}">동이름</span>
-				</li>
-				<li class="det-li">
+		<div id="default">
+			<table class="det-p" >
+				<tr class="det-li">
+					<td>점포명</td>
+					<td th:text="${dto.name}"></td>
+				</tr>
+				<tr class="det-li">
+					<td>담당자 이름</td>
+					<td th:text="${dto.managerName}"></td>
+				</tr>
+				<tr class="det-li">
+					<td>상세정보</td>
+					<td th:text="${dto.content}"></td>
+				</tr>
+				<tr class="det-li">
+					<td>우편번호</td>
+					<td th:text="${dto.postcode}"></td>
+				</tr>
+				<tr class="det-li">
+					<td>도로명주소</td>
+					<td th:text="${dto.roadAddress}"></td>
+				</tr>
+				<tr class="det-li">
+					<td>지번주소</td>
+					<td th:text="${dto.jibunAddress}"></td>
+				</tr>
+				<tr class="det-li">
+					<td>주소상세정보</td>
+					<td th:text="${dto.detailAddress}"></td>
+				</tr>
+				<tr class="det-li">
+					<td>동이름</td>
+					<td th:text="${dto.extraAddress}"></td>
+				</tr>
+			</table>
+				<div class="btn-ed">
 					<form th:action="|/store/store-detail/${dto.id}|" method="post">
 						<input type="hidden" name="_method" value="DELETE">
 						<button>삭제</button>
-						<button class="btn-ed" type="button" id="btnEdit">수정</button>
+						<button type="button" id="btnEdit">수정</button>
 					</form>
-				</li>
-			</ul>
-	
+				</div>
+			</div>
 		<form id="editForm" th:action="|/store/store-detail/${dto.id}|" method="post">
-			<ul class="flex">
-				<li>
-					<input type="hidden" class="test" th:value="${dto.id}">
-					<span th:text="${dto.name}">점포명</span>
-					<input type="text" name="name" th:value="${dto.name}">
-				</li>
-				<li>
-					<span th:text="${dto.managerName}">메니저 이름</span>
-					<input type="text" name="managerName" th:value="${dto.managerName}">
-				</li>
-				<li>
-					<span th:text="${dto.content}">상세정보</span>
-					<input type="text" name="content" th:value="${dto.content}">
-				</li>
-				<li>
-					<span th:text="${dto.postcode}">우편번호</span>
-					<input type="text" name="postcode" th:value="${dto.postcode}">
-				</li>
-				<li>
-					<span th:text="${dto.roadAddress}">도로명주소</span>
-					<input type="text" name="roadAddress" th:value="${dto.roadAddress}">
-				</li>
-				<li>
-					<span th:text="${dto.jibunAddress}">지번주소</span>
-					<input type="text" name="jibunAddress" th:value="${dto.jibunAddress}">
-				</li>
-				<li>
-					<span th:text="${dto.detailAddress}">주소상세정보</span>
-					<input type="text" name="detailAddress" th:value="${dto.detailAddress}">
-				</li>
-				<li>
-					<span th:text="${dto.extraAddress}">동이름</span>
-					<input type="text" name="extraAddress" th:value="${dto.extraAddress}">
-				</li>
-				<li>
-					<input type="hidden" name="_method" value="PUT">
-					<button type="submit">수정완료</button>
-					<button type="button" id="btnCancel">취소</button>
-				</li>
-			</ul>
+			<table class="det-p">
+				<tr>
+					<td>점포명</td>
+					<td>
+						<input class="det-inp" type="text" name="name" th:value="${dto.name}">
+					</td>
+				</tr>
+				<tr>
+					<td>담당자 이름</td>
+					<td>
+						<input class="det-inp" type="text" name="managerName" th:value="${dto.managerName}">
+					</td>
+				</tr>
+				<tr>
+					<td>상세정보</td>
+					<td>
+						<input class="det-inp" type="text" name="content" th:value="${dto.content}">
+					</td>
+				</tr>
+				<tr>
+					<td>우편번호</td>
+					<td>
+						<input class="det-inp" type="text" name="postcode" th:value="${dto.postcode}">
+					</td>
+				</tr>
+				<tr>
+					<td>도로명주소</td>
+					<td>
+						<input class="det-inp" type="text" name="roadAddress" th:value="${dto.roadAddress}">
+					</td>
+				</tr>
+				<tr>
+					<td>지번주소</td>
+					<td>
+						<input class="det-inp" type="text" name="jibunAddress" th:value="${dto.jibunAddress}">
+					</td>
+				</tr>
+				<tr>
+					<td>주소상세정보</td>
+					<td>
+						<input class="det-inp" type="text" name="detailAddress" th:value="${dto.detailAddress}">
+					</td>
+				</tr>
+				<tr>
+					<td>동이름</td>
+					<td>
+						<input class="det-inp" type="text" name="extraAddress" th:value="${dto.extraAddress}">
+					</td>
+				</tr>
+			</table>
+			<div class="btn-ed">
+				<input type="hidden" name="_method" value="PUT">
+				<button type="submit">수정완료</button>
+				<button type="button" id="btnCancel">취소</button>
+			</div>
 		</form>
-	
 	</main>
 </body>
 </html>
