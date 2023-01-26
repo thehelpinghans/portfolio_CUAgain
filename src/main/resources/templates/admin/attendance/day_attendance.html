@@ -78,7 +78,7 @@
 				<th width="7%">부서</th>
 				<th width="4%">직책</th>
 				<th width="15%" >출근기록</th>
-				<th width="17%">퇴근기록</th>
+				<th width="15%">퇴근기록</th>
 				<th width="4%">상태</th>
 			</tr>
 		</thead>
@@ -90,10 +90,10 @@
 					</td>
 					<td th:text="${dto.department}">부서</td>
 					<td th:text="${dto.position}">직책</td>
-					<td th:text="${dto.inTime}">출근기록</td>
-					<td th:text="${dto.outTime}">퇴근기록</td>
+					<td th:text="${#dates.format(dto.inTime, 'yyyy-MM-dd &nbsp; HH:mm')}">출근기록</td>
+					<td th:text="${#dates.format(dto.outTime, 'yyyy-MM-dd &nbsp; HH:mm')}">퇴근기록</td>
 					<td th:text="${dto.attendStatus}">상태</td>
-				</tr>
+				</tr><!-- "${#dates.format(item.createDt, 'yyyy-MM-dd HH:mm:ss')}"   --> 
 				<tr th:if="${#lists.isEmpty(list)}">
 					<td colspan="5">
 						<p>데이터가 없습니다.</p>
