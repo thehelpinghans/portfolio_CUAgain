@@ -35,7 +35,6 @@ public class CalendarController {
     @ResponseBody
     public void setCalendar(Principal principal, @ModelAttribute CalendarDetailDTO dto) {
         System.out.println(dto);
-        System.out.println(dto);
         long employeeId = attendService.principalId(principal);
         calendarService.setCalendar(employeeId, dto);
     }

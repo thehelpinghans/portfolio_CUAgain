@@ -18,6 +18,7 @@ public class EmployeesListDTO {
     private String position;
     private String team;
     private long baseSalary;
+    private String image;
     //주소 처리 필드
     private String address;
 
@@ -32,6 +33,7 @@ public class EmployeesListDTO {
         position=e.getPosition().getPosition();
         baseSalary=e.getPosition().getBaseSalary();
         team=e.getTeam().getName();
+		image=e.getImage().getUrl()+e.getImage().getNewName();
     }
     public EmployeesListDTO address(AddressEntity e){
         address="("+e.getPostcode()+") "+e.getRoadAddress()+"("+e.getJibunAddress()
