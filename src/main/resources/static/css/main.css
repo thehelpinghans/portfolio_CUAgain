@@ -217,6 +217,22 @@
 	padding-left: 250px;
 }
 
+.naver{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all .5s ease;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--color_Light1);
+    height: 50px;
+    min-width: 78px;
+    text-align: center;
+    line-height: 50px;
+    color: var(--color_Light1);
+    margin-left: 50px;
+}
 
 /* ============ Responsive / Breakpoints ========== */
 @media (max-width: 1080px){
