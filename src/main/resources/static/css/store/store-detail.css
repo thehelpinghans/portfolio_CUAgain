@@ -1,18 +1,32 @@
 @charset "UTF-8";
 
 .det-p{
-	padding: 10px 10%;
+	padding: 10px;
     width: 80%;
     margin-top: 20px;
     border: 1px solid #444444;
     margin-left: 50px;
+	border-radius: 3px; 
 }
 .det-li{
-	text-align: center;
+	margin-top: 20px;
+	border-bottom: 1px solid #444444;
+	width: 50px;
+	height: 50px;
+}
+.det-p>.det-li>td {
+	font-size: 16px;
+	font-weight: 500;
+	border-right: 1px solid #444444;
+}
+.det-inp{
+	margin: 20px;
 	border: 1px solid #444444;
-	margin: 5px;
+	border-radius: 3px; 
 }
 .btn-ed{
-	border-top: 1px solid #444444;
-	
+	margin: 50px;
+}
+.btn-ed>button{
+	border: 1px solid #444444;
 }
