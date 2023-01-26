@@ -3,7 +3,7 @@
 <th:block th:each="board:${list}">
     <div th:text="${board.id}" class="num" ></div>
     <div th:text="${board.title}"class="title" onclick="getBoardDetail(this)" ></div>
-    <div th:text="${board.createdDate}" class="date"></div>
+    <div th:text="${#temporals.format(board.createdDate,'yyyy년MM월dd일 hh시mm분')}" class="date"></div>
     <div th:text="${board.writer}"></div>
     <div th:text="${board.readCount}" class="count"></div>
 </th:block>

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface BoardEntityRepository extends JpaRepository<BoardEntity, Long> {
@@ -17,4 +18,10 @@ public interface BoardEntityRepository extends JpaRepository<BoardEntity, Long> 
     List<BoardEntity> findByWriterNameContaining(String data);
 
     Page<BoardEntity> findByType(BoardType type, Pageable pageable);
+
+    List<BoardEntity> findByTitleContainingAndType(String data, BoardType boardTypeEnum);
+
+    List<BoardEntity> findByWriterNameContainingAndType(String data, BoardType boardTypeEnum);
+
+    Optional<BoardEntity> findByIdAndType(Long valueOf, BoardType boardTypeEnum);
 }

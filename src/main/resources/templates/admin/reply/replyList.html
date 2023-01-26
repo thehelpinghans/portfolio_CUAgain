@@ -1,0 +1,6 @@
+<tr th:each="dto:${list}">
+  <td th:text="${dto.id}"></td>
+  <td th:text="${dto.content}"></td>
+  <td th:text="${#temporals.format(dto.createdDate,'yyyy-MM-dd hh:mm')}"></td>
+  <td th:text="${dto.writer}"></td>
+</tr>

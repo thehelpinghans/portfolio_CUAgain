@@ -7,7 +7,7 @@
 	<!--필요한 head 추가-->
 </head>
 <main><!--내용 채우기-->
-    <form th:action="|/admin/board/update/${dto.id}|" method="post">
+    <form th:action="|/member/board/update/${dto.id}|" method="post">
 	<div class="board_wrap">
         <div class="board_title">
             <strong>수정</strong>
@@ -36,7 +36,7 @@
             <div class="bt_wrap">
                 <input type="hidden" name="type" th:value="${dto.type}">
                 <button type="submit">수정완료</button>
-                <a th:href="|/admin/board/view/${boardId}|" class="on">취소</a>
+                <a th:href="|/member/board/view/${boardId}|" class="on">취소</a>
                 <!--<a th:href="|/admin/board/boardList/${dto.type}|" class="on">취소</a>-->
 
             </div>

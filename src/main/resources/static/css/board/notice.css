@@ -118,7 +118,7 @@ a {
 
 .board_list .title {
     width: 50%;
-    text-align: left;
+    text-align: center;
 }
 
 .board_list .top .title {
@@ -142,8 +142,14 @@ table {
 
 }
 table th {
-    background-color: grey;
-    border: 1px solid grey;
+    padding: 7px 4px;
+    font-size: 16px;
+    color: #333;
+    text-align: center;
+    font-weight: normal;
+    background: #ededed;
+    border-top: 1px solid #d5d5d5;
+    border-left: 1px solid #d5d5d5;
 }
 
 .board_page {
@@ -326,4 +332,10 @@ table th {
 
 .replybtn {
     margin-bottom: 20px;
+}
+.tb tr>td{
+    height: 40px;
+    text-align: center;
+    padding-top: 10px;
+    border: 1px solid #d5d5d5;
 }

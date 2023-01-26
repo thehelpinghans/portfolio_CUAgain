@@ -8,12 +8,18 @@
     <script>
     function btncancelClicked(){
          var type = $("#type").text();
-        location.href=`/admin/board/boardList/${type}`;
+        var lType;
+        if(type=="공지사항"){
+            lType=0;
+        }else {
+            lType=1;
+        }
+        location.href=`/member/board/boardList/${lType}`;
     }
     </script>
 </head>
 <main><!--내용 채우기-->
-    <form action="/admin/board/reg"  method="post">
+    <form action="/member/board/reg"  method="post">
 	<div class="board_wrap">
         <div class="board_title">
             <strong id="type" th:text="${type}"></strong>
@@ -34,7 +40,7 @@
             </div>
             <div class="bt_wrap">
                 <button class="on">등록</button>
-                <button onclick="btncancelClicked()" class="on">취소</button>
+                <button type="button" onclick="btncancelClicked()" class="on">취소</button>
             </div>
         </div>
     </div>
