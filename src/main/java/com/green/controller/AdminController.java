@@ -118,7 +118,7 @@ public class AdminController {
     
 ///////////////////////////////////////////////////////////////
     
-  //부서관리 회사명 클릭시 부서관련 다 가져오기
+  //회사명 클릭시 부서+팀리스트 HTML 반환
     @GetMapping("/member/departments")
     public String departments(Model model){
     	depService.getList(model);
@@ -126,17 +126,30 @@ public class AdminController {
     }
 
     //회사명클릭시 모든사원리스트 HTML 반환
-    
 	@GetMapping("/member/all/empList")
 	public String depAllList(Model model) {
 		depService.getEmpList(model);
 		return "admin/depart/depEmpList";
 	}
-
+//	//부서명클릭시 부서소속리스트 HTML 반환
+//	@GetMapping("/member/DepMem/empList/{depId}")
+//	public String DepMemList(@PathVariable("depId") long id, Model model) {
+//		depService.getDepEmpList(id, model);
+//		return "admin/depart/depEmpList";
+//	}
+	//팀명클릭시 팀소속리스트 HTML 반환
+	@GetMapping("/member/TeamMem/empList/{TemaId}")
+	public String teamMemList(@PathVariable("TemaId") long id, Model model) {
+		System.err.println("오류");
+		teamService.getTeamEmpList(id, model);
+		return "admin/depart/depEmpList";
+	}
+		
     //부서등록
 	@ResponseBody
-	@PostMapping("/admin/addDepart/")
-	public void depratReg(DepartmentDTO dto) {
+	@PostMapping("/admin/addDepart")
+	public void depratReg(DepartmentDTO dto) { 
+		System.out.println(dto);
 		//등록하면 dto에 업데이트! 하고 사원 리스트로 리턴
 		depService.save(dto);
 		//return "redirect:/admin/department";	
@@ -145,7 +158,6 @@ public class AdminController {
 	@ResponseBody
 	@PostMapping("/admin/depUpdate/{depId}")
 	public String depUpdate(@PathVariable("depId") long depId, String departmentName) {
-		
 		return depService.depUpdate(depId, departmentName);
 	}
 	//부서 삭제 
