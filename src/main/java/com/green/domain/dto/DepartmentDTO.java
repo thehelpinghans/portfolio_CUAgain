@@ -6,9 +6,12 @@ import com.green.domain.entity.DepartmentEntity;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 @Setter
 @Getter
+@ToString
 public class DepartmentDTO {
+	
 	private long id;
 	private String name;
 //	private String managerName;
@@ -20,7 +23,9 @@ public class DepartmentDTO {
 		this.name = dep.getName();
 	//	this.managerName = dep.getManager().getName();
 	}
-	
+	public DepartmentDTO() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	
 	

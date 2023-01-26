@@ -10,6 +10,7 @@
 	<!-- 팀 선택시 팀 구성원 사원데이터를 받아서 뿌려주기 -->
 	<div class="emplist_body flex column list_body">
 		<ul class="memberlist fix_head flex">
+			
 			<li class="empName">성명</li>
 			<li class="empPosi">직책</li>
 			<li class="empPhone">핸드폰</li>
@@ -18,6 +19,7 @@
 		<div class="empli memberlist fix_body">
 			<ul id="emp-list" class=" flex" th:each="emp:${empList}">
 			.
+				
 				<li th:text="${emp.name}" class="empName">성명<li>
 				<li th:text="${emp.position}" class="empPosi">직책<li>
 				<li th:text="${emp.phone}" class="empPhone">핸드폰<li>

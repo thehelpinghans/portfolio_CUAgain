@@ -38,7 +38,8 @@
 			<li th:each="team : ${dto.teams}" class=" bbb flex"> 
 				<ul class="teamBox flex">
 					<p class="icon-drag" sec:authorize="hasRole('ADMIN')"><i class="fa-regular fa-bars"></i></p>
-					<button th:text="${team.name}" class="team_name"></button>
+					<button th:text="${team.name}" class="team_name" onclick="btnTeamNameClicked(this)"></button>
+					<input type="hidden" class="team_id" th:value="${team.id}" >
 					<p class="team-icon-menu" onclick="TeamIconMenuClicked(this)" sec:authorize="hasRole('ADMIN')"><i class="fa-regular fa-ellipsis-vertical team-icon-menu"></i></p>	
 					<!-- 팀메뉴 -->
 				</ul>
