@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
+<html xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security"
 	  th:replace="~{layout/admin :: adminLayout(~{this::head}, ~{::main})}">
 <head>
     <link rel="stylesheet" href="/css/board/notice.css">
@@ -10,15 +11,20 @@
 
         function getBoardDetail(el) {
             var boardId= $(el).prev().text();
-            location.href=`/admin/board/view/${boardId}`;
+            location.href=`/member/board/view/${boardId}`;
         }
         
         function btnSearchClicked(){
         	var type = $("#search_type").val();
         	var data = $("#search_data").val();
-
+            var boardType = $(".board_title>strong").text();
+            var lbt;
+            if(boardType=="공지사항")
+                lbt=0;
+            else
+                lbt=1;
         	$.ajax({
-        		url:`/admin/board/searchList/${type}/${data}`,
+        		url:`/member/board/searchList/${type}/${data}/${lbt}`,
         		type: "get",
         		success: function (resultHTML){
         			$("#board-list").html(resultHTML);
@@ -57,7 +63,7 @@
                     <th:block th:each="board:${pages}">
                         <div th:text="${board.id}" class="num" ></div>
                         <div th:text="${board.title}"class="title" onclick="getBoardDetail(this)" ></div>
-                        <div th:text="${board.createdDate}" class="date"></div>
+                        <div th:text="${#temporals.format(board.createdDate,'yyyy-MM-dd hh:mm')}" class="date"></div>
                         <div th:text="${board.writer}" class="name"></div>
                         <div th:text="${board.readCount}" class="count"></div>
                     </th:block>
@@ -79,7 +85,8 @@
 
             </div>
             <div class="bt_wrap">
-                <a th:href="|/admin/board/write/${type}|" class="on">등록</a>
+                <a th:if="${type}=='공지사항'" sec:authorize="hasRole('ADMIN')" th:href="|/member/board/write/${type}|" class="on">등록</a>
+                <a th:if="${type}=='자유게시판'" th:href="|/member/board/write/${type}|" class="on">등록</a>
                 <!--<a href="#">수정</a>-->
             </div>
         </div>

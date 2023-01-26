@@ -22,8 +22,6 @@ public class ReplyEntity extends BaseDateEntity{
     @Column(nullable = false)
     private String content;
 
-    @Enumerated(EnumType.STRING)
-    private BoardStatus status;
 
     @JoinColumn
     @ManyToOne(fetch = FetchType.EAGER)
@@ -31,7 +29,7 @@ public class ReplyEntity extends BaseDateEntity{
 
     @JoinColumn
     @ManyToOne(fetch = FetchType.EAGER)
-    private EmployeesEntity employees; //작성자
+    private EmployeesEntity writer; //작성자
 
 
 

@@ -91,3 +91,14 @@ table{
     border-spacing: 1px;
     width: 100%;
 }
+
+.reply_wrap button{
+    line-height: 2em;
+    height: 2em;
+    width: 3em;
+    background-color: white;
+    border: 1px solid black;
+}
+.reply_wrap input{
+    border: none;
+}

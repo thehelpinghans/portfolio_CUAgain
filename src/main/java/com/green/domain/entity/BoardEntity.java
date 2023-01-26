@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Builder
@@ -22,8 +24,6 @@ public class BoardEntity extends  BaseDateEntity {
     @Column(nullable = false)
     private String title; //제목
 
-
-    
     @Lob
     @Column(nullable = false)
     private String content; //내용
@@ -44,6 +44,12 @@ public class BoardEntity extends  BaseDateEntity {
     @JoinColumn
     @ManyToOne(fetch = FetchType.EAGER)
     private EmployeesEntity writer;
+
+    @OneToMany(mappedBy = "board" , fetch = FetchType.EAGER)
+    @OrderBy("id asc")
+    @Builder.Default
+    private List<ReplyEntity> reply= new ArrayList<>();
+
 
 
     public BoardEntity setTitle(String title){

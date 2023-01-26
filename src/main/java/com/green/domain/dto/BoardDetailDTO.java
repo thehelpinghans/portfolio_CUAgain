@@ -15,6 +15,7 @@ public class BoardDetailDTO {
     private String type;
     private LocalDateTime createdDate;
     private long readCount;
+    private long writerId;
 
     public BoardDetailDTO(BoardEntity e){
         this.id=e.getId();
@@ -24,5 +25,6 @@ public class BoardDetailDTO {
         this.createdDate=e.getCreatedDate();
         this.readCount=e.getReadCount();
         this.type=e.getType().name();
+        this.writerId=e.getWriter().getId();
     }
 }

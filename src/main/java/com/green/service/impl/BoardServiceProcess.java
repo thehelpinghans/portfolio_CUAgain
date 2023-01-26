@@ -1,8 +1,6 @@
 package com.green.service.impl;
 
-import com.green.domain.dto.BoardDetailDTO;
-import com.green.domain.dto.BoardInsertDTO;
-import com.green.domain.dto.BoardListDTO;
+import com.green.domain.dto.*;
 import com.green.domain.entity.*;
 import com.green.service.BoardService;
 
@@ -24,6 +22,9 @@ public class BoardServiceProcess implements BoardService {
 
     @Autowired
     private EmployeesEntityRepository empRepo;
+
+    @Autowired
+    private ReplyRepository repRepo;
 
     @Override
     @Transactional(readOnly = true)
@@ -64,6 +65,9 @@ public class BoardServiceProcess implements BoardService {
         boardRepo.save(entity.setReadCount(entity.getReadCount()+1));
        BoardDetailDTO dto=new BoardDetailDTO(entity);
         model.addAttribute("detail", dto);
+
+        model.addAttribute("list", repRepo.findByBoardId(boardId).stream().map(ReplyListDTO::new)
+                .collect(Collectors.toList()));
     }
 
     //공지사항 값을  수정하기위해서 수정버튼 눌렀을때 값 그대로 가져오기위한 기능
@@ -95,19 +99,25 @@ public class BoardServiceProcess implements BoardService {
     }
     @Transactional
 	@Override
-	public void getBoardListBySearch(String type, String data, Model model) {
+	public void getBoardListBySearch(String type, String data,long boardType, Model model) {
+        BoardType boardTypeEnum;
+        if(boardType==0)
+            boardTypeEnum=BoardType.공지사항;
+        else
+            boardTypeEnum=BoardType.자유게시판;
+
 		if(type.equals("title")) {
-			List<BoardListDTO> list= boardRepo.findByTitleContaining(data).stream()
+			List<BoardListDTO> list= boardRepo.findByTitleContainingAndType(data,boardTypeEnum).stream()
 					.map(e-> new BoardListDTO(e)).collect(Collectors.toList());
 			model.addAttribute("list", list);
 		} else if(type.equals("writer")) {
-			List<BoardListDTO> list= boardRepo.findByWriterNameContaining(data)
+			List<BoardListDTO> list= boardRepo.findByWriterNameContainingAndType(data,boardTypeEnum)
                     .stream()
 					.map(e-> new BoardListDTO(e))
                     .collect(Collectors.toList());
 			model.addAttribute("list", list);
 		}else {
-            BoardListDTO dto=boardRepo.findById(Long.valueOf(data))
+            BoardListDTO dto=boardRepo.findByIdAndType(Long.valueOf(data),boardTypeEnum)
                     .map(BoardListDTO::new)
                     .orElseThrow();
             model.addAttribute("list", dto);
@@ -115,7 +125,22 @@ public class BoardServiceProcess implements BoardService {
         }
 
 	}
-    
+
+    @Override
+    public void replyReg(ReplyInsertDTO dto, Model model) {
+
+        //댓글 등록 완료
+        repRepo.save(ReplyEntity.builder()
+                        .board(boardRepo.findById(dto.getBoardId()).get())
+                        .content(dto.getComment())
+                        .writer(empRepo.findById(dto.getWriteId()).get())
+                .build());
+
+        model.addAttribute("list", repRepo.findByBoardId(dto.getBoardId()).stream()
+                .map(ReplyListDTO::new).collect(Collectors.toList()));
+
+    }
+
 //    @Override
 //    @Transactional(readOnly = true)
 //    public Page<BoardEntity> pageList(Pageable pageable) {
