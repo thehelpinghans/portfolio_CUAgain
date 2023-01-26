@@ -59,7 +59,7 @@ public class StoreServiceProcess implements StoreService {
 	@Transactional
 	@Override
 	public void getlist(Model model, int page) {
-		int size=2;
+		int size=5;
 		Sort sort=Sort.by(Direction.DESC, "managerId");
 		Pageable pageable=PageRequest.of(page-1, size, sort);
 		Page<StoreEntity> result = storeRepo.findAll(pageable);
@@ -102,7 +102,7 @@ public class StoreServiceProcess implements StoreService {
 	@Override
 	public void search(String name, String type, Model model, int page) {
 		
-		int size=2;
+		int size=5;
 		
 		Sort sort=Sort.by(Direction.DESC, "managerId");
 		Pageable pageable=PageRequest.of(page-1, size, sort);
