@@ -6,8 +6,33 @@
 	<link rel="stylesheet" href="/css/board/write.css">
 	<!--필요한 head 추가-->
     <script th:inline="javascript">
+        function commentWrtie() {
 
-            function btnListClicked(){
+            const data = {
+                boardId: $("#boardId").text(),
+                comment: $('#comment').val()
+            }
+
+            // 공백 및 빈 문자열 체크
+            if (!data.comment || data.comment.trim() === "") {
+                alert("공백 또는 입력하지 않은 부분이 있습니다.");
+                return false;
+            } else {
+                $.ajax({
+                    type: 'POST',
+                    url: "/member/comment/reg",
+                    /*contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify(data),*/
+                    data: data,
+                    success : function(resulHTML) {
+                        $("#commentList").html(resulHTML);
+                    }
+                });
+            }
+        }
+
+
+    function btnListClicked(){
                 var type=[[${detail.type}]];
                 var lType;
                 if(type=="공지사항"){
@@ -15,7 +40,7 @@
                 }else {
                     lType=1;
                 }
-                location.href="/admin/board/boardList/"+lType;
+                location.href="/member/board/boardList/"+lType;
             }
     </script>
 </head>
@@ -32,11 +57,11 @@
                 <div class="info">
                     <dl>
                         <dt>번호</dt>
-                        <dd>[[${detail.id}]]</dd>
+                        <dd id="boardId">[[${detail.id}]]</dd>
                     </dl>
                     <dl>
                         <dt>작성일</dt>
-                        <dd>[[${detail.createdDate}]]</dd>
+                        <dd th:text="${#temporals.format(detail.createdDate,'yyyy-MM-dd hh:mm')}"></dd>
                     </dl>
                     <dl>
                         <dt>작성자</dt>
@@ -55,12 +80,12 @@
             </div>
             <div class="bt_wrap">
                 <button type="button" onclick="btnListClicked()" class="on">목록</button>
-                <a th:href="@{/admin/board/{boardId}(boardId = ${detail.id})}" class="on">수정</a>
+                <a th:if="${detail.type}=='공지사항'" sec:authorize="hasRole('ADMIN')" th:href="@{/member/board/{boardId}(boardId = ${detail.id})}" class="on">수정</a>
+                <a th:if="${detail.type}=='자유게시판'and${detail.writerId}==${#authentication.principal.id}" th:href="@{/member/board/{boardId}(boardId = ${detail.id})}" class="on">수정</a>
                 <!--<a th:href="@{/admin/board/{boardId}(boardId = ${detail.id})}" class="on">수정</a>-->
             </div>
-            <!-- <div id="comment-write">
-                <input type="text" id="writer" placeholder="작성자">
-                <input type="text" id="content" placeholder="내용">
+            <div  class="reply_wrap" id="comment-write">
+                <input type="text" id="comment" placeholder="내용">
                 <button id="comment-btn" onclick="commentWrtie()">등록</button>
             </div>
             <table class="tb">
@@ -72,14 +97,15 @@
                         <th>작성자</th>
                     </tr>
                 </thead>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                    <tbody id="commentList">
+                    <tr th:each="dto:${list}">
+                        <td th:text="${dto.id}"></td>
+                        <td th:text="${dto.content}"></td>
+                        <td th:text="${#temporals.format(dto.createdDate,'yyyy-MM-dd hh:mm')}"></td>
+                        <td th:text="${dto.writer}"></td>
                     </tr>
-
-            </table> -->
+                    </tbody>
+            </table>
 
 
 
