@@ -125,6 +125,4 @@ public class BoardController {
     	service.getBoardListBySearch(type,data,model);
     	return "admin/board/searchResult";
     }
-
-
 }

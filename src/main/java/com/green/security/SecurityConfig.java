@@ -30,7 +30,7 @@ public class SecurityConfig {
         http
                 .authorizeRequests(authorize -> authorize
                        // .antMatchers("/**").permitAll()
-                        .antMatchers("/comm/checkRole","/member/main").permitAll() //롤 별로 움직
+                        .antMatchers("/hbot","/comm/checkRole","/member/main").permitAll() //롤 별로 움직
                         .antMatchers("/css/**", "/js/**","/image/**").permitAll()
                         .antMatchers("/", "/comm/**").permitAll()
                         .antMatchers("/member/**","/logout").hasRole("USER")

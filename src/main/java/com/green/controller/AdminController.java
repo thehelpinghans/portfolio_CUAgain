@@ -10,35 +10,17 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.green.domain.dto.EmployeesDetailDTO;
-import com.green.domain.dto.DepartmentDTO;
 import com.green.domain.dto.EmployeesInsertDTO;
-import com.green.domain.dto.SalaryResponseDTO;
-import com.green.domain.dto.SalarySaveDTO;
-import com.green.domain.dto.SalaryUpdateDTO;
 import com.green.domain.dto.TeamDTO;
-import com.green.domain.dto.TeamaddtDTO;
-import com.green.domain.entity.Position;
-import com.green.domain.entity.SalaryEntity;
 import com.green.service.DepartmentService;
 import com.green.service.EmployeesService;
 import com.green.service.SalaryService;
 import com.green.service.TeamService;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 @Controller
 public class AdminController {
@@ -242,29 +224,6 @@ public class AdminController {
 		salService.searchEmp(model, empId);
 		return "admin/salary/empSearchResult";
 	}
-
-	//급여 등록
-	/* private final SalaryService salaryService; */
-	@PostMapping("/admin/salary/add")
-	public Long save(@RequestBody SalarySaveDTO requestDTO) {
-		return null;
-	}
-	// 급여 수정
-	@PostMapping("/admin/salary/adit")
-    public Long update(@PathVariable Long id, @RequestBody SalaryUpdateDTO requestDto) {
-		return null;
-    }
-	// 급여 조회
-	@GetMapping("/admin/salary/adit")
-    public SalaryResponseDTO findById (@PathVariable Long id) {
-		return null;
-    }
-	//급여 삭제
-	@DeleteMapping("/admin/salary/adit")
-    public Long delete(@PathVariable Long id) {
-		return null;
-    }
-	
 
 //    //팀등록
 //    @PostMapping("/admin/teamAdd")

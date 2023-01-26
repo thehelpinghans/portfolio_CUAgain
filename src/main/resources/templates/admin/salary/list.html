@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="https://www.thymeleaf.org/extras/spring-security"
+	  th:replace="~{layout/admin :: adminLayout(~{this::head}, ~{::main})}">
+<head>
+	<link rel="stylesheet" href="/css/salary/list.css">
+	
+	<script>
+		var recentMethod=btnMyList;
+		$(function(){
+			$("#btn-search").click(btnSearchClicked);
+			$("#btn-reset-list").click(btnMyList);
+			$(".currentDate").val(new Date().toISOString().substring(0, 10));
+			$(".baseStartDate").val("2023-01-01");
+
+		});
+		//삭제버튼 클릭됐을 때
+		function btnDeleteClicked(el){
+			var salId = $(el).siblings(".salId").val();
+			var data={
+				salId:salId
+			}
+			$.ajax({
+				url:"/admin/sal/delete",
+				type:"delete",
+				data:data,
+				success:function (){
+					alert("급여내역 삭제 완료");
+					recentMethod();
+				}
+			});
+
+		}
+		//내 급여내역 눌렀을 때
+		function btnMyList(){
+
+			$.ajax({
+				url:`/member/sal/searchList`,
+				type:"get",
+				success:function (resultHTML){
+					$("#sal-list-body").html(resultHTML);
+					recentMethod=btnMyList;
+				}
+			});
+		}
+
+		//사원번호로 조회했을때 ,post연습
+		function btnSearchClicked(){
+			var empId=$("#search_data").val();
+			if (empId.trim()==""){
+				alert("사원번호를 입력하세요");
+				return;
+			}
+			var data={
+				startDate:$("#startDate").val(),
+				"endDate":$("#endDate").val(),
+				"empId":empId
+			}
+
+
+			$.ajax({
+				url:`/admin/sal/searchList`,
+				type:"post",
+				data:data,
+				success:function (resultHTML){
+					$("#sal-list-body").html(resultHTML);
+					recentMethod=btnSearchClicked;
+
+				}
+			});
+		}
+
+	</script>
+</head>
+<main><!--내용 채우기-->
+	<h1>급여 조회 페이지</h1>
+
+	<div id="salSearch" sec:authorize="hasRole('ADMIN')">
+		<label>
+			<span>조회기간</span>
+			<input type="date" id="startDate" class="baseStartDate">
+			~
+			<input type="date" id="endDate" class="currentDate">
+		</label>
+		<label>
+			<span>사원번호로 조회</span>
+			<input type="text" id="search_data" >
+		</label>
+		<button id="btn-search" class="btn-search"><i class='bx bx-search-alt-2' ></i></button>
+		<button id="btn-reset-list" class="btn-search">내 급여내역</button>
+	</div>
+	<div id="salListSection">
+		<table>
+			<thead>
+			<tr>
+				<td>부서</td>
+				<td>팀</td>
+				<td>직책</td>
+				<td>사원번호</td>
+				<td>이름</td>
+				<td>지급액</td>
+				<td>지급일</td>
+				<td sec:authorize="hasRole('ADMIN')">비고</td>
+			</tr>
+			</thead>
+			<tbody id="sal-list-body">
+			<tr th:each="dto:${myList}">
+				<td th:text="${dto.empDep}"></td>
+				<td th:text="${dto.empTeam}"></td>
+				<td th:text="${dto.empPosition}"></td>
+				<td th:text="${dto.empId}"></td>
+				<td th:text="${dto.empName}"></td>
+				<td th:text="${dto.totPay}"></td>
+				<td th:text="${dto.payDay}"></td>
+				<td sec:authorize="hasRole('ADMIN')">
+					<input class="salId" type="hidden" th:value="${dto.id}">
+					<button onclick="btnDeleteClicked(this)">삭제</button>
+				</td>
+			</tr>
+			<tr th:if="${#lists.size(myList)!=0}">
+				<td colspan="5">
+					<span th:if="${startDate}" th:text="|조회기간: ${startDate}~|"></span><span th:text="${endDate}"></span>
+					<span th:if="!${startDate}" th:text="|조회기간: 모든 기간|"></span>
+				</td>
+				<td colspan="3"><span>지급총액</span><span id="totalSum" th:text="${totalSum}"></span>원</td>
+			</tr>
+			<tr th:if="${#lists.isEmpty(myList)}">
+				<td colspan="8">데이터가 없습니다.</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+</main>
+</html>

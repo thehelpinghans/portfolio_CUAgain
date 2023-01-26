@@ -4,7 +4,7 @@
 		<td class="e4e4e4">문서번호</td>
 		<td id="doc-id" th:text="${dto.id}">자동채번</td>
 		<td class="e4e4e4">기안일자</td>
-		<td th:text="${dto.createdDate}"></td>
+		<td th:text="${#temporals.format(dto.createdDate,'yyyy년MM월dd일 hh시mm분')}"></td>
 	</tr>
 
 	<tr>
@@ -12,7 +12,8 @@
 		<td th:text="${dto.writerName}">
 		</td>
 		<td class="e4e4e4">최종수정일자</td>
-		<td th:text="${dto.updatedDate}"></td>
+		<td th:text="${#temporals.format(dto.updatedDate,'yyyy년MM월dd일 hh시mm분')}"></td>
+
 	</tr>
 	<tr>
 		<td class="e4e4e4">기안부서</td>
@@ -29,7 +30,7 @@
 	</tr>
 	<tr>
 		<td class="e4e4e4">결재일</td>
-		<td colspan="3" th:text="${dto.approvalDate}"></td>
+		<td colspan="3" th:text="${#temporals.format(dto.approvalDate,'yyyy년MM월dd일 hh시mm분')}"></td>
 	</tr>
 	<tr>
 		<td class="e4e4e4">문서제목</td>

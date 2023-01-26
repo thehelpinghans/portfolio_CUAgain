@@ -8,11 +8,11 @@
 		</td>
 		<td th:text="${dto.depName}"></td>
 		<td th:text="${dto.writerName}"></td>
-		<td th:text="${dto.createdDate}"></td>
+		<td th:text="${#temporals.format(dto.createdDate,'yyyy년MM월dd일 hh시mm분')}"></td>
 		<td th:text="${dto.acceptorName}"></td>
 		<td th:text="${dto.docStatus}"></td>
 		<td th:text="${dto.checkStatus}"></td>
-		<td th:text="${dto.approvalDate}"></td>
+		<td th:text="${#temporals.format(dto.approvalDate,'yyyy년MM월dd일 hh시mm분')}"></td>
 	</tr>
 	<tr th:if="!${dto.id}">
 		<td colspan="9">데이터가 없습니다.</td>
