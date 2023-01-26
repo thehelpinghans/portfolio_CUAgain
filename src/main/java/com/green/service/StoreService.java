@@ -9,7 +9,7 @@ public interface StoreService {
 
 	void save(StoreSaveDTO dto);
 
-	void getlist(Model model);
+	void getlist(Model model, int page);
 
 	void detail(long id, Model model);
 
@@ -17,7 +17,7 @@ public interface StoreService {
 
 	void update(StoreSaveDTO dto, long id, long employeeId);
 
-	void search(String ketword, String manager, Model model, int page);
+	void search(String name, String type, Model model, int page);
 
 
 }
