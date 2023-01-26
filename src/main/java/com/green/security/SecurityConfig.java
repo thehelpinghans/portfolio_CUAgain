@@ -32,7 +32,7 @@ public class SecurityConfig {
                        // .antMatchers("/**").permitAll()
                         .antMatchers("/comm/checkRole","/member/main").permitAll() //롤 별로 움직
                         .antMatchers("/css/**", "/js/**","/image/**").permitAll()
-                        .antMatchers("/", "/comm/**").permitAll()
+                        .antMatchers("/", "/comm/**","/naver/auth2").permitAll()
                         .antMatchers("/member/**","/logout").hasRole("USER")
                         .antMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
