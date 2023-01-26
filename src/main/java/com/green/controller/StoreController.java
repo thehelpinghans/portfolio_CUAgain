@@ -30,10 +30,10 @@ public class StoreController {
 	AttendService aService;
 	
 	@GetMapping("/admin/store")
-	public String getlist(Model model) {
+	public String getlist(Model model ,@RequestParam(defaultValue = "1") int page) {
 		System.out.println("eeeeeeeeeeeeeeeeeeee");
-		service.getlist(model);
-		return "/admin/store/store";
+		service.getlist(model , page);
+		return "admin/store/store";
 	}
 	
 	@PostMapping("/admin/store-write")
@@ -63,9 +63,9 @@ public class StoreController {
 	}
 	
 	@GetMapping("/admin/store-search")
-	public String search(String keyword, String manager, Model model, @RequestParam(defaultValue = "1")int page) {
-		service.search(keyword, manager, model, page);
+	public String search(String name, String type, Model model, @RequestParam(defaultValue = "1")int page) {
+		service.search(name, type, model, page);
 		
-		return "redirect:/admin/store";
+		return "admin/store/store";
 	}
 }

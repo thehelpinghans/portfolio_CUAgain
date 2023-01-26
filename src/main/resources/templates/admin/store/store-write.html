@@ -12,31 +12,32 @@
 	<main>
 		<h1>점포등록</h1>
 		<form action="/admin/store-write" method="post">
-			<table class="flex aicenter store-table">
+			<table class="flex store-table">
 				<tr>
-					<td>점포명</td>
-					<td><input type="text" name="name" placeholder="점포명을 입력해주세요"></td>
+					<td class="inp-titel">점포명</td>
+					<td><input class="inp-t" type="text" name="name" placeholder="점포명을 입력해주세요"></td>
 				</tr>
 				<tr>
-					<td>담당자</td>
-					<td><input type="text" name="managerId" placeholder="담당자를 입력해 주세요"/></td>
+					<td class="inp-titel">담당자</td>
+					<td><input class="inp-t" type="text" name="managerId" placeholder="담당자번호를 입력해 주세요"/></td>
 				</tr>
 				<tr>
-					<div>
-						<input type="text" id="postcode" name="postcode" placeholder="우편번호">
-						<input type="button" onclick="daumPostcode()" value="우편번호 찾기"><br>
-						<input type="text" id="roadAddress" name="roadAddress" placeholder="도로명주소">
-						<input type="text" id="jibunAddress" name="jibunAddress" placeholder="지번주소">
+					<td class="inp-titel">주소입력</td>
+					<td>
+						<input class="inp-t" type="text" id="postcode" name="postcode" placeholder="우편번호">
+						<input class="inp-t" type="button" onclick="daumPostcode()" value="우편번호 찾기"><br>
+						<input class="inp-t" type="text" id="roadAddress" name="roadAddress" placeholder="도로명주소">
+						<input class="inp-t" type="text" id="jibunAddress" name="jibunAddress" placeholder="지번주소">
 						<span id="guide" style="color:#999;display:none"></span>
-						<input type="text" id="detailAddress"  name="detailAddress" placeholder="상세주소">
-						<input type="text" id="extraAddress" name="extraAddress" placeholder="참고항목">
-					</div>
+						<input class="inp-t" type="text" id="detailAddress"  name="detailAddress" placeholder="상세주소">
+						<input class="inp-t" type="text" id="extraAddress" name="extraAddress" placeholder="참고항목">
+					</td>
 				</tr>
 				<tr>
-					<td colspan="2" >점포 상세정보</td>
+					<td class="inp-titel" colspan="2" >점포 상세정보</td>
 				</tr>
 				<tr>
-					<td colspan="2"><textarea name="content"></textarea></td>
+					<td colspan="2"><textarea class="cont-t" name="content"></textarea></td>
 				</tr>
 				<tr>
 					<td colspan="2">
