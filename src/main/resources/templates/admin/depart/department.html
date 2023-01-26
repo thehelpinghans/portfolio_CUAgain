@@ -6,229 +6,20 @@
 	<script src="https://kit.fontawesome.com/8dd87b7874.js" crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="/css/depart/department.css"/>
-	<script type="text/javascript">
-	
-	//문서가 로딩되면 자동으로 실행하는 함수
-	$(function(){
-		setDepartList();
-		$("#org_tree").hide();
-		
-	});
-	//부서+팀 데이터를 가져오는 함수
-	function setDepartList(){
-		$.ajax({
-	   		url:"/admin/departments",
-	   		type:"get",
-	   		success:function(result){
-	   			//페이지가 로딩된이후에
-	   			//ajax를이용해서 동적으로 부서관련 태그들 생성된다
-	   			//동적으로 생성된 태그의 이벤트는 태그인라인 이벤트를 활용했습니다.
-	   			$("#org_tree").html(result);
-	   			viewmemberList();
-	   		}
-	    });
-	}//close jquery
-	//사원정보를 가져오는 함수
-	function viewmemberList(){
-		$.ajax({
-	   		url:"/admin/all/empList",
-	   		type:"get",
-	   		success:function(resultHtml){
-	   			$("#sel_memList").html(resultHtml);
-	   		}
-	    });
-	}//close jquery
-	
-	//부서등록버튼 누르면 새창이 떠서 등록페이지 기능구현 
-	
-	//회사명,부서명,팀명 호버시 드래그랑 메뉴아이콘보임
-	
-	//회사명 클릭시 하위그룹(부서리스트) 토글
-	function viewDepartList(){
-		$("#org_tree").slideToggle(400);
-		//회사명 눌렸을때 해당 소속 사원 리스트 조회
-		if($("#org_tree").css("display")!="none"){
-			viewmemberList();
-		}
-	}
-	//부서이름 클릭시 팀 리스트 토글
-	function btnDepartNameClicked(el){
-		target=$(el).siblings(".team_list");
-		$(".team_list").not(target).hide();
-		target.slideToggle(400);
-		var department=$(el).children(".dept-name").text();
-		if(target.css("display")!="none"){
-			$.ajax({
-				url:"/admin/all/empList",
-				type:"get",
-				data: {"department": $(el).val().trim()},
-				success:function(resultHtml){
-					$("#sel_memList").html(resultHtml);
-				}
-			});
-		}
-	}//close jquery
-	 
-	//부메클릭시 부서메뉴리스트 토글
-	function depIconMenuClicked(el){
-		var target=$(el).siblings(".depart_menu");
-		//다른 부서의 메뉴아이콘 클릭시 닫아주기
-		$(".depart_menu").not(target).hide();
-		target.slideToggle(400);
-	}//close jquery
-	
-	//부메리-팀 등록클릭시 작성창 보여주기
-	function btnTeamInsertClicked(el){
-		$(el).hide();//자기자신 숨기고 
-		$(el).siblings(".teamInsert").show(); //작성창이 나타남
-	}; //close jquery
-	
-	//부메리-팀등록-값입력 후 엔터이벤트실행
-	 function addTeam(el,event) {
-		 if (event.which == 13) {//인풋태그에 값을 입력하고 엔터키실행시
-
-			var target=$(el);//인풋태그
-	        var dept_id=target.siblings(".department_id").val();//해당부서의 pk
-	        var departmentName=target.parents(".depart_menu").siblings(".btn_depart_name").find(".dept-name").text();
-	        var name=target.text(); //팀명이 입력되는 인풋값에 텍스트
-	        alert(departmentName+"의 소속되는"+name+"을 추가합니다");
-	        $.ajax({
-         		url:"/admin/teamInsert/"+dept_id,
-         		type:"post",
-         		data: {"name": $(el).val().trim()},
-         		success:function(result){
-         			//alert("성공적으로 추가되었습니다.");
-         			target.parents(".depart_menu").siblings(".btn_depart_name").find(".dept-name").text(result); 
-           			//target.parents(".depart_menu").hide(); //열린 부서메뉴 숨겨주기
-           			//target.val("");//부서의 pk값 리셋 
-           			//target.hide();//클릭되서 열린거 다시 숨겨주기
-           			//target.siblings(".teamIn").show();	
-           			setDepartList();
-				}
-			});
-		} 	
-	}
-	//부메리-부서 삭제 기능 
-	function depDelete(el){
-		var target=$(el);//클릭한 삭제버튼태그
-		var dep_id = target.siblings(".department_id").val();//클릭한 삭제버튼의 부서번호
-		var departmentName=target.parents(".depart_menu").siblings(".btn_depart_name").find(".dept-name").text();//클릭한 삭제버튼의 부서이름
-		//alert(dep_id); 부서의 pk값이 나옴 
-		if(confirm(departmentName+" 를 정말 삭제하시겠습니까?")){//삭제처리시 물어보기
-			$.ajax({
-           		url:"/admin/depDelete/"+dep_id, //부서번호로 경로 넘겨주기
-           		type:"delete",		//딜리트매핑이니까 타입도 딜리트
-           		success:function(result){	//성공했을경우.
-           			target.parents(".depart_name").remove(); //삭제되면 주르륵뜬거 삭제해주기 
-           			alert(departmentName+"부서가 삭제되었습니다.");
-           			setDepartList();
-           		}//success:function
-			});//$.ajax
-		}	//if
-	} //function depDelete
-	
-	//부서수정 클릭시 부서명입력창
-	function depUpdate(el){
-		$(el).hide(); //부서수정사라지고
-		$(el).siblings(".depUpdate").show();//작성창만나타남
-	}; //close jquery
-	
-	//부서명 수정
-	function depUpdateKeyup(el,event) {
-        if (event.which == 13) {//엔터키가 실행될 경우
-
-        	var target=$(el);//엔터키가 실행된 태그
-        	var dept_id=target.siblings(".department_id").val();//엔터키가 실행된 태그 중에서 department_id의 클래스 이름을 가지고 있는 형제태그
-        	var departmentName=target.parents(".depart_menu").siblings(".btn_depart_name").find(".dept-name").text();
-        	//alert(dept_id);//해당 부서의 pk값
-        	//*
-           	$.ajax({ 
-           		url:"/admin/depUpdate/"+dept_id, 
-           		type:"post",							//공백제거
-           		data: {"departmentName": $(el).val().trim()}, //입력된 값의 변수이름:입력창.변수.공백제거
-           		success:function(result){
-           			target.parents(".depart_menu").siblings(".btn_depart_name").find(".dept-name").text(result); //부모태그의 dept-name로 입력된 부서명 보여주기
-           			target.parents(".depart_menu").hide(); //열린 부서메뉴 숨겨주기
-           			target.val("");//부서의 pk값 리셋 
-           			target.hide();//클릭되서 열린거 다시 숨겨주기
-           			target.siblings(".depUp").show();
-           		}
-            });
-        }
-    }
-	//팀메클릭시 팀메뉴리스트 토글
-	function TeamIconMenuClicked(el){
-		var target=$(el).siblings(".team_manu");
-		$(".team_manu").not(target).hide();
-		target.slideToggle(400);
-	}//close jquery
-
-	//팀메리-팀 삭제
-	function teamDelete(el){
-		var target=$(el);//클릭한 삭제버튼태그
-		var team_id=target.siblings(".team_id").val();//클릭된 
-		var name=target.parents(".team_manu").siblings(".team_name").text();
-		if(confirm(name+" 을 정말 삭제하시겠습니까?")){
-			$.ajax({
-           		url:"/admin/teamDelete/"+team_id,
-           		type:"delete",		
-           		success:function(result){	
-           			target.parents(".team_list").remove(); 
-           			alert(name+"이 삭제되었습니다.");
-           			setDepartList();
-           		}//success:function
-           			
-           		
-			});
-		}	
-	} //close jquery
-	
-	//팀수정 클릭이벤트시
-	function teamUpdate(el){
-		$(el).hide(); //부서수정사라지고
-		$(el).siblings(".teamUpdate").show();//작성창만나타남
-	}; //close jquery
-	
-	//팀메리-팀명 수정
-	function teamUpdateKeyup(el,event) {
-        if (event.which == 13) {//엔터키가 실행될 경우
-
-        	var target=$(el);//엔터키가 실행된 태그
-        	var team_id=target.siblings(".team_id").val();
-        	var teamName=target.parents(".team_menu").siblings("team_name").text();
-           	$.ajax({ 
-           		url:"/admin/teamUpdate/"+team_id, 
-           		type:"post",							//공백제거
-           		data: {"teamName": $(el).val().trim()}, //입력된 값의 변수이름:입력창.변수.공백제거
-           		success:function(result){
-           		setDepartList();
-           		}
-            });
-        }
-    }
-	</script>
+	<script src="/js/depart/department.js"></script>
 </head>
 <main>
 	<div class="container view_size_depa">
 		<!-- 부서관리 타이틀 -->
-		<div class="content_head between">
-			<!-- 상위 페이지 설명 요약단어  -->
-			<div class="flex"> 
-				<p>조직도</p>
-				<p>부서관리</p>
-			</div>
-			<!-- title + btn_dep_reg -->
-			<div class="depart-top">
+		<div class="content_head">
+			<!-- title -->
+			<div class="contents-top">
 				<!-- 페이지이름 -->
 				<div class="title_cover flex">
-					<span>부서관리</span>
+					부서관리
 				</div>
-				<!-- 부서등록버튼  -->
-				<div class="dep_reg">
-					<button type="button" class="btn_dep_reg">부서등록</button>
-				</div>
-			</div><!--  class="depart-top" -->
-		</div> <!--  class="content_head between" -->
+			</div><!--  class="contents-top" -->
+		</div> <!--  class="content_head" -->
 		<!-- 부서관리 내용 -->
 		<div class="content_depart center">
 			<!-- 컨텐츠바디 -->
@@ -237,17 +28,26 @@
 				<div class="member_view flex">
 					<!-- 조직도 -->
 					<div class="organization fix_contents">
-						<!-- 회사명 -->
-						<div class="corp_name">
+						<div>
+							<!-- 회사명 -->
+							<div class="corp_name fix_head flex">
 							<!--  <button type="button" class="btn_toggle_tree">-->
-							<button type="button" class="btn_toggle_tree" onclick="viewDepartList(this)">
-								<i class="fa-solid fa-sort-down"></i>
-							
-							<i class="fa-regular fa-building"></i>
-							<span>CUAgain</span>
-							</button>
-						</div> <!-- class="corp_name" -->
-						
+								<div class= "ooo flex"> 
+									<button type="button" class="btn_toggle_tree flex" onclick="viewDepartList(this)">
+										<p><i class="fa-solid fa-sort-down"></i><p>
+										<p><i class="fa-regular fa-building"></i><p>
+										<span>CUAgain</span>
+									</button>
+									<p class="corp-icon-menu" onclick="corpIconMenuClicked()" sec:authorize="hasRole('ADMIN')"><i class="fa-regular fa-ellipsis-vertical"></i></p>
+								</div>
+								
+								<div class="corp_menu" id="corp_menu">
+									<li onclick="btnDepartInsertClicked(this)" class="dertIn">부서 등록</li>
+									<input type="text" class="departAdd" onkeyup="addDepart(this,event)" placeholder="부서명 입력">
+								</div>
+							</div> <!-- class="corp_name" -->
+								
+						</div>
 						<!-- 회사명 밑 박스 -->
 						<div class="org_tree" id="org_tree">
 							<!-- 부서명 회사누르면 토글되서 내려오는거-->

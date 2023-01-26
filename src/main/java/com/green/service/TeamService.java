@@ -15,6 +15,8 @@ public interface TeamService {
 
 	String teamUpdate(long teamId, String teamName);
 
+	void getTeamEmpList(long id, Model model);
+
 
 
 }
