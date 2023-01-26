@@ -37,6 +37,7 @@
 
 
 /*****************************************************/
+.icon-drag{display: none;}
 .departAdd{display: none;}
 .corp_menu{display: none;}
 .depart_name{display: none;}
@@ -75,6 +76,7 @@
 
 .departList{
 	padding: 0.2em;
+	margin-left: 2em; 
 }
 .departList>p {
 	padding: 0.3em 1em;
@@ -103,11 +105,12 @@
 }
 /*팀명*/
 .team_list{
-	margin-left: 40px;
+	margin-left: 60px;
 	padding: 0.2em;
 }
 .teamBox>p{
 	padding: 0.3em 1em;
+	
 }
 /*팀이름*/
 .team_name{
