@@ -164,7 +164,6 @@
                     <a href="/admin/store" class="link">조회/수정</a>
                 </div>
             </li>   
-
 			<li sec:authorize="isAuthenticated()">
 				<div class="title">
 					<a href="/logout" class="link">
@@ -172,6 +171,16 @@
 						<span class="name">로그아웃</span>
 					</a>
 				</div>
+			</li>
+			<li class="dropdown link">
+				<form action="https://auth.worksmobile.com/oauth2/v2.0/authorize" method="get">
+					<input type="hidden" name="client_id" value="jjFFJFIZXYX701BcqYyp">
+					<input type="hidden" name="redirect_uri" value="http://localhost:8080/naver/auth2">
+					<input type="hidden" name="scope" value="directory,directory.read,orgunit,orgunit.read">
+					<input type="hidden" name="response_type" value="code">
+					<input type="hidden" name="state" value="test">
+					<button class="naver">네이버API 조직인증</button>
+				</form>
 			</li>
       	</ul>
     </div>
