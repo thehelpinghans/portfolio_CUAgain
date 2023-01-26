@@ -51,6 +51,13 @@ public class DepartmentServiceProcess implements DepartmentService{
 		//model.addAttribute("teamlist", teamlist);
 		
 	}
+	//부서등록
+	@Override
+	public void save(DepartmentDTO dto) {
+		depRepo.save(DepartmentEntity.builder()
+				.name(dto.getName())
+				.build());
+	}
 	//부서 수정기능
 	@Transactional
 	@Override
@@ -70,6 +77,7 @@ public class DepartmentServiceProcess implements DepartmentService{
 		//현재 해당부서에 사원이 존재하지않을 경우에만 삭제가 가능하다.
 		//만약 사원이 있는 부서를 삭제하려고한다면 사원정보가 있는 부서는 사원정보를 먼저 제거하라고 해주기.
 	}
+	//모든 사원리스트가져오기
 	@Override
 	public void getEmpList(Model model) {
 		List<EmployeesEntity> result = empRepo.findAll();
@@ -77,6 +85,16 @@ public class DepartmentServiceProcess implements DepartmentService{
 		model.addAttribute("title","CUAgain");
 		model.addAttribute("empList", empList);
 	}
+//	//부서소속 사원 리스트 가져오기
+//	@Override
+//	public void getDepEmpList(long id, Model model) {
+//		List<EmployeesEntity> result = empRepo.findByDepId(id);
+//		List<EmployeesListDTO> depEmpList = result.stream().map(EmployeesListDTO::new).collect(Collectors.toList());
+//		model.addAttribute("title","name");
+//		model.addAttribute("empList", depEmpList);
+//	}
+	
+	
 	
 
 }

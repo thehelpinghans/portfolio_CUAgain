@@ -14,5 +14,9 @@ public interface DepartmentService {
 
 	void getEmpList(Model model);
 
+	void save(DepartmentDTO dto);
+
+	//void getDepEmpList(long id, Model model);
+
 
 }

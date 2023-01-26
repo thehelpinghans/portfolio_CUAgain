@@ -2,24 +2,30 @@
 	<div class="fix_head memlist_head">
 		<div class="list_head">
 			<ul class="lh_select flex">
-				<li class="lh_copeName" th:text="${title}">선택된 그룹의 이름</li>
+				<li class="lh_celName" th:text="${title}">선택된 그룹의 이름</li>
 				<li th:text="${empList.size()}">선택된 그룹의 소속된 사원 수</li>
 			</ul>
 		</div>
 	</div>
 	<!-- 팀 선택시 팀 구성원 사원데이터를 받아서 뿌려주기 -->
-	<div class="flex column list_body">
-		<ul class="memberlist_head flex">
-			<li>성명</li>
-			<li>직책</li>
-			<li>핸드폰</li>
-			<li>E-MAIL</li>
+	<div class="emplist_body flex column list_body">
+		<ul class="memberlist fix_head flex">
+			
+			<li class="empName">성명</li>
+			<li class="empPosi">직책</li>
+			<li class="empPhone">핸드폰</li>
+			<li class="empEmail">E-MAIL</li>
 		</ul>
-		<ul id="emp-list" class="flex" th:each="emp:${empList}">
-			<li th:text="${emp.name}">성명<li>
-			<li th:text="${emp.position}">직책<li>
-			<li th:text="${emp.phone}">핸드폰<li>
-			<li th:text="${emp.email}">E-MAIL<li>
-		</ul>
+		<div class="empli memberlist fix_body">
+			<ul id="emp-list" class=" flex" th:each="emp:${empList}">
+			.
+				
+				<li th:text="${emp.name}" class="empName">성명<li>
+				<li th:text="${emp.position}" class="empPosi">직책<li>
+				<li th:text="${emp.phone}" class="empPhone">핸드폰<li>
+				<li th:text="${emp.email}" class="empEmail">E-MAIL<li>
+			</ul>
+		</div>
+		
 	</div>	
 </section> <!--  class="fix_contents member_list" -->

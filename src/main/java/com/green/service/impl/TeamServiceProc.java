@@ -1,5 +1,6 @@
 package com.green.service.impl;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
@@ -8,9 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.green.domain.dto.EmployeesListDTO;
 import com.green.domain.dto.TeamDTO;
 import com.green.domain.entity.DepartmentEntity;
 import com.green.domain.entity.DepartmentEntityRepository;
+import com.green.domain.entity.EmployeesEntity;
+import com.green.domain.entity.EmployeesEntityRepository;
 import com.green.domain.entity.TeamEntity;
 import com.green.domain.entity.TeamEntityRepository;
 import com.green.service.TeamService;
@@ -24,7 +28,8 @@ public class TeamServiceProc implements TeamService{
 	@Autowired
 	DepartmentEntityRepository depRepo;
 	
-	
+	@Autowired
+	EmployeesEntityRepository empRepo;
 	
 	//팀 데이터 등록하기 
 	@Override
@@ -60,6 +65,15 @@ public class TeamServiceProc implements TeamService{
 	public String teamUpdate(long teamId, String teamName) {
 		teamRepo.findById(teamId).map(e->e.updateTeamName(teamName)).orElseThrow();
 		return teamName;
+	}
+	//팀 소속 사원 리스트 가져가기
+	@Override
+	public void getTeamEmpList(long id, Model model) {
+		//System.err.println("해당팀 소속사원데이터");
+		List<EmployeesEntity> result = empRepo.findByTeamId(id);
+		List<EmployeesListDTO> teamEmpList = result.stream().map(EmployeesListDTO::new).collect(Collectors.toList());
+		model.addAttribute("title",teamEmpList.get(0).getTeam());
+		model.addAttribute("empList", teamEmpList);
 	}
 	
 	
