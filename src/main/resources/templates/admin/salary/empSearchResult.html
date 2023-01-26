@@ -1,5 +1,5 @@
 <h2>급여 상세</h2>
-<form>
+<form action="/member/salary/reg" method="post">
 	<div class="previewContents">
 		<div class="MemberSelectArea">
 			<span>부서</span>
@@ -19,20 +19,21 @@
 		</div>
 		<div class="MemberSelectArea">
 			<span>신고귀속일자</span>
-			<input type="date">
+			<input type="date" name="payDay" class="currentDate">
 		</div>
 		<div class="MemberSelectArea">
 			<span>기본급</span>
-			<span th:text="${dto.baseSalary}"></span>원
+			<span id="basePay" th:text="${dto.baseSalary}"></span>원
 		</div>
 		<div class="MemberSelectArea">
 			<span>상여금</span>
-			<input placeholder="금액 입력" onfocus="this.placeholder=''" onblur="this.placeholder='금액 입력'">
+			<input placeholder="금액 입력" onchange="additionalPay(this)" onfocus="this.placeholder=''" onblur="this.placeholder='금액 입력'">
 		</div>
 		<div class="MemberSelectArea">
 			<span>지급총액</span>
-			<span></span>
+			<input id="totPay" name="totPay" th:value="${dto.baseSalary}" type="text" readonly>
 		</div>
-		<button class="inquireBtn">급여 등록</button>
+		<input type="hidden" th:value="${dto.id}" name="empId">
+		<button>급여 등록</button>
 	</div>
 	</form>

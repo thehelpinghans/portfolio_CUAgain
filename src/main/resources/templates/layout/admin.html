@@ -16,6 +16,8 @@
 	<link rel="shortcut icon" href="assets/img/kxp_fav.png" type="image/x-icon">
     <link rel="stylesheet" href="/css/main.css">
 	<link rel="stylesheet" href="/css/commons/common.css">
+	<link rel="stylesheet" href="/css/commons/chat-bot.css">
+	<script src="/js/chat.js"></script>
     <script>
         function btnNoticeClicked(){
             var type = 0;
@@ -79,8 +81,8 @@
                 </div>
                 <div class="submenu">
                     <a href="#" class="link submenu-title">급여관리</a>
-                    <a href="/admin/add" class="link">등록</a>
-                    <a href="/admin/edit" class="link">조회/수정</a>               
+                    <a sec:authorize="hasRole('ADMIN')" href="/admin/salary/add" class="link">등록</a>
+                    <a href="/member/salary/list" class="link">조회/수정</a>
                 </div>
             </li>
             
@@ -179,6 +181,14 @@
     <section class="home">
 		<th:block th:replace="${main}"/>
 	</section>
+
+	<!-- 챗봇 -->
+	<aside id="chat-bot">
+		<div class="wrap">
+			<button type="button" id="btn-chat-open" onclick="openChat()">helpBOT</button>
+			<th:block th:insert="~{chatbot/chat-bot::#chat-disp}" />
+		</div>
+	</aside>
 	<!-- Link JS -->
 	<script src="/js/main.js"></script>
 </body>

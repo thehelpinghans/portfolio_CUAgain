@@ -1,0 +1,8 @@
+.btn-search{
+    line-height: 2em;
+    height: 2em;
+    display: inline-block;
+    min-width: 3em;
+    background-color: white;
+    border: 1px solid black;
+}

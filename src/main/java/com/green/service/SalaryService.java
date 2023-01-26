@@ -1,14 +1,10 @@
 package com.green.service;
 
-import org.springframework.stereotype.Service;
+import com.green.domain.dto.SalaryInsertDTO;
 import org.springframework.ui.Model;
 
-import com.green.domain.dto.SalaryResponseDTO;
-import com.green.domain.dto.SalarySaveDTO;
-import com.green.domain.dto.SalaryUpdateDTO;
-import com.green.domain.entity.SalaryEntity;
+import java.time.LocalDate;
 
-@Service
 
 public interface SalaryService {
 	
@@ -18,14 +14,19 @@ public interface SalaryService {
 	 * default SalaryEntity dtoToEntity(SalarySaveDTO dto) { return null; }
 	 */
 
-	void salarySave(SalarySaveDTO dto);
-	
-	void salaryList(Model model);
-	
-	void salaryUpdate(SalaryUpdateDTO dto);
 
 	void searchEmp(Model model, long empId);
-	
+
+	void salReg(SalaryInsertDTO dto);
+
+	void salList(Model model, long id);
+
+	void salSearchList(long empId, Model model);
+
+	void salSearchList(LocalDate startDate, LocalDate endDate, long empId, Model model);
+
+	void salDelete(long salId);
+
 
 	/*
 	 * static Long update(Long id, SalaryUpdateDTO requestDto) {

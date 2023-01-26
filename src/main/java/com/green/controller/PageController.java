@@ -39,7 +39,7 @@ public class PageController {
     public String myAttendance(Principal principal, Model model){
     	long id=service.principalId(principal);
 //    	service.myAttList(id, model)
-        return "member/attendance/my_attendance";
+        return "admin/attendance/my_attendance";
     }
 
 //    //임시, 어드민페이지로 이동
@@ -69,17 +69,7 @@ public class PageController {
     }
 
 
- // 급여관리의 등록 페이지로 이동
-    @GetMapping("/admin/add")
-    public String salaryAdd(){
-        return "/admin/salary/add";
-    }
-    
-    // 급여관리의 조회/수정 페이지로 이동
-    @GetMapping("/admin/edit")
-    public String salaryEdit(){
-        return "/admin/salary/edit";
-    }
+
 
     @PostMapping("/comm/checkRole")
     public String checkRole(){

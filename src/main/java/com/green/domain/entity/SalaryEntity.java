@@ -1,5 +1,6 @@
 package com.green.domain.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -32,7 +33,7 @@ public class SalaryEntity {
 	private Long id;
 	
 	
-	private LocalDateTime payday;
+	private LocalDate payDay;
 	
 	@JoinColumn	//employee_id
 	@ManyToOne
