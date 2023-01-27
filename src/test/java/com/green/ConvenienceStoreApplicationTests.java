@@ -85,7 +85,7 @@ class ConvenienceStoreApplicationTests {
 	//@Test
 	void 의도() {
 		intention.save(ChatBotIntention.builder()
-				.name("번호")
+				.name("전화")
 				.answer(answer.findById(1L).get())
 				.build());
 	}
@@ -96,18 +96,18 @@ class ConvenienceStoreApplicationTests {
 
 	}
 
-	@Test
+	//@Test
 	void 안녕의도() {
 		intention.save(ChatBotIntention.builder()
 				.name("안녕")
 				.answer(answer.save(Answer.builder()
-						.keyword("안녕")
-						.content("안녕하세요</br>HELP BOT입니다.")
+						.keyword("전화")
+						.content("문의한 사원의 전화번호 입니다.")
 						.build()))
 				.build());
 		;
 	}
-	@Test
+	//@Test
 	void 기타의도() {
 		intention.save(ChatBotIntention.builder()
 				.name("기타")
@@ -204,4 +204,5 @@ class ConvenienceStoreApplicationTests {
 
 	}
 */
+	
 }
