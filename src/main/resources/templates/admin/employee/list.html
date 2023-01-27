@@ -24,7 +24,7 @@
 			formData.append('gimg', fileData);
 
 			$.ajax({
-				url: "/admin/temp-upload",
+				url: "/member/temp-upload",
 				type: "post",
 				contentType: false,
 				processData: false,
@@ -44,7 +44,7 @@
 			var type = $("#search_type").val();
 			var data = $("#search_data").val();
 			$.ajax({
-				url:`/admin/emp/searchList/${type}/${data}`,
+				url:`/member/emp/searchList/${type}/${data}`,
 				type:"get",
 				success:function (resultHTML){
 					$("#emp-list").html(resultHTML);
@@ -55,7 +55,7 @@
 		//초기화 버튼 눌렀을 때
 		function btnResetClicked(){
 			$.ajax({
-				url:`/admin/emp/allList`,
+				url:`/member/emp/allList`,
 				type:"get",
 				success:function (resultHTML){
 					$("#emp-list").html(resultHTML);
@@ -68,7 +68,7 @@
 		function btnDetailClicked(){
 			var memberId=$(this).parent(".nameTd").prev().text();
 			$.ajax({
-				url:`/admin/member/detailTag/${memberId}`,
+				url:`/member/member/detailTag/${memberId}`,
 				type:"get",
 				success:function (resultHTML){
 					$("#view-list").hide();
@@ -81,7 +81,7 @@
 		function btnEditClicked(el){
 			var memberId=$(el).prev().val();
 			$.ajax({
-				url:`/admin/member/editTag/${memberId}`,
+				url:`/member/member/editTag/${memberId}`,
 				type:"get",
 				success:function (resultHTML){
 					$("#view-list").hide();
@@ -115,7 +115,7 @@
 
 			var pass = $("#pass1").val()
 			$.ajax({
-				url:`/admin/emp/passUpdate?empId=${empId}&pass=${pass}`,
+				url:`/member/emp/passUpdate?empId=${empId}&pass=${pass}`,
 				type:"get",
 				success:function (){
 					alert("비밀번호가 변경되었습니다.")

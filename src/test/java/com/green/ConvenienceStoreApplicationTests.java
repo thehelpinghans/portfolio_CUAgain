@@ -96,7 +96,7 @@ class ConvenienceStoreApplicationTests {
 
 	}
 
-	@Test
+	//@Test
 	void 안녕의도() {
 		intention.save(ChatBotIntention.builder()
 				.name("안녕")
@@ -107,7 +107,7 @@ class ConvenienceStoreApplicationTests {
 				.build());
 		;
 	}
-	@Test
+	//@Test
 	void 기타의도() {
 		intention.save(ChatBotIntention.builder()
 				.name("기타")
