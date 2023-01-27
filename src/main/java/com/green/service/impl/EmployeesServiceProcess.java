@@ -176,11 +176,10 @@ public class EmployeesServiceProcess implements EmployeesService {
                 .address(address)
                 .build().addRole(MyRole.USER);
         if(dto.getPosition().equals("사장")||dto.getPosition().equals("이사")||
-                dto.getPosition().equals("부장")||dto.getPosition().equals("팀장")||
-                dto.getPosition().equals("대리")){
+                dto.getPosition().equals("부장")||dto.getPosition().equals("팀장")){
             entity.addRole(MyRole.ADMIN);
         }
-        empRepo.save(entity);//대리 이상이면 관리자 Role 부여
+        empRepo.save(entity);//팀장 이상이면 관리자 Role 부여
     }
 
     //사원 비밀번호 수정 처리
