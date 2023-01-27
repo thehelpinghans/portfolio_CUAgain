@@ -2,11 +2,11 @@
 
 .det-p{
 	padding: 10px;
-    width: 80%;
+    width: 65%;
     margin-top: 20px;
-    border: 1px solid #444444;
+    border: 1px solid rgb(117, 117, 117);
     margin-left: 50px;
-	border-radius: 3px; 
+	border-radius: 10px; 
 }
 .det-li{
 	margin-top: 20px;
@@ -20,7 +20,7 @@
 	border-right: 1px solid #444444;
 }
 .det-inp{
-	margin: 20px;
+	margin: 0 20px 15px;
 	border: 1px solid #444444;
 	border-radius: 3px; 
 }
@@ -28,5 +28,39 @@
 	margin: 50px;
 }
 .btn-ed>button{
-	border: 1px solid #444444;
+	border: none;
+}
+
+.s-btn{
+	font-weight: bold;
+	color: #fff;
+	width: 100px;
+	height: 30px;
+	margin-right: 25px;
+	border: rgb(180 52 148 / 48%);
+	background-color: rgb(180 52 148 / 55%);
+	border-radius: 10px;
+}
+.a{
+	border-right: 1px solid;
+	padding-left: 15px;
+	padding-top: 15px;
+	font-weight: bold;
+	border-color: rgb(117, 117, 117);
+}
+td{
+	border-right: 1px solid;
+	border-bottom: 1px solid;
+	padding-left: 15px;
+	padding-top: 15px;
+	border-color: rgb(117, 117, 117);
+}
+.s-tit{
+	font-size: 22px;
+	font-weight: bold;
+	margin: 60px 120px 40px;
+}
+
+tr:nth-child(even){
+	background-color: rgb(180 52 148 / 20%);
 }
