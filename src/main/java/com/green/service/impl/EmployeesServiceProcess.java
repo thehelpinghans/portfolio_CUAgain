@@ -30,6 +30,8 @@ public class EmployeesServiceProcess implements EmployeesService {
 
     @Value("${file.location.temp}")
     private String locationTemp;
+    @Value("${file.location.server.temp}")
+    private String locationServerTemp;
 
     @Value("${file.location.upload}")
     private String locationUpload;
@@ -134,7 +136,7 @@ public class EmployeesServiceProcess implements EmployeesService {
 
     @Override
     public Map<String, String> fileTempUpload(MultipartFile gimg) {
-        return MyFileUtils.fileUpload(gimg, locationTemp);
+        return MyFileUtils.serverFileUpload(gimg, locationServerTemp);
     }
 
     /**
