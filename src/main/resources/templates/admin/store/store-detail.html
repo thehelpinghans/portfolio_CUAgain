@@ -3,7 +3,6 @@
 	  th:replace="~{layout/admin :: adminLayout(~{this::head}, ~{::main})}">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="/css/commons/common.css">
 <link rel="stylesheet" href="/css/store/store-detail.css">
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/js/employee/daumPostcode.js"></script>
@@ -25,96 +24,96 @@
 </head>
 <body>
 	<main>
-		<h1>점포상세페이지</h1>
+		<h1 class="s-tit">점포상세페이지</h1>
 		<div id="default">
 			<table class="det-p" >
 				<tr class="det-li">
-					<td>점포명</td>
+					<td class="a">점포명</td>
 					<td th:text="${dto.name}"></td>
 				</tr>
 				<tr class="det-li">
-					<td>담당자 이름</td>
+					<td class="a">담당자 이름</td>
 					<td th:text="${dto.managerName}"></td>
 				</tr>
 				<tr class="det-li">
-					<td>상세정보</td>
+					<td class="a">상세정보</td>
 					<td th:text="${dto.content}"></td>
 				</tr>
 				<tr class="det-li">
-					<td>우편번호</td>
+					<td class="a">우편번호</td>
 					<td th:text="${dto.postcode}"></td>
 				</tr>
 				<tr class="det-li">
-					<td>도로명주소</td>
+					<td class="a">도로명주소</td>
 					<td th:text="${dto.roadAddress}"></td>
 				</tr>
 				<tr class="det-li">
-					<td>지번주소</td>
+					<td class="a">지번주소</td>
 					<td th:text="${dto.jibunAddress}"></td>
 				</tr>
 				<tr class="det-li">
-					<td>주소상세정보</td>
+					<td class="a">주소상세정보</td>
 					<td th:text="${dto.detailAddress}"></td>
 				</tr>
 				<tr class="det-li">
-					<td>동이름</td>
+					<td class="a">동이름</td>
 					<td th:text="${dto.extraAddress}"></td>
 				</tr>
 			</table>
 				<div class="btn-ed">
 					<form th:action="|/store/store-detail/${dto.id}|" method="post">
 						<input type="hidden" name="_method" value="DELETE">
-						<button>삭제</button>
-						<button type="button" id="btnEdit">수정</button>
+						<button class="s-btn">삭제</button>
+						<button class="s-btn" type="button" id="btnEdit">수정</button>
 					</form>
 				</div>
 			</div>
 		<form id="editForm" th:action="|/store/store-detail/${dto.id}|" method="post">
 			<table class="det-p">
 				<tr>
-					<td>점포명</td>
+					<td class="a">점포명</td>
 					<td>
 						<input class="det-inp" type="text" name="name" th:value="${dto.name}">
 					</td>
 				</tr>
 				<tr>
-					<td>담당자 이름</td>
+					<td class="a">담당자 이름</td>
 					<td>
 						<input class="det-inp" type="text" name="managerName" th:value="${dto.managerName}">
 					</td>
 				</tr>
 				<tr>
-					<td>상세정보</td>
+					<td class="a">상세정보</td>
 					<td>
 						<input class="det-inp" type="text" name="content" th:value="${dto.content}">
 					</td>
 				</tr>
 				<tr>
-					<td>우편번호</td>
+					<td class="a">우편번호</td>
 					<td>
 						<input class="det-inp" type="text" name="postcode" th:value="${dto.postcode}">
 					</td>
 				</tr>
 				<tr>
-					<td>도로명주소</td>
+					<td class="a">도로명주소</td>
 					<td>
 						<input class="det-inp" type="text" name="roadAddress" th:value="${dto.roadAddress}">
 					</td>
 				</tr>
 				<tr>
-					<td>지번주소</td>
+					<td class="a">지번주소</td>
 					<td>
 						<input class="det-inp" type="text" name="jibunAddress" th:value="${dto.jibunAddress}">
 					</td>
 				</tr>
 				<tr>
-					<td>주소상세정보</td>
+					<td class="a">주소상세정보</td>
 					<td>
 						<input class="det-inp" type="text" name="detailAddress" th:value="${dto.detailAddress}">
 					</td>
 				</tr>
 				<tr>
-					<td>동이름</td>
+					<td class="a">동이름</td>
 					<td>
 						<input class="det-inp" type="text" name="extraAddress" th:value="${dto.extraAddress}">
 					</td>
@@ -122,8 +121,8 @@
 			</table>
 			<div class="btn-ed">
 				<input type="hidden" name="_method" value="PUT">
-				<button type="submit">수정완료</button>
-				<button type="button" id="btnCancel">취소</button>
+				<button class="s-btn" type="submit">수정완료</button>
+				<button class="s-btn" type="button" id="btnCancel">취소</button>
 			</div>
 		</form>
 	</main>
