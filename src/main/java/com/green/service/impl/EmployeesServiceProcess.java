@@ -136,7 +136,7 @@ public class EmployeesServiceProcess implements EmployeesService {
 
     @Override
     public Map<String, String> fileTempUpload(MultipartFile gimg) {
-        return MyFileUtils.serverFileUpload(gimg, locationServerTemp);
+        return MyFileUtils.serverFileUpload(gimg, locationTemp);
     }
 
     /**
