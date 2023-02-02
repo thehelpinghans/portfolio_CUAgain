@@ -1,0 +1,10 @@
+@charset "UTF-8";
+li{
+   list-style: none;
+}
+.movie-tit{
+   display: inline-block;
+   width:100px;
+   height:40px;
+   font-weight: 700;
+}
