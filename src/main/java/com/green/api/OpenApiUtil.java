@@ -15,7 +15,7 @@ public class OpenApiUtil {
 	 * 
 	 * @param apiUrl 요청url
 	 * @param requestHeaders 요청시 header 들어가는 정보가 있으면 세팅
-	 * @methodType 메서드방식  post or get
+	 * @methodType 메서드방식  POST or GET
 	 * @return JSON문자열 형식으로 리턴됨
 	 */
 	public static String request(String apiUrl, Map<String, String> requestHeaders, String methodType){
@@ -31,6 +31,7 @@ public class OpenApiUtil {
             
             int responseCode = con.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_OK) { // 정상 호출
+				//json 데이터 읽기처리
                 return readBody(con.getInputStream());
             } else { // 오류 발생
                 return readBody(con.getErrorStream());
@@ -53,7 +54,7 @@ public class OpenApiUtil {
         }
     }//connect
 	
-	private static String readBody(InputStream body){
+	private static String readBody(InputStream body){//byte->문자->줄단위 읽기로 확장
         InputStreamReader streamReader = new InputStreamReader(body);
         try (BufferedReader lineReader = new BufferedReader(streamReader)) {
             StringBuilder responseBody = new StringBuilder();

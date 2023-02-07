@@ -163,7 +163,17 @@
                     <a sec:authorize="hasRole('ADMIN')" href="/admin/store-write" class="link">등록</a>
                     <a href="/admin/store" class="link">조회/수정</a>
                 </div>
-            </li>   
+            </li>
+
+			<li class="dropdown">
+				<div class="title">
+					<a href="/bus" class="link">
+						<i class='bx bx-log-out' ></i>
+						<span class="name">버스정보</span>
+					</a>
+				</div>
+			</li>
+
 			<li sec:authorize="isAuthenticated()">
 				<div class="title">
 					<a href="/logout" class="link">
@@ -172,6 +182,7 @@
 					</a>
 				</div>
 			</li>
+
 			<li class="dropdown link">
 				<form action="https://auth.worksmobile.com/oauth2/v2.0/authorize" method="get">
 					<input type="hidden" name="client_id" value="jjFFJFIZXYX701BcqYyp">

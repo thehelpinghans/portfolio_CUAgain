@@ -1,4 +1,4 @@
-package com.green.controller.api;
+package com.green.api.movie;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

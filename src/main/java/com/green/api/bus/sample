@@ -1,0 +1,50 @@
+http://ws.bus.go.kr/api/rest/busRouteInfo/getBusRouteList?serviceKey=i5pte6ySS%2BNxqvWFkT3DgFpYxwTflKEvQ4f%2FVICIaerVms7UWQ7Je2UM5KYmQVtHV11%2F%2BoxEA%2FIrmgXIofRc0w%3D%3D&strSrch=3&resultType=json
+
+{
+	"comMsgHeader": {
+		"responseTime": null,
+		"requestMsgID": null,
+		"responseMsgID": null,
+		"returnCode": null,
+		"errMsg": null,
+		"successYN": null
+	},
+	"msgHeader": {
+		"headerMsg": "정상적으로 처리되었습니다.",
+		"headerCd": "0",
+		"itemCount": 0
+	},
+	"msgBody": {
+		"itemList": [
+			{
+				"busRouteId": "100100414",
+				"busRouteNm": "6003",
+				"busRouteAbrv": "6003",
+				"length": "156",
+				"routeType": "1",
+				"stStationNm": "인천공항",
+				"edStationNm": "서울대학교",
+				"term": "35",
+				"lastBusYn": " ",
+				"lastBusTm": "20230203225000",
+				"firstBusTm": "20230203042000",
+				"lastLowTm": "20191105000000",
+				"firstLowTm": "              ",
+				"corpNm": "공항리무진  02-2664-9898"
+			},
+			{
+				"busRouteId": "100100420",
+				"busRouteNm": "6013",
+				"busRouteAbrv": "6013",
+				"length": "167",
+				"routeType": "1",
+				"stStationNm": "인천공항",
+				"edStationNm": "홈플러스면목점",
+				"term": "40",
+				"lastBusYn": " ",
+				"lastBusTm": "20230203225000",
+				"firstBusTm": "20230203042000",
+				"lastLowTm": "              ",
+				"firstLowTm": "              ",
+				"corpNm": "공항리무진  02-2664-9898"
+			},
