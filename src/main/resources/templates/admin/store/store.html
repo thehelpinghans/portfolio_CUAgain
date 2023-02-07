@@ -2,53 +2,119 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	  th:replace="~{layout/admin :: adminLayout(~{this::head}, ~{::main})}">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="/css/commons/common.css">
-<link rel="stylesheet" href="/css/store/store.css">
-</head>
-	<body>
-		<main>
-		<form action="/admin/store-search" method="get">
-			<div class="serch-zone">
-				<label>
-					<select id="serch-type" name="type">
-						<option value="Name">지점명</option>
-						<option value="managerName">매니저이름</option>
-					</select>
-					 <input type="text" name="name" class="search-box" />
-				</label>
-				<button class="btn-search">검색</button>
-			</div>
-		</form>
-			<table class="store-table">
-				<thead>
-					<tr class="store-list">
-						<td class="stoname">직영점명</td>
-						<td class="stodle">담당자</td>
-						<td class="stoadre">직영점 주소</td>
-					</tr>
-				</thead>
-				<tbody th:each=" dto : ${list}">
-					<tr class="store-list">
-						<td class="stoname1" th:text="${dto.name}" th:onclick="|location.href='/store/store-detail/${dto.id}'|"></td>
-						<td class="stodle1" th:text="${dto.managerName}">담당자</td>
-						<td class="stoadre1" th:text="${dto.jibunAddress}">직영점 주소</td>
-					</tr>
-				</tbody>
-			</table>
-		<div class="pageNumber" th:if="${p.getNumberOfElements()>0}">
-			<a th:if="${p.hasPrevious()}"
-				th:href="|/admin/store?page=${p.getNumber()}|">&lt;</a>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link rel="stylesheet" href="/css/commons/common.css">
+	<link rel="stylesheet" href="/css/store/store.css">
 
-			<th:block th:each="p:${#numbers.sequence(startPage, endPage)}">
-				<a th:if="${p != nowPage}" th:href="@{/admin/store?(page=${p})}"
-					th:text="${p}"></a>
-				<a th:if="${p == nowPage}" th:text="${p}" class="active"></a>
-			</th:block>
-			<!-- th:href="@{notice-boards?(page=${p})}" -->
-			<a th:if="${p.hasNext()}" th:href="|/admin/store?page=${p.getNumber()+2}|">&gt;</a>
+	<style>
+		#map {
+			margin: 100px auto 200px auto;
+		}
+	</style>
+	<script>
+		function btnGetMap(el) {
+			var address = $(el).parent().siblings(".stoadre1").text();
+			var storeName = $(el).parent().siblings(".stoname1").text();
+			getMapInfo(address,storeName);
+		}
+	</script>
+</head>
+<body>
+<main>
+	<form action="/admin/store-search" method="get">
+		<div class="serch-zone">
+			<label>
+				<select id="serch-type" name="type">
+					<option value="Name">지점명</option>
+					<option value="managerName">매니저이름</option>
+				</select>
+				<input type="text" name="name" class="search-box"/>
+			</label>
+			<button class="btn-search">검색</button>
 		</div>
-		</main>
-	</body>
+	</form>
+	<table class="store-table">
+		<thead>
+		<tr class="store-list">
+			<td class="stoname">직영점명</td>
+			<td class="stodle">담당자</td>
+			<td class="stoadre">직영점 주소</td>
+			<td>비고</td>
+		</tr>
+		</thead>
+		<tbody th:each=" dto : ${list}">
+		<tr class="store-list">
+			<td class="stoname1" th:text="${dto.name}"
+				th:onclick="|location.href='/store/store-detail/${dto.id}'|"></td>
+			<td class="stodle1" th:text="${dto.managerName}">담당자</td>
+			<td class="stoadre1" th:text="${dto.jibunAddress}">직영점 주소</td>
+			<td>
+				<button onclick="btnGetMap(this)">지도보기</button>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+	<div class="pageNumber" th:if="${p.getNumberOfElements()>0}">
+		<a th:if="${p.hasPrevious()}"
+		   th:href="|/admin/store?page=${p.getNumber()}|">&lt;</a>
+
+		<th:block th:each="p:${#numbers.sequence(startPage, endPage)}">
+			<a th:if="${p != nowPage}" th:href="@{/admin/store?(page=${p})}"
+			   th:text="${p}"></a>
+			<a th:if="${p == nowPage}" th:text="${p}" class="active"></a>
+		</th:block>
+		<!-- th:href="@{notice-boards?(page=${p})}" -->
+		<a th:if="${p.hasNext()}" th:href="|/admin/store?page=${p.getNumber()+2}|">&gt;</a>
+	</div>
+
+	<div id="map" style="width:80%;height:350px;"></div>
+
+	<script type="text/javascript"
+			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5282b19ae5602ea7a407195e8c96d333&libraries=services"></script>
+	<script>
+		function getMapInfo(address,storeName) {
+			var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+					mapOption = {
+						center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+						level: 3 // 지도의 확대 레벨
+					};
+
+			// 지도를 생성합니다
+			var map = new kakao.maps.Map(mapContainer, mapOption);
+
+			// 주소 저장 변수
+
+
+			// 주소-좌표 변환 객체를 생성합니다
+			var geocoder = new kakao.maps.services.Geocoder();
+
+			// 주소로 좌표를 검색합니다
+			geocoder.addressSearch(address, function (result, status) {
+
+				// 정상적으로 검색이 완료됐으면
+				if (status === kakao.maps.services.Status.OK) {
+
+					var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+					// 결과값으로 받은 위치를 마커로 표시합니다
+					var marker = new kakao.maps.Marker({
+						map: map,
+						position: coords
+					});
+
+					// 인포윈도우로 장소에 대한 설명을 표시합니다
+					var infowindow = new kakao.maps.InfoWindow({
+						content: `<div style="width:150px;text-align:center;padding:6px 0;">${storeName}</div>`
+					});
+					infowindow.open(map, marker);
+
+					// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+					map.setCenter(coords);
+				}
+			});
+		}
+	</script>
+</main>
+</body>
 </html>
