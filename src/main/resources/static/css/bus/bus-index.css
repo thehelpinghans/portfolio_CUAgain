@@ -1,0 +1,50 @@
+@charset "UTF-8";
+
+.bus-div{
+	padding: 2.5em 0 2.5em 21.5em;
+}
+.bus-div2{
+	padding-top: 1em;
+	width: 500px;
+    display: flex;
+    justify-content: center;
+}
+.bus-title{
+	display: flex;
+	justify-content: center;
+	width: 500px;
+}
+.bus-title{
+	font-weight: 700;
+	font-size: 27px;
+	color: #727272;
+}
+.bus-lable{
+	font-size: 20px;
+	font-weight: 500;
+	color: #727272;
+} 
+#strSrch, #routeType{
+	font-size: 13px;
+	border: 3px solid rgb(170,204,57);
+	font-weight: 500;
+}
+#strSrch{
+	width: 5em;
+}
+.bus-btn{
+	font-size: 13px;
+	font-weight: 700;
+	color: rgb(134, 72, 202);
+}
+.bus-table1, .bus-table1 thead, tr, th, td{
+	border: 2px solid #bfbfbf;
+	text-align: center;
+	height: 35px;
+	padding: 10px 0 10px;
+}
+th{
+	font-weight: 700;
+	color: white;
+	background-color: rgb(170,204,57);
+}
