@@ -1,24 +1,13 @@
 package com.green.controller;
 
-import java.security.Principal;
-
+import com.green.chatbot.service.AttendService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.green.domain.dto.AdminAttendanceListDTO;
-import com.green.domain.dto.AttendanceListRequestDTO;
-import com.green.security.MyUserDetails;
-import com.green.service.AttendService;
-import com.green.service.DepartmentService;
-import com.green.service.TeamService;
-import com.green.chatbot.service.AttendService;
+import java.security.Principal;
 
 @Controller
 public class PageController {
