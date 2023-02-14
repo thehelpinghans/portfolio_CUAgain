@@ -39,9 +39,9 @@
             <li class="flex between"><span class="movie-tit">매출액</span><span th:text="${#numbers.formatInteger(dto.salesAmt , 0 ,'COMMA')+'원'}"></span></li>
             <li class="flex between"><span class="movie-tit">관객수</span><span th:text="${#numbers.formatInteger(dto.audiAcc , 0 ,'COMMA')+'명'}"></span></li>
             <li class="flex between">
-            	
+
             </li>
-         
+
             <li class="flex between"><span class="movie-tit">개봉일</span><span th:text="${dto.openDt}"></span></li>
         </ul>
     </div>
@@ -61,7 +61,7 @@
 	/* 처음코드 */
     $(function (){
         $("#movieDetail>*").hide();
-        
+
     })
     function moviePictuerClicked(el){
         var movieCd = $(el).siblings(".movieCode").val();
@@ -70,6 +70,6 @@
         $(`#${movieCd}`).fadeIn(1000);
     }
     /* 처음코드 끝 */
-	  
+
 </script>
 </html>
