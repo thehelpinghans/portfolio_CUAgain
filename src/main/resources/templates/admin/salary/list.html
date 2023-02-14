@@ -15,22 +15,20 @@
 
 		});
 		//삭제버튼 클릭됐을 때
-		function btnDeleteClicked(el) {
-			if(confirm("정말 삭제하시겠습니까?")){
+		function btnDeleteClicked(el){
 			var salId = $(el).siblings(".salId").val();
-			var data = {
-				salId: salId
+			var data={
+				salId:salId
 			}
 			$.ajax({
-				url: "/admin/sal/delete",
-				type: "delete",
-				data: data,
-				success: function () {
+				url:"/admin/sal/delete",
+				type:"delete",
+				data:data,
+				success:function (){
 					alert("급여내역 삭제 완료");
 					recentMethod();
 				}
 			});
-		}
 
 		}
 		//내 급여내역 눌렀을 때
@@ -77,8 +75,7 @@
 <main><!--내용 채우기-->
 	<h1>급여 조회 페이지</h1>
 
-	<div id="salSearch" class="" sec:authorize="hasRole('ADMIN')">
-
+	<div id="salSearch" sec:authorize="hasRole('ADMIN')">
 		<label>
 			<span>조회기간</span>
 			<input type="date" id="startDate" class="baseStartDate">
@@ -86,14 +83,14 @@
 			<input type="date" id="endDate" class="currentDate">
 		</label>
 		<label>
-			<span>사원번호</span>
+			<span>사원번호로 조회</span>
 			<input type="text" id="search_data" >
 		</label>
 		<button id="btn-search" class="btn-search"><i class='bx bx-search-alt-2' ></i></button>
 		<button id="btn-reset-list" class="btn-search">내 급여내역</button>
 	</div>
 	<div id="salListSection">
-		<table class="sal-list-table">
+		<table>
 			<thead>
 			<tr>
 				<td>부서</td>
@@ -125,11 +122,7 @@
 					<span th:if="${startDate}" th:text="|조회기간: ${startDate}~|"></span><span th:text="${endDate}"></span>
 					<span th:if="!${startDate}" th:text="|조회기간: 모든 기간|"></span>
 				</td>
-				<td colspan="3">
-					<span>지급총액: </span>
-					<span id="totalSum" th:text="${totalSum}"></span>
-					<span> 원</span>
-				</td>
+				<td colspan="3"><span>지급총액</span><span id="totalSum" th:text="${totalSum}"></span>원</td>
 			</tr>
 			<tr th:if="${#lists.isEmpty(myList)}">
 				<td colspan="8">데이터가 없습니다.</td>

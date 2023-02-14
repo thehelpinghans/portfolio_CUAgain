@@ -1,0 +1,118 @@
+@charset "UTF-8";
+/*전체적용*/
+main{height:100%; background-color: white;}
+
+/*아이콘 기본 설정*/
+.fa-solid, .fa-regular{
+	font-family: "FontAwesome";
+	color: #a9a9a9;
+	margin: 0 0.2em;
+}
+
+.view_size_depa{
+	margin: 10em auto;
+	width: 900px;
+	height: 700px;
+	padding: 3em;
+}
+/*개별적용*/
+.organization{
+	border: 1px solid #ddd;
+	width: 500px;
+	height: 700px;
+	padding: 0 auto;
+}
+.content_depart{
+	height: 800px;
+}
+/*//////////////////부서조회 추가 수정 삭제 등///////////////////////////*/
+/*부서헤더*/
+.content_head>div>span{
+	margin: -1em 2em;
+	height: 100px;
+	padding: 0.5em;
+	font-size: 24px;
+	font-weight: 600px;
+}
+/*부서바디*/
+.contents_body{
+	padding: 1em;
+	height: 800px;
+	
+}
+/*회사명 btn_toggle_tree누르면 부서org_tree보이게 안보이게 */
+.btn_toggle_tree{
+	background-color: #e7f2fe;
+	padding: 0;
+	height: 30px;
+	margin: 2em 1em ;
+}
+/*회사명*/
+.btn_toggle_tree>.corp_name{
+	color: #157efb;
+	padding: 2em 0em;
+}
+
+/*회사명 btn_toggle_tree호버시 백그라운드컬러 달라지게*/
+.btn_toggle_tree:hover{
+	background-color: #e6e6e6;
+}
+/*부서명 호버시 백그라운드컬러 달라지게*/
+.depart_name> .dep-table>tr:hover{
+	background-color: #e6e6e6;
+}
+
+
+/*토글 기본값 안보이게*/
+.org_tree{display: none;}
+.depart_menu{display: none; padding: 0.5em;}
+.team_name{display: none;}
+.teamInsert{display: none;}
+.depUpdate{display: none;}
+
+/*부서명 선택시 크기*/
+.team_name{
+	margin: 0;
+	padding: 0;
+	height: 30px;
+	background-color: #fff;
+}
+.dep-tr1{ 
+	min-height: 24px;
+	max-height: 140px;
+}
+/*부서 수정가능창 여는 버튼*/
+.btn_depart_menu{
+	width: 20px;
+	height: 20px;
+}
+/*부서클릭시 나타나는 메뉴*/
+.depart_menu{
+	background-color: rgba(255, 255, 255, 0.9);
+	width: 100px;
+	border: 1px solid #ddd;
+}
+/*부서명 클릭시 토글되는 팀리스트*/
+.team_name_c{
+	caption-side: bottom;
+}
+
+/*//////////////////내용///////////////////////////*/
+.selected{
+	margin: 0 0.5em;
+}
+.fix_contents {
+	border: 1px solid #ddd;
+}
+
+.fix_head {
+	border-bottom: 1px solid #ddd;
+	height: 60px;
+	width: 800px;
+    position: relative;
+    line-height: 20px;
+    padding: 16px 0 16px 20px;
+}
+.fix_body{
+	margin: 2em;
+}

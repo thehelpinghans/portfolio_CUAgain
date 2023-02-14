@@ -34,7 +34,7 @@ public class BoardEntity extends  BaseDateEntity {
    //@Enumerated(EnumType.STRING)
    //private BoardStatus status; //상태  0,1,2 정상/삭제/비활성화
 
-//
+
     private boolean pin;   //true or false
 
 

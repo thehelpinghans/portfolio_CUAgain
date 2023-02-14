@@ -84,8 +84,7 @@ public class EmployeesEntity {
         this.position = Position.valueOf(dto.getPosition());
 
         if(dto.getPosition().equals("사원")||dto.getPosition().equals("점장")||
-                dto.getPosition().equals("매니저")||dto.getPosition().equals("직원")
-                ||dto.getPosition().equals("대리")){
+                dto.getPosition().equals("매니저")||dto.getPosition().equals("직원")){
             this.removeRole(MyRole.ADMIN);
         }else{
             this.addRole(MyRole.ADMIN);
@@ -100,7 +99,7 @@ public class EmployeesEntity {
         return this;
     }
     public void additionalUpdate(ImagesEntity image, TeamEntity team, DepartmentEntity dep, AddressEntity address){
-        this.image = image;
+        this.image=image;
         this.team=team;
         this.dep=dep;
         this.address=address;

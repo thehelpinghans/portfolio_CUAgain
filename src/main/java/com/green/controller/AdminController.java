@@ -175,35 +175,35 @@ public class AdminController {
     }
 	//사원 검색시 처리
 
-	@GetMapping("/member/emp/searchList/{type}/{data}")
+	@GetMapping("/admin/emp/searchList/{type}/{data}")
 	public String empListBySearch(@PathVariable String type, @PathVariable String data, Model model){
 		employeesService.getEmpListBySearch(type,data,model);
 		return "admin/employee/searchResult";
 
 	}
 	//사원리스트 초기화시
-	@GetMapping("/member/emp/allList")
+	@GetMapping("/admin/emp/allList")
 	public String empListByReset(Model model){
 		employeesService.getEmpList(model);
 		return "admin/employee/searchResult";
 
 	}
     //사원디테일가져오기
-    @GetMapping("/member/member/detailTag/{memberId}")
+    @GetMapping("/admin/member/detailTag/{memberId}")
     public String empDetail(@PathVariable long memberId, Model model){
 		employeesService.getDetail(memberId,model);
         return "admin/employee/detailTag";
     }
 
 	//사원수정태그가져오기
-	@GetMapping("/member/member/editTag/{memberId}")
+	@GetMapping("/admin/member/editTag/{memberId}")
 	public String empedit(@PathVariable long memberId, Model model){
 		employeesService.getDetail(memberId,model);
 		return "admin/employee/editTag";
 	}
 	//사원 증명사진 이미지 temp 저장
 	@ResponseBody//응답데이터를 json타입으로 리턴합니다.
-	@PostMapping("/member/temp-upload")
+	@PostMapping("/admin/temp-upload")
 	public Map<String, String> tempUpload(MultipartFile gimg) {
 		return employeesService.fileTempUpload(gimg);
 	}
@@ -216,7 +216,7 @@ public class AdminController {
 		return "redirect:/member/emp/list";	//사원리스트 페이지로 이동
 	}
 	//사원 수정시
-	@PostMapping("/member/emp/update")
+	@PostMapping("/admin/emp/update")
 	public String empUpdate(EmployeesDetailDTO dto) {
 		//등록하면 dto에 업데이트! 하고 사원 리스트로 리턴
 		employeesService.update(dto);
@@ -224,7 +224,7 @@ public class AdminController {
 	}
 	//사원 비밀번호 수정시
 	@ResponseBody
-	@GetMapping("/member/emp/passUpdate")
+	@GetMapping("/admin/emp/passUpdate")
 	public void empPassUpdate(@RequestParam(name = "empId") String empId,@RequestParam(name = "pass") String pass ){
 		long numEmpId = Long.parseLong(empId);
 		employeesService.passUpdate(numEmpId,pass);

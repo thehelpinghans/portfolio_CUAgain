@@ -1,8 +1,7 @@
 @charset "UTF-8";
 
 .view-size-content{
-	width: 600px;
-
+	padding: 20px 10px 20px 30px;
 }
 
 h1{
@@ -27,8 +26,7 @@ h2{
 }
 .searchContents div{
 	display: flex;
-	/*justify-content: space-between;*/
-	margin-right: 1em;
+	justify-content: space-between;
 	align-items: center;
 	margin-bottom: 5px;
 }
@@ -67,9 +65,4 @@ select {
 	background-color: #DDD;
 	border-radius: 3px;
 	border: solid 1px black;
-}
-.btn-box{
-	border: 1px solid black;
-	border-radius: 3px;
-	padding: 3px;
 }

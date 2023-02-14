@@ -23,9 +23,7 @@
 		</div>
 		<div class="MemberSelectArea">
 			<span>기본급</span>
-			<div>
 			<span id="basePay" th:text="${dto.baseSalary}"></span>원
-			</div>
 		</div>
 		<div class="MemberSelectArea">
 			<span>상여금</span>
@@ -36,6 +34,6 @@
 			<input id="totPay" name="totPay" th:value="${dto.baseSalary}" type="text" readonly>
 		</div>
 		<input type="hidden" th:value="${dto.id}" name="empId">
-		<button class="btn-box">급여 등록</button>
+		<button>급여 등록</button>
 	</div>
 	</form>

@@ -54,7 +54,7 @@ table {
 a{text-decoration: none; color: #222; text-underline-position: from-font;}
 li{list-style: none;}
 /*h1{position: absolute; left : -9999px;}*/
-button {border: none; background-color: transparent; cursor: pointer;}
+button:not(.s-btn){border: none; background-color: transparent; cursor: pointer;}
 address {font-style: normal;}
 input{border:none}
 
