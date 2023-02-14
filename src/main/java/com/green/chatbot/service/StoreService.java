@@ -1,4 +1,4 @@
-package com.green.service;
+package com.green.chatbot.service;
 
 import org.springframework.ui.Model;
 

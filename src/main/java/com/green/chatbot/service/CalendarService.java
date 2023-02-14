@@ -1,4 +1,4 @@
-package com.green.service;
+package com.green.chatbot.service;
 
 import java.util.Date;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.green.service;
+package com.green.chatbot.service;
 
 import com.green.domain.dto.SalaryInsertDTO;
 import org.springframework.ui.Model;
