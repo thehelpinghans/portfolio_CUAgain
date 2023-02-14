@@ -163,7 +163,20 @@
                     <a sec:authorize="hasRole('ADMIN')" href="/admin/store-write" class="link">등록</a>
                     <a href="/admin/store" class="link">조회/수정</a>
                 </div>
-            </li>   
+            </li>
+            <li class="dropdown">
+                <div class="title">
+                    <a href="#" class="link">
+                        <i class='bx bx-store'></i>
+                        <span class="name">지도</span>
+                    </a>
+                    <i class='bx bxs-chevron-down'></i>
+                </div>
+                <div class="submenu">
+                    <a href="#" class="link submenu-title">지도</a>
+                    <a href="/admin/mapinfo" class="link">위치 찾기</a>
+                </div>
+            </li>
 			<li sec:authorize="isAuthenticated()">
 				<div class="title">
 					<a href="/logout" class="link">

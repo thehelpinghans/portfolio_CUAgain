@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.green.service.DocumentService;
+import com.green.chatbot.service.DocumentService;
 import com.green.domain.dto.DocumentInsertDTO;
 import org.springframework.web.bind.annotation.ResponseBody;
 

@@ -3,7 +3,6 @@ package com.green.controller;
 import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,12 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.green.service.AttendService;
-import com.green.service.StoreService;
-import com.green.service.impl.StoreServiceProcess;
-import com.green.domain.dto.StoreListDTO;
+import com.green.chatbot.service.AttendService;
+import com.green.chatbot.service.StoreService;
 import com.green.domain.dto.StoreSaveDTO;
-import com.green.security.MyUserDetails;
 
 @Controller
 public class StoreController {

@@ -1,4 +1,4 @@
-package com.green.service.api.impl;
+package com.green.chatbot.service.api.impl;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import com.green.chatbot.service.api.MovieService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,6 @@ import com.green.api.OpenApiUtil;
 import com.green.api.movie.Item;
 import com.green.api.movie.MovieResponse;
 import com.green.api.movie.NaverMovieResponse;
-import com.green.service.api.MovieService;
 
 import kr.or.kobis.kobisopenapi.consumer.rest.KobisOpenAPIRestService;
 

@@ -1,5 +1,6 @@
-package com.green.service.impl;
+package com.green.chatbot.service.impl;
 
+import com.green.chatbot.service.SalaryService;
 import com.green.domain.dto.SalaryListDTO;
 import com.green.domain.entity.SalaryEntity;
 import com.green.domain.entity.SalaryEntityRepository;
@@ -10,14 +11,13 @@ import org.springframework.ui.Model;
 import com.green.domain.dto.EmployeesListDTO;
 import com.green.domain.dto.SalaryInsertDTO;
 import com.green.domain.entity.EmployeesEntityRepository;
-import com.green.service.SalaryService;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class SalaryServiceProcess implements SalaryService{
+public class SalaryServiceProcess implements SalaryService {
 	
 	
 	@Autowired
