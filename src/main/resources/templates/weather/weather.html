@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org"
+th:replace="~{layout/admin :: adminLayout(~{this::head}, ~{::main})}">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link rel="stylesheet" th:href="@{/css/commons/common.css}">
+	<link rel="stylesheet" th:href="@{/css/weather/weather.css}">
+	<script src="/js/weather/weather.js"></script> 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+<main>
+	<div class="weather-div">
+		<div class="weather-div1" >
+			<div class="weather_icon"></div>
+		</div>
+		<br>
+		<div class="flex weather-div2">
+			<div class="weather-div3">
+				<div class="temp_min"></div>
+				<div class="temp_max"></div>
+				<div class="humidity"></div>
+			</div>
+		</div>
+		<div class="flex weather-div4">
+			<div class="current_temp"></div>
+			<div>
+				<div class="weather_description"></div>
+				<div class="city"></div>
+			</div>
+		</div>
+	</div>
+</main>
+</html>
