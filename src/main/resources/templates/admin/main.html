@@ -5,8 +5,16 @@
 <head>
 	<!--필요한 head 추가-->
 	<link rel="stylesheet" href="/css/dashboard/member.css">
+	<link rel="stylesheet" href="/css/weather/weather.css">
+	<script src="/js/weather/weather.js"></script> 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 	<script type="text/javascript">
+	$(function() {
+		weather();
+	});
+	
 	$(function(){
+		
 		$(".btn-on").click(on);
 		$(".btn-off").click(off);
 		var img=$(".img2").val();
@@ -56,6 +64,20 @@
 		});
 	
 	}
+	
+	function weatherInfo(){
+        event.preventDefault();
+      //  var weather= $("#weather").val().trim();
+
+        $.ajax({
+            url:"/weather/weather",type:"get",
+            //{name:value} -->name은 변수가 아님
+            success:function(result){
+                $("#weather").html(result);
+            }
+        });
+    }
+	
 	</script>
 </head>
 <main><!--내용 채우기-->
@@ -131,8 +153,30 @@
 			</table>
 		</div>
 		<div>
-			<!-- 대시보드에 더 띄우고 싶은거 띄우기~ -->
+			<!-- weather -->
+			<div id="weather">
+				<div class="weather-div">
+		<div class="weather-div1" >
+			<div class="weather_icon"></div>
+		</div>
+		<br>
+		<div class="flex weather-div2">
+			<div class="weather-div3">
+				<div class="temp_min"></div>
+				<div class="temp_max"></div>
+				<div class="humidity"></div>
+			</div>
+		</div>
+		<div class="flex weather-div4">
+			<div class="current_temp"></div>
+			<div>
+				<div class="weather_description"></div>
+				<div class="city"></div>
+			</div>
 		</div>
 	</div>
+				
+			</div>
+		</div>
 </main>
 </html>
