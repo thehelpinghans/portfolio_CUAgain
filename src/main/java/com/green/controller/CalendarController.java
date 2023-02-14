@@ -11,10 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.green.domain.dto.AttendanceCalendarDTO;
 import com.green.domain.dto.CalendarDetailDTO;
-import com.green.domain.entity.BoardEntityRepository;
-import com.green.service.AttendService;
-import com.green.service.BoardService;
-import com.green.service.CalendarService;
+import com.green.chatbot.service.AttendService;
+import com.green.chatbot.service.CalendarService;
 @Controller
 @RequestMapping("/calendar")
 public class CalendarController {

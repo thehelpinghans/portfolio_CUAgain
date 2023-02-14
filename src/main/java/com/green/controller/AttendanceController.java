@@ -18,7 +18,7 @@ import com.green.domain.dto.AttendanceCalendarDTO;
 import com.green.domain.dto.AttendanceDetailDTO;
 import com.green.domain.dto.AttendanceListDTO;
 import com.green.domain.dto.AttendanceListRequestDTO;
-import com.green.service.AttendService;
+import com.green.chatbot.service.AttendService;
 
 @Controller
 public class AttendanceController {

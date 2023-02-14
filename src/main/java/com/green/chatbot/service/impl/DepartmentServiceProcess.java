@@ -1,10 +1,11 @@
-package com.green.service.impl;
+package com.green.chatbot.service.impl;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
+import com.green.chatbot.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -16,12 +17,10 @@ import com.green.domain.entity.DepartmentEntity;
 import com.green.domain.entity.DepartmentEntityRepository;
 import com.green.domain.entity.EmployeesEntity;
 import com.green.domain.entity.EmployeesEntityRepository;
-import com.green.domain.entity.TeamEntity;
 import com.green.domain.entity.TeamEntityRepository;
-import com.green.service.DepartmentService;
 
 @Service
-public class DepartmentServiceProcess implements DepartmentService{
+public class DepartmentServiceProcess implements DepartmentService {
 
 	@Autowired
 	DepartmentEntityRepository depRepo;
