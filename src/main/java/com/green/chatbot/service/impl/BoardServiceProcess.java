@@ -1,8 +1,8 @@
-package com.green.service.impl;
+package com.green.chatbot.service.impl;
 
+import com.green.chatbot.service.BoardService;
 import com.green.domain.dto.*;
 import com.green.domain.entity.*;
-import com.green.service.BoardService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

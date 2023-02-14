@@ -52,7 +52,7 @@ class ConvenienceStoreApplicationTests {
 
         //사원엔티티 저장
         empRepo.save(EmployeesEntity.builder()
-                .email("admin@CUAgain.com")
+                .email("admin@test.com")
                 .pass(pe.encode("1234"))
                 .name("admin")
                 .hireDate(LocalDate.parse("2023-01-09"))
