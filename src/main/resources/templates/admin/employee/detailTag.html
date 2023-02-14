@@ -13,7 +13,7 @@
 		<label><span>재직여부 </span>
 			<span th:if="${dto.end}">퇴사</span>
 			<span th:if="${dto.end}">퇴사일</span>
-			<input th:if="${dto.end}" type="date"  th:value="${dto.endDate}" readonly>
+			<input th:if="${dto.end}" type="date"  th:value="${dto.endDate}">
 			<span th:if="!${dto.end}">재직</span>
 		</label>
 		<label><span>로그인 이메일</span><span th:text="${dto.email}"></span><br></label>
@@ -41,7 +41,7 @@
 		</div>
 		<div>
 			<input type="hidden" th:value="${dto.id}">
-			<button  th:if="${#authorization.expression('hasRole(''ADMIN'')')}or${dto.id}==${#authentication.principal.id}" type="button" onclick="btnEditClicked(this)">수정</button>
+			<button type="button" onclick="btnEditClicked(this)">수정</button>
 			<button type="button" onclick="btnListClicked();">목록</button>
 		</div>
 	</form>

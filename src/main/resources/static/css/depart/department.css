@@ -96,7 +96,7 @@
 .depart_menu{
 	position:absolute;
 	top:0;
-	right: -150px;
+	right: -200px;
 	z-index: 20;
 	background-color: rgba(255, 255, 255, 0.9);
 	border: 1px solid #ddd;
@@ -125,7 +125,7 @@
 .team_manu{
 	position:absolute;
 	top:0;
-	right: -60px;
+	right: -160px;
 	z-index: 20;
 	background-color: rgba(255, 255, 255, 0.9);
 	border: 1px solid #ddd;
@@ -172,7 +172,7 @@
 	width: 70px;
 }
 .empPosi{
-	width: 60px;
+	width: 40px;
 }
 .empPhone{
 	width: 120px;
