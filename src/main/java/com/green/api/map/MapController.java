@@ -12,3 +12,4 @@ public class MapController {
         return "admin/map/mapinfo";
     }
 }
+ 

@@ -1,8 +1,4 @@
-package com.green.api.bus.dto;
-
-import com.nowon.green.bus.dto.ComMsgHeader;
-import com.nowon.green.bus.dto.MsgBody;
-import com.nowon.green.bus.dto.MsgHeader;
+package com.nowon.green.bus.dto;
 
 import lombok.Data;
 

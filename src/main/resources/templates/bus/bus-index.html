@@ -6,6 +6,7 @@ th:replace="~{layout/admin :: adminLayout(~{this::head}, ~{::main})}">
 	<title>Insert title here</title>
 	<link rel="stylesheet" th:href="@{/css/commons/common.css}">
 	<link rel="stylesheet" href="/css/bus/bus-index.css">
+	<link rel="stylesheet" th:href="@{/css/commons/chat-bot-bus.css}">
 	<style>
 		#bus-station .info li{
 			font-size: 8px;
@@ -15,6 +16,7 @@ th:replace="~{layout/admin :: adminLayout(~{this::head}, ~{::main})}">
 	</style>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=	022e1af6535b7180359a6f22f16fb181&libraries=services,clusterer,drawing"></script>
+	<script th:src="@{/js/chat-bus.js}"></script>
 	<script>
 		/*
 		$(function(){
@@ -77,5 +79,12 @@ th:replace="~{layout/admin :: adminLayout(~{this::head}, ~{::main})}">
 	</div>
 	<div id="list-display" class="flex">
 	</div>
+	<aside id="bus-chat-bot">
+		<h1>챗봇</h1>
+		<div class="wrap">
+			<button type="button" id="btn-chat-open" onclick="openChat()">버스안내봇</button>
+			<th:block th:insert="~{chatbot/chat-bot-bus::#chat-disp}" />
+		</div>
+	</aside>
 </main>
 </html>
