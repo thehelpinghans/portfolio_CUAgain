@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-#chat-bot>.wrap{
+#bus-chat-bot>.wrap{
 	position: absolute;
 	z-index:200;
 	right: 50px;
@@ -9,7 +9,7 @@
 	background-color: rgb(180 52 148 / 25%);
 	border-radius: 5px;
 }
-#chat-bot>.wrap>#chat-disp{
+#bus-chat-bot>.wrap>#chat-disp{
 	display: none;
 	width: 360px;
 	height: 760px;

@@ -1,4 +1,4 @@
-package com.green.api.bus.dto;
+package com.nowon.green.bus.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
