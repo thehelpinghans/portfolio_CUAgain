@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+	<ul class="select-item">
+		<li th:each="dto:${list}" >
+			<!--/*<span th:text="${#numbers.formatInteger(dto.stationId,0)}"></span>*/-->
+			<input type="hidden" class="arsId" th:value="${dto.arsId}" />
+			<span th:text="${dto.stationNm}" onclick="stationClicked(this)"></span>
+		</li>
+	</ul>
+
+</html>
