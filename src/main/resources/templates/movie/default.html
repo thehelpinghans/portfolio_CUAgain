@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/css/movie/chat-bot-movie.css}">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script th:src="@{/js/chat-movie.js}"></script>
 <script>
 	$(function(){
 		dailyBoxOfficeList();
@@ -24,5 +26,12 @@
 	<div id="display-list">
 		
 	</div>
+	<aside id="chat-bot">
+		<h1>챗봇</h1>
+		<div class="wrap">
+			<button type="button" id="btn-chat-open" onclick="openChat()">영화안내봇</button>
+			<th:block th:insert="~{chatbot/chat-bot-movie::#chat-disp}" />
+		</div>
+	</aside>
 </body>
 </html>
